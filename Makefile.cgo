@@ -1,0 +1,34 @@
+## your application name here
+APP=go/cgo.opt
+SRC=$(APP).cpp
+## extra object files for your app here
+OBJ=
+
+## use this to link using libindri.a
+SHR=
+## use this to link using libindri_go.so
+## be sure LD_LIBRARY_PATH is defined, example:
+##    LD_LIBRARY_PATH=/$HOME/usr/lib
+##    export LD_LIBRARY_PATH
+SHR=_go
+
+prefix = /home/tavit/usr
+exec_prefix = ${prefix}
+libdir = ${exec_prefix}/lib
+includedir = ${prefix}/include
+INCPATH=-I$(includedir)
+LIBPATH=-L$(libdir)
+CXXFLAGS=-DPACKAGE_NAME=\"Indri\" -DPACKAGE_TARNAME=\"indri\" -DPACKAGE_VERSION=\"5.13\" -DPACKAGE_STRING=\"Indri\ 5.13\" -DPACKAGE_BUGREPORT=\"project@lemurproject.org\" -DPACKAGE_URL=\"\" -DINDRI_STANDALONE=1 -DHAVE_LIBM=1 -DHAVE_LIBPTHREAD=1 -DHAVE_LIBZ=1 -DHAVE_NAMESPACES=1 -DISNAN_IN_NAMESPACE_STD=1 -DISNAN_IN_NAMESPACE_GNU_CXX=0 -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE_FSEEKO=1 -DHAVE_EXT_ATOMICITY_H=1 -DP_NEEDS_GNU_CXX_NAMESPACE=1 -DHAVE_MKSTEMP=1 -DHAVE_MKSTEMPS=1  -g -O3 $(INCPATH)
+CPPLDFLAGS  =  -lindri$(SHR) -lz -lpthread -lm 
+
+all:
+	echo '// #cgo CXXFLAGS: ${CXXFLAGS} -fPIC' > $(APP)
+	echo '// #cgo LDFLAGS: -g -O3 -L${libdir} ${CPPLDFLAGS}' >> $(APP)
+	echo 'import "C"' >> $(APP)
+	sed -r '{ s/\\//g }' $(APP) > $(APP)2
+	mv $(APP)2 $(APP)
+
+clean:
+	rm -f $(APP)
+
+
