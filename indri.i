@@ -382,7 +382,7 @@ namespace indri
 
 #ifdef SWIGGO
 
-%module indri_go
+%module(directors="1") indri_go
 %insert("go_begin") "go/cgo.opt"
 
 %{
@@ -422,7 +422,7 @@ namespace indri
 #define get_INT64 get
 #define get_double get
 
-  %}
+%}
 
 %include "typemaps.i"
 %include "std_string.i"
@@ -430,6 +430,7 @@ namespace indri
 %include "exception.i"
 %include "indritypemaps.i"
 %include "LemurException.i"
+%include "protect_pre.i"
 %include "IntVector.i"
 %include "StringVector.i"
 %include "StringMap.i"
@@ -443,10 +444,11 @@ namespace indri
 %include "QueryResults.i"
 %include "QueryExpander.i"
 %include "MResults.i"
+%include "MetadataPair.i"
 %include "MetadataPairVector.i"
 %include "DocumentVector.i"
 %include "ConflationPattern.i"
 %include "IndexEnvironment.i"
-%include "Tester.i"
+%include "protect_post.i"
 
 #endif

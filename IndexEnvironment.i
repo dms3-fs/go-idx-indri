@@ -7,7 +7,7 @@
 %typemap(jtype) const std::vector<indri::parse::TagExtent *>& "TagExtent[]"
 %typemap(jstype) const std::vector<indri::parse::TagExtent *>& "TagExtent[]"
 
-%typemap(freearg) const std::vector<indri::parse::TagExtent *>& 
+%typemap(freearg) const std::vector<indri::parse::TagExtent *>&
 {
   for (int i = 0; i < $1->size(); i++) {
     delete((*$1)[i]);
@@ -69,7 +69,7 @@
 // need to pass these in. could use index into input for parent.
     te->number = 0;
     te->parent = 0;
-    
+
     $1->push_back( te );
   }
 */
@@ -80,7 +80,40 @@
 #endif
 namespace indri {
   namespace api {
+
+#ifdef SWIGGO
+
+    setEx(IndexEnvironment::setDocumentRoot);
+    setEx(IndexEnvironment::setAnchorTextPath);
+    setEx(IndexEnvironment::addString);
+    setEx(IndexEnvironment::setOffsetMetadataPath);
+    setEx(IndexEnvironment::setOffsetAnnotationsPath);
+    setEx(IndexEnvironment::getFileClassSpec);
+    setEx(IndexEnvironment::addFileClass);
+    setEx(IndexEnvironment::deleteDocument);
+    setEx(IndexEnvironment::setIndexedFields);
+    setEx(IndexEnvironment::setNumericField);
+    setEx(IndexEnvironment::setOrdinalField);
+    setEx(IndexEnvironment::setParentalField);
+    setEx(IndexEnvironment::setMetadataIndexedFields);
+    setEx(IndexEnvironment::setStopwords);
+    setEx(IndexEnvironment::setStemmer);
+    setEx(IndexEnvironment::setMemory);
+    setEx(IndexEnvironment::setNormalization);
+    setEx(IndexEnvironment::setStoreDocs);
+    setEx(IndexEnvironment::create);
+    setEx(IndexEnvironment::open);
+    setEx(IndexEnvironment::close);
+    setEx(IndexEnvironment::addFile);
+    setEx(IndexEnvironment::addString);
+    setEx(IndexEnvironment::addParsedDocument);
+    setEx(IndexEnvironment::documentsIndexed);
+    setEx(IndexEnvironment::documentsSeen);
+
     %feature("director") IndexStatus;
+
+  #endif
+
     struct IndexStatus {
       enum action_code {
         FileOpen,
@@ -108,13 +141,13 @@ namespace indri {
 public";
 #endif
 
-      void setDocumentRoot( const std::string& documentRoot ) throw (lemur::api::Exception);  
+      void setDocumentRoot( const std::string& documentRoot ) throw (lemur::api::Exception);
 #ifdef SWIGJAVA
       %javamethodmodifiers  "
 /**
  Set anchor text root path.
 @param anchorTextRoot path to anchor text root.
-@throws Exception if 
+@throws Exception if
 */
 public";
 #endif
@@ -165,7 +198,7 @@ public";
 public";
 #endif
 
-      void addFileClass( const std::string& name, 
+      void addFileClass( const std::string& name,
                          const std::string& iterator,
                          const std::string& parser,
                          const std::string& tokenizer,
@@ -175,13 +208,13 @@ public";
                          const std::vector<std::string>& include,
                          const std::vector<std::string>& exclude,
                          const std::vector<std::string>& index,
-                         const std::vector<std::string>& metadata, 
+                         const std::vector<std::string>& metadata,
                          const std::map<indri::parse::ConflationPattern *,std::string>& conflations ) throw (lemur::api::Exception);
 
 #ifdef SWIGCSHARP
       indri::parse::Specification *getFileClassSpec( const std::string& name) throw (lemur::api::Exception);
       void addFileClass( const indri::parse::Specification &spec) throw (lemur::api::Exception);
-#else 
+#else
 #ifdef SWIGJAVA
       %javamethodmodifiers  "
 /**
@@ -193,6 +226,7 @@ public";
 #endif
 
       indri::parse::FileClassEnvironmentFactory::Specification *getFileClassSpec( const std::string& name) throw (lemur::api::Exception);
+
 #ifdef SWIGJAVA
       %javamethodmodifiers  "
 /**
@@ -234,7 +268,7 @@ public";
 #ifdef SWIGJAVA
       %javamethodmodifiers  "
 /**
-       Set the numeric property of a field. 
+       Set the numeric property of a field.
        @param fieldName the field.
        @param isNumeric true if the field is a numeric field, false if not.
        @param parserName The name of the Transformation to use to compute the numeric value of the field. Repository currently recognizes the name NumericFieldAnnotator.
@@ -339,12 +373,12 @@ public";
 
       void setNormalization( bool normalize ) throw (lemur::api::Exception);
 #ifdef SWIGJAVA
-       
+
       %javamethodmodifiers  "
 /**
        set the storeDocs flag
        @param flag, false to not store documents in the compressed
-              collection, true to do so (default) 
+              collection, true to do so (default)
 @throws Exception if a lemur::api::Exception was thrown by the JNI library.
 */
 public";
@@ -465,6 +499,7 @@ public";
 */
 public";
 #endif
+
 
       int documentsIndexed() throw (lemur::api::Exception);
 #ifdef SWIGJAVA

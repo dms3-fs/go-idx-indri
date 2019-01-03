@@ -1,0 +1,26 @@
+<odmver>test odm version 0.1</odmver>
+<schver>test sch version 0.1</schver>
+<kind>blogtest</kind>
+<basetime>UTC time</basetime>
+<maxareas>64</maxareas>
+<maxcats>64</maxcats>
+<offset>0</offset>
+<app>dms3</app>
+<docno>001</docno>
+<docver>1.0</docver>
+  <blog>
+      <about>this blog is abot food</about>
+      <address>72 middlesex turnpike, Burlington, MA</address>
+      <affiliation>Burlington Mall</affiliation>
+      <author>John Doe</author>
+      <brand>Malls R US</brand>
+      <citation>tbd</citation>
+      <description>the food court at burlington mall</description>
+      <email>contact.us.@themall.com</email>
+      <headline>type of food you can eat here</headline>
+      <keywords>pizza, chinese, fastfood</keywords>
+      <language>English</language>
+      <name>Burlington Mall</name>
+      <telephone>nnn-nnn-nnnn</telephone>
+      <version>1</version>
+  </blog>

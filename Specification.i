@@ -36,8 +36,8 @@
     jmethodID mapConstructor;
     jmethodID putMethod;
   };
- 
-  void print_info(jni_specification_info& info) 
+
+  void print_info(jni_specification_info& info)
     {
       std::cerr << info.specClazz << std::endl;
       std::cerr << info.specConstructor << std::endl;
@@ -58,14 +58,14 @@
       std::cerr << info.mapConstructor << std::endl;
       std::cerr << info.putMethod << std::endl;
     }
- 
+
   void specification_init( JNIEnv* jenv, jni_specification_info& info ) {
 
     info.specClazz = jenv->FindClass("lemurproject/indri/Specification");
     info.specConstructor = jenv->GetMethodID(info.specClazz, "<init>", "()V" );
     // get all the fields
     info.nameField = jenv->GetFieldID(info.specClazz, "name", "Ljava/lang/String;");
-    info.tokenizerField = jenv->GetFieldID(info.specClazz, "tokenizer", "Ljava/lang/String;");  
+    info.tokenizerField = jenv->GetFieldID(info.specClazz, "tokenizer", "Ljava/lang/String;");
     info.parserField = jenv->GetFieldID(info.specClazz, "parser", "Ljava/lang/String;");
     info.iteratorField = jenv->GetFieldID(info.specClazz, "iterator", "Ljava/lang/String;");
     info.startDocTagField = jenv->GetFieldID(info.specClazz, "startDocTag", "Ljava/lang/String;");
@@ -84,7 +84,7 @@
 
   jobjectArray string_vector_copy(JNIEnv* jenv, std::vector<std::string> &vec) {
     jclass stringClazz = jenv->FindClass("java/lang/String" );
-    // fill in array  
+    // fill in array
     jobjectArray stringArray = jenv->NewObjectArray(vec.size(), stringClazz,
                                                     NULL);
     for(int i = 0; i < vec.size(); i++ ) {
@@ -93,8 +93,8 @@
     }
     return stringArray;
   }
- 
-  jobject specification_copy( JNIEnv* jenv, jni_specification_info& info, 
+
+  jobject specification_copy( JNIEnv* jenv, jni_specification_info& info,
                               indri::parse::FileClassEnvironmentFactory::Specification* thisSpec ) {
     jobject result = jenv->NewObject(info.specClazz, info.specConstructor);
     // initialize the fields
@@ -116,13 +116,13 @@
     // make a conflations map to go in it
 
     jclass conflationClazz = jenv->FindClass("lemurproject/indri/ConflationPattern");
-    jmethodID conflationConstructor = jenv->GetMethodID(conflationClazz, "<init>", "()V" ); 
+    jmethodID conflationConstructor = jenv->GetMethodID(conflationClazz, "<init>", "()V" );
     jfieldID tag_nameField = jenv->GetFieldID(conflationClazz, "tag_name", "Ljava/lang/String;" );
     jfieldID attribute_nameField = jenv->GetFieldID(conflationClazz, "attribute_name", "Ljava/lang/String;"  );
     jfieldID valueField = jenv->GetFieldID(conflationClazz, "value", "Ljava/lang/String;" );
 
     jobject mapObject = jenv->NewObject(info.mapClazz, info.mapConstructor);
-    for( std::map<indri::parse::ConflationPattern *, std::string>::iterator iter = thisSpec->conflations.begin(); 
+    for( std::map<indri::parse::ConflationPattern *, std::string>::iterator iter = thisSpec->conflations.begin();
          iter != thisSpec->conflations.end(); iter++ ) {
       const indri::parse::ConflationPattern *thisKey = iter->first;
       const std::string &thisVal = iter->second;
@@ -164,17 +164,17 @@
   }
 
   // copy to string vector (stringvector.i)
-  void copy_to_string_vector(JNIEnv* jenv, jobjectArray src, 
+  void copy_to_string_vector(JNIEnv* jenv, jobjectArray src,
                              std::vector<std::string> &target) {
     jsize arrayLength = jenv->GetArrayLength(src);
     for( unsigned int i = 0; i < arrayLength; i++ ) {
       std::string stringCopy;
       jstring str = (jstring) jenv->GetObjectArrayElement(src, i);
-      copy_to_string(jenv, str, stringCopy);    
+      copy_to_string(jenv, str, stringCopy);
       target.push_back(stringCopy);
     }
   }
- 
+
   // copy to map (stringmap.i)
   void copy_to_map(JNIEnv* jenv, jobject src,
                    std::map<indri::parse::ConflationPattern*, std::string> &map) {
@@ -208,7 +208,7 @@
 
       jobject key = jenv->CallObjectMethod( entryObject, mapEntryGetKey );
       jobject value = jenv->CallObjectMethod( entryObject, mapEntryGetValue );
-    
+
       indri::parse::ConflationPattern * pattern = new indri::parse::ConflationPattern();
 
       const char* valueChars = jenv->GetStringUTFChars( (jstring) value, 0 );
@@ -219,7 +219,7 @@
       valueChars = jenv->GetStringUTFChars( (jstring) fieldValue, 0 );
       if (valueChars[0] == '\0') valueChars = NULL; // empty strings are NULL
       pattern->tag_name = valueChars;
-  
+
       fieldValue = (jstring) jenv->GetObjectField(key, attribute_nameField);
       valueChars = jenv->GetStringUTFChars( (jstring) fieldValue, 0 );
       if (valueChars[0] == '\0') valueChars = NULL; // empty strings are NULL
@@ -232,7 +232,7 @@
       map[pattern] = valueString ;
     }
   }
- 
+
   %}
 
 %typemap(in) const indri::parse::FileClassEnvironmentFactory::Specification& (indri::parse::FileClassEnvironmentFactory::Specification spec) {
@@ -243,7 +243,7 @@
   jstring tmpString;
   jobjectArray tmpArray;
   jobject tmpMap;
-  
+
   // string name
   tmpString = (jstring) jenv->GetObjectField($input, info.nameField);
   copy_to_string(jenv, tmpString, spec.name);
@@ -265,7 +265,7 @@
   // string endMetadataTag
   tmpString = (jstring) jenv->GetObjectField($input, info.endMetadataTagField);
   copy_to_string(jenv, tmpString, spec.endMetadataTag);
-  // vector<string> include 
+  // vector<string> include
   tmpArray = (jobjectArray) jenv->GetObjectField($input, info.includeField);
   copy_to_string_vector(jenv, tmpArray, spec.include);
   // vector<string> exclude
@@ -277,7 +277,7 @@
   // vector<string> metadata
   tmpArray = (jobjectArray) jenv->GetObjectField($input, info.metadataField);
   copy_to_string_vector(jenv, tmpArray, spec.metadata);
-  // map<string, string> conflations 
+  // map<string, string> conflations
   tmpMap = (jobject) jenv->GetObjectField($input, info.conflationsField);
   copy_to_map(jenv, tmpMap, spec.conflations);
 
@@ -293,7 +293,7 @@
   jni_specification_info info;
   specification_init(jenv, info);
   //  print_info(info);
-  $result = specification_copy(jenv, info, $1); 
+  $result = specification_copy(jenv, info, $1);
   delete($1);
 }
 
@@ -320,7 +320,7 @@ typedef indri::parse::Specification indri::parse::FileClassEnvironmentFactory::S
 
 
 %{
-  namespace indri 
+  namespace indri
   {
     namespace parse
     {
@@ -348,19 +348,78 @@ namespace indri {
       std::string endDocTag;
       /// tag indicating the end of the metadata fields
       std::string endMetadataTag;
-      /// \brief tags whose contents should be included in the index. 
+      /// \brief tags whose contents should be included in the index.
       /// If empty, all tags are included.
       std::vector<std::string> include;
       /// tags whose contents should be excluded from the index
       std::vector<std::string> exclude;
-      /// tags that should be forwarded to the index for tag extents, ie named fields. 
+      /// tags that should be forwarded to the index for tag extents, ie named fields.
       std::vector<std::string> index;
       /// tags whose contents should be indexed as metadata
       std::vector<std::string> metadata;
-      /// \brief tags that should be conflated. 
+      /// \brief tags that should be conflated.
       /// The map is the of the form tag => conflated tag, eg h1 => heading.
       std::map<indri::parse::ConflationPattern*,std::string> conflations;
     };
   }
 }
+#endif
+
+
+#ifdef SWIGGO
+typedef indri::parse::Specification indri::parse::FileClassEnvironmentFactory::Specification;
+
+%{
+
+  namespace indri
+  {
+    namespace parse
+    {
+      typedef indri::parse::FileClassEnvironmentFactory::Specification Specification ;
+    }
+  }
+
+  void deleteFileClassSpec( indri::parse::FileClassEnvironmentFactory::Specification *spec) {
+    delete spec;
+  };
+
+%}
+
+void deleteFileClassSpec( indri::parse::FileClassEnvironmentFactory::Specification *spec);
+
+namespace indri {
+  namespace parse {
+
+    struct Specification {
+      ///  name of this file class, eg trecweb
+      std::string name;
+      /// document parser for this file class
+      std::string parser;
+      /// document tokenizer for this file class
+      std::string tokenizer;
+      /// document iterator for this file class
+      std::string iterator;
+      /// tag indicating start of a document
+      std::string startDocTag;
+      /// tag indicating the end of a document
+      std::string endDocTag;
+      /// tag indicating the end of the metadata fields
+      std::string endMetadataTag;
+      /// \brief tags whose contents should be included in the index.
+      /// If empty, all tags are included.
+      std::vector<std::string> include;
+      /// tags whose contents should be excluded from the index
+      std::vector<std::string> exclude;
+      /// tags that should be forwarded to the index for tag extents, ie named fields.
+      std::vector<std::string> index;
+      /// tags whose contents should be indexed as metadata
+      std::vector<std::string> metadata;
+      /// \brief tags that should be conflated.
+      /// The map is the of the form tag => conflated tag, eg h1 => heading.
+      std::map<indri::parse::ConflationPattern*,std::string> conflations;
+    };
+
+  }
+}
+
 #endif

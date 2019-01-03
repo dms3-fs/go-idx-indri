@@ -32,26 +32,26 @@ typedef struct { char *p; intgo n; } _gostring_;
 typedef struct { void* array; intgo len; intgo cap; } _goslice_;
 
 
-typedef long long swig_type_1;
-typedef long long swig_type_2;
-typedef long long swig_type_3;
-typedef long long swig_type_4;
-typedef long long swig_type_5;
-typedef long long swig_type_6;
+typedef _gostring_ swig_type_1;
+typedef _gostring_ swig_type_2;
+typedef _gostring_ swig_type_3;
+typedef _gostring_ swig_type_4;
+typedef _gostring_ swig_type_5;
+typedef _gostring_ swig_type_6;
 typedef long long swig_type_7;
-typedef long long swig_type_8;
+typedef _gostring_ swig_type_8;
 typedef _gostring_ swig_type_9;
 typedef _gostring_ swig_type_10;
 typedef _gostring_ swig_type_11;
 typedef _gostring_ swig_type_12;
-typedef _gostring_ swig_type_13;
-typedef _gostring_ swig_type_14;
-typedef _gostring_ swig_type_15;
+typedef long long swig_type_13;
+typedef long long swig_type_14;
+typedef long long swig_type_15;
 typedef long long swig_type_16;
-typedef _gostring_ swig_type_17;
+typedef long long swig_type_17;
 typedef long long swig_type_18;
-typedef _gostring_ swig_type_19;
-typedef _gostring_ swig_type_20;
+typedef long long swig_type_19;
+typedef long long swig_type_20;
 typedef _gostring_ swig_type_21;
 typedef _gostring_ swig_type_22;
 typedef _gostring_ swig_type_23;
@@ -59,9 +59,9 @@ typedef _gostring_ swig_type_24;
 typedef _gostring_ swig_type_25;
 typedef _gostring_ swig_type_26;
 typedef _gostring_ swig_type_27;
-typedef long long swig_type_28;
+typedef _gostring_ swig_type_28;
 typedef _gostring_ swig_type_29;
-typedef long long swig_type_30;
+typedef _gostring_ swig_type_30;
 typedef _gostring_ swig_type_31;
 typedef _gostring_ swig_type_32;
 typedef _gostring_ swig_type_33;
@@ -73,7 +73,7 @@ typedef _gostring_ swig_type_38;
 typedef _gostring_ swig_type_39;
 typedef _gostring_ swig_type_40;
 typedef _gostring_ swig_type_41;
-typedef _gostring_ swig_type_42;
+typedef long long swig_type_42;
 typedef _gostring_ swig_type_43;
 typedef long long swig_type_44;
 typedef _gostring_ swig_type_45;
@@ -85,15 +85,15 @@ typedef _gostring_ swig_type_50;
 typedef _gostring_ swig_type_51;
 typedef _gostring_ swig_type_52;
 typedef _gostring_ swig_type_53;
-typedef _gostring_ swig_type_54;
-typedef long long swig_type_55;
+typedef long long swig_type_54;
+typedef _gostring_ swig_type_55;
 typedef long long swig_type_56;
 typedef _gostring_ swig_type_57;
-typedef long long swig_type_58;
+typedef _gostring_ swig_type_58;
 typedef _gostring_ swig_type_59;
 typedef _gostring_ swig_type_60;
-typedef long long swig_type_61;
-typedef long long swig_type_62;
+typedef _gostring_ swig_type_61;
+typedef _gostring_ swig_type_62;
 typedef _gostring_ swig_type_63;
 typedef _gostring_ swig_type_64;
 typedef _gostring_ swig_type_65;
@@ -101,24 +101,24 @@ typedef _gostring_ swig_type_66;
 typedef _gostring_ swig_type_67;
 typedef _gostring_ swig_type_68;
 typedef _gostring_ swig_type_69;
-typedef _gostring_ swig_type_70;
+typedef long long swig_type_70;
 typedef _gostring_ swig_type_71;
 typedef _gostring_ swig_type_72;
 typedef _gostring_ swig_type_73;
 typedef _gostring_ swig_type_74;
 typedef _gostring_ swig_type_75;
 typedef _gostring_ swig_type_76;
-typedef long long swig_type_77;
-typedef long long swig_type_78;
+typedef _gostring_ swig_type_77;
+typedef _gostring_ swig_type_78;
 typedef _gostring_ swig_type_79;
-typedef long long swig_type_80;
-typedef _gostring_ swig_type_81;
-typedef _gostring_ swig_type_82;
-typedef long long swig_type_83;
-typedef _gostring_ swig_type_84;
+typedef _gostring_ swig_type_80;
+typedef long long swig_type_81;
+typedef long long swig_type_82;
+typedef _gostring_ swig_type_83;
+typedef long long swig_type_84;
 typedef _gostring_ swig_type_85;
-typedef long long swig_type_86;
-typedef _gostring_ swig_type_87;
+typedef _gostring_ swig_type_86;
+typedef long long swig_type_87;
 typedef long long swig_type_88;
 typedef _gostring_ swig_type_89;
 typedef _gostring_ swig_type_90;
@@ -134,24 +134,24 @@ typedef _gostring_ swig_type_99;
 typedef _gostring_ swig_type_100;
 typedef _gostring_ swig_type_101;
 typedef _gostring_ swig_type_102;
-typedef _gostring_ swig_type_103;
-typedef _gostring_ swig_type_104;
+typedef long long swig_type_103;
+typedef long long swig_type_104;
 typedef _gostring_ swig_type_105;
-typedef _gostring_ swig_type_106;
+typedef long long swig_type_106;
 typedef _gostring_ swig_type_107;
 typedef _gostring_ swig_type_108;
-typedef _gostring_ swig_type_109;
+typedef long long swig_type_109;
 typedef _gostring_ swig_type_110;
 typedef _gostring_ swig_type_111;
-typedef _gostring_ swig_type_112;
+typedef long long swig_type_112;
 typedef _gostring_ swig_type_113;
-typedef _gostring_ swig_type_114;
+typedef long long swig_type_114;
 typedef _gostring_ swig_type_115;
 typedef _gostring_ swig_type_116;
 typedef _gostring_ swig_type_117;
 typedef _gostring_ swig_type_118;
 typedef _gostring_ swig_type_119;
-typedef long long swig_type_120;
+typedef _gostring_ swig_type_120;
 typedef _gostring_ swig_type_121;
 typedef _gostring_ swig_type_122;
 typedef _gostring_ swig_type_123;
@@ -159,195 +159,266 @@ typedef _gostring_ swig_type_124;
 typedef _gostring_ swig_type_125;
 typedef _gostring_ swig_type_126;
 typedef _gostring_ swig_type_127;
-typedef _gostring_ swig_type_128;
-typedef _gostring_ swig_type_129;
-typedef _gostring_ swig_type_130;
-typedef _gostring_ swig_type_131;
+typedef long long swig_type_128;
+typedef long long swig_type_129;
+typedef long long swig_type_130;
+typedef long long swig_type_131;
 typedef _gostring_ swig_type_132;
 typedef _gostring_ swig_type_133;
 typedef _gostring_ swig_type_134;
 typedef _gostring_ swig_type_135;
-extern void _wrap_Swig_free_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern uintptr_t _wrap_Swig_malloc_indri_go_8e24520e0b567faa(swig_intgo arg1);
-extern uintptr_t _wrap_new_IntVector__SWIG_0_indri_go_8e24520e0b567faa(void);
-extern uintptr_t _wrap_new_IntVector__SWIG_1_indri_go_8e24520e0b567faa(swig_type_1 arg1);
-extern swig_type_2 _wrap_IntVector_size_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern swig_type_3 _wrap_IntVector_capacity_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern void _wrap_IntVector_reserve_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_4 arg2);
-extern _Bool _wrap_IntVector_isEmpty_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern void _wrap_IntVector_clear_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern void _wrap_IntVector_add_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_intgo arg2);
-extern swig_intgo _wrap_IntVector_get_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_intgo arg2);
-extern void _wrap_IntVector_set_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_intgo arg2, swig_intgo arg3);
-extern void _wrap_delete_IntVector_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern uintptr_t _wrap_new_StringVector__SWIG_0_indri_go_8e24520e0b567faa(void);
-extern uintptr_t _wrap_new_StringVector__SWIG_1_indri_go_8e24520e0b567faa(swig_type_5 arg1);
-extern swig_type_6 _wrap_StringVector_size_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern swig_type_7 _wrap_StringVector_capacity_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern void _wrap_StringVector_reserve_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_8 arg2);
-extern _Bool _wrap_StringVector_isEmpty_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern void _wrap_StringVector_clear_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern void _wrap_StringVector_add_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_9 arg2);
-extern swig_type_10 _wrap_StringVector_get_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_intgo arg2);
-extern void _wrap_StringVector_set_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_intgo arg2, swig_type_11 arg3);
-extern void _wrap_delete_StringVector_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern uintptr_t _wrap_new_Parameters_indri_go_8e24520e0b567faa(void);
-extern void _wrap_delete_Parameters_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern void _wrap_Parameters_set_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_12 arg2);
-extern _Bool _wrap_Parameters_get_bool_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_13 arg2, _Bool arg3);
-extern swig_intgo _wrap_Parameters_get_int_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_14 arg2, swig_intgo arg3);
-extern double _wrap_Parameters_get_double_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_15 arg2, double arg3);
-extern swig_type_16 _wrap_Parameters_get_INT64_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_17 arg2, swig_type_18 arg3);
-extern swig_type_19 _wrap_Parameters_get_string_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_20 arg2, swig_type_21 arg3);
-extern void _wrap_Parameters_remove_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_22 arg2);
-extern void _wrap_Parameters_set_bool_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_23 arg2, _Bool arg3);
-extern void _wrap_Parameters_set_string_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_24 arg2, swig_type_25 arg3);
-extern void _wrap_Parameters_set_int_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_26 arg2, swig_intgo arg3);
-extern void _wrap_Parameters_set_UINT64_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_27 arg2, swig_type_28 arg3);
-extern void _wrap_Parameters_set_double_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_29 arg2, double arg3);
-extern void _wrap_Parameters_clear_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern swig_type_30 _wrap_Parameters_size_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern _Bool _wrap_Parameters_exists_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_31 arg2);
-extern void _wrap_Parameters_load_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_32 arg2);
-extern void _wrap_TermExtent_begin_set_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_intgo arg2);
-extern swig_intgo _wrap_TermExtent_begin_get_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern void _wrap_TermExtent_end_set_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_intgo arg2);
-extern swig_intgo _wrap_TermExtent_end_get_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern void _wrap_delete_TermExtent_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern uintptr_t _wrap_new_TermExtent_indri_go_8e24520e0b567faa(void);
-extern void _wrap_delete_ScoredExtentResult_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern uintptr_t _wrap_new_ScoredExtentResult_indri_go_8e24520e0b567faa(void);
-extern void _wrap_delete_ParsedDocument_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern swig_type_33 _wrap_ParsedDocument_getContent_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern uintptr_t _wrap_new_ParsedDocument_indri_go_8e24520e0b567faa(void);
-extern void _wrap_QueryAnnotationNode_name_set_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_34 arg2);
-extern swig_type_35 _wrap_QueryAnnotationNode_name_get_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern void _wrap_QueryAnnotationNode_Xtype_set_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_36 arg2);
-extern swig_type_37 _wrap_QueryAnnotationNode_Xtype_get_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern void _wrap_QueryAnnotationNode_queryText_set_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_38 arg2);
-extern swig_type_39 _wrap_QueryAnnotationNode_queryText_get_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern void _wrap_QueryAnnotationNode_children_set_indri_go_8e24520e0b567faa(uintptr_t arg1, uintptr_t arg2);
-extern uintptr_t _wrap_QueryAnnotationNode_children_get_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern uintptr_t _wrap_new_QueryAnnotationNode_indri_go_8e24520e0b567faa(void);
-extern void _wrap_delete_QueryAnnotationNode_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern uintptr_t _wrap_QueryAnnotation_getQueryTree_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern uintptr_t _wrap_QueryAnnotation_getAnnotations_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern uintptr_t _wrap_QueryAnnotation_getResults_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern uintptr_t _wrap_new_QueryAnnotation_indri_go_8e24520e0b567faa(void);
-extern void _wrap_delete_QueryAnnotation_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern uintptr_t _wrap_new_QueryEnvironment_indri_go_8e24520e0b567faa(void);
-extern void _wrap_QueryEnvironment_addServer_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_40 arg2);
-extern void _wrap_QueryEnvironment_addIndex_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_41 arg2);
-extern void _wrap_QueryEnvironment_removeServer_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_42 arg2);
-extern void _wrap_QueryEnvironment_removeIndex_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_43 arg2);
-extern void _wrap_QueryEnvironment_close_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern void _wrap_QueryEnvironment_setMemory_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_44 arg2);
-extern void _wrap_QueryEnvironment_setScoringRules_indri_go_8e24520e0b567faa(uintptr_t arg1, uintptr_t arg2);
-extern void _wrap_QueryEnvironment_setStopwords_indri_go_8e24520e0b567faa(uintptr_t arg1, uintptr_t arg2);
-extern uintptr_t _wrap_QueryEnvironment_runQuery__SWIG_0_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_45 arg2, swig_intgo arg3);
-extern uintptr_t _wrap_QueryEnvironment_runQuery__SWIG_1_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_46 arg2, uintptr_t arg3, swig_intgo arg4);
-extern uintptr_t _wrap_QueryEnvironment_runAnnotatedQuery__SWIG_0_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_47 arg2, swig_intgo arg3);
-extern uintptr_t _wrap_QueryEnvironment_runAnnotatedQuery__SWIG_1_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_48 arg2, uintptr_t arg3, swig_intgo arg4);
-extern uintptr_t _wrap_QueryEnvironment_runQuerydocset_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_49 arg2, uintptr_t arg3, swig_intgo arg4);
-extern uintptr_t _wrap_QueryEnvironment_runAnnotatedQuerydocset_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_50 arg2, uintptr_t arg3, swig_intgo arg4);
-extern uintptr_t _wrap_QueryEnvironment_documents__SWIG_0_indri_go_8e24520e0b567faa(uintptr_t arg1, uintptr_t arg2);
-extern uintptr_t _wrap_QueryEnvironment_documents__SWIG_1_indri_go_8e24520e0b567faa(uintptr_t arg1, uintptr_t arg2);
-extern uintptr_t _wrap_QueryEnvironment_documentMetadata__SWIG_0_indri_go_8e24520e0b567faa(uintptr_t arg1, uintptr_t arg2, swig_type_51 arg3);
-extern uintptr_t _wrap_QueryEnvironment_documentMetadata__SWIG_1_indri_go_8e24520e0b567faa(uintptr_t arg1, uintptr_t arg2, swig_type_52 arg3);
-extern uintptr_t _wrap_QueryEnvironment_documentIDsFromMetadata_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_53 arg2, uintptr_t arg3);
-extern uintptr_t _wrap_QueryEnvironment_documentsFromMetadata_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_54 arg2, uintptr_t arg3);
-extern swig_type_55 _wrap_QueryEnvironment_termCount__SWIG_0_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern swig_type_56 _wrap_QueryEnvironment_termCount__SWIG_1_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_57 arg2);
-extern swig_type_58 _wrap_QueryEnvironment_termFieldCount_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_59 arg2, swig_type_60 arg3);
-extern uintptr_t _wrap_QueryEnvironment_fieldList_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern swig_type_61 _wrap_QueryEnvironment_documentCount__SWIG_0_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern swig_type_62 _wrap_QueryEnvironment_documentCount__SWIG_1_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_63 arg2);
-extern uintptr_t _wrap_QueryEnvironment_documentVectors_indri_go_8e24520e0b567faa(uintptr_t arg1, uintptr_t arg2);
-extern double _wrap_QueryEnvironment_expressionCount__SWIG_0_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_64 arg2, swig_type_65 arg3);
-extern double _wrap_QueryEnvironment_expressionCount__SWIG_1_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_66 arg2);
-extern double _wrap_QueryEnvironment_documentExpressionCount__SWIG_0_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_67 arg2, swig_type_68 arg3);
-extern double _wrap_QueryEnvironment_documentExpressionCount__SWIG_1_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_69 arg2);
-extern uintptr_t _wrap_QueryEnvironment_expressionList__SWIG_0_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_70 arg2, swig_type_71 arg3);
-extern uintptr_t _wrap_QueryEnvironment_expressionList__SWIG_1_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_72 arg2);
-extern swig_intgo _wrap_QueryEnvironment_documentLength_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_intgo arg2);
-extern void _wrap_QueryEnvironment_setFormulationParameters_indri_go_8e24520e0b567faa(uintptr_t arg1, uintptr_t arg2);
-extern swig_type_73 _wrap_QueryEnvironment_reformulateQuery_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_74 arg2);
-extern swig_type_75 _wrap_QueryEnvironment_stemTerm_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_76 arg2);
-extern swig_type_77 _wrap_QueryEnvironment_termCountUnique_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern swig_type_78 _wrap_QueryEnvironment_stemCount_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_79 arg2);
-extern swig_type_80 _wrap_QueryEnvironment_stemFieldCount_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_81 arg2, swig_type_82 arg3);
-extern swig_type_83 _wrap_QueryEnvironment_documentStemCount_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_84 arg2);
-extern uintptr_t _wrap_QueryEnvironment_documentsdocids_indri_go_8e24520e0b567faa(uintptr_t arg1, uintptr_t arg2);
-extern uintptr_t _wrap_QueryEnvironment_documentMetadatadocids_indri_go_8e24520e0b567faa(uintptr_t arg1, uintptr_t arg2, swig_type_85 arg3);
-extern swig_type_86 _wrap_QueryEnvironment_onetermCount_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_87 arg2);
-extern swig_type_88 _wrap_QueryEnvironment_onedocumentCount_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_89 arg2);
-extern void _wrap_delete_QueryEnvironment_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern void _wrap_delete_QueryExpander_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern uintptr_t _wrap_QueryExpander_runExpandedQuery__SWIG_0_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_90 arg2, swig_intgo arg3, _Bool arg4);
-extern uintptr_t _wrap_QueryExpander_runExpandedQuery__SWIG_1_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_91 arg2, swig_intgo arg3);
-extern swig_type_92 _wrap_QueryExpander_expand_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_93 arg2, uintptr_t arg3);
-extern uintptr_t _wrap_new_RMExpander_indri_go_8e24520e0b567faa(uintptr_t arg1, uintptr_t arg2);
-extern swig_type_94 _wrap_RMExpander_expand_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_95 arg2, uintptr_t arg3);
-extern void _wrap_delete_RMExpander_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern uintptr_t _wrap_RMExpander_runExpandedQuery__SWIG_0_indri_go_8e24520e0b567faa(uintptr_t _swig_base, swig_type_96 arg1, swig_intgo arg2, _Bool arg3);
-extern uintptr_t _wrap_RMExpander_runExpandedQuery__SWIG_1_indri_go_8e24520e0b567faa(uintptr_t _swig_base, swig_type_97 arg1, swig_intgo arg2);
-extern uintptr_t _wrap_new_PonteExpander_indri_go_8e24520e0b567faa(uintptr_t arg1, uintptr_t arg2);
-extern swig_type_98 _wrap_PonteExpander_expand_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_99 arg2, uintptr_t arg3);
-extern void _wrap_delete_PonteExpander_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern uintptr_t _wrap_PonteExpander_runExpandedQuery__SWIG_0_indri_go_8e24520e0b567faa(uintptr_t _swig_base, swig_type_96 arg1, swig_intgo arg2, _Bool arg3);
-extern uintptr_t _wrap_PonteExpander_runExpandedQuery__SWIG_1_indri_go_8e24520e0b567faa(uintptr_t _swig_base, swig_type_97 arg1, swig_intgo arg2);
-extern swig_intgo _wrap_FileOpen_IndexStatus_indri_go_8e24520e0b567faa(void);
-extern swig_intgo _wrap_FileSkip_IndexStatus_indri_go_8e24520e0b567faa(void);
-extern swig_intgo _wrap_FileError_IndexStatus_indri_go_8e24520e0b567faa(void);
-extern swig_intgo _wrap_FileClose_IndexStatus_indri_go_8e24520e0b567faa(void);
-extern swig_intgo _wrap_DocumentCount_IndexStatus_indri_go_8e24520e0b567faa(void);
-extern void _wrap_delete_IndexStatus_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern void _wrap_IndexStatus_status_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_intgo arg2, swig_type_100 arg3, swig_type_101 arg4, swig_intgo arg5, swig_intgo arg6);
-extern uintptr_t _wrap_new_IndexEnvironment_indri_go_8e24520e0b567faa(void);
-extern void _wrap_delete_IndexEnvironment_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern void _wrap_IndexEnvironment_setDocumentRoot_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_102 arg2);
-extern void _wrap_IndexEnvironment_setAnchorTextPath_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_103 arg2);
-extern void _wrap_IndexEnvironment_setOffsetMetadataPath_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_104 arg2);
-extern void _wrap_IndexEnvironment_setOffsetAnnotationsPath_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_105 arg2);
-extern void _wrap_IndexEnvironment_addFileClass__SWIG_0_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_106 arg2, swig_type_107 arg3, swig_type_108 arg4, swig_type_109 arg5, swig_type_110 arg6, swig_type_111 arg7, swig_type_112 arg8, uintptr_t arg9, uintptr_t arg10, uintptr_t arg11, uintptr_t arg12, uintptr_t arg13);
-extern uintptr_t _wrap_IndexEnvironment_getFileClassSpec_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_113 arg2);
-extern void _wrap_IndexEnvironment_addFileClass__SWIG_1_indri_go_8e24520e0b567faa(uintptr_t arg1, uintptr_t arg2);
-extern void _wrap_IndexEnvironment_deleteDocument_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_intgo arg2);
-extern void _wrap_IndexEnvironment_setIndexedFields_indri_go_8e24520e0b567faa(uintptr_t arg1, uintptr_t arg2);
-extern void _wrap_IndexEnvironment_setNumericField__SWIG_0_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_114 arg2, _Bool arg3, swig_type_115 arg4);
-extern void _wrap_IndexEnvironment_setNumericField__SWIG_1_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_116 arg2, _Bool arg3);
-extern void _wrap_IndexEnvironment_setOrdinalField_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_117 arg2, _Bool arg3);
-extern void _wrap_IndexEnvironment_setParentalField_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_118 arg2, _Bool arg3);
-extern void _wrap_IndexEnvironment_setMetadataIndexedFields_indri_go_8e24520e0b567faa(uintptr_t arg1, uintptr_t arg2, uintptr_t arg3);
-extern void _wrap_IndexEnvironment_setStopwords_indri_go_8e24520e0b567faa(uintptr_t arg1, uintptr_t arg2);
-extern void _wrap_IndexEnvironment_setStemmer_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_119 arg2);
-extern void _wrap_IndexEnvironment_setMemory_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_120 arg2);
-extern void _wrap_IndexEnvironment_setNormalization_indri_go_8e24520e0b567faa(uintptr_t arg1, _Bool arg2);
-extern void _wrap_IndexEnvironment_setStoreDocs_indri_go_8e24520e0b567faa(uintptr_t arg1, _Bool arg2);
-extern void _wrap_IndexEnvironment_create__SWIG_0_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_121 arg2, uintptr_t arg3);
-extern void _wrap_IndexEnvironment_create__SWIG_1_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_122 arg2);
-extern void _wrap_IndexEnvironment_open__SWIG_0_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_123 arg2, uintptr_t arg3);
-extern void _wrap_IndexEnvironment_open__SWIG_1_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_124 arg2);
-extern void _wrap_IndexEnvironment_close_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern void _wrap_IndexEnvironment_addFile__SWIG_0_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_125 arg2);
-extern void _wrap_IndexEnvironment_addFile__SWIG_1_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_126 arg2, swig_type_127 arg3);
-extern swig_intgo _wrap_IndexEnvironment_addString_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_128 arg2, swig_type_129 arg3, uintptr_t arg4);
-extern swig_intgo _wrap_IndexEnvironment_addParsedDocument_indri_go_8e24520e0b567faa(uintptr_t arg1, uintptr_t arg2);
-extern swig_intgo _wrap_IndexEnvironment_documentsIndexed_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern swig_intgo _wrap_IndexEnvironment_documentsSeen_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern swig_type_130 _wrap_StaticMethodPanic_indri_go_8e24520e0b567faa(void);
-extern swig_type_131 _wrap_Tester_GetName_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern swig_type_132 _wrap_Tester_GetType_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern void _wrap_Tester_SetName_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_133 arg2);
-extern void _wrap_Tester_SetType_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_type_134 arg2);
-extern swig_type_135 _wrap_Tester_InjectFault_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern uintptr_t _wrap_new_Tester_indri_go_8e24520e0b567faa(void);
-extern void _wrap_delete_Tester_indri_go_8e24520e0b567faa(uintptr_t arg1);
-extern uintptr_t _wrap_new_Wrapped_DemoLib_indri_go_8e24520e0b567faa(void);
-extern double _wrap_Wrapped_DemoLib_Wrapped_DivideBy_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_intgo arg2);
-extern swig_intgo _wrap_Wrapped_DemoLib_Wrapped_NegativeThrows_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_intgo arg2);
-extern swig_intgo _wrap_Wrapped_DemoLib_NeverThrows_indri_go_8e24520e0b567faa(uintptr_t arg1, swig_intgo arg2);
-extern void _wrap_delete_Wrapped_DemoLib_indri_go_8e24520e0b567faa(uintptr_t arg1);
+typedef _gostring_ swig_type_136;
+typedef _gostring_ swig_type_137;
+typedef _gostring_ swig_type_138;
+typedef _gostring_ swig_type_139;
+typedef _gostring_ swig_type_140;
+typedef _gostring_ swig_type_141;
+typedef _gostring_ swig_type_142;
+typedef _gostring_ swig_type_143;
+typedef _gostring_ swig_type_144;
+typedef _gostring_ swig_type_145;
+typedef _gostring_ swig_type_146;
+typedef _gostring_ swig_type_147;
+typedef _gostring_ swig_type_148;
+typedef _gostring_ swig_type_149;
+typedef _gostring_ swig_type_150;
+typedef _gostring_ swig_type_151;
+typedef long long swig_type_152;
+typedef _gostring_ swig_type_153;
+typedef _gostring_ swig_type_154;
+typedef _gostring_ swig_type_155;
+typedef _gostring_ swig_type_156;
+typedef _gostring_ swig_type_157;
+typedef _gostring_ swig_type_158;
+typedef _gostring_ swig_type_159;
+typedef _gostring_ swig_type_160;
+typedef _gostring_ swig_type_161;
+extern void _wrap_Swig_free_indri_go_add17ee78870902e(uintptr_t arg1);
+extern uintptr_t _wrap_Swig_malloc_indri_go_add17ee78870902e(swig_intgo arg1);
+extern swig_type_1 _wrap_indriVersion_get_indri_go_add17ee78870902e(void);
+extern _Bool _wrap_buildindex_recoverRepository_indri_go_add17ee78870902e(swig_type_2 arg1);
+extern void _wrap_buildindex_start_time_indri_go_add17ee78870902e(void);
+extern void _wrap_buildindex_print_event_indri_go_add17ee78870902e(swig_type_3 arg1);
+extern void _wrap_buildindex_print_status__SWIG_0_indri_go_add17ee78870902e(swig_type_4 arg1, swig_intgo arg2);
+extern void _wrap_buildindex_print_status__SWIG_1_indri_go_add17ee78870902e(swig_type_5 arg1, swig_intgo arg2, swig_type_6 arg3, swig_type_7 arg4);
+extern void _wrap_buildindex_flush_status_indri_go_add17ee78870902e(void);
+extern _Bool _wrap_buildindex_augmentSpec_indri_go_add17ee78870902e(uintptr_t arg1, uintptr_t arg2, uintptr_t arg3, uintptr_t arg4, uintptr_t arg5);
+extern void _wrap_buildindex_mymain_indri_go_add17ee78870902e(swig_intgo arg1, swig_type_8 arg2, swig_type_9 arg3, swig_type_10 arg4, swig_type_11 arg5, swig_type_12 arg6);
+extern uintptr_t _wrap_new_IntVector__SWIG_0_indri_go_add17ee78870902e(void);
+extern uintptr_t _wrap_new_IntVector__SWIG_1_indri_go_add17ee78870902e(swig_type_13 arg1);
+extern swig_type_14 _wrap_IntVector_size_indri_go_add17ee78870902e(uintptr_t arg1);
+extern swig_type_15 _wrap_IntVector_capacity_indri_go_add17ee78870902e(uintptr_t arg1);
+extern void _wrap_IntVector_reserve_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_16 arg2);
+extern _Bool _wrap_IntVector_isEmpty_indri_go_add17ee78870902e(uintptr_t arg1);
+extern void _wrap_IntVector_clear_indri_go_add17ee78870902e(uintptr_t arg1);
+extern void _wrap_IntVector_add_indri_go_add17ee78870902e(uintptr_t arg1, swig_intgo arg2);
+extern swig_intgo _wrap_IntVector_get_indri_go_add17ee78870902e(uintptr_t arg1, swig_intgo arg2);
+extern void _wrap_IntVector_set_indri_go_add17ee78870902e(uintptr_t arg1, swig_intgo arg2, swig_intgo arg3);
+extern void _wrap_delete_IntVector_indri_go_add17ee78870902e(uintptr_t arg1);
+extern uintptr_t _wrap_new_StringVector__SWIG_0_indri_go_add17ee78870902e(void);
+extern uintptr_t _wrap_new_StringVector__SWIG_1_indri_go_add17ee78870902e(swig_type_17 arg1);
+extern swig_type_18 _wrap_StringVector_size_indri_go_add17ee78870902e(uintptr_t arg1);
+extern swig_type_19 _wrap_StringVector_capacity_indri_go_add17ee78870902e(uintptr_t arg1);
+extern void _wrap_StringVector_reserve_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_20 arg2);
+extern _Bool _wrap_StringVector_isEmpty_indri_go_add17ee78870902e(uintptr_t arg1);
+extern void _wrap_StringVector_clear_indri_go_add17ee78870902e(uintptr_t arg1);
+extern void _wrap_StringVector_add_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_21 arg2);
+extern swig_type_22 _wrap_StringVector_get_indri_go_add17ee78870902e(uintptr_t arg1, swig_intgo arg2);
+extern void _wrap_StringVector_set_indri_go_add17ee78870902e(uintptr_t arg1, swig_intgo arg2, swig_type_23 arg3);
+extern void _wrap_delete_StringVector_indri_go_add17ee78870902e(uintptr_t arg1);
+extern void _wrap_Wrapped_deleteFileClassSpec_indri_go_add17ee78870902e(uintptr_t arg1);
+extern void _wrap_Specification_name_set_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_24 arg2);
+extern swig_type_25 _wrap_Specification_name_get_indri_go_add17ee78870902e(uintptr_t arg1);
+extern void _wrap_Specification_parser_set_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_26 arg2);
+extern swig_type_27 _wrap_Specification_parser_get_indri_go_add17ee78870902e(uintptr_t arg1);
+extern void _wrap_Specification_tokenizer_set_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_28 arg2);
+extern swig_type_29 _wrap_Specification_tokenizer_get_indri_go_add17ee78870902e(uintptr_t arg1);
+extern void _wrap_Specification_iterator_set_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_30 arg2);
+extern swig_type_31 _wrap_Specification_iterator_get_indri_go_add17ee78870902e(uintptr_t arg1);
+extern void _wrap_Specification_startDocTag_set_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_32 arg2);
+extern swig_type_33 _wrap_Specification_startDocTag_get_indri_go_add17ee78870902e(uintptr_t arg1);
+extern void _wrap_Specification_endDocTag_set_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_34 arg2);
+extern swig_type_35 _wrap_Specification_endDocTag_get_indri_go_add17ee78870902e(uintptr_t arg1);
+extern void _wrap_Specification_endMetadataTag_set_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_36 arg2);
+extern swig_type_37 _wrap_Specification_endMetadataTag_get_indri_go_add17ee78870902e(uintptr_t arg1);
+extern void _wrap_Specification_include_set_indri_go_add17ee78870902e(uintptr_t arg1, uintptr_t arg2);
+extern uintptr_t _wrap_Specification_include_get_indri_go_add17ee78870902e(uintptr_t arg1);
+extern void _wrap_Specification_exclude_set_indri_go_add17ee78870902e(uintptr_t arg1, uintptr_t arg2);
+extern uintptr_t _wrap_Specification_exclude_get_indri_go_add17ee78870902e(uintptr_t arg1);
+extern void _wrap_Specification_index_set_indri_go_add17ee78870902e(uintptr_t arg1, uintptr_t arg2);
+extern uintptr_t _wrap_Specification_index_get_indri_go_add17ee78870902e(uintptr_t arg1);
+extern void _wrap_Specification_metadata_set_indri_go_add17ee78870902e(uintptr_t arg1, uintptr_t arg2);
+extern uintptr_t _wrap_Specification_metadata_get_indri_go_add17ee78870902e(uintptr_t arg1);
+extern void _wrap_Specification_conflations_set_indri_go_add17ee78870902e(uintptr_t arg1, uintptr_t arg2);
+extern uintptr_t _wrap_Specification_conflations_get_indri_go_add17ee78870902e(uintptr_t arg1);
+extern uintptr_t _wrap_new_Specification_indri_go_add17ee78870902e(void);
+extern void _wrap_delete_Specification_indri_go_add17ee78870902e(uintptr_t arg1);
+extern uintptr_t _wrap_new_Wrapped_Parameters_indri_go_add17ee78870902e(void);
+extern void _wrap_delete_Wrapped_Parameters_indri_go_add17ee78870902e(uintptr_t arg1);
+extern void _wrap_Wrapped_Parameters_set_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_38 arg2);
+extern _Bool _wrap_Wrapped_Parameters_get_bool_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_39 arg2, _Bool arg3);
+extern swig_intgo _wrap_Wrapped_Parameters_get_int_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_40 arg2, swig_intgo arg3);
+extern double _wrap_Wrapped_Parameters_get_double_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_41 arg2, double arg3);
+extern swig_type_42 _wrap_Wrapped_Parameters_get_INT64_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_43 arg2, swig_type_44 arg3);
+extern swig_type_45 _wrap_Wrapped_Parameters_get_string_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_46 arg2, swig_type_47 arg3);
+extern void _wrap_Wrapped_Parameters_remove_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_48 arg2);
+extern void _wrap_Wrapped_Parameters_set_bool_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_49 arg2, _Bool arg3);
+extern void _wrap_Wrapped_Parameters_set_string_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_50 arg2, swig_type_51 arg3);
+extern void _wrap_Wrapped_Parameters_set_int_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_52 arg2, swig_intgo arg3);
+extern void _wrap_Wrapped_Parameters_set_UINT64_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_53 arg2, swig_type_54 arg3);
+extern void _wrap_Wrapped_Parameters_set_double_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_55 arg2, double arg3);
+extern void _wrap_Wrapped_Parameters_clear_indri_go_add17ee78870902e(uintptr_t arg1);
+extern swig_type_56 _wrap_Wrapped_Parameters_size_indri_go_add17ee78870902e(uintptr_t arg1);
+extern _Bool _wrap_Wrapped_Parameters_exists_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_57 arg2);
+extern void _wrap_Wrapped_Parameters_load_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_58 arg2);
+extern void _wrap_TermExtent_begin_set_indri_go_add17ee78870902e(uintptr_t arg1, swig_intgo arg2);
+extern swig_intgo _wrap_TermExtent_begin_get_indri_go_add17ee78870902e(uintptr_t arg1);
+extern void _wrap_TermExtent_end_set_indri_go_add17ee78870902e(uintptr_t arg1, swig_intgo arg2);
+extern swig_intgo _wrap_TermExtent_end_get_indri_go_add17ee78870902e(uintptr_t arg1);
+extern void _wrap_delete_TermExtent_indri_go_add17ee78870902e(uintptr_t arg1);
+extern uintptr_t _wrap_new_TermExtent_indri_go_add17ee78870902e(void);
+extern void _wrap_delete_ScoredExtentResult_indri_go_add17ee78870902e(uintptr_t arg1);
+extern uintptr_t _wrap_new_ScoredExtentResult_indri_go_add17ee78870902e(void);
+extern void _wrap_delete_ParsedDocument_indri_go_add17ee78870902e(uintptr_t arg1);
+extern swig_type_59 _wrap_ParsedDocument_getContent_indri_go_add17ee78870902e(uintptr_t arg1);
+extern uintptr_t _wrap_new_ParsedDocument_indri_go_add17ee78870902e(void);
+extern void _wrap_QueryAnnotationNode_name_set_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_60 arg2);
+extern swig_type_61 _wrap_QueryAnnotationNode_name_get_indri_go_add17ee78870902e(uintptr_t arg1);
+extern void _wrap_QueryAnnotationNode_Xtype_set_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_62 arg2);
+extern swig_type_63 _wrap_QueryAnnotationNode_Xtype_get_indri_go_add17ee78870902e(uintptr_t arg1);
+extern void _wrap_QueryAnnotationNode_queryText_set_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_64 arg2);
+extern swig_type_65 _wrap_QueryAnnotationNode_queryText_get_indri_go_add17ee78870902e(uintptr_t arg1);
+extern void _wrap_QueryAnnotationNode_children_set_indri_go_add17ee78870902e(uintptr_t arg1, uintptr_t arg2);
+extern uintptr_t _wrap_QueryAnnotationNode_children_get_indri_go_add17ee78870902e(uintptr_t arg1);
+extern uintptr_t _wrap_new_QueryAnnotationNode_indri_go_add17ee78870902e(void);
+extern void _wrap_delete_QueryAnnotationNode_indri_go_add17ee78870902e(uintptr_t arg1);
+extern uintptr_t _wrap_QueryAnnotation_getQueryTree_indri_go_add17ee78870902e(uintptr_t arg1);
+extern uintptr_t _wrap_QueryAnnotation_getAnnotations_indri_go_add17ee78870902e(uintptr_t arg1);
+extern uintptr_t _wrap_QueryAnnotation_getResults_indri_go_add17ee78870902e(uintptr_t arg1);
+extern uintptr_t _wrap_new_QueryAnnotation_indri_go_add17ee78870902e(void);
+extern void _wrap_delete_QueryAnnotation_indri_go_add17ee78870902e(uintptr_t arg1);
+extern uintptr_t _wrap_new_QueryEnvironment_indri_go_add17ee78870902e(void);
+extern void _wrap_QueryEnvironment_addServer_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_66 arg2);
+extern void _wrap_QueryEnvironment_addIndex_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_67 arg2);
+extern void _wrap_QueryEnvironment_removeServer_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_68 arg2);
+extern void _wrap_QueryEnvironment_removeIndex_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_69 arg2);
+extern void _wrap_QueryEnvironment_close_indri_go_add17ee78870902e(uintptr_t arg1);
+extern void _wrap_QueryEnvironment_setMemory_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_70 arg2);
+extern void _wrap_QueryEnvironment_setScoringRules_indri_go_add17ee78870902e(uintptr_t arg1, uintptr_t arg2);
+extern void _wrap_QueryEnvironment_setStopwords_indri_go_add17ee78870902e(uintptr_t arg1, uintptr_t arg2);
+extern uintptr_t _wrap_QueryEnvironment_runQuery__SWIG_0_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_71 arg2, swig_intgo arg3);
+extern uintptr_t _wrap_QueryEnvironment_runQuery__SWIG_1_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_72 arg2, uintptr_t arg3, swig_intgo arg4);
+extern uintptr_t _wrap_QueryEnvironment_runAnnotatedQuery__SWIG_0_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_73 arg2, swig_intgo arg3);
+extern uintptr_t _wrap_QueryEnvironment_runAnnotatedQuery__SWIG_1_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_74 arg2, uintptr_t arg3, swig_intgo arg4);
+extern uintptr_t _wrap_QueryEnvironment_runQuerydocset_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_75 arg2, uintptr_t arg3, swig_intgo arg4);
+extern uintptr_t _wrap_QueryEnvironment_runAnnotatedQuerydocset_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_76 arg2, uintptr_t arg3, swig_intgo arg4);
+extern uintptr_t _wrap_QueryEnvironment_documents__SWIG_0_indri_go_add17ee78870902e(uintptr_t arg1, uintptr_t arg2);
+extern uintptr_t _wrap_QueryEnvironment_documents__SWIG_1_indri_go_add17ee78870902e(uintptr_t arg1, uintptr_t arg2);
+extern uintptr_t _wrap_QueryEnvironment_documentMetadata__SWIG_0_indri_go_add17ee78870902e(uintptr_t arg1, uintptr_t arg2, swig_type_77 arg3);
+extern uintptr_t _wrap_QueryEnvironment_documentMetadata__SWIG_1_indri_go_add17ee78870902e(uintptr_t arg1, uintptr_t arg2, swig_type_78 arg3);
+extern uintptr_t _wrap_QueryEnvironment_documentIDsFromMetadata_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_79 arg2, uintptr_t arg3);
+extern uintptr_t _wrap_QueryEnvironment_documentsFromMetadata_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_80 arg2, uintptr_t arg3);
+extern swig_type_81 _wrap_QueryEnvironment_termCount__SWIG_0_indri_go_add17ee78870902e(uintptr_t arg1);
+extern swig_type_82 _wrap_QueryEnvironment_termCount__SWIG_1_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_83 arg2);
+extern swig_type_84 _wrap_QueryEnvironment_termFieldCount_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_85 arg2, swig_type_86 arg3);
+extern uintptr_t _wrap_QueryEnvironment_fieldList_indri_go_add17ee78870902e(uintptr_t arg1);
+extern swig_type_87 _wrap_QueryEnvironment_documentCount__SWIG_0_indri_go_add17ee78870902e(uintptr_t arg1);
+extern swig_type_88 _wrap_QueryEnvironment_documentCount__SWIG_1_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_89 arg2);
+extern uintptr_t _wrap_QueryEnvironment_documentVectors_indri_go_add17ee78870902e(uintptr_t arg1, uintptr_t arg2);
+extern double _wrap_QueryEnvironment_expressionCount__SWIG_0_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_90 arg2, swig_type_91 arg3);
+extern double _wrap_QueryEnvironment_expressionCount__SWIG_1_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_92 arg2);
+extern double _wrap_QueryEnvironment_documentExpressionCount__SWIG_0_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_93 arg2, swig_type_94 arg3);
+extern double _wrap_QueryEnvironment_documentExpressionCount__SWIG_1_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_95 arg2);
+extern uintptr_t _wrap_QueryEnvironment_expressionList__SWIG_0_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_96 arg2, swig_type_97 arg3);
+extern uintptr_t _wrap_QueryEnvironment_expressionList__SWIG_1_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_98 arg2);
+extern swig_intgo _wrap_QueryEnvironment_documentLength_indri_go_add17ee78870902e(uintptr_t arg1, swig_intgo arg2);
+extern void _wrap_QueryEnvironment_setFormulationParameters_indri_go_add17ee78870902e(uintptr_t arg1, uintptr_t arg2);
+extern swig_type_99 _wrap_QueryEnvironment_reformulateQuery_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_100 arg2);
+extern swig_type_101 _wrap_QueryEnvironment_stemTerm_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_102 arg2);
+extern swig_type_103 _wrap_QueryEnvironment_termCountUnique_indri_go_add17ee78870902e(uintptr_t arg1);
+extern swig_type_104 _wrap_QueryEnvironment_stemCount_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_105 arg2);
+extern swig_type_106 _wrap_QueryEnvironment_stemFieldCount_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_107 arg2, swig_type_108 arg3);
+extern swig_type_109 _wrap_QueryEnvironment_documentStemCount_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_110 arg2);
+extern uintptr_t _wrap_QueryEnvironment_documentsdocids_indri_go_add17ee78870902e(uintptr_t arg1, uintptr_t arg2);
+extern uintptr_t _wrap_QueryEnvironment_documentMetadatadocids_indri_go_add17ee78870902e(uintptr_t arg1, uintptr_t arg2, swig_type_111 arg3);
+extern swig_type_112 _wrap_QueryEnvironment_onetermCount_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_113 arg2);
+extern swig_type_114 _wrap_QueryEnvironment_onedocumentCount_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_115 arg2);
+extern void _wrap_delete_QueryEnvironment_indri_go_add17ee78870902e(uintptr_t arg1);
+extern void _wrap_delete_QueryExpander_indri_go_add17ee78870902e(uintptr_t arg1);
+extern uintptr_t _wrap_QueryExpander_runExpandedQuery__SWIG_0_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_116 arg2, swig_intgo arg3, _Bool arg4);
+extern uintptr_t _wrap_QueryExpander_runExpandedQuery__SWIG_1_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_117 arg2, swig_intgo arg3);
+extern swig_type_118 _wrap_QueryExpander_expand_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_119 arg2, uintptr_t arg3);
+extern uintptr_t _wrap_new_RMExpander_indri_go_add17ee78870902e(uintptr_t arg1, uintptr_t arg2);
+extern swig_type_120 _wrap_RMExpander_expand_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_121 arg2, uintptr_t arg3);
+extern void _wrap_delete_RMExpander_indri_go_add17ee78870902e(uintptr_t arg1);
+extern uintptr_t _wrap_RMExpander_runExpandedQuery__SWIG_0_indri_go_add17ee78870902e(uintptr_t _swig_base, swig_type_122 arg1, swig_intgo arg2, _Bool arg3);
+extern uintptr_t _wrap_RMExpander_runExpandedQuery__SWIG_1_indri_go_add17ee78870902e(uintptr_t _swig_base, swig_type_123 arg1, swig_intgo arg2);
+extern uintptr_t _wrap_new_PonteExpander_indri_go_add17ee78870902e(uintptr_t arg1, uintptr_t arg2);
+extern swig_type_124 _wrap_PonteExpander_expand_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_125 arg2, uintptr_t arg3);
+extern void _wrap_delete_PonteExpander_indri_go_add17ee78870902e(uintptr_t arg1);
+extern uintptr_t _wrap_PonteExpander_runExpandedQuery__SWIG_0_indri_go_add17ee78870902e(uintptr_t _swig_base, swig_type_122 arg1, swig_intgo arg2, _Bool arg3);
+extern uintptr_t _wrap_PonteExpander_runExpandedQuery__SWIG_1_indri_go_add17ee78870902e(uintptr_t _swig_base, swig_type_123 arg1, swig_intgo arg2);
+extern void _wrap_Wrapped_MetadataPair_key_set_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_126 arg2);
+extern swig_type_127 _wrap_Wrapped_MetadataPair_key_get_indri_go_add17ee78870902e(uintptr_t arg1);
+extern void _wrap_Wrapped_MetadataPair_value_set_indri_go_add17ee78870902e(uintptr_t arg1, uintptr_t arg2);
+extern uintptr_t _wrap_Wrapped_MetadataPair_value_get_indri_go_add17ee78870902e(uintptr_t arg1);
+extern void _wrap_Wrapped_MetadataPair_valueLength_set_indri_go_add17ee78870902e(uintptr_t arg1, swig_intgo arg2);
+extern swig_intgo _wrap_Wrapped_MetadataPair_valueLength_get_indri_go_add17ee78870902e(uintptr_t arg1);
+extern void _wrap_Wrapped_MetadataPair_stripValue_indri_go_add17ee78870902e(uintptr_t arg1);
+extern uintptr_t _wrap_new_Wrapped_MetadataPair_indri_go_add17ee78870902e(void);
+extern void _wrap_delete_Wrapped_MetadataPair_indri_go_add17ee78870902e(uintptr_t arg1);
+extern uintptr_t _wrap_new_MetadataPairVector__SWIG_0_indri_go_add17ee78870902e(void);
+extern uintptr_t _wrap_new_MetadataPairVector__SWIG_1_indri_go_add17ee78870902e(swig_type_128 arg1);
+extern swig_type_129 _wrap_MetadataPairVector_size_indri_go_add17ee78870902e(uintptr_t arg1);
+extern swig_type_130 _wrap_MetadataPairVector_capacity_indri_go_add17ee78870902e(uintptr_t arg1);
+extern void _wrap_MetadataPairVector_reserve_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_131 arg2);
+extern _Bool _wrap_MetadataPairVector_isEmpty_indri_go_add17ee78870902e(uintptr_t arg1);
+extern void _wrap_MetadataPairVector_clear_indri_go_add17ee78870902e(uintptr_t arg1);
+extern void _wrap_MetadataPairVector_add_indri_go_add17ee78870902e(uintptr_t arg1, uintptr_t arg2);
+extern uintptr_t _wrap_MetadataPairVector_get_indri_go_add17ee78870902e(uintptr_t arg1, swig_intgo arg2);
+extern void _wrap_MetadataPairVector_set_indri_go_add17ee78870902e(uintptr_t arg1, swig_intgo arg2, uintptr_t arg3);
+extern void _wrap_delete_MetadataPairVector_indri_go_add17ee78870902e(uintptr_t arg1);
+extern uintptr_t _wrap__swig_NewDirectorIndexStatusIndexStatus_indri_go_add17ee78870902e(int);
+extern void _wrap_DeleteDirectorIndexStatus_indri_go_add17ee78870902e(uintptr_t arg1);
+extern swig_intgo _wrap_FileOpen_IndexStatus_indri_go_add17ee78870902e(void);
+extern swig_intgo _wrap_FileSkip_IndexStatus_indri_go_add17ee78870902e(void);
+extern swig_intgo _wrap_FileError_IndexStatus_indri_go_add17ee78870902e(void);
+extern swig_intgo _wrap_FileClose_IndexStatus_indri_go_add17ee78870902e(void);
+extern swig_intgo _wrap_DocumentCount_IndexStatus_indri_go_add17ee78870902e(void);
+extern void _wrap_delete_IndexStatus_indri_go_add17ee78870902e(uintptr_t arg1);
+extern void _wrap_IndexStatus_status_indri_go_add17ee78870902e(uintptr_t arg1, swig_intgo arg2, swig_type_132 arg3, swig_type_133 arg4, swig_intgo arg5, swig_intgo arg6);
+extern uintptr_t _wrap_new_Wrapped_IndexEnvironment_indri_go_add17ee78870902e(void);
+extern void _wrap_delete_Wrapped_IndexEnvironment_indri_go_add17ee78870902e(uintptr_t arg1);
+extern void _wrap_Wrapped_IndexEnvironment_Wrapped_setDocumentRoot_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_134 arg2);
+extern void _wrap_Wrapped_IndexEnvironment_Wrapped_setAnchorTextPath_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_135 arg2);
+extern void _wrap_Wrapped_IndexEnvironment_Wrapped_setOffsetMetadataPath_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_136 arg2);
+extern void _wrap_Wrapped_IndexEnvironment_Wrapped_setOffsetAnnotationsPath_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_137 arg2);
+extern void _wrap_Wrapped_IndexEnvironment_Wrapped_addFileClass__SWIG_0_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_138 arg2, swig_type_139 arg3, swig_type_140 arg4, swig_type_141 arg5, swig_type_142 arg6, swig_type_143 arg7, swig_type_144 arg8, uintptr_t arg9, uintptr_t arg10, uintptr_t arg11, uintptr_t arg12, uintptr_t arg13);
+extern uintptr_t _wrap_Wrapped_IndexEnvironment_Wrapped_getFileClassSpec_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_145 arg2);
+extern void _wrap_Wrapped_IndexEnvironment_Wrapped_addFileClass__SWIG_1_indri_go_add17ee78870902e(uintptr_t arg1, uintptr_t arg2);
+extern void _wrap_Wrapped_IndexEnvironment_Wrapped_deleteDocument_indri_go_add17ee78870902e(uintptr_t arg1, swig_intgo arg2);
+extern void _wrap_Wrapped_IndexEnvironment_Wrapped_setIndexedFields_indri_go_add17ee78870902e(uintptr_t arg1, uintptr_t arg2);
+extern void _wrap_Wrapped_IndexEnvironment_Wrapped_setNumericField__SWIG_0_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_146 arg2, _Bool arg3, swig_type_147 arg4);
+extern void _wrap_Wrapped_IndexEnvironment_Wrapped_setNumericField__SWIG_1_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_148 arg2, _Bool arg3);
+extern void _wrap_Wrapped_IndexEnvironment_Wrapped_setOrdinalField_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_149 arg2, _Bool arg3);
+extern void _wrap_Wrapped_IndexEnvironment_Wrapped_setParentalField_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_150 arg2, _Bool arg3);
+extern void _wrap_Wrapped_IndexEnvironment_Wrapped_setMetadataIndexedFields_indri_go_add17ee78870902e(uintptr_t arg1, uintptr_t arg2, uintptr_t arg3);
+extern void _wrap_Wrapped_IndexEnvironment_Wrapped_setStopwords_indri_go_add17ee78870902e(uintptr_t arg1, uintptr_t arg2);
+extern void _wrap_Wrapped_IndexEnvironment_Wrapped_setStemmer_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_151 arg2);
+extern void _wrap_Wrapped_IndexEnvironment_Wrapped_setMemory_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_152 arg2);
+extern void _wrap_Wrapped_IndexEnvironment_Wrapped_setNormalization_indri_go_add17ee78870902e(uintptr_t arg1, _Bool arg2);
+extern void _wrap_Wrapped_IndexEnvironment_Wrapped_setStoreDocs_indri_go_add17ee78870902e(uintptr_t arg1, _Bool arg2);
+extern void _wrap_Wrapped_IndexEnvironment_Wrapped_create__SWIG_0_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_153 arg2, uintptr_t arg3);
+extern void _wrap_Wrapped_IndexEnvironment_Wrapped_create__SWIG_1_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_154 arg2);
+extern void _wrap_Wrapped_IndexEnvironment_Wrapped_open__SWIG_0_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_155 arg2, uintptr_t arg3);
+extern void _wrap_Wrapped_IndexEnvironment_Wrapped_open__SWIG_1_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_156 arg2);
+extern void _wrap_Wrapped_IndexEnvironment_Wrapped_close_indri_go_add17ee78870902e(uintptr_t arg1);
+extern void _wrap_Wrapped_IndexEnvironment_Wrapped_addFile__SWIG_0_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_157 arg2);
+extern void _wrap_Wrapped_IndexEnvironment_Wrapped_addFile__SWIG_1_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_158 arg2, swig_type_159 arg3);
+extern swig_intgo _wrap_Wrapped_IndexEnvironment_Wrapped_addString_indri_go_add17ee78870902e(uintptr_t arg1, swig_type_160 arg2, swig_type_161 arg3, uintptr_t arg4);
+extern swig_intgo _wrap_Wrapped_IndexEnvironment_Wrapped_addParsedDocument_indri_go_add17ee78870902e(uintptr_t arg1, uintptr_t arg2);
+extern swig_intgo _wrap_Wrapped_IndexEnvironment_Wrapped_documentsIndexed_indri_go_add17ee78870902e(uintptr_t arg1);
+extern swig_intgo _wrap_Wrapped_IndexEnvironment_Wrapped_documentsSeen_indri_go_add17ee78870902e(uintptr_t arg1);
 #undef intgo
 */
 import "C"
@@ -356,6 +427,7 @@ import "unsafe"
 import _ "runtime/cgo"
 import "sync"
 import "fmt"
+import "runtime"
 
 
 type _ unsafe.Pointer
@@ -383,14 +455,121 @@ func swigCopyString(s string) string {
 
 func Swig_free(arg1 uintptr) {
 	_swig_i_0 := arg1
-	C._wrap_Swig_free_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0))
+	C._wrap_Swig_free_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))
 }
 
 func Swig_malloc(arg1 int) (_swig_ret uintptr) {
 	var swig_r uintptr
 	_swig_i_0 := arg1
-	swig_r = (uintptr)(C._wrap_Swig_malloc_indri_go_8e24520e0b567faa(C.swig_intgo(_swig_i_0)))
+	swig_r = (uintptr)(C._wrap_Swig_malloc_indri_go_add17ee78870902e(C.swig_intgo(_swig_i_0)))
 	return swig_r
+}
+
+func GetIndriVersion() (_swig_ret string) {
+	var swig_r string
+	swig_r_p := C._wrap_indriVersion_get_indri_go_add17ee78870902e()
+	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
+	var swig_r_1 string
+ swig_r_1 = swigCopyString(swig_r) 
+	return swig_r_1
+}
+
+func Buildindex_recoverRepository(arg1 string) (_swig_ret bool) {
+	var swig_r bool
+	_swig_i_0 := arg1
+	swig_r = (bool)(C._wrap_buildindex_recoverRepository_indri_go_add17ee78870902e(*(*C.swig_type_2)(unsafe.Pointer(&_swig_i_0))))
+	if Swig_escape_always_false {
+		Swig_escape_val = arg1
+	}
+	return swig_r
+}
+
+func Buildindex_start_time() {
+	C._wrap_buildindex_start_time_indri_go_add17ee78870902e()
+}
+
+func Buildindex_print_event(arg1 string) {
+	_swig_i_0 := arg1
+	C._wrap_buildindex_print_event_indri_go_add17ee78870902e(*(*C.swig_type_3)(unsafe.Pointer(&_swig_i_0)))
+	if Swig_escape_always_false {
+		Swig_escape_val = arg1
+	}
+}
+
+func Buildindex_print_status__SWIG_0(arg1 string, arg2 int) {
+	_swig_i_0 := arg1
+	_swig_i_1 := arg2
+	C._wrap_buildindex_print_status__SWIG_0_indri_go_add17ee78870902e(*(*C.swig_type_4)(unsafe.Pointer(&_swig_i_0)), C.swig_intgo(_swig_i_1))
+	if Swig_escape_always_false {
+		Swig_escape_val = arg1
+	}
+}
+
+func Buildindex_print_status__SWIG_1(arg1 string, arg2 int, arg3 string, arg4 int64) {
+	_swig_i_0 := arg1
+	_swig_i_1 := arg2
+	_swig_i_2 := arg3
+	_swig_i_3 := arg4
+	C._wrap_buildindex_print_status__SWIG_1_indri_go_add17ee78870902e(*(*C.swig_type_5)(unsafe.Pointer(&_swig_i_0)), C.swig_intgo(_swig_i_1), *(*C.swig_type_6)(unsafe.Pointer(&_swig_i_2)), C.swig_type_7(_swig_i_3))
+	if Swig_escape_always_false {
+		Swig_escape_val = arg1
+	}
+	if Swig_escape_always_false {
+		Swig_escape_val = arg3
+	}
+}
+
+func Buildindex_print_status(a ...interface{}) {
+	argc := len(a)
+	if argc == 2 {
+		Buildindex_print_status__SWIG_0(a[0].(string), a[1].(int))
+		return
+	}
+	if argc == 4 {
+		Buildindex_print_status__SWIG_1(a[0].(string), a[1].(int), a[2].(string), a[3].(int64))
+		return
+	}
+	panic("No match for overloaded function call")
+}
+
+func Buildindex_flush_status() {
+	C._wrap_buildindex_flush_status_indri_go_add17ee78870902e()
+}
+
+func Buildindex_augmentSpec(arg1 Indri_parse_FileClassEnvironmentFactory_Specification, arg2 StringVector, arg3 StringVector, arg4 StringVector, arg5 StringVector) (_swig_ret bool) {
+	var swig_r bool
+	_swig_i_0 := arg1.Swigcptr()
+	_swig_i_1 := arg2.Swigcptr()
+	_swig_i_2 := arg3.Swigcptr()
+	_swig_i_3 := arg4.Swigcptr()
+	_swig_i_4 := arg5.Swigcptr()
+	swig_r = (bool)(C._wrap_buildindex_augmentSpec_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1), C.uintptr_t(_swig_i_2), C.uintptr_t(_swig_i_3), C.uintptr_t(_swig_i_4)))
+	return swig_r
+}
+
+func Buildindex_mymain(arg1 int, arg2 string, arg3 string, arg4 string, arg5 string, arg6 string) {
+	_swig_i_0 := arg1
+	_swig_i_1 := arg2
+	_swig_i_2 := arg3
+	_swig_i_3 := arg4
+	_swig_i_4 := arg5
+	_swig_i_5 := arg6
+	C._wrap_buildindex_mymain_indri_go_add17ee78870902e(C.swig_intgo(_swig_i_0), *(*C.swig_type_8)(unsafe.Pointer(&_swig_i_1)), *(*C.swig_type_9)(unsafe.Pointer(&_swig_i_2)), *(*C.swig_type_10)(unsafe.Pointer(&_swig_i_3)), *(*C.swig_type_11)(unsafe.Pointer(&_swig_i_4)), *(*C.swig_type_12)(unsafe.Pointer(&_swig_i_5)))
+	if Swig_escape_always_false {
+		Swig_escape_val = arg2
+	}
+	if Swig_escape_always_false {
+		Swig_escape_val = arg3
+	}
+	if Swig_escape_always_false {
+		Swig_escape_val = arg4
+	}
+	if Swig_escape_always_false {
+		Swig_escape_val = arg5
+	}
+	if Swig_escape_always_false {
+		Swig_escape_val = arg6
+	}
 }
 
 type SwigcptrIntVector uintptr
@@ -404,14 +583,14 @@ func (p SwigcptrIntVector) SwigIsIntVector() {
 
 func NewIntVector__SWIG_0() (_swig_ret IntVector) {
 	var swig_r IntVector
-	swig_r = (IntVector)(SwigcptrIntVector(C._wrap_new_IntVector__SWIG_0_indri_go_8e24520e0b567faa()))
+	swig_r = (IntVector)(SwigcptrIntVector(C._wrap_new_IntVector__SWIG_0_indri_go_add17ee78870902e()))
 	return swig_r
 }
 
 func NewIntVector__SWIG_1(arg1 int64) (_swig_ret IntVector) {
 	var swig_r IntVector
 	_swig_i_0 := arg1
-	swig_r = (IntVector)(SwigcptrIntVector(C._wrap_new_IntVector__SWIG_1_indri_go_8e24520e0b567faa(C.swig_type_1(_swig_i_0))))
+	swig_r = (IntVector)(SwigcptrIntVector(C._wrap_new_IntVector__SWIG_1_indri_go_add17ee78870902e(C.swig_type_13(_swig_i_0))))
 	return swig_r
 }
 
@@ -429,46 +608,46 @@ func NewIntVector(a ...interface{}) IntVector {
 func (arg1 SwigcptrIntVector) Size() (_swig_ret int64) {
 	var swig_r int64
 	_swig_i_0 := arg1
-	swig_r = (int64)(C._wrap_IntVector_size_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0)))
+	swig_r = (int64)(C._wrap_IntVector_size_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0)))
 	return swig_r
 }
 
 func (arg1 SwigcptrIntVector) Capacity() (_swig_ret int64) {
 	var swig_r int64
 	_swig_i_0 := arg1
-	swig_r = (int64)(C._wrap_IntVector_capacity_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0)))
+	swig_r = (int64)(C._wrap_IntVector_capacity_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0)))
 	return swig_r
 }
 
 func (arg1 SwigcptrIntVector) Reserve(arg2 int64) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	C._wrap_IntVector_reserve_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), C.swig_type_4(_swig_i_1))
+	C._wrap_IntVector_reserve_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.swig_type_16(_swig_i_1))
 }
 
 func (arg1 SwigcptrIntVector) IsEmpty() (_swig_ret bool) {
 	var swig_r bool
 	_swig_i_0 := arg1
-	swig_r = (bool)(C._wrap_IntVector_isEmpty_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0)))
+	swig_r = (bool)(C._wrap_IntVector_isEmpty_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0)))
 	return swig_r
 }
 
 func (arg1 SwigcptrIntVector) Clear() {
 	_swig_i_0 := arg1
-	C._wrap_IntVector_clear_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0))
+	C._wrap_IntVector_clear_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))
 }
 
 func (arg1 SwigcptrIntVector) Add(arg2 int) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	C._wrap_IntVector_add_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), C.swig_intgo(_swig_i_1))
+	C._wrap_IntVector_add_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.swig_intgo(_swig_i_1))
 }
 
 func (arg1 SwigcptrIntVector) Get(arg2 int) (_swig_ret int) {
 	var swig_r int
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	swig_r = (int)(C._wrap_IntVector_get_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), C.swig_intgo(_swig_i_1)))
+	swig_r = (int)(C._wrap_IntVector_get_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.swig_intgo(_swig_i_1)))
 	return swig_r
 }
 
@@ -476,12 +655,12 @@ func (arg1 SwigcptrIntVector) Set(arg2 int, arg3 int) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
 	_swig_i_2 := arg3
-	C._wrap_IntVector_set_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), C.swig_intgo(_swig_i_1), C.swig_intgo(_swig_i_2))
+	C._wrap_IntVector_set_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.swig_intgo(_swig_i_1), C.swig_intgo(_swig_i_2))
 }
 
 func DeleteIntVector(arg1 IntVector) {
 	_swig_i_0 := arg1.Swigcptr()
-	C._wrap_delete_IntVector_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0))
+	C._wrap_delete_IntVector_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))
 }
 
 type IntVector interface {
@@ -508,14 +687,14 @@ func (p SwigcptrStringVector) SwigIsStringVector() {
 
 func NewStringVector__SWIG_0() (_swig_ret StringVector) {
 	var swig_r StringVector
-	swig_r = (StringVector)(SwigcptrStringVector(C._wrap_new_StringVector__SWIG_0_indri_go_8e24520e0b567faa()))
+	swig_r = (StringVector)(SwigcptrStringVector(C._wrap_new_StringVector__SWIG_0_indri_go_add17ee78870902e()))
 	return swig_r
 }
 
 func NewStringVector__SWIG_1(arg1 int64) (_swig_ret StringVector) {
 	var swig_r StringVector
 	_swig_i_0 := arg1
-	swig_r = (StringVector)(SwigcptrStringVector(C._wrap_new_StringVector__SWIG_1_indri_go_8e24520e0b567faa(C.swig_type_5(_swig_i_0))))
+	swig_r = (StringVector)(SwigcptrStringVector(C._wrap_new_StringVector__SWIG_1_indri_go_add17ee78870902e(C.swig_type_17(_swig_i_0))))
 	return swig_r
 }
 
@@ -533,39 +712,39 @@ func NewStringVector(a ...interface{}) StringVector {
 func (arg1 SwigcptrStringVector) Size() (_swig_ret int64) {
 	var swig_r int64
 	_swig_i_0 := arg1
-	swig_r = (int64)(C._wrap_StringVector_size_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0)))
+	swig_r = (int64)(C._wrap_StringVector_size_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0)))
 	return swig_r
 }
 
 func (arg1 SwigcptrStringVector) Capacity() (_swig_ret int64) {
 	var swig_r int64
 	_swig_i_0 := arg1
-	swig_r = (int64)(C._wrap_StringVector_capacity_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0)))
+	swig_r = (int64)(C._wrap_StringVector_capacity_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0)))
 	return swig_r
 }
 
 func (arg1 SwigcptrStringVector) Reserve(arg2 int64) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	C._wrap_StringVector_reserve_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), C.swig_type_8(_swig_i_1))
+	C._wrap_StringVector_reserve_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.swig_type_20(_swig_i_1))
 }
 
 func (arg1 SwigcptrStringVector) IsEmpty() (_swig_ret bool) {
 	var swig_r bool
 	_swig_i_0 := arg1
-	swig_r = (bool)(C._wrap_StringVector_isEmpty_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0)))
+	swig_r = (bool)(C._wrap_StringVector_isEmpty_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0)))
 	return swig_r
 }
 
 func (arg1 SwigcptrStringVector) Clear() {
 	_swig_i_0 := arg1
-	C._wrap_StringVector_clear_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0))
+	C._wrap_StringVector_clear_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))
 }
 
 func (arg1 SwigcptrStringVector) Add(arg2 string) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	C._wrap_StringVector_add_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_9)(unsafe.Pointer(&_swig_i_1)))
+	C._wrap_StringVector_add_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_21)(unsafe.Pointer(&_swig_i_1)))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
@@ -575,7 +754,7 @@ func (arg1 SwigcptrStringVector) Get(arg2 int) (_swig_ret string) {
 	var swig_r string
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	swig_r_p := C._wrap_StringVector_get_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), C.swig_intgo(_swig_i_1))
+	swig_r_p := C._wrap_StringVector_get_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.swig_intgo(_swig_i_1))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
  swig_r_1 = swigCopyString(swig_r) 
@@ -586,7 +765,7 @@ func (arg1 SwigcptrStringVector) Set(arg2 int, arg3 string) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
 	_swig_i_2 := arg3
-	C._wrap_StringVector_set_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), C.swig_intgo(_swig_i_1), *(*C.swig_type_11)(unsafe.Pointer(&_swig_i_2)))
+	C._wrap_StringVector_set_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.swig_intgo(_swig_i_1), *(*C.swig_type_23)(unsafe.Pointer(&_swig_i_2)))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg3
 	}
@@ -594,7 +773,7 @@ func (arg1 SwigcptrStringVector) Set(arg2 int, arg3 string) {
 
 func DeleteStringVector(arg1 StringVector) {
 	_swig_i_0 := arg1.Swigcptr()
-	C._wrap_delete_StringVector_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0))
+	C._wrap_delete_StringVector_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))
 }
 
 type StringVector interface {
@@ -610,89 +789,341 @@ type StringVector interface {
 	Set(arg2 int, arg3 string)
 }
 
-type SwigcptrParameters uintptr
+func Wrapped_deleteFileClassSpec(arg1 Indri_parse_FileClassEnvironmentFactory_Specification) {
+	_swig_i_0 := arg1.Swigcptr()
+	C._wrap_Wrapped_deleteFileClassSpec_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))
+}
 
-func (p SwigcptrParameters) Swigcptr() uintptr {
+type SwigcptrSpecification uintptr
+
+func (p SwigcptrSpecification) Swigcptr() uintptr {
 	return (uintptr)(p)
 }
 
-func (p SwigcptrParameters) SwigIsParameters() {
+func (p SwigcptrSpecification) SwigIsSpecification() {
 }
 
-func NewParameters() (_swig_ret Parameters) {
-	var swig_r Parameters
-	swig_r = (Parameters)(SwigcptrParameters(C._wrap_new_Parameters_indri_go_8e24520e0b567faa()))
-	return swig_r
-}
-
-func DeleteParameters(arg1 Parameters) {
-	_swig_i_0 := arg1.Swigcptr()
-	C._wrap_delete_Parameters_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0))
-}
-
-func (arg1 SwigcptrParameters) Set(arg2 string) {
+func (arg1 SwigcptrSpecification) SetName(arg2 string) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	C._wrap_Parameters_set_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_12)(unsafe.Pointer(&_swig_i_1)))
+	C._wrap_Specification_name_set_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_24)(unsafe.Pointer(&_swig_i_1)))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
 }
 
-func (arg1 SwigcptrParameters) Get_bool(arg2 string, arg3 bool) (_swig_ret bool) {
+func (arg1 SwigcptrSpecification) GetName() (_swig_ret string) {
+	var swig_r string
+	_swig_i_0 := arg1
+	swig_r_p := C._wrap_Specification_name_get_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))
+	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
+	var swig_r_1 string
+ swig_r_1 = swigCopyString(swig_r) 
+	return swig_r_1
+}
+
+func (arg1 SwigcptrSpecification) SetParser(arg2 string) {
+	_swig_i_0 := arg1
+	_swig_i_1 := arg2
+	C._wrap_Specification_parser_set_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_26)(unsafe.Pointer(&_swig_i_1)))
+	if Swig_escape_always_false {
+		Swig_escape_val = arg2
+	}
+}
+
+func (arg1 SwigcptrSpecification) GetParser() (_swig_ret string) {
+	var swig_r string
+	_swig_i_0 := arg1
+	swig_r_p := C._wrap_Specification_parser_get_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))
+	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
+	var swig_r_1 string
+ swig_r_1 = swigCopyString(swig_r) 
+	return swig_r_1
+}
+
+func (arg1 SwigcptrSpecification) SetTokenizer(arg2 string) {
+	_swig_i_0 := arg1
+	_swig_i_1 := arg2
+	C._wrap_Specification_tokenizer_set_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_28)(unsafe.Pointer(&_swig_i_1)))
+	if Swig_escape_always_false {
+		Swig_escape_val = arg2
+	}
+}
+
+func (arg1 SwigcptrSpecification) GetTokenizer() (_swig_ret string) {
+	var swig_r string
+	_swig_i_0 := arg1
+	swig_r_p := C._wrap_Specification_tokenizer_get_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))
+	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
+	var swig_r_1 string
+ swig_r_1 = swigCopyString(swig_r) 
+	return swig_r_1
+}
+
+func (arg1 SwigcptrSpecification) SetIterator(arg2 string) {
+	_swig_i_0 := arg1
+	_swig_i_1 := arg2
+	C._wrap_Specification_iterator_set_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_30)(unsafe.Pointer(&_swig_i_1)))
+	if Swig_escape_always_false {
+		Swig_escape_val = arg2
+	}
+}
+
+func (arg1 SwigcptrSpecification) GetIterator() (_swig_ret string) {
+	var swig_r string
+	_swig_i_0 := arg1
+	swig_r_p := C._wrap_Specification_iterator_get_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))
+	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
+	var swig_r_1 string
+ swig_r_1 = swigCopyString(swig_r) 
+	return swig_r_1
+}
+
+func (arg1 SwigcptrSpecification) SetStartDocTag(arg2 string) {
+	_swig_i_0 := arg1
+	_swig_i_1 := arg2
+	C._wrap_Specification_startDocTag_set_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_32)(unsafe.Pointer(&_swig_i_1)))
+	if Swig_escape_always_false {
+		Swig_escape_val = arg2
+	}
+}
+
+func (arg1 SwigcptrSpecification) GetStartDocTag() (_swig_ret string) {
+	var swig_r string
+	_swig_i_0 := arg1
+	swig_r_p := C._wrap_Specification_startDocTag_get_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))
+	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
+	var swig_r_1 string
+ swig_r_1 = swigCopyString(swig_r) 
+	return swig_r_1
+}
+
+func (arg1 SwigcptrSpecification) SetEndDocTag(arg2 string) {
+	_swig_i_0 := arg1
+	_swig_i_1 := arg2
+	C._wrap_Specification_endDocTag_set_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_34)(unsafe.Pointer(&_swig_i_1)))
+	if Swig_escape_always_false {
+		Swig_escape_val = arg2
+	}
+}
+
+func (arg1 SwigcptrSpecification) GetEndDocTag() (_swig_ret string) {
+	var swig_r string
+	_swig_i_0 := arg1
+	swig_r_p := C._wrap_Specification_endDocTag_get_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))
+	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
+	var swig_r_1 string
+ swig_r_1 = swigCopyString(swig_r) 
+	return swig_r_1
+}
+
+func (arg1 SwigcptrSpecification) SetEndMetadataTag(arg2 string) {
+	_swig_i_0 := arg1
+	_swig_i_1 := arg2
+	C._wrap_Specification_endMetadataTag_set_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_36)(unsafe.Pointer(&_swig_i_1)))
+	if Swig_escape_always_false {
+		Swig_escape_val = arg2
+	}
+}
+
+func (arg1 SwigcptrSpecification) GetEndMetadataTag() (_swig_ret string) {
+	var swig_r string
+	_swig_i_0 := arg1
+	swig_r_p := C._wrap_Specification_endMetadataTag_get_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))
+	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
+	var swig_r_1 string
+ swig_r_1 = swigCopyString(swig_r) 
+	return swig_r_1
+}
+
+func (arg1 SwigcptrSpecification) SetInclude(arg2 StringVector) {
+	_swig_i_0 := arg1
+	_swig_i_1 := arg2.Swigcptr()
+	C._wrap_Specification_include_set_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1))
+}
+
+func (arg1 SwigcptrSpecification) GetInclude() (_swig_ret StringVector) {
+	var swig_r StringVector
+	_swig_i_0 := arg1
+	swig_r = (StringVector)(SwigcptrStringVector(C._wrap_Specification_include_get_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))))
+	return swig_r
+}
+
+func (arg1 SwigcptrSpecification) SetExclude(arg2 StringVector) {
+	_swig_i_0 := arg1
+	_swig_i_1 := arg2.Swigcptr()
+	C._wrap_Specification_exclude_set_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1))
+}
+
+func (arg1 SwigcptrSpecification) GetExclude() (_swig_ret StringVector) {
+	var swig_r StringVector
+	_swig_i_0 := arg1
+	swig_r = (StringVector)(SwigcptrStringVector(C._wrap_Specification_exclude_get_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))))
+	return swig_r
+}
+
+func (arg1 SwigcptrSpecification) SetIndex(arg2 StringVector) {
+	_swig_i_0 := arg1
+	_swig_i_1 := arg2.Swigcptr()
+	C._wrap_Specification_index_set_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1))
+}
+
+func (arg1 SwigcptrSpecification) GetIndex() (_swig_ret StringVector) {
+	var swig_r StringVector
+	_swig_i_0 := arg1
+	swig_r = (StringVector)(SwigcptrStringVector(C._wrap_Specification_index_get_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))))
+	return swig_r
+}
+
+func (arg1 SwigcptrSpecification) SetMetadata(arg2 StringVector) {
+	_swig_i_0 := arg1
+	_swig_i_1 := arg2.Swigcptr()
+	C._wrap_Specification_metadata_set_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1))
+}
+
+func (arg1 SwigcptrSpecification) GetMetadata() (_swig_ret StringVector) {
+	var swig_r StringVector
+	_swig_i_0 := arg1
+	swig_r = (StringVector)(SwigcptrStringVector(C._wrap_Specification_metadata_get_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))))
+	return swig_r
+}
+
+func (arg1 SwigcptrSpecification) SetConflations(arg2 Std_map_Sl_indri_parse_ConflationPattern_Sm__Sc_std_string_Sg_) {
+	_swig_i_0 := arg1
+	_swig_i_1 := arg2.Swigcptr()
+	C._wrap_Specification_conflations_set_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1))
+}
+
+func (arg1 SwigcptrSpecification) GetConflations() (_swig_ret Std_map_Sl_indri_parse_ConflationPattern_Sm__Sc_std_string_Sg_) {
+	var swig_r Std_map_Sl_indri_parse_ConflationPattern_Sm__Sc_std_string_Sg_
+	_swig_i_0 := arg1
+	swig_r = (Std_map_Sl_indri_parse_ConflationPattern_Sm__Sc_std_string_Sg_)(SwigcptrStd_map_Sl_indri_parse_ConflationPattern_Sm__Sc_std_string_Sg_(C._wrap_Specification_conflations_get_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))))
+	return swig_r
+}
+
+func NewSpecification() (_swig_ret Specification) {
+	var swig_r Specification
+	swig_r = (Specification)(SwigcptrSpecification(C._wrap_new_Specification_indri_go_add17ee78870902e()))
+	return swig_r
+}
+
+func DeleteSpecification(arg1 Specification) {
+	_swig_i_0 := arg1.Swigcptr()
+	C._wrap_delete_Specification_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))
+}
+
+type Specification interface {
+	Swigcptr() uintptr
+	SwigIsSpecification()
+	SetName(arg2 string)
+	GetName() (_swig_ret string)
+	SetParser(arg2 string)
+	GetParser() (_swig_ret string)
+	SetTokenizer(arg2 string)
+	GetTokenizer() (_swig_ret string)
+	SetIterator(arg2 string)
+	GetIterator() (_swig_ret string)
+	SetStartDocTag(arg2 string)
+	GetStartDocTag() (_swig_ret string)
+	SetEndDocTag(arg2 string)
+	GetEndDocTag() (_swig_ret string)
+	SetEndMetadataTag(arg2 string)
+	GetEndMetadataTag() (_swig_ret string)
+	SetInclude(arg2 StringVector)
+	GetInclude() (_swig_ret StringVector)
+	SetExclude(arg2 StringVector)
+	GetExclude() (_swig_ret StringVector)
+	SetIndex(arg2 StringVector)
+	GetIndex() (_swig_ret StringVector)
+	SetMetadata(arg2 StringVector)
+	GetMetadata() (_swig_ret StringVector)
+	SetConflations(arg2 Std_map_Sl_indri_parse_ConflationPattern_Sm__Sc_std_string_Sg_)
+	GetConflations() (_swig_ret Std_map_Sl_indri_parse_ConflationPattern_Sm__Sc_std_string_Sg_)
+}
+
+type SwigcptrWrapped_Parameters uintptr
+
+func (p SwigcptrWrapped_Parameters) Swigcptr() uintptr {
+	return (uintptr)(p)
+}
+
+func (p SwigcptrWrapped_Parameters) SwigIsWrapped_Parameters() {
+}
+
+func NewWrapped_Parameters() (_swig_ret Wrapped_Parameters) {
+	var swig_r Wrapped_Parameters
+	swig_r = (Wrapped_Parameters)(SwigcptrWrapped_Parameters(C._wrap_new_Wrapped_Parameters_indri_go_add17ee78870902e()))
+	return swig_r
+}
+
+func DeleteWrapped_Parameters(arg1 Wrapped_Parameters) {
+	_swig_i_0 := arg1.Swigcptr()
+	C._wrap_delete_Wrapped_Parameters_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))
+}
+
+func (arg1 SwigcptrWrapped_Parameters) Set(arg2 string) {
+	_swig_i_0 := arg1
+	_swig_i_1 := arg2
+	C._wrap_Wrapped_Parameters_set_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_38)(unsafe.Pointer(&_swig_i_1)))
+	if Swig_escape_always_false {
+		Swig_escape_val = arg2
+	}
+}
+
+func (arg1 SwigcptrWrapped_Parameters) Get_bool(arg2 string, arg3 bool) (_swig_ret bool) {
 	var swig_r bool
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
 	_swig_i_2 := arg3
-	swig_r = (bool)(C._wrap_Parameters_get_bool_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_13)(unsafe.Pointer(&_swig_i_1)), C._Bool(_swig_i_2)))
+	swig_r = (bool)(C._wrap_Wrapped_Parameters_get_bool_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_39)(unsafe.Pointer(&_swig_i_1)), C._Bool(_swig_i_2)))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
 	return swig_r
 }
 
-func (arg1 SwigcptrParameters) Get_int(arg2 string, arg3 int) (_swig_ret int) {
+func (arg1 SwigcptrWrapped_Parameters) Get_int(arg2 string, arg3 int) (_swig_ret int) {
 	var swig_r int
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
 	_swig_i_2 := arg3
-	swig_r = (int)(C._wrap_Parameters_get_int_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_14)(unsafe.Pointer(&_swig_i_1)), C.swig_intgo(_swig_i_2)))
+	swig_r = (int)(C._wrap_Wrapped_Parameters_get_int_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_40)(unsafe.Pointer(&_swig_i_1)), C.swig_intgo(_swig_i_2)))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
 	return swig_r
 }
 
-func (arg1 SwigcptrParameters) Get_double(arg2 string, arg3 float64) (_swig_ret float64) {
+func (arg1 SwigcptrWrapped_Parameters) Get_double(arg2 string, arg3 float64) (_swig_ret float64) {
 	var swig_r float64
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
 	_swig_i_2 := arg3
-	swig_r = (float64)(C._wrap_Parameters_get_double_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_15)(unsafe.Pointer(&_swig_i_1)), C.double(_swig_i_2)))
+	swig_r = (float64)(C._wrap_Wrapped_Parameters_get_double_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_41)(unsafe.Pointer(&_swig_i_1)), C.double(_swig_i_2)))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
 	return swig_r
 }
 
-func (arg1 SwigcptrParameters) Get_INT64(arg2 string, arg3 int64) (_swig_ret int64) {
+func (arg1 SwigcptrWrapped_Parameters) Get_INT64(arg2 string, arg3 int64) (_swig_ret int64) {
 	var swig_r int64
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
 	_swig_i_2 := arg3
-	swig_r = (int64)(C._wrap_Parameters_get_INT64_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_17)(unsafe.Pointer(&_swig_i_1)), C.swig_type_18(_swig_i_2)))
+	swig_r = (int64)(C._wrap_Wrapped_Parameters_get_INT64_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_43)(unsafe.Pointer(&_swig_i_1)), C.swig_type_44(_swig_i_2)))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
 	return swig_r
 }
 
-func (arg1 SwigcptrParameters) Get_string(arg2 string, arg3 string) (_swig_ret string) {
+func (arg1 SwigcptrWrapped_Parameters) Get_string(arg2 string, arg3 string) (_swig_ret string) {
 	var swig_r string
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
 	_swig_i_2 := arg3
-	swig_r_p := C._wrap_Parameters_get_string_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_20)(unsafe.Pointer(&_swig_i_1)), *(*C.swig_type_21)(unsafe.Pointer(&_swig_i_2)))
+	swig_r_p := C._wrap_Wrapped_Parameters_get_string_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_46)(unsafe.Pointer(&_swig_i_1)), *(*C.swig_type_47)(unsafe.Pointer(&_swig_i_2)))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
@@ -705,30 +1136,30 @@ func (arg1 SwigcptrParameters) Get_string(arg2 string, arg3 string) (_swig_ret s
 	return swig_r_1
 }
 
-func (arg1 SwigcptrParameters) Remove(arg2 string) {
+func (arg1 SwigcptrWrapped_Parameters) Remove(arg2 string) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	C._wrap_Parameters_remove_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_22)(unsafe.Pointer(&_swig_i_1)))
+	C._wrap_Wrapped_Parameters_remove_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_48)(unsafe.Pointer(&_swig_i_1)))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
 }
 
-func (arg1 SwigcptrParameters) Set_bool(arg2 string, arg3 bool) {
+func (arg1 SwigcptrWrapped_Parameters) Set_bool(arg2 string, arg3 bool) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
 	_swig_i_2 := arg3
-	C._wrap_Parameters_set_bool_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_23)(unsafe.Pointer(&_swig_i_1)), C._Bool(_swig_i_2))
+	C._wrap_Wrapped_Parameters_set_bool_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_49)(unsafe.Pointer(&_swig_i_1)), C._Bool(_swig_i_2))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
 }
 
-func (arg1 SwigcptrParameters) Set_string(arg2 string, arg3 string) {
+func (arg1 SwigcptrWrapped_Parameters) Set_string(arg2 string, arg3 string) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
 	_swig_i_2 := arg3
-	C._wrap_Parameters_set_string_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_24)(unsafe.Pointer(&_swig_i_1)), *(*C.swig_type_25)(unsafe.Pointer(&_swig_i_2)))
+	C._wrap_Wrapped_Parameters_set_string_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_50)(unsafe.Pointer(&_swig_i_1)), *(*C.swig_type_51)(unsafe.Pointer(&_swig_i_2)))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
@@ -737,71 +1168,71 @@ func (arg1 SwigcptrParameters) Set_string(arg2 string, arg3 string) {
 	}
 }
 
-func (arg1 SwigcptrParameters) Set_int(arg2 string, arg3 int) {
+func (arg1 SwigcptrWrapped_Parameters) Set_int(arg2 string, arg3 int) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
 	_swig_i_2 := arg3
-	C._wrap_Parameters_set_int_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_26)(unsafe.Pointer(&_swig_i_1)), C.swig_intgo(_swig_i_2))
+	C._wrap_Wrapped_Parameters_set_int_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_52)(unsafe.Pointer(&_swig_i_1)), C.swig_intgo(_swig_i_2))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
 }
 
-func (arg1 SwigcptrParameters) Set_UINT64(arg2 string, arg3 int64) {
+func (arg1 SwigcptrWrapped_Parameters) Set_UINT64(arg2 string, arg3 int64) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
 	_swig_i_2 := arg3
-	C._wrap_Parameters_set_UINT64_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_27)(unsafe.Pointer(&_swig_i_1)), C.swig_type_28(_swig_i_2))
+	C._wrap_Wrapped_Parameters_set_UINT64_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_53)(unsafe.Pointer(&_swig_i_1)), C.swig_type_54(_swig_i_2))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
 }
 
-func (arg1 SwigcptrParameters) Set_double(arg2 string, arg3 float64) {
+func (arg1 SwigcptrWrapped_Parameters) Set_double(arg2 string, arg3 float64) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
 	_swig_i_2 := arg3
-	C._wrap_Parameters_set_double_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_29)(unsafe.Pointer(&_swig_i_1)), C.double(_swig_i_2))
+	C._wrap_Wrapped_Parameters_set_double_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_55)(unsafe.Pointer(&_swig_i_1)), C.double(_swig_i_2))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
 }
 
-func (arg1 SwigcptrParameters) Clear() {
+func (arg1 SwigcptrWrapped_Parameters) Clear() {
 	_swig_i_0 := arg1
-	C._wrap_Parameters_clear_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0))
+	C._wrap_Wrapped_Parameters_clear_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))
 }
 
-func (arg1 SwigcptrParameters) Size() (_swig_ret int64) {
+func (arg1 SwigcptrWrapped_Parameters) Size() (_swig_ret int64) {
 	var swig_r int64
 	_swig_i_0 := arg1
-	swig_r = (int64)(C._wrap_Parameters_size_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0)))
+	swig_r = (int64)(C._wrap_Wrapped_Parameters_size_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0)))
 	return swig_r
 }
 
-func (arg1 SwigcptrParameters) Exists(arg2 string) (_swig_ret bool) {
+func (arg1 SwigcptrWrapped_Parameters) Exists(arg2 string) (_swig_ret bool) {
 	var swig_r bool
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	swig_r = (bool)(C._wrap_Parameters_exists_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_31)(unsafe.Pointer(&_swig_i_1))))
+	swig_r = (bool)(C._wrap_Wrapped_Parameters_exists_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_57)(unsafe.Pointer(&_swig_i_1))))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
 	return swig_r
 }
 
-func (arg1 SwigcptrParameters) Load(arg2 string) {
+func (arg1 SwigcptrWrapped_Parameters) Load(arg2 string) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	C._wrap_Parameters_load_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_32)(unsafe.Pointer(&_swig_i_1)))
+	C._wrap_Wrapped_Parameters_load_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_58)(unsafe.Pointer(&_swig_i_1)))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
 }
 
-type Parameters interface {
+type Wrapped_Parameters interface {
 	Swigcptr() uintptr
-	SwigIsParameters()
+	SwigIsWrapped_Parameters()
 	Set(arg2 string)
 	Get_bool(arg2 string, arg3 bool) (_swig_ret bool)
 	Get_int(arg2 string, arg3 int) (_swig_ret int)
@@ -832,37 +1263,37 @@ func (p SwigcptrTermExtent) SwigIsTermExtent() {
 func (arg1 SwigcptrTermExtent) SetBegin(arg2 int) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	C._wrap_TermExtent_begin_set_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), C.swig_intgo(_swig_i_1))
+	C._wrap_TermExtent_begin_set_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.swig_intgo(_swig_i_1))
 }
 
 func (arg1 SwigcptrTermExtent) GetBegin() (_swig_ret int) {
 	var swig_r int
 	_swig_i_0 := arg1
-	swig_r = (int)(C._wrap_TermExtent_begin_get_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0)))
+	swig_r = (int)(C._wrap_TermExtent_begin_get_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0)))
 	return swig_r
 }
 
 func (arg1 SwigcptrTermExtent) SetEnd(arg2 int) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	C._wrap_TermExtent_end_set_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), C.swig_intgo(_swig_i_1))
+	C._wrap_TermExtent_end_set_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.swig_intgo(_swig_i_1))
 }
 
 func (arg1 SwigcptrTermExtent) GetEnd() (_swig_ret int) {
 	var swig_r int
 	_swig_i_0 := arg1
-	swig_r = (int)(C._wrap_TermExtent_end_get_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0)))
+	swig_r = (int)(C._wrap_TermExtent_end_get_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0)))
 	return swig_r
 }
 
 func DeleteTermExtent(arg1 TermExtent) {
 	_swig_i_0 := arg1.Swigcptr()
-	C._wrap_delete_TermExtent_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0))
+	C._wrap_delete_TermExtent_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))
 }
 
 func NewTermExtent() (_swig_ret TermExtent) {
 	var swig_r TermExtent
-	swig_r = (TermExtent)(SwigcptrTermExtent(C._wrap_new_TermExtent_indri_go_8e24520e0b567faa()))
+	swig_r = (TermExtent)(SwigcptrTermExtent(C._wrap_new_TermExtent_indri_go_add17ee78870902e()))
 	return swig_r
 }
 
@@ -886,12 +1317,12 @@ func (p SwigcptrScoredExtentResult) SwigIsScoredExtentResult() {
 
 func DeleteScoredExtentResult(arg1 ScoredExtentResult) {
 	_swig_i_0 := arg1.Swigcptr()
-	C._wrap_delete_ScoredExtentResult_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0))
+	C._wrap_delete_ScoredExtentResult_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))
 }
 
 func NewScoredExtentResult() (_swig_ret ScoredExtentResult) {
 	var swig_r ScoredExtentResult
-	swig_r = (ScoredExtentResult)(SwigcptrScoredExtentResult(C._wrap_new_ScoredExtentResult_indri_go_8e24520e0b567faa()))
+	swig_r = (ScoredExtentResult)(SwigcptrScoredExtentResult(C._wrap_new_ScoredExtentResult_indri_go_add17ee78870902e()))
 	return swig_r
 }
 
@@ -911,13 +1342,13 @@ func (p SwigcptrParsedDocument) SwigIsParsedDocument() {
 
 func DeleteParsedDocument(arg1 ParsedDocument) {
 	_swig_i_0 := arg1.Swigcptr()
-	C._wrap_delete_ParsedDocument_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0))
+	C._wrap_delete_ParsedDocument_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))
 }
 
 func (arg1 SwigcptrParsedDocument) GetContent() (_swig_ret string) {
 	var swig_r string
 	_swig_i_0 := arg1
-	swig_r_p := C._wrap_ParsedDocument_getContent_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0))
+	swig_r_p := C._wrap_ParsedDocument_getContent_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
  swig_r_1 = swigCopyString(swig_r) 
@@ -926,7 +1357,7 @@ func (arg1 SwigcptrParsedDocument) GetContent() (_swig_ret string) {
 
 func NewParsedDocument() (_swig_ret ParsedDocument) {
 	var swig_r ParsedDocument
-	swig_r = (ParsedDocument)(SwigcptrParsedDocument(C._wrap_new_ParsedDocument_indri_go_8e24520e0b567faa()))
+	swig_r = (ParsedDocument)(SwigcptrParsedDocument(C._wrap_new_ParsedDocument_indri_go_add17ee78870902e()))
 	return swig_r
 }
 
@@ -948,7 +1379,7 @@ func (p SwigcptrQueryAnnotationNode) SwigIsQueryAnnotationNode() {
 func (arg1 SwigcptrQueryAnnotationNode) SetName(arg2 string) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	C._wrap_QueryAnnotationNode_name_set_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_34)(unsafe.Pointer(&_swig_i_1)))
+	C._wrap_QueryAnnotationNode_name_set_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_60)(unsafe.Pointer(&_swig_i_1)))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
@@ -957,7 +1388,7 @@ func (arg1 SwigcptrQueryAnnotationNode) SetName(arg2 string) {
 func (arg1 SwigcptrQueryAnnotationNode) GetName() (_swig_ret string) {
 	var swig_r string
 	_swig_i_0 := arg1
-	swig_r_p := C._wrap_QueryAnnotationNode_name_get_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0))
+	swig_r_p := C._wrap_QueryAnnotationNode_name_get_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
  swig_r_1 = swigCopyString(swig_r) 
@@ -967,7 +1398,7 @@ func (arg1 SwigcptrQueryAnnotationNode) GetName() (_swig_ret string) {
 func (arg1 SwigcptrQueryAnnotationNode) SetXtype(arg2 string) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	C._wrap_QueryAnnotationNode_Xtype_set_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_36)(unsafe.Pointer(&_swig_i_1)))
+	C._wrap_QueryAnnotationNode_Xtype_set_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_62)(unsafe.Pointer(&_swig_i_1)))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
@@ -976,7 +1407,7 @@ func (arg1 SwigcptrQueryAnnotationNode) SetXtype(arg2 string) {
 func (arg1 SwigcptrQueryAnnotationNode) GetXtype() (_swig_ret string) {
 	var swig_r string
 	_swig_i_0 := arg1
-	swig_r_p := C._wrap_QueryAnnotationNode_Xtype_get_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0))
+	swig_r_p := C._wrap_QueryAnnotationNode_Xtype_get_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
  swig_r_1 = swigCopyString(swig_r) 
@@ -986,7 +1417,7 @@ func (arg1 SwigcptrQueryAnnotationNode) GetXtype() (_swig_ret string) {
 func (arg1 SwigcptrQueryAnnotationNode) SetQueryText(arg2 string) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	C._wrap_QueryAnnotationNode_queryText_set_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_38)(unsafe.Pointer(&_swig_i_1)))
+	C._wrap_QueryAnnotationNode_queryText_set_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_64)(unsafe.Pointer(&_swig_i_1)))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
@@ -995,7 +1426,7 @@ func (arg1 SwigcptrQueryAnnotationNode) SetQueryText(arg2 string) {
 func (arg1 SwigcptrQueryAnnotationNode) GetQueryText() (_swig_ret string) {
 	var swig_r string
 	_swig_i_0 := arg1
-	swig_r_p := C._wrap_QueryAnnotationNode_queryText_get_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0))
+	swig_r_p := C._wrap_QueryAnnotationNode_queryText_get_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	var swig_r_1 string
  swig_r_1 = swigCopyString(swig_r) 
@@ -1005,25 +1436,25 @@ func (arg1 SwigcptrQueryAnnotationNode) GetQueryText() (_swig_ret string) {
 func (arg1 SwigcptrQueryAnnotationNode) SetChildren(arg2 Std_vector_Sl_indri_api_QueryAnnotationNode_Sm__Sg_) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2.Swigcptr()
-	C._wrap_QueryAnnotationNode_children_set_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1))
+	C._wrap_QueryAnnotationNode_children_set_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1))
 }
 
 func (arg1 SwigcptrQueryAnnotationNode) GetChildren() (_swig_ret Std_vector_Sl_indri_api_QueryAnnotationNode_Sm__Sg_) {
 	var swig_r Std_vector_Sl_indri_api_QueryAnnotationNode_Sm__Sg_
 	_swig_i_0 := arg1
-	swig_r = (Std_vector_Sl_indri_api_QueryAnnotationNode_Sm__Sg_)(SwigcptrStd_vector_Sl_indri_api_QueryAnnotationNode_Sm__Sg_(C._wrap_QueryAnnotationNode_children_get_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0))))
+	swig_r = (Std_vector_Sl_indri_api_QueryAnnotationNode_Sm__Sg_)(SwigcptrStd_vector_Sl_indri_api_QueryAnnotationNode_Sm__Sg_(C._wrap_QueryAnnotationNode_children_get_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))))
 	return swig_r
 }
 
 func NewQueryAnnotationNode() (_swig_ret QueryAnnotationNode) {
 	var swig_r QueryAnnotationNode
-	swig_r = (QueryAnnotationNode)(SwigcptrQueryAnnotationNode(C._wrap_new_QueryAnnotationNode_indri_go_8e24520e0b567faa()))
+	swig_r = (QueryAnnotationNode)(SwigcptrQueryAnnotationNode(C._wrap_new_QueryAnnotationNode_indri_go_add17ee78870902e()))
 	return swig_r
 }
 
 func DeleteQueryAnnotationNode(arg1 QueryAnnotationNode) {
 	_swig_i_0 := arg1.Swigcptr()
-	C._wrap_delete_QueryAnnotationNode_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0))
+	C._wrap_delete_QueryAnnotationNode_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))
 }
 
 type QueryAnnotationNode interface {
@@ -1051,33 +1482,33 @@ func (p SwigcptrQueryAnnotation) SwigIsQueryAnnotation() {
 func (arg1 SwigcptrQueryAnnotation) GetQueryTree() (_swig_ret QueryAnnotationNode) {
 	var swig_r QueryAnnotationNode
 	_swig_i_0 := arg1
-	swig_r = (QueryAnnotationNode)(SwigcptrQueryAnnotationNode(C._wrap_QueryAnnotation_getQueryTree_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0))))
+	swig_r = (QueryAnnotationNode)(SwigcptrQueryAnnotationNode(C._wrap_QueryAnnotation_getQueryTree_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))))
 	return swig_r
 }
 
 func (arg1 SwigcptrQueryAnnotation) GetAnnotations() (_swig_ret Std_map_Sl_std_string_Sc_std_vector_Sl_indri_api_ScoredExtentResult_Sg__Sg_) {
 	var swig_r Std_map_Sl_std_string_Sc_std_vector_Sl_indri_api_ScoredExtentResult_Sg__Sg_
 	_swig_i_0 := arg1
-	swig_r = (Std_map_Sl_std_string_Sc_std_vector_Sl_indri_api_ScoredExtentResult_Sg__Sg_)(SwigcptrStd_map_Sl_std_string_Sc_std_vector_Sl_indri_api_ScoredExtentResult_Sg__Sg_(C._wrap_QueryAnnotation_getAnnotations_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0))))
+	swig_r = (Std_map_Sl_std_string_Sc_std_vector_Sl_indri_api_ScoredExtentResult_Sg__Sg_)(SwigcptrStd_map_Sl_std_string_Sc_std_vector_Sl_indri_api_ScoredExtentResult_Sg__Sg_(C._wrap_QueryAnnotation_getAnnotations_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))))
 	return swig_r
 }
 
 func (arg1 SwigcptrQueryAnnotation) GetResults() (_swig_ret Std_vector_Sl_indri_api_ScoredExtentResult_Sg_) {
 	var swig_r Std_vector_Sl_indri_api_ScoredExtentResult_Sg_
 	_swig_i_0 := arg1
-	swig_r = (Std_vector_Sl_indri_api_ScoredExtentResult_Sg_)(SwigcptrStd_vector_Sl_indri_api_ScoredExtentResult_Sg_(C._wrap_QueryAnnotation_getResults_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0))))
+	swig_r = (Std_vector_Sl_indri_api_ScoredExtentResult_Sg_)(SwigcptrStd_vector_Sl_indri_api_ScoredExtentResult_Sg_(C._wrap_QueryAnnotation_getResults_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))))
 	return swig_r
 }
 
 func NewQueryAnnotation() (_swig_ret QueryAnnotation) {
 	var swig_r QueryAnnotation
-	swig_r = (QueryAnnotation)(SwigcptrQueryAnnotation(C._wrap_new_QueryAnnotation_indri_go_8e24520e0b567faa()))
+	swig_r = (QueryAnnotation)(SwigcptrQueryAnnotation(C._wrap_new_QueryAnnotation_indri_go_add17ee78870902e()))
 	return swig_r
 }
 
 func DeleteQueryAnnotation(arg1 QueryAnnotation) {
 	_swig_i_0 := arg1.Swigcptr()
-	C._wrap_delete_QueryAnnotation_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0))
+	C._wrap_delete_QueryAnnotation_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))
 }
 
 type QueryAnnotation interface {
@@ -1099,14 +1530,14 @@ func (p SwigcptrQueryEnvironment) SwigIsQueryEnvironment() {
 
 func NewQueryEnvironment() (_swig_ret QueryEnvironment) {
 	var swig_r QueryEnvironment
-	swig_r = (QueryEnvironment)(SwigcptrQueryEnvironment(C._wrap_new_QueryEnvironment_indri_go_8e24520e0b567faa()))
+	swig_r = (QueryEnvironment)(SwigcptrQueryEnvironment(C._wrap_new_QueryEnvironment_indri_go_add17ee78870902e()))
 	return swig_r
 }
 
 func (arg1 SwigcptrQueryEnvironment) AddServer(arg2 string) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	C._wrap_QueryEnvironment_addServer_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_40)(unsafe.Pointer(&_swig_i_1)))
+	C._wrap_QueryEnvironment_addServer_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_66)(unsafe.Pointer(&_swig_i_1)))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
@@ -1115,7 +1546,7 @@ func (arg1 SwigcptrQueryEnvironment) AddServer(arg2 string) {
 func (arg1 SwigcptrQueryEnvironment) AddIndex(arg2 string) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	C._wrap_QueryEnvironment_addIndex_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_41)(unsafe.Pointer(&_swig_i_1)))
+	C._wrap_QueryEnvironment_addIndex_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_67)(unsafe.Pointer(&_swig_i_1)))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
@@ -1124,7 +1555,7 @@ func (arg1 SwigcptrQueryEnvironment) AddIndex(arg2 string) {
 func (arg1 SwigcptrQueryEnvironment) RemoveServer(arg2 string) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	C._wrap_QueryEnvironment_removeServer_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_42)(unsafe.Pointer(&_swig_i_1)))
+	C._wrap_QueryEnvironment_removeServer_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_68)(unsafe.Pointer(&_swig_i_1)))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
@@ -1133,7 +1564,7 @@ func (arg1 SwigcptrQueryEnvironment) RemoveServer(arg2 string) {
 func (arg1 SwigcptrQueryEnvironment) RemoveIndex(arg2 string) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	C._wrap_QueryEnvironment_removeIndex_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_43)(unsafe.Pointer(&_swig_i_1)))
+	C._wrap_QueryEnvironment_removeIndex_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_69)(unsafe.Pointer(&_swig_i_1)))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
@@ -1141,25 +1572,25 @@ func (arg1 SwigcptrQueryEnvironment) RemoveIndex(arg2 string) {
 
 func (arg1 SwigcptrQueryEnvironment) Close() {
 	_swig_i_0 := arg1
-	C._wrap_QueryEnvironment_close_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0))
+	C._wrap_QueryEnvironment_close_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))
 }
 
 func (arg1 SwigcptrQueryEnvironment) SetMemory(arg2 int64) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	C._wrap_QueryEnvironment_setMemory_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), C.swig_type_44(_swig_i_1))
+	C._wrap_QueryEnvironment_setMemory_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.swig_type_70(_swig_i_1))
 }
 
 func (arg1 SwigcptrQueryEnvironment) SetScoringRules(arg2 StringVector) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2.Swigcptr()
-	C._wrap_QueryEnvironment_setScoringRules_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1))
+	C._wrap_QueryEnvironment_setScoringRules_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1))
 }
 
 func (arg1 SwigcptrQueryEnvironment) SetStopwords(arg2 StringVector) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2.Swigcptr()
-	C._wrap_QueryEnvironment_setStopwords_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1))
+	C._wrap_QueryEnvironment_setStopwords_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1))
 }
 
 func (arg1 SwigcptrQueryEnvironment) RunQuery__SWIG_0(arg2 string, arg3 int) (_swig_ret Std_vector_Sl_indri_api_ScoredExtentResult_Sg_) {
@@ -1167,7 +1598,7 @@ func (arg1 SwigcptrQueryEnvironment) RunQuery__SWIG_0(arg2 string, arg3 int) (_s
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
 	_swig_i_2 := arg3
-	swig_r = (Std_vector_Sl_indri_api_ScoredExtentResult_Sg_)(SwigcptrStd_vector_Sl_indri_api_ScoredExtentResult_Sg_(C._wrap_QueryEnvironment_runQuery__SWIG_0_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_45)(unsafe.Pointer(&_swig_i_1)), C.swig_intgo(_swig_i_2))))
+	swig_r = (Std_vector_Sl_indri_api_ScoredExtentResult_Sg_)(SwigcptrStd_vector_Sl_indri_api_ScoredExtentResult_Sg_(C._wrap_QueryEnvironment_runQuery__SWIG_0_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_71)(unsafe.Pointer(&_swig_i_1)), C.swig_intgo(_swig_i_2))))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
@@ -1180,7 +1611,7 @@ func (arg1 SwigcptrQueryEnvironment) RunQuery__SWIG_1(arg2 string, arg3 IntVecto
 	_swig_i_1 := arg2
 	_swig_i_2 := arg3.Swigcptr()
 	_swig_i_3 := arg4
-	swig_r = (Std_vector_Sl_indri_api_ScoredExtentResult_Sg_)(SwigcptrStd_vector_Sl_indri_api_ScoredExtentResult_Sg_(C._wrap_QueryEnvironment_runQuery__SWIG_1_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_46)(unsafe.Pointer(&_swig_i_1)), C.uintptr_t(_swig_i_2), C.swig_intgo(_swig_i_3))))
+	swig_r = (Std_vector_Sl_indri_api_ScoredExtentResult_Sg_)(SwigcptrStd_vector_Sl_indri_api_ScoredExtentResult_Sg_(C._wrap_QueryEnvironment_runQuery__SWIG_1_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_72)(unsafe.Pointer(&_swig_i_1)), C.uintptr_t(_swig_i_2), C.swig_intgo(_swig_i_3))))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
@@ -1203,7 +1634,7 @@ func (arg1 SwigcptrQueryEnvironment) RunAnnotatedQuery__SWIG_0(arg2 string, arg3
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
 	_swig_i_2 := arg3
-	swig_r = (QueryAnnotation)(SwigcptrQueryAnnotation(C._wrap_QueryEnvironment_runAnnotatedQuery__SWIG_0_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_47)(unsafe.Pointer(&_swig_i_1)), C.swig_intgo(_swig_i_2))))
+	swig_r = (QueryAnnotation)(SwigcptrQueryAnnotation(C._wrap_QueryEnvironment_runAnnotatedQuery__SWIG_0_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_73)(unsafe.Pointer(&_swig_i_1)), C.swig_intgo(_swig_i_2))))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
@@ -1216,7 +1647,7 @@ func (arg1 SwigcptrQueryEnvironment) RunAnnotatedQuery__SWIG_1(arg2 string, arg3
 	_swig_i_1 := arg2
 	_swig_i_2 := arg3.Swigcptr()
 	_swig_i_3 := arg4
-	swig_r = (QueryAnnotation)(SwigcptrQueryAnnotation(C._wrap_QueryEnvironment_runAnnotatedQuery__SWIG_1_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_48)(unsafe.Pointer(&_swig_i_1)), C.uintptr_t(_swig_i_2), C.swig_intgo(_swig_i_3))))
+	swig_r = (QueryAnnotation)(SwigcptrQueryAnnotation(C._wrap_QueryEnvironment_runAnnotatedQuery__SWIG_1_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_74)(unsafe.Pointer(&_swig_i_1)), C.uintptr_t(_swig_i_2), C.swig_intgo(_swig_i_3))))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
@@ -1240,7 +1671,7 @@ func (arg1 SwigcptrQueryEnvironment) RunQuerydocset(arg2 string, arg3 Std_vector
 	_swig_i_1 := arg2
 	_swig_i_2 := arg3.Swigcptr()
 	_swig_i_3 := arg4
-	swig_r = (Std_vector_Sl_indri_api_ScoredExtentResult_Sg_)(SwigcptrStd_vector_Sl_indri_api_ScoredExtentResult_Sg_(C._wrap_QueryEnvironment_runQuerydocset_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_49)(unsafe.Pointer(&_swig_i_1)), C.uintptr_t(_swig_i_2), C.swig_intgo(_swig_i_3))))
+	swig_r = (Std_vector_Sl_indri_api_ScoredExtentResult_Sg_)(SwigcptrStd_vector_Sl_indri_api_ScoredExtentResult_Sg_(C._wrap_QueryEnvironment_runQuerydocset_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_75)(unsafe.Pointer(&_swig_i_1)), C.uintptr_t(_swig_i_2), C.swig_intgo(_swig_i_3))))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
@@ -1253,7 +1684,7 @@ func (arg1 SwigcptrQueryEnvironment) RunAnnotatedQuerydocset(arg2 string, arg3 S
 	_swig_i_1 := arg2
 	_swig_i_2 := arg3.Swigcptr()
 	_swig_i_3 := arg4
-	swig_r = (QueryAnnotation)(SwigcptrQueryAnnotation(C._wrap_QueryEnvironment_runAnnotatedQuerydocset_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_50)(unsafe.Pointer(&_swig_i_1)), C.uintptr_t(_swig_i_2), C.swig_intgo(_swig_i_3))))
+	swig_r = (QueryAnnotation)(SwigcptrQueryAnnotation(C._wrap_QueryEnvironment_runAnnotatedQuerydocset_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_76)(unsafe.Pointer(&_swig_i_1)), C.uintptr_t(_swig_i_2), C.swig_intgo(_swig_i_3))))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
@@ -1264,7 +1695,7 @@ func (arg1 SwigcptrQueryEnvironment) Documents__SWIG_0(arg2 IntVector) (_swig_re
 	var swig_r Std_vector_Sl_indri_api_ParsedDocument_Sm__Sg_
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2.Swigcptr()
-	swig_r = (Std_vector_Sl_indri_api_ParsedDocument_Sm__Sg_)(SwigcptrStd_vector_Sl_indri_api_ParsedDocument_Sm__Sg_(C._wrap_QueryEnvironment_documents__SWIG_0_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1))))
+	swig_r = (Std_vector_Sl_indri_api_ParsedDocument_Sm__Sg_)(SwigcptrStd_vector_Sl_indri_api_ParsedDocument_Sm__Sg_(C._wrap_QueryEnvironment_documents__SWIG_0_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1))))
 	return swig_r
 }
 
@@ -1272,7 +1703,7 @@ func (arg1 SwigcptrQueryEnvironment) Documents__SWIG_1(arg2 Std_vector_Sl_indri_
 	var swig_r Std_vector_Sl_indri_api_ParsedDocument_Sm__Sg_
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2.Swigcptr()
-	swig_r = (Std_vector_Sl_indri_api_ParsedDocument_Sm__Sg_)(SwigcptrStd_vector_Sl_indri_api_ParsedDocument_Sm__Sg_(C._wrap_QueryEnvironment_documents__SWIG_1_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1))))
+	swig_r = (Std_vector_Sl_indri_api_ParsedDocument_Sm__Sg_)(SwigcptrStd_vector_Sl_indri_api_ParsedDocument_Sm__Sg_(C._wrap_QueryEnvironment_documents__SWIG_1_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1))))
 	return swig_r
 }
 
@@ -1296,7 +1727,7 @@ func (arg1 SwigcptrQueryEnvironment) DocumentMetadata__SWIG_0(arg2 IntVector, ar
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2.Swigcptr()
 	_swig_i_2 := arg3
-	swig_r = (StringVector)(SwigcptrStringVector(C._wrap_QueryEnvironment_documentMetadata__SWIG_0_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1), *(*C.swig_type_51)(unsafe.Pointer(&_swig_i_2)))))
+	swig_r = (StringVector)(SwigcptrStringVector(C._wrap_QueryEnvironment_documentMetadata__SWIG_0_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1), *(*C.swig_type_77)(unsafe.Pointer(&_swig_i_2)))))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg3
 	}
@@ -1308,7 +1739,7 @@ func (arg1 SwigcptrQueryEnvironment) DocumentMetadata__SWIG_1(arg2 Std_vector_Sl
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2.Swigcptr()
 	_swig_i_2 := arg3
-	swig_r = (StringVector)(SwigcptrStringVector(C._wrap_QueryEnvironment_documentMetadata__SWIG_1_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1), *(*C.swig_type_52)(unsafe.Pointer(&_swig_i_2)))))
+	swig_r = (StringVector)(SwigcptrStringVector(C._wrap_QueryEnvironment_documentMetadata__SWIG_1_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1), *(*C.swig_type_78)(unsafe.Pointer(&_swig_i_2)))))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg3
 	}
@@ -1335,7 +1766,7 @@ func (arg1 SwigcptrQueryEnvironment) DocumentIDsFromMetadata(arg2 string, arg3 S
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
 	_swig_i_2 := arg3.Swigcptr()
-	swig_r = (IntVector)(SwigcptrIntVector(C._wrap_QueryEnvironment_documentIDsFromMetadata_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_53)(unsafe.Pointer(&_swig_i_1)), C.uintptr_t(_swig_i_2))))
+	swig_r = (IntVector)(SwigcptrIntVector(C._wrap_QueryEnvironment_documentIDsFromMetadata_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_79)(unsafe.Pointer(&_swig_i_1)), C.uintptr_t(_swig_i_2))))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
@@ -1347,7 +1778,7 @@ func (arg1 SwigcptrQueryEnvironment) DocumentsFromMetadata(arg2 string, arg3 Str
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
 	_swig_i_2 := arg3.Swigcptr()
-	swig_r = (Std_vector_Sl_indri_api_ParsedDocument_Sm__Sg_)(SwigcptrStd_vector_Sl_indri_api_ParsedDocument_Sm__Sg_(C._wrap_QueryEnvironment_documentsFromMetadata_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_54)(unsafe.Pointer(&_swig_i_1)), C.uintptr_t(_swig_i_2))))
+	swig_r = (Std_vector_Sl_indri_api_ParsedDocument_Sm__Sg_)(SwigcptrStd_vector_Sl_indri_api_ParsedDocument_Sm__Sg_(C._wrap_QueryEnvironment_documentsFromMetadata_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_80)(unsafe.Pointer(&_swig_i_1)), C.uintptr_t(_swig_i_2))))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
@@ -1357,7 +1788,7 @@ func (arg1 SwigcptrQueryEnvironment) DocumentsFromMetadata(arg2 string, arg3 Str
 func (arg1 SwigcptrQueryEnvironment) TermCount__SWIG_0() (_swig_ret int64) {
 	var swig_r int64
 	_swig_i_0 := arg1
-	swig_r = (int64)(C._wrap_QueryEnvironment_termCount__SWIG_0_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0)))
+	swig_r = (int64)(C._wrap_QueryEnvironment_termCount__SWIG_0_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0)))
 	return swig_r
 }
 
@@ -1365,7 +1796,7 @@ func (arg1 SwigcptrQueryEnvironment) TermCount__SWIG_1(arg2 string) (_swig_ret i
 	var swig_r int64
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	swig_r = (int64)(C._wrap_QueryEnvironment_termCount__SWIG_1_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_57)(unsafe.Pointer(&_swig_i_1))))
+	swig_r = (int64)(C._wrap_QueryEnvironment_termCount__SWIG_1_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_83)(unsafe.Pointer(&_swig_i_1))))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
@@ -1388,7 +1819,7 @@ func (arg1 SwigcptrQueryEnvironment) TermFieldCount(arg2 string, arg3 string) (_
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
 	_swig_i_2 := arg3
-	swig_r = (int64)(C._wrap_QueryEnvironment_termFieldCount_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_59)(unsafe.Pointer(&_swig_i_1)), *(*C.swig_type_60)(unsafe.Pointer(&_swig_i_2))))
+	swig_r = (int64)(C._wrap_QueryEnvironment_termFieldCount_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_85)(unsafe.Pointer(&_swig_i_1)), *(*C.swig_type_86)(unsafe.Pointer(&_swig_i_2))))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
@@ -1401,14 +1832,14 @@ func (arg1 SwigcptrQueryEnvironment) TermFieldCount(arg2 string, arg3 string) (_
 func (arg1 SwigcptrQueryEnvironment) FieldList() (_swig_ret StringVector) {
 	var swig_r StringVector
 	_swig_i_0 := arg1
-	swig_r = (StringVector)(SwigcptrStringVector(C._wrap_QueryEnvironment_fieldList_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0))))
+	swig_r = (StringVector)(SwigcptrStringVector(C._wrap_QueryEnvironment_fieldList_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))))
 	return swig_r
 }
 
 func (arg1 SwigcptrQueryEnvironment) DocumentCount__SWIG_0() (_swig_ret int64) {
 	var swig_r int64
 	_swig_i_0 := arg1
-	swig_r = (int64)(C._wrap_QueryEnvironment_documentCount__SWIG_0_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0)))
+	swig_r = (int64)(C._wrap_QueryEnvironment_documentCount__SWIG_0_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0)))
 	return swig_r
 }
 
@@ -1416,7 +1847,7 @@ func (arg1 SwigcptrQueryEnvironment) DocumentCount__SWIG_1(arg2 string) (_swig_r
 	var swig_r int64
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	swig_r = (int64)(C._wrap_QueryEnvironment_documentCount__SWIG_1_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_63)(unsafe.Pointer(&_swig_i_1))))
+	swig_r = (int64)(C._wrap_QueryEnvironment_documentCount__SWIG_1_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_89)(unsafe.Pointer(&_swig_i_1))))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
@@ -1438,7 +1869,7 @@ func (arg1 SwigcptrQueryEnvironment) DocumentVectors(arg2 IntVector) (_swig_ret 
 	var swig_r Std_vector_Sl_indri_api_DocumentVector_Sm__Sg_
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2.Swigcptr()
-	swig_r = (Std_vector_Sl_indri_api_DocumentVector_Sm__Sg_)(SwigcptrStd_vector_Sl_indri_api_DocumentVector_Sm__Sg_(C._wrap_QueryEnvironment_documentVectors_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1))))
+	swig_r = (Std_vector_Sl_indri_api_DocumentVector_Sm__Sg_)(SwigcptrStd_vector_Sl_indri_api_DocumentVector_Sm__Sg_(C._wrap_QueryEnvironment_documentVectors_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1))))
 	return swig_r
 }
 
@@ -1447,7 +1878,7 @@ func (arg1 SwigcptrQueryEnvironment) ExpressionCount__SWIG_0(arg2 string, arg3 s
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
 	_swig_i_2 := arg3
-	swig_r = (float64)(C._wrap_QueryEnvironment_expressionCount__SWIG_0_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_64)(unsafe.Pointer(&_swig_i_1)), *(*C.swig_type_65)(unsafe.Pointer(&_swig_i_2))))
+	swig_r = (float64)(C._wrap_QueryEnvironment_expressionCount__SWIG_0_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_90)(unsafe.Pointer(&_swig_i_1)), *(*C.swig_type_91)(unsafe.Pointer(&_swig_i_2))))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
@@ -1461,7 +1892,7 @@ func (arg1 SwigcptrQueryEnvironment) ExpressionCount__SWIG_1(arg2 string) (_swig
 	var swig_r float64
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	swig_r = (float64)(C._wrap_QueryEnvironment_expressionCount__SWIG_1_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_66)(unsafe.Pointer(&_swig_i_1))))
+	swig_r = (float64)(C._wrap_QueryEnvironment_expressionCount__SWIG_1_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_92)(unsafe.Pointer(&_swig_i_1))))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
@@ -1484,7 +1915,7 @@ func (arg1 SwigcptrQueryEnvironment) DocumentExpressionCount__SWIG_0(arg2 string
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
 	_swig_i_2 := arg3
-	swig_r = (float64)(C._wrap_QueryEnvironment_documentExpressionCount__SWIG_0_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_67)(unsafe.Pointer(&_swig_i_1)), *(*C.swig_type_68)(unsafe.Pointer(&_swig_i_2))))
+	swig_r = (float64)(C._wrap_QueryEnvironment_documentExpressionCount__SWIG_0_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_93)(unsafe.Pointer(&_swig_i_1)), *(*C.swig_type_94)(unsafe.Pointer(&_swig_i_2))))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
@@ -1498,7 +1929,7 @@ func (arg1 SwigcptrQueryEnvironment) DocumentExpressionCount__SWIG_1(arg2 string
 	var swig_r float64
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	swig_r = (float64)(C._wrap_QueryEnvironment_documentExpressionCount__SWIG_1_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_69)(unsafe.Pointer(&_swig_i_1))))
+	swig_r = (float64)(C._wrap_QueryEnvironment_documentExpressionCount__SWIG_1_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_95)(unsafe.Pointer(&_swig_i_1))))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
@@ -1521,7 +1952,7 @@ func (arg1 SwigcptrQueryEnvironment) ExpressionList__SWIG_0(arg2 string, arg3 st
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
 	_swig_i_2 := arg3
-	swig_r = (Std_vector_Sl_indri_api_ScoredExtentResult_Sg_)(SwigcptrStd_vector_Sl_indri_api_ScoredExtentResult_Sg_(C._wrap_QueryEnvironment_expressionList__SWIG_0_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_70)(unsafe.Pointer(&_swig_i_1)), *(*C.swig_type_71)(unsafe.Pointer(&_swig_i_2)))))
+	swig_r = (Std_vector_Sl_indri_api_ScoredExtentResult_Sg_)(SwigcptrStd_vector_Sl_indri_api_ScoredExtentResult_Sg_(C._wrap_QueryEnvironment_expressionList__SWIG_0_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_96)(unsafe.Pointer(&_swig_i_1)), *(*C.swig_type_97)(unsafe.Pointer(&_swig_i_2)))))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
@@ -1535,7 +1966,7 @@ func (arg1 SwigcptrQueryEnvironment) ExpressionList__SWIG_1(arg2 string) (_swig_
 	var swig_r Std_vector_Sl_indri_api_ScoredExtentResult_Sg_
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	swig_r = (Std_vector_Sl_indri_api_ScoredExtentResult_Sg_)(SwigcptrStd_vector_Sl_indri_api_ScoredExtentResult_Sg_(C._wrap_QueryEnvironment_expressionList__SWIG_1_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_72)(unsafe.Pointer(&_swig_i_1)))))
+	swig_r = (Std_vector_Sl_indri_api_ScoredExtentResult_Sg_)(SwigcptrStd_vector_Sl_indri_api_ScoredExtentResult_Sg_(C._wrap_QueryEnvironment_expressionList__SWIG_1_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_98)(unsafe.Pointer(&_swig_i_1)))))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
@@ -1557,21 +1988,21 @@ func (arg1 SwigcptrQueryEnvironment) DocumentLength(arg2 int) (_swig_ret int) {
 	var swig_r int
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	swig_r = (int)(C._wrap_QueryEnvironment_documentLength_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), C.swig_intgo(_swig_i_1)))
+	swig_r = (int)(C._wrap_QueryEnvironment_documentLength_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.swig_intgo(_swig_i_1)))
 	return swig_r
 }
 
-func (arg1 SwigcptrQueryEnvironment) SetFormulationParameters(arg2 Parameters) {
+func (arg1 SwigcptrQueryEnvironment) SetFormulationParameters(arg2 Wrapped_Parameters) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2.Swigcptr()
-	C._wrap_QueryEnvironment_setFormulationParameters_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1))
+	C._wrap_QueryEnvironment_setFormulationParameters_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1))
 }
 
 func (arg1 SwigcptrQueryEnvironment) ReformulateQuery(arg2 string) (_swig_ret string) {
 	var swig_r string
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	swig_r_p := C._wrap_QueryEnvironment_reformulateQuery_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_74)(unsafe.Pointer(&_swig_i_1)))
+	swig_r_p := C._wrap_QueryEnvironment_reformulateQuery_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_100)(unsafe.Pointer(&_swig_i_1)))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
@@ -1585,7 +2016,7 @@ func (arg1 SwigcptrQueryEnvironment) StemTerm(arg2 string) (_swig_ret string) {
 	var swig_r string
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	swig_r_p := C._wrap_QueryEnvironment_stemTerm_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_76)(unsafe.Pointer(&_swig_i_1)))
+	swig_r_p := C._wrap_QueryEnvironment_stemTerm_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_102)(unsafe.Pointer(&_swig_i_1)))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
@@ -1598,7 +2029,7 @@ func (arg1 SwigcptrQueryEnvironment) StemTerm(arg2 string) (_swig_ret string) {
 func (arg1 SwigcptrQueryEnvironment) TermCountUnique() (_swig_ret int64) {
 	var swig_r int64
 	_swig_i_0 := arg1
-	swig_r = (int64)(C._wrap_QueryEnvironment_termCountUnique_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0)))
+	swig_r = (int64)(C._wrap_QueryEnvironment_termCountUnique_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0)))
 	return swig_r
 }
 
@@ -1606,7 +2037,7 @@ func (arg1 SwigcptrQueryEnvironment) StemCount(arg2 string) (_swig_ret int64) {
 	var swig_r int64
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	swig_r = (int64)(C._wrap_QueryEnvironment_stemCount_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_79)(unsafe.Pointer(&_swig_i_1))))
+	swig_r = (int64)(C._wrap_QueryEnvironment_stemCount_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_105)(unsafe.Pointer(&_swig_i_1))))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
@@ -1618,7 +2049,7 @@ func (arg1 SwigcptrQueryEnvironment) StemFieldCount(arg2 string, arg3 string) (_
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
 	_swig_i_2 := arg3
-	swig_r = (int64)(C._wrap_QueryEnvironment_stemFieldCount_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_81)(unsafe.Pointer(&_swig_i_1)), *(*C.swig_type_82)(unsafe.Pointer(&_swig_i_2))))
+	swig_r = (int64)(C._wrap_QueryEnvironment_stemFieldCount_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_107)(unsafe.Pointer(&_swig_i_1)), *(*C.swig_type_108)(unsafe.Pointer(&_swig_i_2))))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
@@ -1632,7 +2063,7 @@ func (arg1 SwigcptrQueryEnvironment) DocumentStemCount(arg2 string) (_swig_ret i
 	var swig_r int64
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	swig_r = (int64)(C._wrap_QueryEnvironment_documentStemCount_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_84)(unsafe.Pointer(&_swig_i_1))))
+	swig_r = (int64)(C._wrap_QueryEnvironment_documentStemCount_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_110)(unsafe.Pointer(&_swig_i_1))))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
@@ -1643,7 +2074,7 @@ func (arg1 SwigcptrQueryEnvironment) Documentsdocids(arg2 Std_vector_Sl_lemur_ap
 	var swig_r Std_vector_Sl_indri_api_ParsedDocument_Sm__Sg_
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2.Swigcptr()
-	swig_r = (Std_vector_Sl_indri_api_ParsedDocument_Sm__Sg_)(SwigcptrStd_vector_Sl_indri_api_ParsedDocument_Sm__Sg_(C._wrap_QueryEnvironment_documentsdocids_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1))))
+	swig_r = (Std_vector_Sl_indri_api_ParsedDocument_Sm__Sg_)(SwigcptrStd_vector_Sl_indri_api_ParsedDocument_Sm__Sg_(C._wrap_QueryEnvironment_documentsdocids_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1))))
 	return swig_r
 }
 
@@ -1652,7 +2083,7 @@ func (arg1 SwigcptrQueryEnvironment) DocumentMetadatadocids(arg2 Std_vector_Sl_l
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2.Swigcptr()
 	_swig_i_2 := arg3
-	swig_r = (StringVector)(SwigcptrStringVector(C._wrap_QueryEnvironment_documentMetadatadocids_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1), *(*C.swig_type_85)(unsafe.Pointer(&_swig_i_2)))))
+	swig_r = (StringVector)(SwigcptrStringVector(C._wrap_QueryEnvironment_documentMetadatadocids_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1), *(*C.swig_type_111)(unsafe.Pointer(&_swig_i_2)))))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg3
 	}
@@ -1663,7 +2094,7 @@ func (arg1 SwigcptrQueryEnvironment) OnetermCount(arg2 string) (_swig_ret int64)
 	var swig_r int64
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	swig_r = (int64)(C._wrap_QueryEnvironment_onetermCount_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_87)(unsafe.Pointer(&_swig_i_1))))
+	swig_r = (int64)(C._wrap_QueryEnvironment_onetermCount_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_113)(unsafe.Pointer(&_swig_i_1))))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
@@ -1674,7 +2105,7 @@ func (arg1 SwigcptrQueryEnvironment) OnedocumentCount(arg2 string) (_swig_ret in
 	var swig_r int64
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	swig_r = (int64)(C._wrap_QueryEnvironment_onedocumentCount_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_89)(unsafe.Pointer(&_swig_i_1))))
+	swig_r = (int64)(C._wrap_QueryEnvironment_onedocumentCount_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_115)(unsafe.Pointer(&_swig_i_1))))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
@@ -1683,7 +2114,7 @@ func (arg1 SwigcptrQueryEnvironment) OnedocumentCount(arg2 string) (_swig_ret in
 
 func DeleteQueryEnvironment(arg1 QueryEnvironment) {
 	_swig_i_0 := arg1.Swigcptr()
-	C._wrap_delete_QueryEnvironment_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0))
+	C._wrap_delete_QueryEnvironment_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))
 }
 
 type QueryEnvironment interface {
@@ -1714,7 +2145,7 @@ type QueryEnvironment interface {
 	DocumentExpressionCount(a ...interface{}) float64
 	ExpressionList(a ...interface{}) Std_vector_Sl_indri_api_ScoredExtentResult_Sg_
 	DocumentLength(arg2 int) (_swig_ret int)
-	SetFormulationParameters(arg2 Parameters)
+	SetFormulationParameters(arg2 Wrapped_Parameters)
 	ReformulateQuery(arg2 string) (_swig_ret string)
 	StemTerm(arg2 string) (_swig_ret string)
 	TermCountUnique() (_swig_ret int64)
@@ -1738,7 +2169,7 @@ func (p SwigcptrQueryExpander) SwigIsQueryExpander() {
 
 func DeleteQueryExpander(arg1 QueryExpander) {
 	_swig_i_0 := arg1.Swigcptr()
-	C._wrap_delete_QueryExpander_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0))
+	C._wrap_delete_QueryExpander_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))
 }
 
 func (arg1 SwigcptrQueryExpander) RunExpandedQuery__SWIG_0(arg2 string, arg3 int, arg4 bool) (_swig_ret Std_vector_Sl_indri_api_ScoredExtentResult_Sg_) {
@@ -1747,7 +2178,7 @@ func (arg1 SwigcptrQueryExpander) RunExpandedQuery__SWIG_0(arg2 string, arg3 int
 	_swig_i_1 := arg2
 	_swig_i_2 := arg3
 	_swig_i_3 := arg4
-	swig_r = (Std_vector_Sl_indri_api_ScoredExtentResult_Sg_)(SwigcptrStd_vector_Sl_indri_api_ScoredExtentResult_Sg_(C._wrap_QueryExpander_runExpandedQuery__SWIG_0_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_90)(unsafe.Pointer(&_swig_i_1)), C.swig_intgo(_swig_i_2), C._Bool(_swig_i_3))))
+	swig_r = (Std_vector_Sl_indri_api_ScoredExtentResult_Sg_)(SwigcptrStd_vector_Sl_indri_api_ScoredExtentResult_Sg_(C._wrap_QueryExpander_runExpandedQuery__SWIG_0_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_116)(unsafe.Pointer(&_swig_i_1)), C.swig_intgo(_swig_i_2), C._Bool(_swig_i_3))))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
@@ -1759,7 +2190,7 @@ func (arg1 SwigcptrQueryExpander) RunExpandedQuery__SWIG_1(arg2 string, arg3 int
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
 	_swig_i_2 := arg3
-	swig_r = (Std_vector_Sl_indri_api_ScoredExtentResult_Sg_)(SwigcptrStd_vector_Sl_indri_api_ScoredExtentResult_Sg_(C._wrap_QueryExpander_runExpandedQuery__SWIG_1_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_91)(unsafe.Pointer(&_swig_i_1)), C.swig_intgo(_swig_i_2))))
+	swig_r = (Std_vector_Sl_indri_api_ScoredExtentResult_Sg_)(SwigcptrStd_vector_Sl_indri_api_ScoredExtentResult_Sg_(C._wrap_QueryExpander_runExpandedQuery__SWIG_1_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_117)(unsafe.Pointer(&_swig_i_1)), C.swig_intgo(_swig_i_2))))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
@@ -1782,7 +2213,7 @@ func (arg1 SwigcptrQueryExpander) Expand(arg2 string, arg3 Std_vector_Sl_indri_a
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
 	_swig_i_2 := arg3.Swigcptr()
-	swig_r_p := C._wrap_QueryExpander_expand_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_93)(unsafe.Pointer(&_swig_i_1)), C.uintptr_t(_swig_i_2))
+	swig_r_p := C._wrap_QueryExpander_expand_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_119)(unsafe.Pointer(&_swig_i_1)), C.uintptr_t(_swig_i_2))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
@@ -1808,11 +2239,11 @@ func (p SwigcptrRMExpander) Swigcptr() uintptr {
 func (p SwigcptrRMExpander) SwigIsRMExpander() {
 }
 
-func NewRMExpander(arg1 QueryEnvironment, arg2 Parameters) (_swig_ret RMExpander) {
+func NewRMExpander(arg1 QueryEnvironment, arg2 Wrapped_Parameters) (_swig_ret RMExpander) {
 	var swig_r RMExpander
 	_swig_i_0 := arg1.Swigcptr()
 	_swig_i_1 := arg2.Swigcptr()
-	swig_r = (RMExpander)(SwigcptrRMExpander(C._wrap_new_RMExpander_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1))))
+	swig_r = (RMExpander)(SwigcptrRMExpander(C._wrap_new_RMExpander_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1))))
 	return swig_r
 }
 
@@ -1821,7 +2252,7 @@ func (arg1 SwigcptrRMExpander) Expand(arg2 string, arg3 Std_vector_Sl_indri_api_
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
 	_swig_i_2 := arg3.Swigcptr()
-	swig_r_p := C._wrap_RMExpander_expand_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_95)(unsafe.Pointer(&_swig_i_1)), C.uintptr_t(_swig_i_2))
+	swig_r_p := C._wrap_RMExpander_expand_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_121)(unsafe.Pointer(&_swig_i_1)), C.uintptr_t(_swig_i_2))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
@@ -1833,7 +2264,7 @@ func (arg1 SwigcptrRMExpander) Expand(arg2 string, arg3 Std_vector_Sl_indri_api_
 
 func DeleteRMExpander(arg1 RMExpander) {
 	_swig_i_0 := arg1.Swigcptr()
-	C._wrap_delete_RMExpander_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0))
+	C._wrap_delete_RMExpander_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))
 }
 
 func (_swig_base SwigcptrRMExpander) RunExpandedQuery__SWIG_0(arg1 string, arg2 int, arg3 bool) (_swig_ret Std_vector_Sl_indri_api_ScoredExtentResult_Sg_) {
@@ -1841,7 +2272,7 @@ func (_swig_base SwigcptrRMExpander) RunExpandedQuery__SWIG_0(arg1 string, arg2 
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
 	_swig_i_2 := arg3
-	swig_r = (Std_vector_Sl_indri_api_ScoredExtentResult_Sg_)(SwigcptrStd_vector_Sl_indri_api_ScoredExtentResult_Sg_(C._wrap_RMExpander_runExpandedQuery__SWIG_0_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_base), *(*C.swig_type_96)(unsafe.Pointer(&_swig_i_0)), C.swig_intgo(_swig_i_1), C._Bool(_swig_i_2))))
+	swig_r = (Std_vector_Sl_indri_api_ScoredExtentResult_Sg_)(SwigcptrStd_vector_Sl_indri_api_ScoredExtentResult_Sg_(C._wrap_RMExpander_runExpandedQuery__SWIG_0_indri_go_add17ee78870902e(C.uintptr_t(_swig_base), *(*C.swig_type_122)(unsafe.Pointer(&_swig_i_0)), C.swig_intgo(_swig_i_1), C._Bool(_swig_i_2))))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg1
 	}
@@ -1852,7 +2283,7 @@ func (_swig_base SwigcptrRMExpander) RunExpandedQuery__SWIG_1(arg1 string, arg2 
 	var swig_r Std_vector_Sl_indri_api_ScoredExtentResult_Sg_
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	swig_r = (Std_vector_Sl_indri_api_ScoredExtentResult_Sg_)(SwigcptrStd_vector_Sl_indri_api_ScoredExtentResult_Sg_(C._wrap_RMExpander_runExpandedQuery__SWIG_1_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_base), *(*C.swig_type_97)(unsafe.Pointer(&_swig_i_0)), C.swig_intgo(_swig_i_1))))
+	swig_r = (Std_vector_Sl_indri_api_ScoredExtentResult_Sg_)(SwigcptrStd_vector_Sl_indri_api_ScoredExtentResult_Sg_(C._wrap_RMExpander_runExpandedQuery__SWIG_1_indri_go_add17ee78870902e(C.uintptr_t(_swig_base), *(*C.swig_type_123)(unsafe.Pointer(&_swig_i_0)), C.swig_intgo(_swig_i_1))))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg1
 	}
@@ -1895,11 +2326,11 @@ func (p SwigcptrPonteExpander) Swigcptr() uintptr {
 func (p SwigcptrPonteExpander) SwigIsPonteExpander() {
 }
 
-func NewPonteExpander(arg1 QueryEnvironment, arg2 Parameters) (_swig_ret PonteExpander) {
+func NewPonteExpander(arg1 QueryEnvironment, arg2 Wrapped_Parameters) (_swig_ret PonteExpander) {
 	var swig_r PonteExpander
 	_swig_i_0 := arg1.Swigcptr()
 	_swig_i_1 := arg2.Swigcptr()
-	swig_r = (PonteExpander)(SwigcptrPonteExpander(C._wrap_new_PonteExpander_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1))))
+	swig_r = (PonteExpander)(SwigcptrPonteExpander(C._wrap_new_PonteExpander_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1))))
 	return swig_r
 }
 
@@ -1908,7 +2339,7 @@ func (arg1 SwigcptrPonteExpander) Expand(arg2 string, arg3 Std_vector_Sl_indri_a
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
 	_swig_i_2 := arg3.Swigcptr()
-	swig_r_p := C._wrap_PonteExpander_expand_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_99)(unsafe.Pointer(&_swig_i_1)), C.uintptr_t(_swig_i_2))
+	swig_r_p := C._wrap_PonteExpander_expand_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_125)(unsafe.Pointer(&_swig_i_1)), C.uintptr_t(_swig_i_2))
 	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
@@ -1920,7 +2351,7 @@ func (arg1 SwigcptrPonteExpander) Expand(arg2 string, arg3 Std_vector_Sl_indri_a
 
 func DeletePonteExpander(arg1 PonteExpander) {
 	_swig_i_0 := arg1.Swigcptr()
-	C._wrap_delete_PonteExpander_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0))
+	C._wrap_delete_PonteExpander_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))
 }
 
 func (_swig_base SwigcptrPonteExpander) RunExpandedQuery__SWIG_0(arg1 string, arg2 int, arg3 bool) (_swig_ret Std_vector_Sl_indri_api_ScoredExtentResult_Sg_) {
@@ -1928,7 +2359,7 @@ func (_swig_base SwigcptrPonteExpander) RunExpandedQuery__SWIG_0(arg1 string, ar
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
 	_swig_i_2 := arg3
-	swig_r = (Std_vector_Sl_indri_api_ScoredExtentResult_Sg_)(SwigcptrStd_vector_Sl_indri_api_ScoredExtentResult_Sg_(C._wrap_PonteExpander_runExpandedQuery__SWIG_0_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_base), *(*C.swig_type_96)(unsafe.Pointer(&_swig_i_0)), C.swig_intgo(_swig_i_1), C._Bool(_swig_i_2))))
+	swig_r = (Std_vector_Sl_indri_api_ScoredExtentResult_Sg_)(SwigcptrStd_vector_Sl_indri_api_ScoredExtentResult_Sg_(C._wrap_PonteExpander_runExpandedQuery__SWIG_0_indri_go_add17ee78870902e(C.uintptr_t(_swig_base), *(*C.swig_type_122)(unsafe.Pointer(&_swig_i_0)), C.swig_intgo(_swig_i_1), C._Bool(_swig_i_2))))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg1
 	}
@@ -1939,7 +2370,7 @@ func (_swig_base SwigcptrPonteExpander) RunExpandedQuery__SWIG_1(arg1 string, ar
 	var swig_r Std_vector_Sl_indri_api_ScoredExtentResult_Sg_
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	swig_r = (Std_vector_Sl_indri_api_ScoredExtentResult_Sg_)(SwigcptrStd_vector_Sl_indri_api_ScoredExtentResult_Sg_(C._wrap_PonteExpander_runExpandedQuery__SWIG_1_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_base), *(*C.swig_type_97)(unsafe.Pointer(&_swig_i_0)), C.swig_intgo(_swig_i_1))))
+	swig_r = (Std_vector_Sl_indri_api_ScoredExtentResult_Sg_)(SwigcptrStd_vector_Sl_indri_api_ScoredExtentResult_Sg_(C._wrap_PonteExpander_runExpandedQuery__SWIG_1_indri_go_add17ee78870902e(C.uintptr_t(_swig_base), *(*C.swig_type_123)(unsafe.Pointer(&_swig_i_0)), C.swig_intgo(_swig_i_1))))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg1
 	}
@@ -1973,6 +2404,247 @@ type PonteExpander interface {
 	SwigGetQueryExpander() QueryExpander
 }
 
+type SwigcptrWrapped_MetadataPair uintptr
+
+func (p SwigcptrWrapped_MetadataPair) Swigcptr() uintptr {
+	return (uintptr)(p)
+}
+
+func (p SwigcptrWrapped_MetadataPair) SwigIsWrapped_MetadataPair() {
+}
+
+func (arg1 SwigcptrWrapped_MetadataPair) SetKey(arg2 string) {
+	_swig_i_0 := arg1
+	_swig_i_1 := arg2
+	C._wrap_Wrapped_MetadataPair_key_set_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_126)(unsafe.Pointer(&_swig_i_1)))
+	if Swig_escape_always_false {
+		Swig_escape_val = arg2
+	}
+}
+
+func (arg1 SwigcptrWrapped_MetadataPair) GetKey() (_swig_ret string) {
+	var swig_r string
+	_swig_i_0 := arg1
+	swig_r_p := C._wrap_Wrapped_MetadataPair_key_get_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))
+	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
+	var swig_r_1 string
+ swig_r_1 = swigCopyString(swig_r) 
+	return swig_r_1
+}
+
+func (arg1 SwigcptrWrapped_MetadataPair) SetValue(arg2 uintptr) {
+	_swig_i_0 := arg1
+	_swig_i_1 := arg2
+	C._wrap_Wrapped_MetadataPair_value_set_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1))
+}
+
+func (arg1 SwigcptrWrapped_MetadataPair) GetValue() (_swig_ret uintptr) {
+	var swig_r uintptr
+	_swig_i_0 := arg1
+	swig_r = (uintptr)(C._wrap_Wrapped_MetadataPair_value_get_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0)))
+	return swig_r
+}
+
+func (arg1 SwigcptrWrapped_MetadataPair) SetValueLength(arg2 int) {
+	_swig_i_0 := arg1
+	_swig_i_1 := arg2
+	C._wrap_Wrapped_MetadataPair_valueLength_set_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.swig_intgo(_swig_i_1))
+}
+
+func (arg1 SwigcptrWrapped_MetadataPair) GetValueLength() (_swig_ret int) {
+	var swig_r int
+	_swig_i_0 := arg1
+	swig_r = (int)(C._wrap_Wrapped_MetadataPair_valueLength_get_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0)))
+	return swig_r
+}
+
+func (arg1 SwigcptrWrapped_MetadataPair) StripValue() {
+	_swig_i_0 := arg1
+	C._wrap_Wrapped_MetadataPair_stripValue_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))
+}
+
+func NewWrapped_MetadataPair() (_swig_ret Wrapped_MetadataPair) {
+	var swig_r Wrapped_MetadataPair
+	swig_r = (Wrapped_MetadataPair)(SwigcptrWrapped_MetadataPair(C._wrap_new_Wrapped_MetadataPair_indri_go_add17ee78870902e()))
+	return swig_r
+}
+
+func DeleteWrapped_MetadataPair(arg1 Wrapped_MetadataPair) {
+	_swig_i_0 := arg1.Swigcptr()
+	C._wrap_delete_Wrapped_MetadataPair_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))
+}
+
+type Wrapped_MetadataPair interface {
+	Swigcptr() uintptr
+	SwigIsWrapped_MetadataPair()
+	SetKey(arg2 string)
+	GetKey() (_swig_ret string)
+	SetValue(arg2 uintptr)
+	GetValue() (_swig_ret uintptr)
+	SetValueLength(arg2 int)
+	GetValueLength() (_swig_ret int)
+	StripValue()
+}
+
+type SwigcptrMetadataPairVector uintptr
+
+func (p SwigcptrMetadataPairVector) Swigcptr() uintptr {
+	return (uintptr)(p)
+}
+
+func (p SwigcptrMetadataPairVector) SwigIsMetadataPairVector() {
+}
+
+func NewMetadataPairVector__SWIG_0() (_swig_ret MetadataPairVector) {
+	var swig_r MetadataPairVector
+	swig_r = (MetadataPairVector)(SwigcptrMetadataPairVector(C._wrap_new_MetadataPairVector__SWIG_0_indri_go_add17ee78870902e()))
+	return swig_r
+}
+
+func NewMetadataPairVector__SWIG_1(arg1 int64) (_swig_ret MetadataPairVector) {
+	var swig_r MetadataPairVector
+	_swig_i_0 := arg1
+	swig_r = (MetadataPairVector)(SwigcptrMetadataPairVector(C._wrap_new_MetadataPairVector__SWIG_1_indri_go_add17ee78870902e(C.swig_type_128(_swig_i_0))))
+	return swig_r
+}
+
+func NewMetadataPairVector(a ...interface{}) MetadataPairVector {
+	argc := len(a)
+	if argc == 0 {
+		return NewMetadataPairVector__SWIG_0()
+	}
+	if argc == 1 {
+		return NewMetadataPairVector__SWIG_1(a[0].(int64))
+	}
+	panic("No match for overloaded function call")
+}
+
+func (arg1 SwigcptrMetadataPairVector) Size() (_swig_ret int64) {
+	var swig_r int64
+	_swig_i_0 := arg1
+	swig_r = (int64)(C._wrap_MetadataPairVector_size_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0)))
+	return swig_r
+}
+
+func (arg1 SwigcptrMetadataPairVector) Capacity() (_swig_ret int64) {
+	var swig_r int64
+	_swig_i_0 := arg1
+	swig_r = (int64)(C._wrap_MetadataPairVector_capacity_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0)))
+	return swig_r
+}
+
+func (arg1 SwigcptrMetadataPairVector) Reserve(arg2 int64) {
+	_swig_i_0 := arg1
+	_swig_i_1 := arg2
+	C._wrap_MetadataPairVector_reserve_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.swig_type_131(_swig_i_1))
+}
+
+func (arg1 SwigcptrMetadataPairVector) IsEmpty() (_swig_ret bool) {
+	var swig_r bool
+	_swig_i_0 := arg1
+	swig_r = (bool)(C._wrap_MetadataPairVector_isEmpty_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0)))
+	return swig_r
+}
+
+func (arg1 SwigcptrMetadataPairVector) Clear() {
+	_swig_i_0 := arg1
+	C._wrap_MetadataPairVector_clear_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))
+}
+
+func (arg1 SwigcptrMetadataPairVector) Add(arg2 Wrapped_MetadataPair) {
+	_swig_i_0 := arg1
+	_swig_i_1 := arg2.Swigcptr()
+	C._wrap_MetadataPairVector_add_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1))
+}
+
+func (arg1 SwigcptrMetadataPairVector) Get(arg2 int) (_swig_ret Wrapped_MetadataPair) {
+	var swig_r Wrapped_MetadataPair
+	_swig_i_0 := arg1
+	_swig_i_1 := arg2
+	swig_r = (Wrapped_MetadataPair)(SwigcptrWrapped_MetadataPair(C._wrap_MetadataPairVector_get_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.swig_intgo(_swig_i_1))))
+	return swig_r
+}
+
+func (arg1 SwigcptrMetadataPairVector) Set(arg2 int, arg3 Wrapped_MetadataPair) {
+	_swig_i_0 := arg1
+	_swig_i_1 := arg2
+	_swig_i_2 := arg3.Swigcptr()
+	C._wrap_MetadataPairVector_set_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.swig_intgo(_swig_i_1), C.uintptr_t(_swig_i_2))
+}
+
+func DeleteMetadataPairVector(arg1 MetadataPairVector) {
+	_swig_i_0 := arg1.Swigcptr()
+	C._wrap_delete_MetadataPairVector_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))
+}
+
+type MetadataPairVector interface {
+	Swigcptr() uintptr
+	SwigIsMetadataPairVector()
+	Size() (_swig_ret int64)
+	Capacity() (_swig_ret int64)
+	Reserve(arg2 int64)
+	IsEmpty() (_swig_ret bool)
+	Clear()
+	Add(arg2 Wrapped_MetadataPair)
+	Get(arg2 int) (_swig_ret Wrapped_MetadataPair)
+	Set(arg2 int, arg3 Wrapped_MetadataPair)
+}
+
+type _swig_DirectorIndexStatus struct {
+	SwigcptrIndexStatus
+	v interface{}
+}
+
+func (p *_swig_DirectorIndexStatus) Swigcptr() uintptr {
+	return p.SwigcptrIndexStatus.Swigcptr()
+}
+
+func (p *_swig_DirectorIndexStatus) SwigIsIndexStatus() {
+}
+
+func (p *_swig_DirectorIndexStatus) DirectorInterface() interface{} {
+	return p.v
+}
+
+func NewDirectorIndexStatus(v interface{}) IndexStatus {
+	p := &_swig_DirectorIndexStatus{0, v}
+	p.SwigcptrIndexStatus = SwigcptrIndexStatus(C._wrap__swig_NewDirectorIndexStatusIndexStatus_indri_go_add17ee78870902e(C.int(swigDirectorAdd(p))))
+	return p
+}
+
+func DeleteDirectorIndexStatus(arg1 IndexStatus) {
+	_swig_i_0 := arg1.Swigcptr()
+	C._wrap_DeleteDirectorIndexStatus_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))
+}
+
+//export Swiggo_DeleteDirector_IndexStatus_indri_go_add17ee78870902e
+func Swiggo_DeleteDirector_IndexStatus_indri_go_add17ee78870902e(c int) {
+	swigDirectorLookup(c).(*_swig_DirectorIndexStatus).SwigcptrIndexStatus = 0
+	swigDirectorDelete(c)
+}
+
+type _swig_DirectorInterfaceIndexStatusStatus interface {
+	Status(int, string, string, int, int)
+}
+
+func (swig_p *_swig_DirectorIndexStatus) Status(code int, documentPath string, error string, documentsIndexed int, documentsSeen int) {
+	if swig_g, swig_ok := swig_p.v.(_swig_DirectorInterfaceIndexStatusStatus); swig_ok {
+		swig_g.Status(code, documentPath, error, documentsIndexed, documentsSeen)
+		return
+	}
+	panic("call to pure virtual method")
+}
+
+//export Swig_DirectorIndexStatus_callback_status_indri_go_add17ee78870902e
+func Swig_DirectorIndexStatus_callback_status_indri_go_add17ee78870902e(swig_c int, code int, documentPath string, error string, documentsIndexed int, documentsSeen int) {
+	var _swig_i_1 string
+	var _swig_i_2 string
+	swig_p := swigDirectorLookup(swig_c).(*_swig_DirectorIndexStatus)
+ _swig_i_1 = swigCopyString(documentPath) 
+ _swig_i_2 = swigCopyString(error) 
+	swig_p.Status(code, _swig_i_1, _swig_i_2, documentsIndexed, documentsSeen)
+}
+
 type SwigcptrIndexStatus uintptr
 
 func (p SwigcptrIndexStatus) Swigcptr() uintptr {
@@ -1989,42 +2661,42 @@ func (p SwigcptrIndexStatus) DirectorInterface() interface{} {
 type IndriApiIndexStatusAction_code int
 func _swig_getIndexStatus_FileOpen_IndexStatus() (_swig_ret IndriApiIndexStatusAction_code) {
 	var swig_r IndriApiIndexStatusAction_code
-	swig_r = (IndriApiIndexStatusAction_code)(C._wrap_FileOpen_IndexStatus_indri_go_8e24520e0b567faa())
+	swig_r = (IndriApiIndexStatusAction_code)(C._wrap_FileOpen_IndexStatus_indri_go_add17ee78870902e())
 	return swig_r
 }
 
 var IndexStatusFileOpen IndriApiIndexStatusAction_code = _swig_getIndexStatus_FileOpen_IndexStatus()
 func _swig_getIndexStatus_FileSkip_IndexStatus() (_swig_ret IndriApiIndexStatusAction_code) {
 	var swig_r IndriApiIndexStatusAction_code
-	swig_r = (IndriApiIndexStatusAction_code)(C._wrap_FileSkip_IndexStatus_indri_go_8e24520e0b567faa())
+	swig_r = (IndriApiIndexStatusAction_code)(C._wrap_FileSkip_IndexStatus_indri_go_add17ee78870902e())
 	return swig_r
 }
 
 var IndexStatusFileSkip IndriApiIndexStatusAction_code = _swig_getIndexStatus_FileSkip_IndexStatus()
 func _swig_getIndexStatus_FileError_IndexStatus() (_swig_ret IndriApiIndexStatusAction_code) {
 	var swig_r IndriApiIndexStatusAction_code
-	swig_r = (IndriApiIndexStatusAction_code)(C._wrap_FileError_IndexStatus_indri_go_8e24520e0b567faa())
+	swig_r = (IndriApiIndexStatusAction_code)(C._wrap_FileError_IndexStatus_indri_go_add17ee78870902e())
 	return swig_r
 }
 
 var IndexStatusFileError IndriApiIndexStatusAction_code = _swig_getIndexStatus_FileError_IndexStatus()
 func _swig_getIndexStatus_FileClose_IndexStatus() (_swig_ret IndriApiIndexStatusAction_code) {
 	var swig_r IndriApiIndexStatusAction_code
-	swig_r = (IndriApiIndexStatusAction_code)(C._wrap_FileClose_IndexStatus_indri_go_8e24520e0b567faa())
+	swig_r = (IndriApiIndexStatusAction_code)(C._wrap_FileClose_IndexStatus_indri_go_add17ee78870902e())
 	return swig_r
 }
 
 var IndexStatusFileClose IndriApiIndexStatusAction_code = _swig_getIndexStatus_FileClose_IndexStatus()
 func _swig_getIndexStatus_DocumentCount_IndexStatus() (_swig_ret IndriApiIndexStatusAction_code) {
 	var swig_r IndriApiIndexStatusAction_code
-	swig_r = (IndriApiIndexStatusAction_code)(C._wrap_DocumentCount_IndexStatus_indri_go_8e24520e0b567faa())
+	swig_r = (IndriApiIndexStatusAction_code)(C._wrap_DocumentCount_IndexStatus_indri_go_add17ee78870902e())
 	return swig_r
 }
 
 var IndexStatusDocumentCount IndriApiIndexStatusAction_code = _swig_getIndexStatus_DocumentCount_IndexStatus()
 func DeleteIndexStatus(arg1 IndexStatus) {
 	_swig_i_0 := arg1.Swigcptr()
-	C._wrap_delete_IndexStatus_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0))
+	C._wrap_delete_IndexStatus_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))
 }
 
 func (arg1 SwigcptrIndexStatus) Status(arg2 int, arg3 string, arg4 string, arg5 int, arg6 int) {
@@ -2034,7 +2706,7 @@ func (arg1 SwigcptrIndexStatus) Status(arg2 int, arg3 string, arg4 string, arg5 
 	_swig_i_3 := arg4
 	_swig_i_4 := arg5
 	_swig_i_5 := arg6
-	C._wrap_IndexStatus_status_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), C.swig_intgo(_swig_i_1), *(*C.swig_type_100)(unsafe.Pointer(&_swig_i_2)), *(*C.swig_type_101)(unsafe.Pointer(&_swig_i_3)), C.swig_intgo(_swig_i_4), C.swig_intgo(_swig_i_5))
+	C._wrap_IndexStatus_status_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.swig_intgo(_swig_i_1), *(*C.swig_type_132)(unsafe.Pointer(&_swig_i_2)), *(*C.swig_type_133)(unsafe.Pointer(&_swig_i_3)), C.swig_intgo(_swig_i_4), C.swig_intgo(_swig_i_5))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg3
 	}
@@ -2050,63 +2722,63 @@ type IndexStatus interface {
 	Status(arg2 int, arg3 string, arg4 string, arg5 int, arg6 int)
 }
 
-type SwigcptrIndexEnvironment uintptr
+type SwigcptrWrapped_IndexEnvironment uintptr
 
-func (p SwigcptrIndexEnvironment) Swigcptr() uintptr {
+func (p SwigcptrWrapped_IndexEnvironment) Swigcptr() uintptr {
 	return (uintptr)(p)
 }
 
-func (p SwigcptrIndexEnvironment) SwigIsIndexEnvironment() {
+func (p SwigcptrWrapped_IndexEnvironment) SwigIsWrapped_IndexEnvironment() {
 }
 
-func NewIndexEnvironment() (_swig_ret IndexEnvironment) {
-	var swig_r IndexEnvironment
-	swig_r = (IndexEnvironment)(SwigcptrIndexEnvironment(C._wrap_new_IndexEnvironment_indri_go_8e24520e0b567faa()))
+func NewWrapped_IndexEnvironment() (_swig_ret Wrapped_IndexEnvironment) {
+	var swig_r Wrapped_IndexEnvironment
+	swig_r = (Wrapped_IndexEnvironment)(SwigcptrWrapped_IndexEnvironment(C._wrap_new_Wrapped_IndexEnvironment_indri_go_add17ee78870902e()))
 	return swig_r
 }
 
-func DeleteIndexEnvironment(arg1 IndexEnvironment) {
+func DeleteWrapped_IndexEnvironment(arg1 Wrapped_IndexEnvironment) {
 	_swig_i_0 := arg1.Swigcptr()
-	C._wrap_delete_IndexEnvironment_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0))
+	C._wrap_delete_Wrapped_IndexEnvironment_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))
 }
 
-func (arg1 SwigcptrIndexEnvironment) SetDocumentRoot(arg2 string) {
+func (arg1 SwigcptrWrapped_IndexEnvironment) Wrapped_setDocumentRoot(arg2 string) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	C._wrap_IndexEnvironment_setDocumentRoot_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_102)(unsafe.Pointer(&_swig_i_1)))
+	C._wrap_Wrapped_IndexEnvironment_Wrapped_setDocumentRoot_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_134)(unsafe.Pointer(&_swig_i_1)))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
 }
 
-func (arg1 SwigcptrIndexEnvironment) SetAnchorTextPath(arg2 string) {
+func (arg1 SwigcptrWrapped_IndexEnvironment) Wrapped_setAnchorTextPath(arg2 string) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	C._wrap_IndexEnvironment_setAnchorTextPath_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_103)(unsafe.Pointer(&_swig_i_1)))
+	C._wrap_Wrapped_IndexEnvironment_Wrapped_setAnchorTextPath_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_135)(unsafe.Pointer(&_swig_i_1)))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
 }
 
-func (arg1 SwigcptrIndexEnvironment) SetOffsetMetadataPath(arg2 string) {
+func (arg1 SwigcptrWrapped_IndexEnvironment) Wrapped_setOffsetMetadataPath(arg2 string) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	C._wrap_IndexEnvironment_setOffsetMetadataPath_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_104)(unsafe.Pointer(&_swig_i_1)))
+	C._wrap_Wrapped_IndexEnvironment_Wrapped_setOffsetMetadataPath_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_136)(unsafe.Pointer(&_swig_i_1)))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
 }
 
-func (arg1 SwigcptrIndexEnvironment) SetOffsetAnnotationsPath(arg2 string) {
+func (arg1 SwigcptrWrapped_IndexEnvironment) Wrapped_setOffsetAnnotationsPath(arg2 string) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	C._wrap_IndexEnvironment_setOffsetAnnotationsPath_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_105)(unsafe.Pointer(&_swig_i_1)))
+	C._wrap_Wrapped_IndexEnvironment_Wrapped_setOffsetAnnotationsPath_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_137)(unsafe.Pointer(&_swig_i_1)))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
 }
 
-func (arg1 SwigcptrIndexEnvironment) AddFileClass__SWIG_0(arg2 string, arg3 string, arg4 string, arg5 string, arg6 string, arg7 string, arg8 string, arg9 StringVector, arg10 StringVector, arg11 StringVector, arg12 StringVector, arg13 Std_map_Sl_indri_parse_ConflationPattern_Sm__Sc_std_string_Sg_) {
+func (arg1 SwigcptrWrapped_IndexEnvironment) Wrapped_addFileClass__SWIG_0(arg2 string, arg3 string, arg4 string, arg5 string, arg6 string, arg7 string, arg8 string, arg9 StringVector, arg10 StringVector, arg11 StringVector, arg12 StringVector, arg13 Std_map_Sl_indri_parse_ConflationPattern_Sm__Sc_std_string_Sg_) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
 	_swig_i_2 := arg3
@@ -2120,7 +2792,7 @@ func (arg1 SwigcptrIndexEnvironment) AddFileClass__SWIG_0(arg2 string, arg3 stri
 	_swig_i_10 := arg11.Swigcptr()
 	_swig_i_11 := arg12.Swigcptr()
 	_swig_i_12 := arg13.Swigcptr()
-	C._wrap_IndexEnvironment_addFileClass__SWIG_0_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_106)(unsafe.Pointer(&_swig_i_1)), *(*C.swig_type_107)(unsafe.Pointer(&_swig_i_2)), *(*C.swig_type_108)(unsafe.Pointer(&_swig_i_3)), *(*C.swig_type_109)(unsafe.Pointer(&_swig_i_4)), *(*C.swig_type_110)(unsafe.Pointer(&_swig_i_5)), *(*C.swig_type_111)(unsafe.Pointer(&_swig_i_6)), *(*C.swig_type_112)(unsafe.Pointer(&_swig_i_7)), C.uintptr_t(_swig_i_8), C.uintptr_t(_swig_i_9), C.uintptr_t(_swig_i_10), C.uintptr_t(_swig_i_11), C.uintptr_t(_swig_i_12))
+	C._wrap_Wrapped_IndexEnvironment_Wrapped_addFileClass__SWIG_0_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_138)(unsafe.Pointer(&_swig_i_1)), *(*C.swig_type_139)(unsafe.Pointer(&_swig_i_2)), *(*C.swig_type_140)(unsafe.Pointer(&_swig_i_3)), *(*C.swig_type_141)(unsafe.Pointer(&_swig_i_4)), *(*C.swig_type_142)(unsafe.Pointer(&_swig_i_5)), *(*C.swig_type_143)(unsafe.Pointer(&_swig_i_6)), *(*C.swig_type_144)(unsafe.Pointer(&_swig_i_7)), C.uintptr_t(_swig_i_8), C.uintptr_t(_swig_i_9), C.uintptr_t(_swig_i_10), C.uintptr_t(_swig_i_11), C.uintptr_t(_swig_i_12))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
@@ -2144,54 +2816,54 @@ func (arg1 SwigcptrIndexEnvironment) AddFileClass__SWIG_0(arg2 string, arg3 stri
 	}
 }
 
-func (arg1 SwigcptrIndexEnvironment) GetFileClassSpec(arg2 string) (_swig_ret Indri_parse_FileClassEnvironmentFactory_Specification) {
+func (arg1 SwigcptrWrapped_IndexEnvironment) Wrapped_getFileClassSpec(arg2 string) (_swig_ret Indri_parse_FileClassEnvironmentFactory_Specification) {
 	var swig_r Indri_parse_FileClassEnvironmentFactory_Specification
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	swig_r = (Indri_parse_FileClassEnvironmentFactory_Specification)(SwigcptrIndri_parse_FileClassEnvironmentFactory_Specification(C._wrap_IndexEnvironment_getFileClassSpec_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_113)(unsafe.Pointer(&_swig_i_1)))))
+	swig_r = (Indri_parse_FileClassEnvironmentFactory_Specification)(SwigcptrIndri_parse_FileClassEnvironmentFactory_Specification(C._wrap_Wrapped_IndexEnvironment_Wrapped_getFileClassSpec_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_145)(unsafe.Pointer(&_swig_i_1)))))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
 	return swig_r
 }
 
-func (arg1 SwigcptrIndexEnvironment) AddFileClass__SWIG_1(arg2 Indri_parse_FileClassEnvironmentFactory_Specification) {
+func (arg1 SwigcptrWrapped_IndexEnvironment) Wrapped_addFileClass__SWIG_1(arg2 Indri_parse_FileClassEnvironmentFactory_Specification) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2.Swigcptr()
-	C._wrap_IndexEnvironment_addFileClass__SWIG_1_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1))
+	C._wrap_Wrapped_IndexEnvironment_Wrapped_addFileClass__SWIG_1_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1))
 }
 
-func (p SwigcptrIndexEnvironment) AddFileClass(a ...interface{}) {
+func (p SwigcptrWrapped_IndexEnvironment) Wrapped_addFileClass(a ...interface{}) {
 	argc := len(a)
 	if argc == 1 {
-		p.AddFileClass__SWIG_1(a[0].(Indri_parse_FileClassEnvironmentFactory_Specification))
+		p.Wrapped_addFileClass__SWIG_1(a[0].(Indri_parse_FileClassEnvironmentFactory_Specification))
 		return
 	}
 	if argc == 12 {
-		p.AddFileClass__SWIG_0(a[0].(string), a[1].(string), a[2].(string), a[3].(string), a[4].(string), a[5].(string), a[6].(string), a[7].(StringVector), a[8].(StringVector), a[9].(StringVector), a[10].(StringVector), a[11].(Std_map_Sl_indri_parse_ConflationPattern_Sm__Sc_std_string_Sg_))
+		p.Wrapped_addFileClass__SWIG_0(a[0].(string), a[1].(string), a[2].(string), a[3].(string), a[4].(string), a[5].(string), a[6].(string), a[7].(StringVector), a[8].(StringVector), a[9].(StringVector), a[10].(StringVector), a[11].(Std_map_Sl_indri_parse_ConflationPattern_Sm__Sc_std_string_Sg_))
 		return
 	}
 	panic("No match for overloaded function call")
 }
 
-func (arg1 SwigcptrIndexEnvironment) DeleteDocument(arg2 int) {
+func (arg1 SwigcptrWrapped_IndexEnvironment) Wrapped_deleteDocument(arg2 int) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	C._wrap_IndexEnvironment_deleteDocument_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), C.swig_intgo(_swig_i_1))
+	C._wrap_Wrapped_IndexEnvironment_Wrapped_deleteDocument_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.swig_intgo(_swig_i_1))
 }
 
-func (arg1 SwigcptrIndexEnvironment) SetIndexedFields(arg2 StringVector) {
+func (arg1 SwigcptrWrapped_IndexEnvironment) Wrapped_setIndexedFields(arg2 StringVector) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2.Swigcptr()
-	C._wrap_IndexEnvironment_setIndexedFields_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1))
+	C._wrap_Wrapped_IndexEnvironment_Wrapped_setIndexedFields_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1))
 }
 
-func (arg1 SwigcptrIndexEnvironment) SetNumericField__SWIG_0(arg2 string, arg3 bool, arg4 string) {
+func (arg1 SwigcptrWrapped_IndexEnvironment) Wrapped_setNumericField__SWIG_0(arg2 string, arg3 bool, arg4 string) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
 	_swig_i_2 := arg3
 	_swig_i_3 := arg4
-	C._wrap_IndexEnvironment_setNumericField__SWIG_0_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_114)(unsafe.Pointer(&_swig_i_1)), C._Bool(_swig_i_2), *(*C.swig_type_115)(unsafe.Pointer(&_swig_i_3)))
+	C._wrap_Wrapped_IndexEnvironment_Wrapped_setNumericField__SWIG_0_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_146)(unsafe.Pointer(&_swig_i_1)), C._Bool(_swig_i_2), *(*C.swig_type_147)(unsafe.Pointer(&_swig_i_3)))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
@@ -2200,172 +2872,172 @@ func (arg1 SwigcptrIndexEnvironment) SetNumericField__SWIG_0(arg2 string, arg3 b
 	}
 }
 
-func (arg1 SwigcptrIndexEnvironment) SetNumericField__SWIG_1(arg2 string, arg3 bool) {
+func (arg1 SwigcptrWrapped_IndexEnvironment) Wrapped_setNumericField__SWIG_1(arg2 string, arg3 bool) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
 	_swig_i_2 := arg3
-	C._wrap_IndexEnvironment_setNumericField__SWIG_1_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_116)(unsafe.Pointer(&_swig_i_1)), C._Bool(_swig_i_2))
+	C._wrap_Wrapped_IndexEnvironment_Wrapped_setNumericField__SWIG_1_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_148)(unsafe.Pointer(&_swig_i_1)), C._Bool(_swig_i_2))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
 }
 
-func (p SwigcptrIndexEnvironment) SetNumericField(a ...interface{}) {
+func (p SwigcptrWrapped_IndexEnvironment) Wrapped_setNumericField(a ...interface{}) {
 	argc := len(a)
 	if argc == 2 {
-		p.SetNumericField__SWIG_1(a[0].(string), a[1].(bool))
+		p.Wrapped_setNumericField__SWIG_1(a[0].(string), a[1].(bool))
 		return
 	}
 	if argc == 3 {
-		p.SetNumericField__SWIG_0(a[0].(string), a[1].(bool), a[2].(string))
+		p.Wrapped_setNumericField__SWIG_0(a[0].(string), a[1].(bool), a[2].(string))
 		return
 	}
 	panic("No match for overloaded function call")
 }
 
-func (arg1 SwigcptrIndexEnvironment) SetOrdinalField(arg2 string, arg3 bool) {
+func (arg1 SwigcptrWrapped_IndexEnvironment) Wrapped_setOrdinalField(arg2 string, arg3 bool) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
 	_swig_i_2 := arg3
-	C._wrap_IndexEnvironment_setOrdinalField_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_117)(unsafe.Pointer(&_swig_i_1)), C._Bool(_swig_i_2))
+	C._wrap_Wrapped_IndexEnvironment_Wrapped_setOrdinalField_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_149)(unsafe.Pointer(&_swig_i_1)), C._Bool(_swig_i_2))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
 }
 
-func (arg1 SwigcptrIndexEnvironment) SetParentalField(arg2 string, arg3 bool) {
+func (arg1 SwigcptrWrapped_IndexEnvironment) Wrapped_setParentalField(arg2 string, arg3 bool) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
 	_swig_i_2 := arg3
-	C._wrap_IndexEnvironment_setParentalField_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_118)(unsafe.Pointer(&_swig_i_1)), C._Bool(_swig_i_2))
+	C._wrap_Wrapped_IndexEnvironment_Wrapped_setParentalField_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_150)(unsafe.Pointer(&_swig_i_1)), C._Bool(_swig_i_2))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
 }
 
-func (arg1 SwigcptrIndexEnvironment) SetMetadataIndexedFields(arg2 StringVector, arg3 StringVector) {
+func (arg1 SwigcptrWrapped_IndexEnvironment) Wrapped_setMetadataIndexedFields(arg2 StringVector, arg3 StringVector) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2.Swigcptr()
 	_swig_i_2 := arg3.Swigcptr()
-	C._wrap_IndexEnvironment_setMetadataIndexedFields_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1), C.uintptr_t(_swig_i_2))
+	C._wrap_Wrapped_IndexEnvironment_Wrapped_setMetadataIndexedFields_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1), C.uintptr_t(_swig_i_2))
 }
 
-func (arg1 SwigcptrIndexEnvironment) SetStopwords(arg2 StringVector) {
+func (arg1 SwigcptrWrapped_IndexEnvironment) Wrapped_setStopwords(arg2 StringVector) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2.Swigcptr()
-	C._wrap_IndexEnvironment_setStopwords_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1))
+	C._wrap_Wrapped_IndexEnvironment_Wrapped_setStopwords_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1))
 }
 
-func (arg1 SwigcptrIndexEnvironment) SetStemmer(arg2 string) {
+func (arg1 SwigcptrWrapped_IndexEnvironment) Wrapped_setStemmer(arg2 string) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	C._wrap_IndexEnvironment_setStemmer_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_119)(unsafe.Pointer(&_swig_i_1)))
+	C._wrap_Wrapped_IndexEnvironment_Wrapped_setStemmer_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_151)(unsafe.Pointer(&_swig_i_1)))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
 }
 
-func (arg1 SwigcptrIndexEnvironment) SetMemory(arg2 int64) {
+func (arg1 SwigcptrWrapped_IndexEnvironment) Wrapped_setMemory(arg2 int64) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	C._wrap_IndexEnvironment_setMemory_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), C.swig_type_120(_swig_i_1))
+	C._wrap_Wrapped_IndexEnvironment_Wrapped_setMemory_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.swig_type_152(_swig_i_1))
 }
 
-func (arg1 SwigcptrIndexEnvironment) SetNormalization(arg2 bool) {
+func (arg1 SwigcptrWrapped_IndexEnvironment) Wrapped_setNormalization(arg2 bool) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	C._wrap_IndexEnvironment_setNormalization_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), C._Bool(_swig_i_1))
+	C._wrap_Wrapped_IndexEnvironment_Wrapped_setNormalization_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C._Bool(_swig_i_1))
 }
 
-func (arg1 SwigcptrIndexEnvironment) SetStoreDocs(arg2 bool) {
+func (arg1 SwigcptrWrapped_IndexEnvironment) Wrapped_setStoreDocs(arg2 bool) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	C._wrap_IndexEnvironment_setStoreDocs_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), C._Bool(_swig_i_1))
+	C._wrap_Wrapped_IndexEnvironment_Wrapped_setStoreDocs_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C._Bool(_swig_i_1))
 }
 
-func (arg1 SwigcptrIndexEnvironment) Create__SWIG_0(arg2 string, arg3 IndexStatus) {
+func (arg1 SwigcptrWrapped_IndexEnvironment) Wrapped_create__SWIG_0(arg2 string, arg3 IndexStatus) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
 	_swig_i_2 := arg3.Swigcptr()
-	C._wrap_IndexEnvironment_create__SWIG_0_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_121)(unsafe.Pointer(&_swig_i_1)), C.uintptr_t(_swig_i_2))
+	C._wrap_Wrapped_IndexEnvironment_Wrapped_create__SWIG_0_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_153)(unsafe.Pointer(&_swig_i_1)), C.uintptr_t(_swig_i_2))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
 }
 
-func (arg1 SwigcptrIndexEnvironment) Create__SWIG_1(arg2 string) {
+func (arg1 SwigcptrWrapped_IndexEnvironment) Wrapped_create__SWIG_1(arg2 string) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	C._wrap_IndexEnvironment_create__SWIG_1_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_122)(unsafe.Pointer(&_swig_i_1)))
+	C._wrap_Wrapped_IndexEnvironment_Wrapped_create__SWIG_1_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_154)(unsafe.Pointer(&_swig_i_1)))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
 }
 
-func (p SwigcptrIndexEnvironment) Create(a ...interface{}) {
+func (p SwigcptrWrapped_IndexEnvironment) Wrapped_create(a ...interface{}) {
 	argc := len(a)
 	if argc == 1 {
-		p.Create__SWIG_1(a[0].(string))
+		p.Wrapped_create__SWIG_1(a[0].(string))
 		return
 	}
 	if argc == 2 {
-		p.Create__SWIG_0(a[0].(string), a[1].(IndexStatus))
+		p.Wrapped_create__SWIG_0(a[0].(string), a[1].(IndexStatus))
 		return
 	}
 	panic("No match for overloaded function call")
 }
 
-func (arg1 SwigcptrIndexEnvironment) Open__SWIG_0(arg2 string, arg3 IndexStatus) {
+func (arg1 SwigcptrWrapped_IndexEnvironment) Wrapped_open__SWIG_0(arg2 string, arg3 IndexStatus) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
 	_swig_i_2 := arg3.Swigcptr()
-	C._wrap_IndexEnvironment_open__SWIG_0_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_123)(unsafe.Pointer(&_swig_i_1)), C.uintptr_t(_swig_i_2))
+	C._wrap_Wrapped_IndexEnvironment_Wrapped_open__SWIG_0_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_155)(unsafe.Pointer(&_swig_i_1)), C.uintptr_t(_swig_i_2))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
 }
 
-func (arg1 SwigcptrIndexEnvironment) Open__SWIG_1(arg2 string) {
+func (arg1 SwigcptrWrapped_IndexEnvironment) Wrapped_open__SWIG_1(arg2 string) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	C._wrap_IndexEnvironment_open__SWIG_1_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_124)(unsafe.Pointer(&_swig_i_1)))
+	C._wrap_Wrapped_IndexEnvironment_Wrapped_open__SWIG_1_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_156)(unsafe.Pointer(&_swig_i_1)))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
 }
 
-func (p SwigcptrIndexEnvironment) Open(a ...interface{}) {
+func (p SwigcptrWrapped_IndexEnvironment) Wrapped_open(a ...interface{}) {
 	argc := len(a)
 	if argc == 1 {
-		p.Open__SWIG_1(a[0].(string))
+		p.Wrapped_open__SWIG_1(a[0].(string))
 		return
 	}
 	if argc == 2 {
-		p.Open__SWIG_0(a[0].(string), a[1].(IndexStatus))
+		p.Wrapped_open__SWIG_0(a[0].(string), a[1].(IndexStatus))
 		return
 	}
 	panic("No match for overloaded function call")
 }
 
-func (arg1 SwigcptrIndexEnvironment) Close() {
+func (arg1 SwigcptrWrapped_IndexEnvironment) Wrapped_close() {
 	_swig_i_0 := arg1
-	C._wrap_IndexEnvironment_close_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0))
+	C._wrap_Wrapped_IndexEnvironment_Wrapped_close_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0))
 }
 
-func (arg1 SwigcptrIndexEnvironment) AddFile__SWIG_0(arg2 string) {
+func (arg1 SwigcptrWrapped_IndexEnvironment) Wrapped_addFile__SWIG_0(arg2 string) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
-	C._wrap_IndexEnvironment_addFile__SWIG_0_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_125)(unsafe.Pointer(&_swig_i_1)))
+	C._wrap_Wrapped_IndexEnvironment_Wrapped_addFile__SWIG_0_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_157)(unsafe.Pointer(&_swig_i_1)))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
 }
 
-func (arg1 SwigcptrIndexEnvironment) AddFile__SWIG_1(arg2 string, arg3 string) {
+func (arg1 SwigcptrWrapped_IndexEnvironment) Wrapped_addFile__SWIG_1(arg2 string, arg3 string) {
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
 	_swig_i_2 := arg3
-	C._wrap_IndexEnvironment_addFile__SWIG_1_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_126)(unsafe.Pointer(&_swig_i_1)), *(*C.swig_type_127)(unsafe.Pointer(&_swig_i_2)))
+	C._wrap_Wrapped_IndexEnvironment_Wrapped_addFile__SWIG_1_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_158)(unsafe.Pointer(&_swig_i_1)), *(*C.swig_type_159)(unsafe.Pointer(&_swig_i_2)))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
@@ -2374,26 +3046,26 @@ func (arg1 SwigcptrIndexEnvironment) AddFile__SWIG_1(arg2 string, arg3 string) {
 	}
 }
 
-func (p SwigcptrIndexEnvironment) AddFile(a ...interface{}) {
+func (p SwigcptrWrapped_IndexEnvironment) Wrapped_addFile(a ...interface{}) {
 	argc := len(a)
 	if argc == 1 {
-		p.AddFile__SWIG_0(a[0].(string))
+		p.Wrapped_addFile__SWIG_0(a[0].(string))
 		return
 	}
 	if argc == 2 {
-		p.AddFile__SWIG_1(a[0].(string), a[1].(string))
+		p.Wrapped_addFile__SWIG_1(a[0].(string), a[1].(string))
 		return
 	}
 	panic("No match for overloaded function call")
 }
 
-func (arg1 SwigcptrIndexEnvironment) AddString(arg2 string, arg3 string, arg4 Std_vector_Sl_indri_parse_MetadataPair_Sg_) (_swig_ret int) {
+func (arg1 SwigcptrWrapped_IndexEnvironment) Wrapped_addString(arg2 string, arg3 string, arg4 MetadataPairVector) (_swig_ret int) {
 	var swig_r int
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2
 	_swig_i_2 := arg3
 	_swig_i_3 := arg4.Swigcptr()
-	swig_r = (int)(C._wrap_IndexEnvironment_addString_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_128)(unsafe.Pointer(&_swig_i_1)), *(*C.swig_type_129)(unsafe.Pointer(&_swig_i_2)), C.uintptr_t(_swig_i_3)))
+	swig_r = (int)(C._wrap_Wrapped_IndexEnvironment_Wrapped_addString_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), *(*C.swig_type_160)(unsafe.Pointer(&_swig_i_1)), *(*C.swig_type_161)(unsafe.Pointer(&_swig_i_2)), C.uintptr_t(_swig_i_3)))
 	if Swig_escape_always_false {
 		Swig_escape_val = arg2
 	}
@@ -2403,245 +3075,679 @@ func (arg1 SwigcptrIndexEnvironment) AddString(arg2 string, arg3 string, arg4 St
 	return swig_r
 }
 
-func (arg1 SwigcptrIndexEnvironment) AddParsedDocument(arg2 ParsedDocument) (_swig_ret int) {
+func (arg1 SwigcptrWrapped_IndexEnvironment) Wrapped_addParsedDocument(arg2 ParsedDocument) (_swig_ret int) {
 	var swig_r int
 	_swig_i_0 := arg1
 	_swig_i_1 := arg2.Swigcptr()
-	swig_r = (int)(C._wrap_IndexEnvironment_addParsedDocument_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1)))
+	swig_r = (int)(C._wrap_Wrapped_IndexEnvironment_Wrapped_addParsedDocument_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.uintptr_t(_swig_i_1)))
 	return swig_r
 }
 
-func (arg1 SwigcptrIndexEnvironment) DocumentsIndexed() (_swig_ret int) {
+func (arg1 SwigcptrWrapped_IndexEnvironment) Wrapped_documentsIndexed() (_swig_ret int) {
 	var swig_r int
 	_swig_i_0 := arg1
-	swig_r = (int)(C._wrap_IndexEnvironment_documentsIndexed_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0)))
+	swig_r = (int)(C._wrap_Wrapped_IndexEnvironment_Wrapped_documentsIndexed_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0)))
 	return swig_r
 }
 
-func (arg1 SwigcptrIndexEnvironment) DocumentsSeen() (_swig_ret int) {
+func (arg1 SwigcptrWrapped_IndexEnvironment) Wrapped_documentsSeen() (_swig_ret int) {
 	var swig_r int
 	_swig_i_0 := arg1
-	swig_r = (int)(C._wrap_IndexEnvironment_documentsSeen_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0)))
+	swig_r = (int)(C._wrap_Wrapped_IndexEnvironment_Wrapped_documentsSeen_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0)))
 	return swig_r
 }
 
-type IndexEnvironment interface {
+type Wrapped_IndexEnvironment interface {
 	Swigcptr() uintptr
-	SwigIsIndexEnvironment()
-	SetDocumentRoot(arg2 string)
-	SetAnchorTextPath(arg2 string)
-	SetOffsetMetadataPath(arg2 string)
-	SetOffsetAnnotationsPath(arg2 string)
-	GetFileClassSpec(arg2 string) (_swig_ret Indri_parse_FileClassEnvironmentFactory_Specification)
-	AddFileClass(a ...interface{})
-	DeleteDocument(arg2 int)
-	SetIndexedFields(arg2 StringVector)
-	SetNumericField(a ...interface{})
-	SetOrdinalField(arg2 string, arg3 bool)
-	SetParentalField(arg2 string, arg3 bool)
-	SetMetadataIndexedFields(arg2 StringVector, arg3 StringVector)
-	SetStopwords(arg2 StringVector)
-	SetStemmer(arg2 string)
-	SetMemory(arg2 int64)
-	SetNormalization(arg2 bool)
-	SetStoreDocs(arg2 bool)
-	Create(a ...interface{})
-	Open(a ...interface{})
-	Close()
-	AddFile(a ...interface{})
-	AddString(arg2 string, arg3 string, arg4 Std_vector_Sl_indri_parse_MetadataPair_Sg_) (_swig_ret int)
-	AddParsedDocument(arg2 ParsedDocument) (_swig_ret int)
-	DocumentsIndexed() (_swig_ret int)
-	DocumentsSeen() (_swig_ret int)
-}
-
-func StaticMethodPanic() (_swig_ret string) {
-	var swig_r string
-	swig_r_p := C._wrap_StaticMethodPanic_indri_go_8e24520e0b567faa()
-	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
-	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
-	return swig_r_1
-}
-
-type SwigcptrTester uintptr
-
-func (p SwigcptrTester) Swigcptr() uintptr {
-	return (uintptr)(p)
-}
-
-func (p SwigcptrTester) SwigIsTester() {
-}
-
-func (arg1 SwigcptrTester) GetName() (_swig_ret string) {
-	var swig_r string
-	_swig_i_0 := arg1
-	swig_r_p := C._wrap_Tester_GetName_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0))
-	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
-	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
-	return swig_r_1
-}
-
-func (arg1 SwigcptrTester) GetType() (_swig_ret string) {
-	var swig_r string
-	_swig_i_0 := arg1
-	swig_r_p := C._wrap_Tester_GetType_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0))
-	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
-	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
-	return swig_r_1
-}
-
-func (arg1 SwigcptrTester) SetName(arg2 string) {
-	_swig_i_0 := arg1
-	_swig_i_1 := arg2
-	C._wrap_Tester_SetName_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_133)(unsafe.Pointer(&_swig_i_1)))
-	if Swig_escape_always_false {
-		Swig_escape_val = arg2
-	}
-}
-
-func (arg1 SwigcptrTester) SetType(arg2 string) {
-	_swig_i_0 := arg1
-	_swig_i_1 := arg2
-	C._wrap_Tester_SetType_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), *(*C.swig_type_134)(unsafe.Pointer(&_swig_i_1)))
-	if Swig_escape_always_false {
-		Swig_escape_val = arg2
-	}
-}
-
-func (arg1 SwigcptrTester) InjectFault() (_swig_ret string) {
-	var swig_r string
-	_swig_i_0 := arg1
-	swig_r_p := C._wrap_Tester_InjectFault_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0))
-	swig_r = *(*string)(unsafe.Pointer(&swig_r_p))
-	var swig_r_1 string
- swig_r_1 = swigCopyString(swig_r) 
-	return swig_r_1
-}
-
-func NewTester() (_swig_ret Tester) {
-	var swig_r Tester
-	swig_r = (Tester)(SwigcptrTester(C._wrap_new_Tester_indri_go_8e24520e0b567faa()))
-	return swig_r
-}
-
-func DeleteTester(arg1 Tester) {
-	_swig_i_0 := arg1.Swigcptr()
-	C._wrap_delete_Tester_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0))
-}
-
-type Tester interface {
-	Swigcptr() uintptr
-	SwigIsTester()
-	GetName() (_swig_ret string)
-	GetType() (_swig_ret string)
-	SetName(arg2 string)
-	SetType(arg2 string)
-	InjectFault() (_swig_ret string)
-}
-
-type SwigcptrWrapped_DemoLib uintptr
-
-func (p SwigcptrWrapped_DemoLib) Swigcptr() uintptr {
-	return (uintptr)(p)
-}
-
-func (p SwigcptrWrapped_DemoLib) SwigIsWrapped_DemoLib() {
-}
-
-func NewWrapped_DemoLib() (_swig_ret Wrapped_DemoLib) {
-	var swig_r Wrapped_DemoLib
-	swig_r = (Wrapped_DemoLib)(SwigcptrWrapped_DemoLib(C._wrap_new_Wrapped_DemoLib_indri_go_8e24520e0b567faa()))
-	return swig_r
-}
-
-func (arg1 SwigcptrWrapped_DemoLib) Wrapped_DivideBy(arg2 int) (_swig_ret float64) {
-	var swig_r float64
-	_swig_i_0 := arg1
-	_swig_i_1 := arg2
-	swig_r = (float64)(C._wrap_Wrapped_DemoLib_Wrapped_DivideBy_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), C.swig_intgo(_swig_i_1)))
-	return swig_r
-}
-
-func (arg1 SwigcptrWrapped_DemoLib) Wrapped_NegativeThrows(arg2 int) (_swig_ret int) {
-	var swig_r int
-	_swig_i_0 := arg1
-	_swig_i_1 := arg2
-	swig_r = (int)(C._wrap_Wrapped_DemoLib_Wrapped_NegativeThrows_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), C.swig_intgo(_swig_i_1)))
-	return swig_r
-}
-
-func (arg1 SwigcptrWrapped_DemoLib) NeverThrows(arg2 int) (_swig_ret int) {
-	var swig_r int
-	_swig_i_0 := arg1
-	_swig_i_1 := arg2
-	swig_r = (int)(C._wrap_Wrapped_DemoLib_NeverThrows_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0), C.swig_intgo(_swig_i_1)))
-	return swig_r
-}
-
-func DeleteWrapped_DemoLib(arg1 Wrapped_DemoLib) {
-	_swig_i_0 := arg1.Swigcptr()
-	C._wrap_delete_Wrapped_DemoLib_indri_go_8e24520e0b567faa(C.uintptr_t(_swig_i_0))
-}
-
-type Wrapped_DemoLib interface {
-	Swigcptr() uintptr
-	SwigIsWrapped_DemoLib()
-	Wrapped_DivideBy(arg2 int) (_swig_ret float64)
-	Wrapped_NegativeThrows(arg2 int) (_swig_ret int)
-	NeverThrows(arg2 int) (_swig_ret int)
+	SwigIsWrapped_IndexEnvironment()
+	Wrapped_setDocumentRoot(arg2 string)
+	Wrapped_setAnchorTextPath(arg2 string)
+	Wrapped_setOffsetMetadataPath(arg2 string)
+	Wrapped_setOffsetAnnotationsPath(arg2 string)
+	Wrapped_getFileClassSpec(arg2 string) (_swig_ret Indri_parse_FileClassEnvironmentFactory_Specification)
+	Wrapped_addFileClass(a ...interface{})
+	Wrapped_deleteDocument(arg2 int)
+	Wrapped_setIndexedFields(arg2 StringVector)
+	Wrapped_setNumericField(a ...interface{})
+	Wrapped_setOrdinalField(arg2 string, arg3 bool)
+	Wrapped_setParentalField(arg2 string, arg3 bool)
+	Wrapped_setMetadataIndexedFields(arg2 StringVector, arg3 StringVector)
+	Wrapped_setStopwords(arg2 StringVector)
+	Wrapped_setStemmer(arg2 string)
+	Wrapped_setMemory(arg2 int64)
+	Wrapped_setNormalization(arg2 bool)
+	Wrapped_setStoreDocs(arg2 bool)
+	Wrapped_create(a ...interface{})
+	Wrapped_open(a ...interface{})
+	Wrapped_close()
+	Wrapped_addFile(a ...interface{})
+	Wrapped_addString(arg2 string, arg3 string, arg4 MetadataPairVector) (_swig_ret int)
+	Wrapped_addParsedDocument(arg2 ParsedDocument) (_swig_ret int)
+	Wrapped_documentsIndexed() (_swig_ret int)
+	Wrapped_documentsSeen() (_swig_ret int)
 }
 
 
 
-type DemoLib interface {
-    Wrapped_DemoLib
-    NegativeThrows(int) (int, error)
-    DivideBy(int) (float64, error)
-}
-
-func NewDemoLib() DemoLib {
-    //// TODO: need to figure out what controls id suffixes generation
-    //// they don't seem to change each time we recompile/.
-    //// the suffix used here and in functions below was manually edited into
-    //// the MODULE.go file after swig generates it.
-    return (DemoLib)(SwigcptrWrapped_DemoLib(C._wrap_new_Wrapped_DemoLib_indri_go_8e24520e0b567faa()))
-}
-
+//
 // catch will recover from a panic and store the recover message to the error
 // parameter. The error must be passed by reference in order to be returned to the
 // calling function.
+//
+//
+// see index_environment_test.go for more details on the following note.
+// ...
+// however, the "catch" panic handler does not trap all the exceptions and
+// the cgo crosscall results in a segmentation violation [ most likely due
+// the pair's value, both void * and value length, are in random state ]
+//
+// TODO: figure out how we may trap all C exceptions.
+// there seems to be path cases where the execution thread context (thread
+// stack and frame pointer) is switched on syscalls (to avoid GC and other
+// GO thread from blocking. And on return, the completion may run on a
+// different thread. This panic handler may be on a different stack???
+// review comments in go/src/runtime/cgocall.go
+// ...
+//
 func catch(err *error) {
     if r := recover(); r != nil {
-        *err = fmt.Errorf("%v", r)
+        var sf []string = []string{}
+        var pc []uintptr
+        var skip, fc int = 0, 0
+        fc = runtime.Callers(skip, pc)
+        if fc > 0 {
+            fp := runtime.CallersFrames(pc)
+            if fp != nil {
+                var more bool
+                var f runtime.Frame
+                for more = true; more; f, more = fp.Next() {
+                    sf = append(sf, fmt.Sprintf("%v %v %v %v\n", f.PC, f.Function, f.File, f.Line))
+                }
+            }
+        }
+        *err = fmt.Errorf("Panic stack %v, error %v", sf, r)
     }
 }
 
-// NegativeThrows catched panics generated in the %exception block and turns them into
+
+
+
+//
+//  extend Parameters.i
+//
+type Parameters interface {
+    Wrapped_Parameters
+
+    // can't seem to name function Load, compiler declares it is a duplicate.
+    // the wrapped method varies in signature only with the return type,
+    // which is empty/void. perhaps this is a signature mapping 'feature'
+    // when the c++ method return is void?
+    MyLoad(string) error
+}
+
+func NewParameters() Parameters {
+    return (Parameters)(SwigcptrWrapped_Parameters(C._wrap_new_Wrapped_Parameters_indri_go_add17ee78870902e()))
+}
+
+// Load catching panics generated in the %exception block and turn them into
 // a go error type
-func (e SwigcptrWrapped_DemoLib) NegativeThrows(n int) (i int, err error) {
+func (e SwigcptrWrapped_Parameters) MyLoad(s string) (err error) {
 	defer catch(&err)
-	i = e.Wrapped_NegativeThrows(n)
+    e.Load(s)
 	return
 }
 
-func (e SwigcptrWrapped_DemoLib) DivideBy(n int) (f float64, err error) {
+
+
+
+//
+//  extend IndexEnvironment.i
+//
+type IndexEnvironment interface {
+    Wrapped_IndexEnvironment
+
+	SetDocumentRoot(arg2 string) (err error)
+	SetAnchorTextPath(arg2 string) (err error)
+	SetOffsetMetadataPath(arg2 string) (err error)
+	SetOffsetAnnotationsPath(arg2 string) (err error)
+	GetFileClassSpec(arg2 string) (_swig_ret Indri_parse_FileClassEnvironmentFactory_Specification, err error)
+	AddFileClass(a ...interface{}) (err error)
+	DeleteDocument(arg2 int) (err error)
+	SetIndexedFields(arg2 StringVector) (err error)
+	SetNumericField(a ...interface{}) (err error)
+	SetOrdinalField(arg2 string, arg3 bool) (err error)
+	SetParentalField(arg2 string, arg3 bool) (err error)
+	SetMetadataIndexedFields(arg2 StringVector, arg3 StringVector) (err error)
+	SetStopwords(arg2 StringVector) (err error)
+	SetStemmer(arg2 string) (err error)
+	SetMemory(arg2 int64) (err error)
+	SetNormalization(arg2 bool) (err error)
+	SetStoreDocs(arg2 bool) (err error)
+	Create(a ...interface{}) (err error)
+	Open(a ...interface{}) (err error)
+	Close() (err error)
+	AddFile(a ...interface{}) (err error)
+	AddString(arg2 string, arg3 string, arg4 MetadataPairVector) (_swig_ret int, err error)
+	AddParsedDocument(arg2 ParsedDocument) (_swig_ret int, err error)
+	DocumentsIndexed() (_swig_ret int, err error)
+	DocumentsSeen() (_swig_ret int, err error)
+}
+
+func NewIndexEnvironment() IndexEnvironment {
+    return (IndexEnvironment)(SwigcptrWrapped_IndexEnvironment(C._wrap_new_Wrapped_IndexEnvironment_indri_go_add17ee78870902e()))
+}
+
+func (e SwigcptrWrapped_IndexEnvironment) SetDocumentRoot(arg2 string) (err error) {
     defer catch(&err)
-	f = e.Wrapped_DivideBy(n)
+    e.Wrapped_setDocumentRoot(arg2)
+    return
+}
+
+func (e SwigcptrWrapped_IndexEnvironment) SetAnchorTextPath(arg2 string) (err error) {
+    defer catch(&err)
+    e.Wrapped_setAnchorTextPath(arg2)
+    return
+}
+
+func (e SwigcptrWrapped_IndexEnvironment) SetOffsetMetadataPath(arg2 string) (err error) {
+    defer catch(&err)
+    e.Wrapped_setOffsetMetadataPath(arg2)
+    return
+}
+
+func (e SwigcptrWrapped_IndexEnvironment) SetOffsetAnnotationsPath(arg2 string) (err error) {
+    defer catch(&err)
+    e.Wrapped_setOffsetAnnotationsPath(arg2)
+    return
+}
+
+func (e SwigcptrWrapped_IndexEnvironment) GetFileClassSpec(arg2 string) (_swig_ret Indri_parse_FileClassEnvironmentFactory_Specification, err error) {
+    defer catch(&err)
+    _swig_ret = e.Wrapped_getFileClassSpec(arg2)
+    return
+}
+
+func (e SwigcptrWrapped_IndexEnvironment) AddFileClass(a ...interface{}) (err error) {
+    defer catch(&err)
+    argc := len(a)
+	if argc == 1 {
+		e.Wrapped_addFileClass(a[0].(Indri_parse_FileClassEnvironmentFactory_Specification))
+		return
+	}
+	if argc == 12 {
+		e.Wrapped_addFileClass(a[0].(string), a[1].(string), a[2].(string), a[3].(string), a[4].(string), a[5].(string), a[6].(string), a[7].(StringVector), a[8].(StringVector), a[9].(StringVector), a[10].(StringVector), a[11].(Std_map_Sl_indri_parse_ConflationPattern_Sm__Sc_std_string_Sg_))
+		return
+	}
+	panic("No match for overloaded function call")
+    return
+}
+
+func (e SwigcptrWrapped_IndexEnvironment) DeleteDocument(arg2 int) (err error) {
+    defer catch(&err)
+    e.Wrapped_deleteDocument(arg2)
+    return
+}
+
+func (e SwigcptrWrapped_IndexEnvironment) SetIndexedFields(arg2 StringVector) (err error) {
+    defer catch(&err)
+    e.Wrapped_setIndexedFields(arg2)
+    return
+}
+
+func (e SwigcptrWrapped_IndexEnvironment) SetNumericField(a ...interface{}) (err error) {
+    defer catch(&err)
+    argc := len(a)
+	if argc == 2 {
+		e.Wrapped_setNumericField(a[0].(string), a[1].(bool))
+		return
+	}
+	if argc == 3 {
+		e.Wrapped_setNumericField(a[0].(string), a[1].(bool), a[2].(string))
+		return
+	}
+	panic("No match for overloaded function call")
+    // can't nest variadit function
+    //e.Wrapped_setNumericField(a)
+    return
+}
+
+func (e SwigcptrWrapped_IndexEnvironment) SetOrdinalField(arg2 string, arg3 bool) (err error) {
+    defer catch(&err)
+    e.Wrapped_setOrdinalField(arg2, arg3)
+    return
+}
+
+func (e SwigcptrWrapped_IndexEnvironment) SetParentalField(arg2 string, arg3 bool) (err error) {
+    defer catch(&err)
+    e.Wrapped_setParentalField(arg2, arg3)
+    return
+}
+
+func (e SwigcptrWrapped_IndexEnvironment) SetMetadataIndexedFields(arg2 StringVector, arg3 StringVector) (err error) {
+    defer catch(&err)
+    e.Wrapped_setMetadataIndexedFields(arg2, arg3)
+    return
+}
+
+func (e SwigcptrWrapped_IndexEnvironment) SetStopwords(arg2 StringVector) (err error) {
+    defer catch(&err)
+    e.Wrapped_setStopwords(arg2)
+    return
+}
+
+func (e SwigcptrWrapped_IndexEnvironment) SetStemmer(arg2 string) (err error) {
+    defer catch(&err)
+    e.Wrapped_setStemmer(arg2)
+    return
+}
+
+func (e SwigcptrWrapped_IndexEnvironment) SetMemory(arg2 int64) (err error) {
+    defer catch(&err)
+    e.Wrapped_setMemory(arg2)
+    return
+}
+
+func (e SwigcptrWrapped_IndexEnvironment) SetNormalization(arg2 bool) (err error) {
+    defer catch(&err)
+    e.Wrapped_setNormalization(arg2)
+    return
+}
+
+func (e SwigcptrWrapped_IndexEnvironment) SetStoreDocs(arg2 bool) (err error) {
+    defer catch(&err)
+    e.Wrapped_setStoreDocs(arg2)
+    return
+}
+
+func (e SwigcptrWrapped_IndexEnvironment) Create(a ...interface{}) (err error) {
+    defer catch(&err)
+    argc := len(a)
+	if argc == 1 {
+		e.Wrapped_create(a[0].(string))
+		return
+	}
+	if argc == 2 {
+		e.Wrapped_create(a[0].(string), a[1].(IndexStatus))
+		return
+	}
+	panic("No match for overloaded function call")
+    return
+}
+
+func (e SwigcptrWrapped_IndexEnvironment) Open(a ...interface{}) (err error) {
+    defer catch(&err)
+    argc := len(a)
+	if argc == 1 {
+		e.Wrapped_open(a[0].(string))
+		return
+	}
+	if argc == 2 {
+		e.Wrapped_open(a[0].(string), a[1].(IndexStatus))
+		return
+	}
+	panic("No match for overloaded function call")
+    return
+}
+
+func (e SwigcptrWrapped_IndexEnvironment) Close() (err error) {
+    defer catch(&err)
+    e.Wrapped_close()
+    return
+}
+
+func (e SwigcptrWrapped_IndexEnvironment) AddFile(a ...interface{}) (err error) {
+    defer catch(&err)
+    argc := len(a)
+	if argc == 1 {
+		e.Wrapped_addFile(a[0].(string))
+		return
+	}
+	if argc == 2 {
+		e.Wrapped_addFile(a[0].(string), a[1].(string))
+		return
+	}
+	panic("No match for overloaded function call")
+    return
+}
+
+func (e SwigcptrWrapped_IndexEnvironment) AddString(arg2 string, arg3 string, arg4 MetadataPairVector) (_swig_ret int, err error) {
+    defer catch(&err)
+    _swig_ret = e.Wrapped_addString(arg2, arg3, arg4)
+    return
+}
+
+func (e SwigcptrWrapped_IndexEnvironment) AddParsedDocument(arg2 ParsedDocument) (_swig_ret int, err error) {
+    defer catch(&err)
+    _swig_ret = e.Wrapped_addParsedDocument(arg2)
+    return
+}
+
+func (e SwigcptrWrapped_IndexEnvironment) DocumentsIndexed() (_swig_ret int, err error) {
+    defer catch(&err)
+    _swig_ret = e.Wrapped_documentsIndexed()
+    return
+}
+
+func (e SwigcptrWrapped_IndexEnvironment) DocumentsSeen() (_swig_ret int, err error) {
+    defer catch(&err)
+    _swig_ret = e.Wrapped_documentsSeen()
+    return
+}
+
+
+//
+// the GO type MyStatusMonitor is subclassed from C++ type indri::api::IndexStatus
+// this requires that director feature be enabled, look for
+// '%module(directors="1") modulename' under ifdef SWIGGO in indri.i
+//
+// MyStatusMonitor is a superset of IndexStatus and hence can be used as a
+// drop in replacement for IndexStatus but the reverse causes a compile time
+// error. refer to swig docs for details
+//
+type MyStatusMonitor interface {
+  IndexStatus
+  DeleteIndexStatus()
+  IsIndexStatus()
+}
+
+// Via embedding myStatusMonitor "inherits" all methods of IndexStatus.
+type myStatusMonitor struct {
+  IndexStatus
+}
+
+func (isgs *myStatusMonitor) DeleteIndexStatus() {
+  DeleteDirectorIndexStatus(isgs.IndexStatus)
+}
+
+func (isgs *myStatusMonitor) IsIndexStatus() {}
+
+type overwrittenMethodsOnIndexStatus struct {
+  is IndexStatus
+}
+
+func (om *overwrittenMethodsOnIndexStatus) Status( code int, documentFile string, error string, documentsIndexed int, documentsSeen int ) {
+
+    // C++ code defines class local enums, method signature uses int for code
+    // swiggo generates constants we cannot use because of signature mismatch
+    // note: must match C++ definition
+    const (
+        FileOpen = iota
+        FileSkip
+        FileError
+        FileClose
+        DocumentCount
+    )
+
+    switch(code) {
+    case FileOpen:
+        Buildindex_print_event( fmt.Sprintf("Opened %v", documentFile) )
+
+    case FileClose:
+        Buildindex_print_event( fmt.Sprintf("Closed %v", documentFile) )
+
+    case FileSkip:
+        Buildindex_print_event( fmt.Sprintf("Skipped %v", documentFile) )
+
+    case FileError:
+        Buildindex_print_event( fmt.Sprintf("Error in %v : %v", documentFile, error) )
+
+    default:
+        fallthrough
+    case DocumentCount:
+        if( documentsSeen < 10 || (documentsSeen % 500) == 0 ) {
+            // note: C++ signature wants second count as INT64, but it is int here in GO
+            //Buildindex_print_status( "Documents parsed: ", documentsSeen, " Documents indexed: ", documentsIndexed )
+            // so use this instead.
+            Buildindex_print_event( fmt.Sprintf("Documents parsed: %v Documents indexed: %v", documentsSeen, documentsIndexed) )
+            Buildindex_flush_status()
+        }
+    }
+}
+
+func NewMyStatusMonitor() MyStatusMonitor {
+  om := &overwrittenMethodsOnIndexStatus{}
+  ins := NewDirectorIndexStatus(om)
+  om.is = ins
+
+  isgs := &myStatusMonitor{IndexStatus: ins}
+  return isgs
+}
+
+func DeleteMyStatusMonitor(isgs MyStatusMonitor) {
+    isgs.DeleteIndexStatus()
+}
+
+
+
+
+//
+//  extend wrapped IndriBuildIndex.i
+//
+func Wrapped_Buildindex_recoverRepository(arg1 string) (_swig_ret bool, err error) {
+    defer catch(&err)
+    _swig_ret = Buildindex_recoverRepository(arg1)
+    return
+}
+
+func Wrapped_Buildindex_augmentSpec(spec Indri_parse_FileClassEnvironmentFactory_Specification,
+                        fields StringVector,
+                        metadata StringVector,
+                        metadataForward StringVector,
+                        metadataBackward StringVector ) (_swig_ret bool, err error) {
+    defer catch(&err)
+    _swig_ret = Buildindex_augmentSpec(spec,
+                            fields,
+                            metadata,
+                            metadataForward,
+                            metadataBackward )
+    return
+}
+
+func Wrapped_Buildindex_mymain(argc int, arg0, arg1, arg2, arg3, arg4 string) (err error) {
+    defer catch(&err)
+    Buildindex_mymain(argc, arg0, arg1, arg2, arg3, arg4)
+    return
+}
+
+
+
+
+//
+//  extend MetadataPair.i
+//
+
+type MetadataPair interface {
+    Wrapped_MetadataPair
+
+    WSetKey(arg2 string) (err error)
+	WGetKey() (_swig_ret string, err error)
+	WSetValue(arg2 []byte) (err error)
+	WGetValue() (_swig_ret []byte, err error)
+
+    WReset()
+    WClear() (err error)
+}
+
+func NewMetadataPair() (_swig_ret MetadataPair, err error) {
+    _swig_ret = (MetadataPair)(SwigcptrWrapped_MetadataPair(C._wrap_new_Wrapped_MetadataPair_indri_go_add17ee78870902e()))
+    if _swig_ret == nil {
+        return
+    }
+    _swig_ret.WReset()
+	return
+}
+
+func DeleteMetadataPair(arg1 MetadataPair) {
+
+    // don't leak resource
+    arg1.WClear()
+
+    DeleteWrapped_MetadataPair(arg1)
+    return
+}
+
+func (m SwigcptrWrapped_MetadataPair) WReset() {
+    var zvs string
+    var zvv uintptr = 0
+
+    // initialize key/value to zero values
+    m.SetKey(zvs)
+    m.SetValue(zvv)
+    m.SetValueLength(0)
+
+    return
+}
+
+func (m SwigcptrWrapped_MetadataPair) WClear() (err error) {
+    defer catch(&err)
+
+    // overrwrite reference to GO resource
+    var zvs string
+    m.SetKey(zvs)
+
+    // don't leak C++ resource
+    p := m.GetValue()
+    l := m.GetValueLength()
+    if l > 0 && p > 0 {
+        Swig_free(p)
+    }
+    m.WReset()
+
+    return
+}
+
+func (m SwigcptrWrapped_MetadataPair) WSetKey(arg2 string) (err error) {
+    defer catch(&err)
+    m.SetKey(arg2)
+    return
+}
+
+func (m SwigcptrWrapped_MetadataPair) WGetKey() (_swig_ret string, err error) {
+    defer catch(&err)
+    _swig_ret = m.GetKey()
+    return
+}
+
+func (m SwigcptrWrapped_MetadataPair) WSetValue(arg2 []byte)  (err error) {
+    defer catch(&err)
+
+    // don't leak C++ resource that may have already been set
+    p := m.GetValue()
+    l := m.GetValueLength()
+    if l > 0 && p > 0 {
+        Swig_free(p)
+    }
+
+    p = Swig_malloc(len(arg2))
+    s := (*[1<<30]byte)(unsafe.Pointer(p))[:len(arg2)]
+
+    i := copy(s, arg2)
+    if i != len(arg2) {
+        err = fmt.Errorf("Wrapped_MetadataPair.WSetValue: expected to copy %v but copied %v", len(arg2), i)
+        return
+    }
+
+    m.SetValue(uintptr(unsafe.Pointer(p)))
+    m.SetValueLength(len(arg2))
+
+    //fmt.Printf("WSetValue: len %v cap %v arg2 %v i %v\n", len(arg2), cap(arg2), arg2, i)
+    return
+}
+
+func (m SwigcptrWrapped_MetadataPair) WGetValue() (_swig_ret []byte, err error) {
+    defer catch(&err)
+
+    p := m.GetValue()
+    len := m.GetValueLength()
+    s := (*[1<<30]byte)(unsafe.Pointer(p))[:len]
+    _swig_ret = make([]byte, len, len)
+
+    i := copy(_swig_ret, s)
+    if i != len {
+        err = fmt.Errorf("Wrapped_MetadataPair.WGetValue: expected to copy %v but copied %v", len, i)
+    }
+
 	return
 }
 
 
 
-type SwigcptrStd_vector_Sl_indri_parse_MetadataPair_Sg_ uintptr
-type Std_vector_Sl_indri_parse_MetadataPair_Sg_ interface {
-	Swigcptr() uintptr;
+
+//
+//  extend MetadataPairVector.i
+//
+
+type Wrapped_MetadataPairVector interface {
+    MetadataPairVector
+
+    WReserve(arg2 int64) (err error)
+	WClear() (err error)
+	WAdd(arg2 MetadataPair) (err error)
+	WGet(arg2 int) (_swig_ret MetadataPair, err error)
+	WSet(arg2 int, arg3 MetadataPair) (err error)
 }
-func (p SwigcptrStd_vector_Sl_indri_parse_MetadataPair_Sg_) Swigcptr() uintptr {
-	return uintptr(p)
+
+func NewWrapped_MetadataPairVector(a ...interface{}) Wrapped_MetadataPairVector {
+	argc := len(a)
+	if argc == 0 {
+		return (Wrapped_MetadataPairVector)(SwigcptrMetadataPairVector(C._wrap_new_MetadataPairVector__SWIG_0_indri_go_add17ee78870902e()))
+	}
+	if argc == 1 {
+        _swig_i_0 := a[0].(int)
+    	return (Wrapped_MetadataPairVector)(SwigcptrMetadataPairVector(C._wrap_new_MetadataPairVector__SWIG_1_indri_go_add17ee78870902e(C.swig_type_128(_swig_i_0))))
+	}
+	panic("No match for overloaded function call")
 }
+
+func (arg1 SwigcptrMetadataPairVector) WReserve(arg2 int64) (err error) {
+    defer catch(&err)
+    arg1.Reserve(arg2)
+    return
+}
+
+func (arg1 SwigcptrMetadataPairVector) WClear() (err error) {
+    defer catch(&err)
+    arg1.Clear()
+    return
+}
+
+func (arg1 SwigcptrMetadataPairVector) WAdd(arg2 MetadataPair) (err error) {
+    defer catch(&err)
+    arg1.Add(arg2)
+    return
+}
+
+func (arg1 SwigcptrMetadataPairVector) WGet(arg2 int) (_swig_ret MetadataPair, err error) {
+    defer catch(&err)
+
+    //
+    // we want to return the extended wrapped pair interface instead
+    // (named MetadataPair). The C++ MetadataPair class is first renamed to
+    // Wrapped_MetadataPair so we can subclass it in GO using the director
+    // feature. When we wrap the (GO) MetadataPairVector specialization, it
+    // references the renamed C++ class type and not the GO subclass. So the
+    // generated code returns the renamed interface type Wrapped_MetadataPair
+    // instead of the GO MetadataPairVector vector interface type.
+    //_swig_ret = arg1.Get(arg2)
+    //return
+
+	_swig_i_0 := arg1
+	_swig_i_1 := arg2
+	_swig_ret = (MetadataPair)(SwigcptrWrapped_MetadataPair(C._wrap_MetadataPairVector_get_indri_go_add17ee78870902e(C.uintptr_t(_swig_i_0), C.swig_intgo(_swig_i_1))))
+	return
+}
+
+func (arg1 SwigcptrMetadataPairVector) WSet(arg2 int, arg3 MetadataPair) (err error) {
+    defer catch(&err)
+    arg1.Set(arg2, arg3)
+    return
+}
+
+func DeleteWrapped_MetadataPairVector(arg1 Wrapped_MetadataPairVector) {
+    DeleteMetadataPairVector(arg1)
+}
+
+
 
 type SwigcptrIndri_parse_FileClassEnvironmentFactory_Specification uintptr
 type Indri_parse_FileClassEnvironmentFactory_Specification interface {
@@ -2675,19 +3781,19 @@ func (p SwigcptrStd_vector_Sl_indri_api_ScoredExtentResult_Sg_) Swigcptr() uintp
 	return uintptr(p)
 }
 
-type SwigcptrStd_vector_Sl_lemur_api_DOCID_T_Sg_ uintptr
-type Std_vector_Sl_lemur_api_DOCID_T_Sg_ interface {
-	Swigcptr() uintptr;
-}
-func (p SwigcptrStd_vector_Sl_lemur_api_DOCID_T_Sg_) Swigcptr() uintptr {
-	return uintptr(p)
-}
-
 type SwigcptrStd_map_Sl_indri_parse_ConflationPattern_Sm__Sc_std_string_Sg_ uintptr
 type Std_map_Sl_indri_parse_ConflationPattern_Sm__Sc_std_string_Sg_ interface {
 	Swigcptr() uintptr;
 }
 func (p SwigcptrStd_map_Sl_indri_parse_ConflationPattern_Sm__Sc_std_string_Sg_) Swigcptr() uintptr {
+	return uintptr(p)
+}
+
+type SwigcptrStd_vector_Sl_lemur_api_DOCID_T_Sg_ uintptr
+type Std_vector_Sl_lemur_api_DOCID_T_Sg_ interface {
+	Swigcptr() uintptr;
+}
+func (p SwigcptrStd_vector_Sl_lemur_api_DOCID_T_Sg_) Swigcptr() uintptr {
 	return uintptr(p)
 }
 
@@ -2706,4 +3812,48 @@ type Std_vector_Sl_indri_api_DocumentVector_Sm__Sg_ interface {
 func (p SwigcptrStd_vector_Sl_indri_api_DocumentVector_Sm__Sg_) Swigcptr() uintptr {
 	return uintptr(p)
 }
+
+
+
+var swigDirectorTrack struct {
+	sync.Mutex
+	m map[int]interface{}
+	c int
+}
+
+func swigDirectorAdd(v interface{}) int {
+	swigDirectorTrack.Lock()
+	defer swigDirectorTrack.Unlock()
+	if swigDirectorTrack.m == nil {
+		swigDirectorTrack.m = make(map[int]interface{})
+	}
+	swigDirectorTrack.c++
+	ret := swigDirectorTrack.c
+	swigDirectorTrack.m[ret] = v
+	return ret
+}
+
+func swigDirectorLookup(c int) interface{} {
+	swigDirectorTrack.Lock()
+	defer swigDirectorTrack.Unlock()
+	ret := swigDirectorTrack.m[c]
+	if ret == nil {
+		panic("C++ director pointer not found (possible	use-after-free)")
+	}
+	return ret
+}
+
+func swigDirectorDelete(c int) {
+	swigDirectorTrack.Lock()
+	defer swigDirectorTrack.Unlock()
+	if swigDirectorTrack.m[c] == nil {
+		if c > swigDirectorTrack.c {
+			panic("C++ director pointer invalid (possible memory corruption")
+		} else {
+			panic("C++ director pointer not found (possible use-after-free)")
+		}
+	}
+	delete(swigDirectorTrack.m, c)
+}
+
 

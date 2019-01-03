@@ -156,9 +156,13 @@
 #endif
 
 #ifdef SWIGGO
+
 namespace indri{
 
     namespace api{
+
+        setEx(Parameters::load);
+
         class Parameters {
         public:
           /// Create
@@ -248,6 +252,7 @@ namespace indri{
         };
     }
 }
+
 #endif
 
 #ifdef SWIGCSHARP

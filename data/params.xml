@@ -1,0 +1,131 @@
+  <parameters>
+      <index>/tmp/testrepo</index>
+      <corpus>
+          <path>/tmp/testcorpus</path>
+          <class>html</class>
+          <metadata>/tmp/testmetadata</metadata>
+      </corpus>
+      <metadata>
+
+<!-- read-only life-cycle [system] metadata fields -->
+
+          <forward>odmver</forward>
+          <forward>schver</forward>
+          <forward>kind</forward>
+          <forward>basetime</forward>
+          <forward>maxareas</forward>
+          <forward>maxcats</forward>
+          <forward>offset</forward>
+          <forward>app</forward>
+
+<!-- read-write life-cycle [document] metadata fields -->
+
+          <forward>docno</forward>
+          <forward>docver</forward>
+
+<!-- start of [document] kind common metadata fields -->
+
+          <backward>odmver</backward>
+          <backward>schver</backward>
+          <backward>kind</backward>
+          <backward>basetime</backward>
+          <backward>maxareas</backward>
+          <backward>maxcats</backward>
+          <backward>offset</backward>
+          <backward>app</backward>
+          <backward>docno</backward>
+          <backward>docver</backward>
+          <field>
+              <name>odmver</name>
+          </field>
+          <field>
+              <name>schver</name>
+          </field>
+          <field>
+              <name>kind</name>
+          </field>
+          <field>
+              <name>basetime</name>
+          </field>
+          <field>
+              <name>maxareas</name>
+          </field>
+          <field>
+              <name>maxcats</name>
+          </field>
+          <field>
+              <name>offset</name>
+          </field>
+          <field>
+              <name>app</name>
+          </field>
+          <field>
+              <name>docno</name>
+          </field>
+          <field>
+              <name>docver</name>
+          </field>
+      </metadata>
+
+<!-- start of [document] kind specific metadata fields -->
+
+      <field>
+          <name>blog</name>
+      </field>
+      <field>
+          <name>about</name>
+      </field>
+      <field>
+          <name>address</name>
+      </field>
+      <field>
+          <name>affiliation</name>
+      </field>
+      <field>
+          <name>author</name>
+      </field>
+      <field>
+          <name>brand</name>
+      </field>
+      <field>
+          <name>citation</name>
+      </field>
+      <field>
+          <name>description</name>
+      </field>
+      <field>
+          <name>email</name>
+      </field>
+      <field>
+          <name>headline</name>
+      </field>
+      <field>
+          <name>keywords</name>
+      </field>
+      <field>
+          <name>language</name>
+      </field>
+      <field>
+          <name>name</name>
+      </field>
+      <field>
+          <name>telephone</name>
+      </field>
+      <field>
+          <name>version</name>
+      </field>
+
+<!-- optional index parameters -->
+
+      <memory>100m</memory>
+      <stemmer>
+          <name>krovetz</name>
+      </stemmer>
+      <normalize>true</normalize>
+      <stopper>
+          <word>a</word>
+          <word>an</word>
+          <word>the</word>
+          <word>as</word>
+      </stopper>
+  </parameters>

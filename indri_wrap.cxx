@@ -11,6 +11,7 @@
 // source: indri.i
 
 #define SWIGMODULE indri_go
+#define SWIG_DIRECTORS
 
 #ifdef __cplusplus
 /* SwigValueWrapper is described in swig.swg */
@@ -315,10 +316,1193 @@ static void* Swig_malloc(int c) {
 #define get_INT64 get
 #define get_double get
 
-  
+
 
 #include <vector>
 #include <stdexcept>
+
+
+#include "indri/indri-platform.h"
+const std::string indriVersion(INDRI_DISTRIBUTION);
+
+
+
+/*==========================================================================
+ * Copyright (c) 2004 University of Massachusetts.  All Rights Reserved.
+ *
+ * Use of the Lemur Toolkit for Language Modeling and Information Retrieval
+ * is subject to the terms of the software license set forth in the LICENSE
+ * file included with this software, and also available at
+ * http://www.lemurproject.org/license.html
+ *
+ *==========================================================================
+*/
+
+//
+// buildindex
+//
+// 10 February 2004 -- tds
+//
+// Indri index build driver application
+//
+/*! \page IndriParameters Indri Parameter Files
+
+<P>The indri applications, IndriBuildIndex, IndriDaemon, and
+IndriRunQuery accept parameters from either the command line or from a
+file. The parameter file uses an XML format. The command line uses
+dotted path notation. The top level element in the parameters file is
+named <em>parameters</em>.
+
+<H3> Repository construction parameters</h3>
+<dl>
+<dt>memory</dt>
+<dd> an integer value specifying the number of bytes to use for the
+indexing process. The value can include a scaling factor by adding a
+suffix. Valid values are (case insensitive) K = 1000, M = 1000000, G =
+1000000000. So 100M would be equivalent to 100000000. The value should
+contain only decimal digits and the optional suffix. Specified as
+&lt;memory&gt;100M&lt;/memory&gt; in the parameter file and as
+<tt>-memory=100M</tt> on the command line. </dd>
+<dt>corpus</dt>
+<dd>a complex element containing parameters related to a corpus. This
+element can be specified multiple times. The parameters are
+<dl>
+<dt>path</dt>
+<dd>The pathname of the file or directory containing documents to
+index. Specified as
+&lt;corpus&gt;&lt;path&gt;/path/to/file_or_directory&lt;/path&gt;&lt;/corpus&gt;
+in the parameter file and as
+<tt>-corpus.path=/path/to/file_or_directory</tt> on the command
+line.</dd>
+<dt>class</dt>
+<dd>The FileClassEnviroment of the file or directory containing
+documents to index. Specified as
+&lt;corpus&gt;&lt;class&gt;trecweb&lt;/class&gt;&lt;/corpus&gt; in the
+parameter file and as <tt>-corpus.class=trecweb</tt> on the command
+line. The known classes are:
+<ul>
+<li>html -- web page data.
+<li>xml -- xml marked up data.
+<li>trecweb -- TREC web format, eg terabyte track.
+<li>trectext -- TREC format, eg TREC-3 onward.
+<li>trecalt -- TREC format, eg TREC-3 onward, with only the TEXT field included.
+<li>warc -- WARC (Web ARChive) format, such as can be output by the heritrix webcrawler.
+<li>warcchar -- WARC (Web ARChive) format, such as can be output by the heritrix webcrawler. Tokenizes individual characters, enabling indexing of unsgemented text.
+<li>doc -- Microsoft Word format (windows platform only).
+<li>ppt -- Microsoft Powerpoint format (windows platform only).
+<li>pdf --  Adobe PDF format.
+<li>txt --  Plain text format.
+</ul>
+</dd>
+<dt>annotations</dt>
+<dd>The pathname of the file containing offset annotations for the documents
+specified in <tt>path</tt>. Specified as
+&lt;corpus&gt;&lt;annotations&gt;/path/to/file&lt;/annotations&gt;&lt;/corpus&gt;
+in the parameter file and as
+<tt>-corpus.annotations=/path/to/file</tt> on the command
+line.</dd>
+<dt>metadata</dt>
+<dd>The pathname of the file or directory containing offset metadata for the
+documents specified in <tt>path</tt>. Specified as
+&lt;corpus&gt;&lt;metadata&gt;/path/to/file&lt;/metadata&gt;&lt;/corpus&gt;
+in the parameter file and as
+<tt>-corpus.metadata=/path/to/file</tt> on the command
+line.</dd>
+
+Combining the first two of these elements, the parameter file would contain:
+<br>
+&lt;corpus&gt;<br>
+&nbsp;&nbsp;&lt;path&gt;/path/to/file_or_directory&lt;/path&gt;<br>
+&nbsp;&nbsp;&lt;class&gt;trecweb&lt;/class&gt;<br>
+&lt;/corpus&gt;
+</dd>
+</dl>
+
+<dt>metadata</dt>
+<dd>a complex element containing one or more entries
+specifying the metadata fields to index, eg title, headline.
+There are three options
+<ol>
+
+<li> <tt>field</tt> -- Make the named field available for retrieval as
+ metadata.  Specified as
+ &lt;metadata&gt;&lt;field&gt;fieldname&lt;/field&gt;&lt;/metadata&gt;
+ in the parameter file and as <tt>metadata.field=fieldname</tt> on the
+ command line.
+
+<li> <tt>forward</tt> -- Make the named field available for retrieval as
+ metadata and build a lookup table to make retrieving the value more
+ efficient.  Specified as
+ &lt;metadata&gt;&lt;forward&gt;fieldname&lt;/forward&gt;&lt;/metadata&gt;
+ in the parameter file and as <tt>metadata.forward=fieldname</tt> on the
+ command line. The external document id field "docno" is automatically
+ added as a forward metadata field.
+
+<li> <tt>backward</tt> -- Make the named field available for retrieval
+ as metadata and build a lookup table for inverse lookup of documents
+ based on the value of the field.  Specified as
+ &lt;metadata&gt;&lt;backward&gt;fieldname&lt;/backward&gt;&lt;/metadata&gt;
+ in the parameter file and as <tt>metadata.backward=fieldname</tt> on
+ the command line. The external document id field "docno" is automatically
+ added as a backward metadata field.
+
+</ol>
+</dd>
+
+<dt>field</dt>
+
+<dd>a complex element specifying the fields to index as data, eg
+TITLE. This parameter can appear multiple times in a parameter file.
+<b>If provided on the command line, only the first field specified will
+be indexed</b>. The subelements are:
+
+<dl>
+<dt>name</dt><dd>the field name, specified as
+&lt;field&gt;&lt;name&gt;fieldname&lt;/name&gt;&lt;/field&gt; in the
+parameter file and as <tt>-field.name=fieldname</tt> on the command
+line.</dd>
+<dt>numeric</dt><dd>the symbol <tt>true</tt> if the field contains
+numeric data, otherwise the symbol <tt>false</tt>, specified as
+&lt;field&gt;&lt;numeric&gt;true&lt;/numeric&gt;&lt;/field&gt; in the
+parameter file and as <tt>-field.numeric=true</tt> on the command
+line. This is an optional parameter, defaulting to false. Note that <tt>0</tt>
+can be used for false and <tt>1</tt> can be used for true. </dd>
+<dt>parserName</dt><dd>the name of the parser to use to convert a numeric
+field to an unsigned integer value. The default is NumericFieldAnnotator. If numeric field data is provided via offset annotations, you should use the value OffsetAnnotationAnnotator. If the field contains a formatted date (see <a href="DateFields.html">Date Fields</a>) you should use the value DateFieldAnnotator.
+</dd>
+</dl>
+</dd>
+<dt>stemmer</dt>
+<dd>a complex element specifying the stemming algorithm to use in the
+subelement name. Valid options are:
+<ul>
+<li> porter -- Porter stemmer
+<li> krovetz -- Krovetz stemmer
+<li> arabic_stop -- Larkey stemmer, remove stopwords
+<li>  arabic_norm2  -- Larkey stemmer, table normalization
+<li>  arabic_norm2_stop -- Larkey stemmer, table normalization with stopping
+<li>  arabic_light10 -- Larkey stemmer, light9 plus ll prefix
+<li>  arabic_light10_stop -- Larkey stemmer, light10 and remove stop words
+</ul>
+
+Specified as
+&lt;stemmer&gt;&lt;name&gt;stemmername&lt;/name&gt;&lt;/stemmer&gt; and
+as <tt>-stemmer.name=stemmername</tt> on the command line. This is an
+optional parameter with the default of no stemming.
+</dd>
+<dt>normalize</dt>
+<dd><tt>true</tt> to perform case normalization when indexing, false to
+index with mixed case. Default <tt>true</tt>
+</dd>
+<dt>stopper</dt>
+<dd>a complex element containing one or more subelements named word,
+specifying the stopword list to use. Specified as
+&lt;stopper&gt;&lt;word&gt;stopword&lt;/word&gt;&lt;/stopper&gt; and
+as <tt>-stopper.word=stopword</tt> on the command line. This is an
+optional parameter with the default of no stopping.</dd>
+<dt>offsetannotationhint</dt>
+<dd>An optional parameter to provide a hint to the indexer to speed
+up indexing of offset annotations when using offset annotation files
+as specified in the &lt;corpus&gt; parameter. Valid values here
+are &quot;unordered&quot; and &quot;ordered&quot;. An &quot;unordered&quot;
+hint (the default) will inform the indexer that the document IDs of the
+annotations are not necessarily in the same order as the documents
+in the corpus. The indexer will adjust its internal memory allocations
+appropriately to pre-allocate enough memory before reading in the annotations
+file. If you are absolutely certain that the annotations in the offset annotation
+file are in the exact same order as the documents, then you can use the &quot;ordered&quot;
+hint. This will tell the indexer to not read in the entire file at once, but rather
+read in the offset annotations file as needed for only the annotations that
+are specified for the currently indexing document ID.</dd>
+</dl>
+
+<H3>QueryEnvironment Parameters</H3>
+<H4>Retrieval Parameters</H4>
+<dl>
+<dt>index</dt>
+<dd> path to an Indri Repository. Specified as
+&lt;index&gt;/path/to/repository&lt;/index&gt; in the parameter file and
+as <tt>-index=/path/to/repository</tt> on the command line. This element
+can be specified multiple times to combine Repositories.
+</dd>
+<dt>server</dt>
+<dd> hostname of a host running an Indri server (IndriDaemon). Specified as
+&lt;server&gt;hostname&lt;/server&gt; in the parameter file and
+as <tt>-server=hostname</tt> on the command line. The hostname can
+include an optional port number to connect to, using the form
+<tt>hostname:portnum</tt>. This element
+can be specified multiple times to combine servers.
+</dd>
+<dt>count</dt>
+<dd>an integer value specifying the maximum number of results to
+return for a given query. Specified as
+&lt;count&gt;number&lt;/count&gt; in the parameter file and
+as <tt>-count=number</tt> on the command line. </dd>
+<dt>query</dt>
+<dd>An indri query language query to run. This element can be specified
+multiple times.
+ The query element may take numerous optional parameters.
+With none of the optional parameters, the query text can be the body of
+the element, eg:<br>
+
+&lt;query&gt;#combine(query terms)&lt;/query&gt;
+<p>
+The optional parameters are:
+<dl>
+<dt>type</dt><dd>one of <tt>indri</tt>, to use the indri query language,
+or <tt>nexi</tt> to use the nexi query language. The default is
+<tt>indri</tt>. This element may appear 0 or 1 times.</dd>
+<dt>number</dt><dd>The query number or identifier. This may be a
+non-numeric symbol. The default is to number the queries in the parameters in
+order, starting with 0. This element may appear 0 or 1 times.</dd>
+<dt>text</dt><dd>The query text, eg, "#combine(query terms)". This element
+may appear 0 or 1 times and must be used if any of the other
+parameters are supplied.</dd>
+<dt>workingSetDocno</dt><dd>The external document id of a document to add to
+the working set for the query. This element may appear 0 or more times.
+When specified, query evaluation is restricted to the document ids
+specified.</dd>
+<dt>feedbackDocno</dt><dd>The external document id of a document to add to
+the relevance feeedback set for the query. This element may appear 0 or more
+times. When specified, query expansion is performed using only the document
+ids specified. It is still necessary to specify a non-zero value for the
+fbDocs parameter when specifying feedbackDocno elements.</dd>
+</dl>
+
+</dd>
+<dt>rule</dt>
+<dd>specifies the smoothing rule (TermScoreFunction) to apply. Format of
+the rule is:<br>
+
+<tt>   ( key ":" value ) [ "," key ":" value ]* </tt>
+<p>
+Here's an example rule in command line format:<br>
+
+   <tt>-rule=method:linear,collectionLambda:0.2,field:title</tt>
+<p> and in parameter file format:<br>
+<tt>
+&lt;rule&gt;method:linear,collectionLambda:0.2,field:title&lt;/rule&gt;
+</tt>
+
+<p>This corresponds to Jelinek-Mercer smoothing with background lambda
+equal to 0.2, only for items in a title field.
+
+<p>If nothing is listed for a key, all values are assumed.
+So, a rule that does not specify a field matches all fields.  This makes
+<tt>-rule=method:linear,collectionLambda:0.2</tt> a valid rule.
+
+<p>Valid keys:
+<dl>
+<dt>   method</dt><dd> smoothing method (text)</dd>
+<dt>   field</dt><dd> field to apply this rule to</dd>
+<dt>   operator
+<dd> type of item in query to apply to { term, window }</dd>
+</dl>
+
+<p>Valid methods:
+<dl>
+<dt>   dirichlet</dt><dd> (also 'd', 'dir') (default mu=2500)</dd>
+<dt>   jelinek-mercer</dt><dd> (also 'jm', 'linear') (default
+collectionLambda=0.4, documentLambda=0.0),  collectionLambda is also
+known as just "lambda", either will work </dt>
+<dt>   twostage</dt><dd> (also 'two-stage', 'two') (default mu=2500,
+lambda=0.4)</dd>
+</dl>
+If the rule doesn't parse correctly, the default is Dirichlet, mu=2500.
+</dd>
+<dt>stopper</dt>
+<dd>a complex element containing one or more subelements named word,
+specifying the stopword list to use. Specified as
+&lt;stopper&gt;&lt;word&gt;stopword&lt;/word&gt;&lt;/stopper&gt; and
+as <tt>-stopper.word=stopword</tt> on the command line. This is an
+optional parameter with the default of no stopping.</dd>
+<dt>maxWildcardTerms</dt>
+<dd>
+<i>(optional)</i> An integer specifying the maximum number of wildcard terms that can
+be generated for a synonym list for this query or set of queries. If this limit
+is reached for a wildcard term, an exception will be thrown. If this parameter
+is not specified, a default of 100 will be used.
+</dd>
+</dl>
+<H4>Baseline (non-LM) retrieval</H4>
+<dl>
+<dt>baseline</dt>
+<dd>Specifies the baseline (non-language modeling) retrieval method to
+apply. This enables running baseline experiments on collections too large
+for the Lemur RetMethod API. When running a baseline experiment, the queries
+may not contain any indri query language operators, they must contain only
+terms.
+
+<p>Format of the parameter value:<br>
+
+<tt>   (tfidf|okapi) [ "," key ":" value ]* </tt>
+<p>
+Here's an example rule in command line format:<br>
+
+   <tt>-baseline=tfidf,k1:1.0,b:0.3</tt>
+<p> and in parameter file format:<br>
+<tt>
+&lt;baseline&gt;tfidf,k1:1.0,b:0.3&lt;/baseline&gt;
+</tt>
+
+<p>Methods:
+<dl>
+
+<dt>   tfidf</dt>
+
+<dd> Performs retrieval via tf.idf scoring as implemented in
+lemur::retrieval::TFIDFRetMethod using BM25TF term weighting.
+Pseudo-relevance feedback may be performed via the parameters below.
+<p>
+<p>Parameters (optional):
+<dl>
+<dt>   k1</dt><dd>k1 parameter for term  weight (default 1.2)</dd>
+<dt>   b</dt><dd>b parameter for term weight (default 0.75)</dd>
+</dd>
+</dl>
+</dd>
+
+<dt>   okapi</dt>
+
+<dd> Performs retrieval via Okapi scoring as implemented in
+lemur::retrieval::OkapiRetMethod. Pseudo-relevance feedback may
+<bold>not</bold> be performed with this baseline method.
+<p>
+<p>Parameters (optional):
+<dl>
+<dt>   k1</dt><dd>k1 parameter for term  weight (default 1.2)</dd>
+<dt>   b</dt><dd>b parameter for term weight (default 0.75)</dd>
+<dt>   k3</dt><dd>k3 parameter for query term  weight (default 7) </dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<H4>Formatting Parameters</H4>
+<dl>
+<dt>queryOffset</dt>
+<dd>an integer value specifying one less than the starting query number,
+eg 150 for TREC formatted output. Specified as
+&lt;queryOffset&gt;number&lt;/queryOffset&gt; in the parameter file and
+as <tt>-queryOffset=number</tt> on the command line.</dd>
+<dt>runID</dt>
+<dd>a string specifying the id for a query run, used in TREC scorable
+output. Specified as
+&lt;runID&gt;someID&lt;/runID&gt; in the parameter file and
+as <tt>-runID=someID</tt> on the command line.</dd>
+<dt>trecFormat</dt>
+<dd>the symbol <tt>true</tt> to produce TREC scorable output, otherwise
+the symbol <tt>false</tt>. Specified as
+&lt;trecFormat&gt;true&lt;/trecFormat&gt; in the parameter file and
+as <tt>-trecFormat=true</tt> on the command line.  Note that <tt>0</tt>
+can be used for false, and <tt>1</tt> can be used for true.</dd>
+</dl>
+<H4>Pseudo-Relevance Feedback Parameters</H4>
+<dl>
+<dt>fbDocs</dt>
+<dd>an integer specifying the number of documents to use for
+feedback. Specified as
+&lt;fbDocs&gt;number&lt;/fbDocs&gt; in the parameter file and
+as <tt>-fbDocs=number</tt> on the command line.</dd>
+<dt>fbTerms</dt>
+<dd>an integer specifying the number of terms to use for
+feedback. Specified as
+&lt;fbTerms&gt;number&lt;/fbTerms&gt; in the parameter file and
+as <tt>-fbTerms=number</tt> on the command line.</dd>
+<dt>fbMu</dt>
+<dd>a floating point value specifying the value of mu to use for
+feedback. Specified as
+&lt;fbMu&gt;number&lt;/fbMu&gt; in the parameter file and
+as <tt>-fbMu=number</tt> on the command line.</dd>
+<dt>fbOrigWeight</dt>
+<dd>a floating point value in the range [0.0..1.0] specifying the weight
+for the original query in the expanded query. Specified as
+&lt;fbOrigWeight&gt;number&lt;/fbOrigWeight&gt; in the parameter file and
+as <tt>-fbOrigWeight=number</tt> on the command line.</dd>
+</dl>
+
+<H3>IndriDaemon Parameters</H3>
+<dl>
+<dt>index</dt>
+<dd> path to the Indri Repository to act as server for. Specified as
+&lt;index&gt;/path/to/repository&lt;/index&gt; in the parameter file and
+as <tt>-index=/path/to/repository</tt> on the command line.
+</dd>
+<dt>port</dt>
+<dd> an integer value specifying the port number to use.Specified as
+&lt;port&gt;number&lt;/port&gt; in the parameter file and as
+<tt>-port=number</tt> on the command line. </dd>
+</dl>
+
+*/
+/*! \page IndriIndexer Indri Repository Builder
+<P>
+ This application builds an Indri Repository for a collection of documents.
+ Parameter formats for all Indri applications are also described in
+<a href="IndriParameters.html">IndriParameters.html</a>
+<H3> Repository construction parameters</h3>
+<dl>
+<dt>memory</dt>
+<dd> an integer value specifying the number of bytes to use for the
+indexing process. The value can include a scaling factor by adding a
+suffix. Valid values are (case insensitive) K = 1000, M = 1000000, G =
+1000000000. So 100M would be equivalent to 100000000. The value should
+contain only decimal digits and the optional suffix. Specified as
+&lt;memory&gt;100M&lt;/memory&gt; in the parameter file and as
+<tt>-memory=100M</tt> on the command line. </dd>
+<dt>corpus</dt>
+<dd>a complex element containing parameters related to a corpus. This
+element can be specified multiple times. The parameters are
+<dl>
+<dt>path</dt>
+<dd>The pathname of the file or directory containing documents to
+index. Specified as
+&lt;corpus&gt;&lt;path&gt;/path/to/file_or_directory&lt;/path&gt;&lt;/corpus&gt;
+in the parameter file and as
+<tt>-corpus.path=/path/to/file_or_directory</tt> on the command
+line.</dd>
+<dt>class</dt>
+<dd>The FileClassEnviroment of the file or directory containing
+documents to index. Specified as
+&lt;corpus&gt;&lt;class&gt;trecweb&lt;/class&gt;&lt;/corpus&gt; in the
+parameter file and as <tt>-corpus.class=trecweb</tt> on the command
+line. The known classes are:
+<ul>
+<li>html -- web page data.
+<li>xml -- xml marked up data.
+<li>trecweb -- TREC web format, eg terabyte track.
+<li>trectext -- TREC format, eg TREC-3 onward.
+<li>trecalt -- TREC format, eg TREC-3 onward, with only the TEXT field included.
+<li>warc -- WARC (Web ARChive) format, such as can be output by the heritrix webcrawler.
+<li>warcchar -- WARC (Web ARChive) format, such as can be output by the heritrix webcrawler. Tokenizes individual characters, enabling indexing of unsgemented text.
+<li>doc -- Microsoft Word format (windows platform only).
+<li>ppt -- Microsoft Powerpoint format (windows platform only).
+<li>pdf --  Adobe PDF format.
+<li>txt --  Plain text format.
+</ul>
+</dd>
+<dt>annotations</dt>
+<dd>The pathname of the file containing offset annotations for the documents
+specified in <tt>path</tt>. Specified as
+&lt;corpus&gt;&lt;annotations&gt;/path/to/file&lt;/annotations&gt;&lt;/corpus&gt;
+in the parameter file and as
+<tt>-corpus.annotations=/path/to/file</tt> on the command
+line.</dd>
+<dt>metadata</dt>
+<dd>The pathname of the file or directory containing offset metadata for the
+documents specified in <tt>path</tt>. Specified as
+&lt;corpus&gt;&lt;metadata&gt;/path/to/file&lt;/metadata&gt;&lt;/corpus&gt;
+in the parameter file and as
+<tt>-corpus.metadata=/path/to/file</tt> on the command
+line.</dd>
+
+Combining the first two of these elements, the parameter file would contain:
+<br>
+&lt;corpus&gt;<br>
+&nbsp;&nbsp;&lt;path&gt;/path/to/file_or_directory&lt;/path&gt;<br>
+&nbsp;&nbsp;&lt;class&gt;trecweb&lt;/class&gt;<br>
+&lt;/corpus&gt;
+</dd>
+</dl>
+
+<dt>metadata</dt>
+<dd>a complex element containing one or more entries
+specifying the metadata fields to index, eg title, headline.
+There are three options
+<ol>
+
+<li> <tt>field</tt> -- Make the named field available for retrieval as
+ metadata.  Specified as
+ &lt;metadata&gt;&lt;field&gt;fieldname&lt;/field&gt;&lt;/metadata&gt;
+ in the parameter file and as <tt>metadata.field=fieldname</tt> on the
+ command line.
+
+<li> <tt>forward</tt> -- Make the named field available for retrieval as
+ metadata and build a lookup table to make retrieving the value more
+ efficient.  Specified as
+ &lt;metadata&gt;&lt;forward&gt;fieldname&lt;/forward&gt;&lt;/metadata&gt;
+ in the parameter file and as <tt>metadata.forward=fieldname</tt> on the
+ command line.
+
+<li> <tt>backward</tt> -- Make the named field available for retrieval
+ as metadata and build a lookup table for inverse lookup of documents
+ based on the value of the field.  Specified as
+ &lt;metadata&gt;&lt;backward&gt;fieldname&lt;/backward&gt;&lt;/metadata&gt;
+ in the parameter file and as <tt>metadata.backward=fieldname</tt> on
+ the command line.
+
+</ol>
+</dd>
+
+<dt>field</dt>
+
+<dd>a complex element specifying the fields to index as data, eg
+TITLE. This parameter can appear multiple times in a parameter file.
+<b>If provided on the command line, only the first field specified will
+be indexed</b>. The subelements are:
+
+<dl>
+<dt>name</dt><dd>the field name, specified as
+&lt;field&gt;&lt;name&gt;fieldname&lt;/name&gt;&lt;/field&gt; in the
+parameter file and as <tt>-field.name=fieldname</tt> on the command
+line.</dd>
+<dt>numeric</dt><dd>the symbol <tt>true</tt> if the field contains
+numeric data, otherwise the symbol <tt>false</tt>, specified as
+&lt;field&gt;&lt;numeric&gt;true&lt;/numeric&gt;&lt;/field&gt; in the
+parameter file and as <tt>-field.numeric=true</tt> on the command
+line. This is an optional parameter, defaulting to false. Note that <tt>0</tt>
+can be used for false and <tt>1</tt> can be used for true. </dd>
+<dt>parserName</dt><dd>the name of the parser to use to convert a numeric
+field to an unsigned integer value. The default is NumericFieldAnnotator. If numeric field data is provided via offset annotations, you should use the value OffsetAnnotationAnnotator. If the field contains a formatted date (see <a href="DateFields.html">Date Fields</a>) you should use the value DateFieldAnnotator.
+</dd>
+</dl>
+</dd>
+<dt>stemmer</dt>
+<dd>a complex element specifying the stemming algorithm to use in the
+subelement name. Valid options are:
+<ul>
+<li> porter -- Porter stemmer
+<li> krovetz -- Krovetz stemmer
+<li> arabic_stop -- Larkey stemmer, remove stopwords
+<li>  arabic_norm2  -- Larkey stemmer, table normalization
+<li>  arabic_norm2_stop -- Larkey stemmer, table normalization with stopping
+<li>  arabic_light10 -- Larkey stemmer, light9 plus ll prefix
+<li>  arabic_light10_stop -- Larkey stemmer, light10 and remove stop words
+</ul>
+
+Specified as
+&lt;stemmer&gt;&lt;name&gt;stemmername&lt;/name&gt;&lt;/stemmer&gt; and
+as <tt>-stemmer.name=stemmername</tt> on the command line. This is an
+optional parameter with the default of no stemming.
+</dd>
+<dt>normalize</dt>
+<dd><tt>true</tt> to perform case normalization when indexing, false to
+index with mixed case. Default <tt>true</tt>
+</dd>
+<dt>stopper</dt>
+<dd>a complex element containing one or more subelements named word,
+specifying the stopword list to use. Specified as
+&lt;stopper&gt;&lt;word&gt;stopword&lt;/word&gt;&lt;/stopper&gt; and
+as <tt>-stopper.word=stopword</tt> on the command line. This is an
+optional parameter with the default of no stopping.</dd>
+<dt>offsetannotationhint</dt>
+<dd>An optional parameter to provide a hint to the indexer to speed
+up indexing of offset annotations when using offset annotation files
+as specified in the &lt;corpus&gt; parameter. Valid values here
+are &quot;unordered&quot; and &quot;ordered&quot;. An &quot;unordered&quot;
+hint (the default) will inform the indexer that the document IDs of the
+annotations are not necessarily in the same order as the documents
+in the corpus. The indexer will adjust its internal memory allocations
+appropriately to pre-allocate enough memory before reading in the annotations
+file. If you are absolutely certain that the annotations in the offset annotation
+file are in the exact same order as the documents, then you can use the &quot;ordered&quot;
+hint. This will tell the indexer to not read in the entire file at once, but rather
+read in the offset annotations file as needed for only the annotations that
+are specified for the currently indexing document ID.</dd>
+</dl>
+
+*/
+
+#include <algorithm>
+#include <cstring>
+#include <string>
+#include <cctype>
+
+#include "indri/Parameters.hpp"
+#include "indri/IndexEnvironment.hpp"
+#include <time.h>
+#include "indri/Path.hpp"
+#include "indri/ConflationPattern.hpp"
+#include "lemur/Exception.hpp"
+#include "indri/FileTreeIterator.hpp"
+#include <vector>
+#include <map>
+#include "indri/IndriTimer.hpp"
+
+#include "indri/QueryEnvironment.hpp"
+#include "indri/Thread.hpp"
+#include "indri/SequentialWriteBuffer.hpp"
+
+#include <math.h>
+
+#include "indri/Repository.hpp"
+#include "indri/CompressedCollection.hpp"
+#include "indri/ScopedLock.hpp"
+#include "indri/DirectoryIterator.hpp"
+#include "indri/Path.hpp"
+
+// Recover a repository that crashed during build to be consistent with
+// its latest checkpoint. If it can't be recovered, create an empty one.
+static bool _recoverRepository(const std::string &path) {
+  indri::collection::Repository repo;
+  try {
+    repo.open(path);
+  } catch (lemur::api::Exception &ex) {
+    // failed to open, can't fix it, recreate.
+    return false;
+  }
+
+  // count up the documents that made it to disk
+  indri::collection::Repository::index_state indexes = repo.indexes();
+  INT64 total = 0;
+  for( size_t i = 0; i < indexes->size(); i++ ) {
+    indri::thread::ScopedLock lock( (*indexes)[i]->statisticsLock() );
+    total += (*indexes)[i]->documentCount();
+  }
+  total -= repo.deletedList().deletedCount();
+
+  // identify the docids that are in the collection but not in a disk index
+  indri::collection::CompressedCollection *col = repo.collection();
+  indri::index::DeletedDocumentList del;
+  bool marked = false;
+  int numMarked = 0;
+  for (int i = (int)total + 1; col->exists(i); i++) {
+      del.markDeleted(i);
+      marked = true;
+      numMarked++;
+  }
+  // compact to delete the data associated with the unindexed docids.
+  if (marked) {
+    try {
+      std::cerr << "Reovering Repository: " << path << "\nDeleting "
+                << numMarked << " uncommitted documents." << std::endl;
+      col->compact(del);
+      // check for any partial disk indexes (crash during write)
+      // and remove them
+      std::string indexPath = indri::file::Path::combine( path, "index" );
+      indri::file::DirectoryIterator idirs( indexPath );
+      while (! (idirs == indri::file::DirectoryIterator::end())) {
+        // iterate over the subdirectories, removing any that don't have a
+        // manifest file.
+        std::string current = *idirs;
+        std::string manifest = indri::file::Path::combine(current, "manifest");
+        if (!indri::file::Path::exists(manifest)) {
+          std::cerr << "Removing corrupted index directory: " << current
+                    << std::endl;
+          indri::file::Path::remove(current);
+          }
+        idirs++;
+      }
+    } catch (lemur::api::Exception &e) {
+      // no recovery possible here...
+      LEMUR_ABORT(e);
+    }
+  }
+  repo.close();
+  // successfully opened and closed
+  return true;
+}
+
+static indri::utility::IndriTimer g_timer;
+
+static void buildindex_start_time() {
+  g_timer.start();
+}
+
+static void buildindex_print_status( const char* status, int count ) {
+  g_timer.printElapsedSeconds(std::cout);
+  std::cout << ": " << status << count << "\r";
+}
+
+static void buildindex_print_status( const char* status, int count, const char* status2, INT64 count2 ) {
+  g_timer.printElapsedSeconds(std::cout);
+  std::cout << ": " << status << count << status2 << count2 << "\r";
+}
+
+static void buildindex_flush_status() {
+  std::cout.flush();
+}
+
+static void buildindex_print_event( const char* event ) {
+  g_timer.printElapsedSeconds(std::cout);
+  std::cout << ": " << event << std::endl;
+}
+
+static void buildindex_print_event( std::string event ) {
+  buildindex_print_event( event.c_str() );
+}
+
+class StatusMonitor : public indri::api::IndexStatus {
+  void operator() ( int code, const std::string& documentFile, const std::string& error, int documentsParsed, int documentsSeen ) {
+    std::stringstream event;
+
+    switch(code) {
+      case indri::api::IndexStatus::FileOpen:
+        event << "Opened " << documentFile;
+        buildindex_print_event( event.str() );
+        break;
+
+      case indri::api::IndexStatus::FileClose:
+        buildindex_print_status( "Documents parsed: ", documentsSeen, " Documents indexed: ", documentsParsed );
+        buildindex_print_event( "" );
+        event << "Closed " << documentFile;
+        buildindex_print_event( event.str() );
+        break;
+
+      case indri::api::IndexStatus::FileSkip:
+        event << "Skipped " << documentFile;
+        buildindex_print_event( event.str() );
+        break;
+
+      case indri::api::IndexStatus::FileError:
+        event << "Error in " << documentFile << " : " << error;
+        buildindex_print_event( event.str() );
+        break;
+
+      default:
+      case indri::api::IndexStatus::DocumentCount:
+        if( !(documentsSeen % 500) ) {
+          buildindex_print_status( "Documents parsed: ", documentsSeen, " Documents indexed: ", documentsParsed );
+          buildindex_flush_status();
+        }
+        break;
+    }
+  }
+};
+
+static std::string downcase_string( const std::string& str ) {
+  std::string result;
+  result.resize( str.size() );
+
+  for( size_t i=0; i<str.size(); i++ ) {
+    result[i] = tolower(str[i]);
+  }
+
+  return result;
+}
+
+static void downcase_string_vector (std::vector<std::string>& vec) {
+  for( size_t i=0; i<vec.size(); i++ ) {
+    vec[i] = downcase_string( vec[i] );
+  }
+}
+
+static bool copy_parameters_to_string_vector( std::vector<std::string>& vec, indri::api::Parameters p, const std::string& parameterName, const std::string* subName = 0 ) {
+  if( !p.exists(parameterName) )
+    return false;
+
+  indri::api::Parameters slice = p[parameterName];
+
+  for( size_t i=0; i<slice.size(); i++ ) {
+    if( subName ) {
+      if( slice[i].exists(*subName) ) {
+        vec.push_back( slice[i][*subName] );
+      }
+    } else {
+      vec.push_back( slice[i] );
+    }
+  }
+
+  return true;
+}
+
+/*! Given a Specification and a field name, return a vector containing all
+ * of the field names that conflate to that name as well as the original
+ * name.
+ * @param spec The indri::parse::FileClassEnvironmentFactory::Specification to inspect.
+ * @param name The field name to look for.
+ * @return a vector containing all of the field names that conflate to that name as well as the original name.
+ */
+static std::vector<std::string> findConflations(indri::parse::FileClassEnvironmentFactory::Specification *spec, std::string & name) {
+  std::vector<std::string> retval;
+  // have to walk the map and add an entry for each
+  // conflation to a given name
+  std::map<indri::parse::ConflationPattern*, std::string>::const_iterator iter;
+  for (iter = spec->conflations.begin();
+       iter != spec->conflations.end(); iter++) {
+    if( iter->second == name )
+      retval.push_back(iter->first->tag_name);
+  }
+  // put the original into the list
+  retval.push_back(name);
+  return retval;
+}
+
+/*! Add a string to a vector if not already present.
+ * @return true if the string was added.
+ */
+static bool addNew(std::vector<std::string>& orig,
+                   std::vector<std::string>& vec, string &name,
+                   std::string &specName, const char *msg) {
+  bool retval = false;
+  if( std::find( orig.begin(), orig.end(), name ) == orig.end() ) {
+    std::cerr << "Adding " << name << " to " << specName << msg << std::endl;
+    vec.push_back(name);
+    retval = true;
+  }
+  return retval;
+}
+/*! Add field names to index or metadata for an existing file class
+ * specification.
+ */
+static bool augmentSpec(indri::parse::FileClassEnvironmentFactory::Specification *spec,
+                        std::vector<std::string>& fields,
+                        std::vector<std::string>& metadata,
+                        std::vector<std::string>& metadataForward,
+                        std::vector<std::string>& metadataBackward ) {
+  // add to index and metadata fields in spec if necessary.
+  // return true if a field is changed.
+  bool retval = false;
+  // input field names are potentially conflated names:
+  // eg headline for head, hl, or headline tags.
+  std::vector<std::string> conflations;
+  std::vector<std::string>::iterator i1;
+  std::vector<std::string> origIndex = spec->index;
+  std::vector<std::string> origInclude = spec->include;
+
+  for (i1 = fields.begin(); i1 != fields.end(); i1++) {
+    // find any conflated names
+    conflations = findConflations(spec, *i1);
+    for (size_t j = 0; j < conflations.size(); j++) {
+      // only add the field for indexing if it doesn't already exist
+      if (addNew(origIndex, spec->index, conflations[j],
+                 spec->name, " as an indexed field")) {
+        // added a field, make sure it is indexable
+        // only add include tags if there are some already.
+        // if it is empty, *all* tags are included.
+        if( !spec->include.empty() ) {
+          addNew(origInclude, spec->include, conflations[j], spec->name,
+                 " as an included tag");
+        }
+        retval = true;
+      }
+    }
+  }
+
+  // add fields that should be marked metadata for retrieval
+  for (i1 = metadata.begin(); i1 != metadata.end(); i1++) {
+    // find any conflated names
+    conflations = findConflations(spec, *i1);
+    for (size_t j = 0; j < conflations.size(); j++)
+      retval |= addNew(spec->metadata, spec->metadata, conflations[j], spec->name,
+                       " as a metadata field");
+  }
+  // add fields that should have a metadata forward lookup table.
+  for (i1 = metadataForward.begin(); i1 != metadataForward.end(); i1++) {
+    // find any conflated names
+    conflations = findConflations(spec, *i1);
+    for (size_t j = 0; j < conflations.size(); j++)
+      retval |= addNew(spec->metadata, spec->metadata, conflations[j], spec->name,
+                       " as a forward indexed metadata field");
+  }
+  // add fields that should have a metadata reverse lookup table.
+  for (i1 = metadataBackward.begin(); i1 != metadataBackward.end(); i1++) {
+    // find any conflated names
+    conflations = findConflations(spec, *i1);
+    for (size_t j = 0; j < conflations.size(); j++)
+      retval |= addNew(spec->metadata, spec->metadata, conflations[j], spec->name,
+                       " as a backward indexed metadata field");
+  }
+
+  return retval;
+}
+
+//
+// process_numeric_fields
+//
+
+static void process_numeric_fields( indri::api::Parameters parameters, indri::api::IndexEnvironment& env ) {
+  std::string numName = "numeric";
+  std::string subName = "name";
+  indri::api::Parameters slice = parameters["field"];
+  for( size_t i=0; i<slice.size(); i++ ) {
+    bool isNumeric = slice[i].get(numName, false);
+    if( isNumeric ) {
+      // let user override default NumericFieldAnnotator for parser
+      // enabling numeric fields in offset annotations.
+      std::string parserName = slice[i].get("parserName", "NumericFieldAnnotator");
+      std::string fieldName = slice[i][subName];
+      fieldName = downcase_string( fieldName );
+      env.setNumericField(fieldName, isNumeric, parserName);
+    }
+  }
+}
+
+//
+// process_ordinal_fields
+//
+
+static void process_ordinal_fields( indri::api::Parameters parameters, indri::api::IndexEnvironment& env ) {
+  std::string ordName = "ordinal";
+  std::string subName = "name";
+  indri::api::Parameters slice = parameters["field"];
+
+  for( size_t i=0; i<slice.size(); i++ ) {
+    bool isOrdinal = slice[i].get(ordName, false);
+
+    if( isOrdinal ) {
+      std::string fieldName = slice[i][subName];
+      fieldName = downcase_string( fieldName );
+      env.setOrdinalField(fieldName, isOrdinal);
+    }
+  }
+}
+
+//
+// process_parental_fields
+//
+static void process_parental_fields( indri::api::Parameters parameters, indri::api::IndexEnvironment& env ) { // pto
+  std::string parName = "parental";
+  std::string subName = "name";
+  indri::api::Parameters slice = parameters["field"];
+  for( int i=0; i<slice.size(); i++ ) {
+    bool isParental = slice[i].get(parName, false);
+    if( isParental ) {
+      std::string fieldName = slice[i][subName];
+      fieldName = downcase_string( fieldName );
+      env.setParentalField(fieldName, isParental);
+    }
+  }
+}
+
+void require_parameter( const char* name, indri::api::Parameters& p ) {
+  if( !p.exists( name ) ) {
+    LEMUR_THROW( LEMUR_MISSING_PARAMETER_ERROR, "Must specify a " + name + " parameter." );
+  }
+}
+
+int  buildindex_main(int argc, char * argv[]) {
+  try {
+    indri::api::Parameters& parameters = indri::api::Parameters::instance();
+    parameters.loadCommandLine( argc, argv );
+
+    require_parameter( "corpus", parameters );
+    require_parameter( "index", parameters );
+
+    StatusMonitor monitor;
+    indri::api::IndexEnvironment env;
+    std::string repositoryPath = parameters["index"];
+
+    buildindex_start_time();
+
+    if( parameters.get( "version", 0 ) ) {
+      std::cout << INDRI_DISTRIBUTION << std::endl;
+    }
+
+    env.setMemory( parameters.get("memory", INT64(1024*1024*1024)) );
+
+    env.setNormalization( parameters.get("normalize", true));
+    env.setInjectURL( parameters.get("injectURL", true));
+    env.setStoreDocs( parameters.get("storeDocs", true));
+
+    std::string blackList = parameters.get("blacklist", "");
+    if( blackList.length() ) {
+        int count = env.setBlackList(blackList);
+        std::cout << "Added to blacklist: "<< count << std::endl;
+        std::cout.flush();
+    }
+
+    std::string offsetAnnotationHint=parameters.get("offsetannotationhint", "default");
+    if (offsetAnnotationHint=="ordered") {
+      env.setOffsetAnnotationIndexHint(indri::parse::OAHintOrderedAnnotations);
+    } if (offsetAnnotationHint=="unordered") {
+      env.setOffsetAnnotationIndexHint(indri::parse::OAHintSizeBuffers);
+    } else {
+      env.setOffsetAnnotationIndexHint(indri::parse::OAHintDefault);
+    }
+
+    /* std::string stemmerName = parameters.get("stemmer.name", "");
+    if( stemmerName.length() )
+      env.setStemmer(stemmerName);
+    */
+
+    //- Throw an error and fail if user specifies a stemmer without a <name> parameter.
+    if (parameters.exists ("stemmer")) {
+      std::string stemmerName = parameters.get("stemmer.name", "");
+
+      if( stemmerName.length() > 0)
+	env.setStemmer(stemmerName);
+      else {
+	LEMUR_THROW (LEMUR_MISSING_PARAMETER_ERROR,
+		     "Stemmer name parameter not specified. Use <stemmer><name>stemmer_name</name></stemmer>");
+      }
+    }
+
+    std::vector<std::string> stopwords;
+    if( copy_parameters_to_string_vector( stopwords, parameters, "stopper.word" ) )
+      env.setStopwords(stopwords);
+    // fields to include as metadata (unindexed)
+    std::vector<std::string> metadata;
+    // metadata fields that should have a forward lookup table.
+    std::vector<std::string> metadataForward;
+    // metadata fields that should have a backward lookup table.
+    std::vector<std::string> metadataBackward;
+    copy_parameters_to_string_vector( metadata, parameters, "metadata.field" );
+    downcase_string_vector(metadata);
+
+    copy_parameters_to_string_vector( metadataForward, parameters, "metadata.forward" );
+    downcase_string_vector(metadataForward);
+    copy_parameters_to_string_vector( metadataBackward, parameters, "metadata.backward" );
+    downcase_string_vector(metadataBackward);
+    // docno is a special field, automagically add it as forward and backward.
+    std::string docno = "docno";
+    if( std::find( metadataForward.begin(),
+                   metadataForward.end(),
+                   docno ) == metadataForward.end() )
+      metadataForward.push_back(docno);
+    if( std::find( metadataBackward.begin(),
+                   metadataBackward.end(),
+                   docno ) == metadataBackward.end() )
+      metadataBackward.push_back(docno);
+
+    env.setMetadataIndexedFields( metadataForward, metadataBackward );
+#if 0
+    // "document" is a special field.
+    // automagically add it as an indexed field.
+    indri::api::Parameters field = parameters.append("field");
+    field.set( "name", "document" );
+    field.set( "ordinal", true );
+    field.set("parental", true);
+#endif
+    std::vector<std::string> fields;
+    std::string subName = "name";
+    if( copy_parameters_to_string_vector( fields, parameters, "field", &subName ) ) {
+      downcase_string_vector(fields);
+      env.setIndexedFields(fields);
+      process_numeric_fields( parameters, env );
+      process_ordinal_fields( parameters, env );
+      process_parental_fields( parameters, env ); //pto
+    }
+
+    if( indri::collection::Repository::exists( repositoryPath ) ) {
+      // check if the repository was corrupted by an indexing crash
+      // if so, recover it and continue.
+      if (_recoverRepository(repositoryPath)) {
+        env.open( repositoryPath, &monitor );
+        buildindex_print_event( std::string() + "Opened repository " + repositoryPath );
+      } else  {
+        //  failed to open it, needs to be created from scratch.
+        // create will remove any cruft.
+        env.create( repositoryPath, &monitor );
+        buildindex_print_event( std::string() + "Created repository " + repositoryPath );
+      }
+    } else {
+      env.create( repositoryPath, &monitor );
+      buildindex_print_event( std::string() + "Created repository " + repositoryPath );
+    }
+
+    indri::api::Parameters corpus = parameters["corpus"];
+
+    for( unsigned int i=0; i<corpus.size(); i++ ) {
+      indri::api::Parameters thisCorpus = corpus[i];
+      require_parameter( "path", thisCorpus );
+      std::string corpusPath = thisCorpus["path"];
+      std::string fileClass = thisCorpus.get("class", "");
+
+      // augment field/metadata tags in the environment if needed.
+      if( fileClass.length() ) {
+        indri::parse::FileClassEnvironmentFactory::Specification *spec = env.getFileClassSpec(fileClass);
+        if( spec ) {
+          // add fields if necessary, only update if changed.
+          if( augmentSpec( spec, fields, metadata, metadataForward, metadataBackward ) )
+            env.addFileClass(*spec);
+          delete(spec);
+        }
+      }
+
+      bool isDirectory = indri::file::Path::isDirectory( corpusPath );
+
+      // First record the document root, and then the paths to any annotator inputs
+      env.setDocumentRoot( corpusPath );
+
+      // Support for anchor text
+      std::string anchorText = thisCorpus.get("inlink", "");
+      env.setAnchorTextPath( anchorText );
+
+      // Support for offset annotations
+      std::string offsetAnnotationsPath = thisCorpus.get( "annotations", "" );
+      env.setOffsetAnnotationsPath( offsetAnnotationsPath );
+
+      // Support for offset metadata file
+      std::string offsetMetadataPath = thisCorpus.get( "metadata", "" );
+      env.setOffsetMetadataPath( offsetMetadataPath );
+
+      if( isDirectory ) {
+        indri::file::FileTreeIterator files( corpusPath );
+
+        for( ; files != indri::file::FileTreeIterator::end(); files++ ) {
+          if( fileClass.length() )
+            env.addFile( *files, fileClass );
+          else {
+            std::string extension = indri::file::Path::extension( *files );
+            indri::parse::FileClassEnvironmentFactory::Specification *spec = env.getFileClassSpec(extension);
+            if( spec ) {
+              // add fields if necessary, only update if changed.
+              if( augmentSpec( spec, fields, metadata, metadataForward, metadataBackward ) )
+                env.addFileClass(*spec);
+              delete(spec);
+            }
+            env.addFile( *files );
+          }
+        }
+      } else {
+        if( fileClass.length() )
+          env.addFile( corpusPath, fileClass );
+        else {
+          std::string extension = indri::file::Path::extension( corpusPath );
+          indri::parse::FileClassEnvironmentFactory::Specification *spec = env.getFileClassSpec(extension);
+          if( spec ) {
+            // add fields if necessary, only update if changed.
+            if( augmentSpec( spec, fields, metadata, metadataForward, metadataBackward ) )
+              env.addFileClass(*spec);
+            delete(spec);
+          }
+          env.addFile( corpusPath );
+        }
+      }
+    }
+
+    buildindex_print_event( "Closing index" );
+    env.close();
+    buildindex_print_event( "Finished" );
+  } catch( lemur::api::Exception& e ) {
+    LEMUR_ABORT(e);
+  }
+
+  return 0;
+}
+
+void buildindex_mymain(int argc, std::string arg0, std::string arg1, std::string arg2, std::string arg3, std::string arg4) {
+    char** argv = new char* [argc];
+
+    argv[0] = new char [arg0.size()+1];
+    if( argv[0] ) {
+        strcpy(argv[0], arg0.c_str());
+    }
+
+    argv[1] = new char [arg1.size()+1];
+    if( argv[1] ) {
+        strcpy(argv[1], arg1.c_str());
+    }
+
+    argv[2] = new char [arg2.size()+1];
+    if( argv[2] ) {
+        strcpy(argv[2], arg2.c_str());
+    }
+
+    argv[3] = new char [arg3.size()+1];
+    if( argv[3] ) {
+        strcpy(argv[3], arg3.c_str());
+    }
+
+    argv[4] = new char [arg4.size()+1];
+    if( argv[4] ) {
+        strcpy(argv[4], arg4.c_str());
+    }
+
+    buildindex_main(argc, argv);
+
+    if (argc > 0) {
+        for(int i=0; i < argc; i++) {
+            delete argv[i];
+            argv[i] = NULL;
+        }
+        delete [] argv;
+        argv = NULL;
+    }
+}
+
 
 SWIGINTERN std::vector< int >::const_reference std_vector_Sl_int_Sg__get(std::vector< int > *self,int i){
                 int size = int(self->size());
@@ -349,87 +1533,144 @@ SWIGINTERN void std_vector_Sl_std_string_Sg__set(std::vector< std::string > *sel
                     throw std::out_of_range("vector index out of range");
             }
 
+
+  namespace indri
+  {
+    namespace parse
+    {
+      typedef indri::parse::FileClassEnvironmentFactory::Specification Specification ;
+    }
+  }
+
+  void deleteFileClassSpec( indri::parse::FileClassEnvironmentFactory::Specification *spec) {
+    delete spec;
+  };
+
+
+
+#include <vector>
+#include <stdexcept>
+
+SWIGINTERN std::vector< indri::parse::MetadataPair >::value_type std_vector_Sl_indri_parse_MetadataPair_Sg__get(std::vector< indri::parse::MetadataPair > *self,int i){
+                int size = int(self->size());
+                if (i>=0 && i<size)
+                    return (*self)[i];
+                else
+                    throw std::out_of_range("vector index out of range");
+            }
+SWIGINTERN void std_vector_Sl_indri_parse_MetadataPair_Sg__set(std::vector< indri::parse::MetadataPair > *self,int i,std::vector< indri::parse::MetadataPair >::value_type const &val){
+                int size = int(self->size());
+                if (i>=0 && i<size)
+                    (*self)[i] = val;
+                else
+                    throw std::out_of_range("vector index out of range");
+            }
+
 #include "indri/TagList.hpp"
 
 
+// C++ director class methods.
+#include "indri_wrap.h"
 
-#ifdef INDRI_STANDALONE
-#include "lemur/Exception.hpp"
-#else
-#include "Exception.hpp"
-#endif
 
-static char *StaticMethodPanic() {
-    SWIG_exception(SWIG_RuntimeError,"forced exception");
-    char *s = (char *)"";
-    return s;
-}
+#include <map>
 
-namespace indri{
+namespace {
+  struct GCItem {
+    virtual ~GCItem() {}
+  };
 
-    namespace api{
-
-        class Tester {
-            std::string name;
-            std::string type;
-
-        public:
-
-            std::string GetName() {
-                return name;
-            }
-            std::string GetType() {
-                return type;
-            }
-
-            void SetName(std::string v) {
-                name = v;
-            }
-            void SetType(std::string v) {
-                type = v;
-            }
-
-            std::string InjectFault() {
-                LEMUR_THROW( LEMUR_GENERIC_ERROR, "forced exception");
-                std::string s = "";
-                return s;
-            }
-        };
+  struct GCItem_var {
+    GCItem_var(GCItem *item = 0) : _item(item) {
     }
+
+    GCItem_var& operator=(GCItem *item) {
+      GCItem *tmp = _item;
+      _item = item;
+      delete tmp;
+      return *this;
+    }
+
+    ~GCItem_var() {
+      delete _item;
+    }
+
+    GCItem* operator->() {
+      return _item;
+    }
+
+    private:
+      GCItem *_item;
+  };
+
+  template <typename Type>
+  struct GCItem_T : GCItem {
+    GCItem_T(Type *ptr) : _ptr(ptr) {
+    }
+
+    virtual ~GCItem_T() {
+      delete _ptr;
+    }
+
+  private:
+    Type *_ptr;
+  };
 }
 
-class DemoLib {
-
+class Swig_memory {
 public:
-    DemoLib() {}
-
-    double DivideBy(int n) {
-        if (n == 0) {
-            // use exception.i when throwing std_exception
-            throw std::invalid_argument("Cannot divide by zero");
-        }
-        return 1.0 / n;
+  template <typename Type>
+  void swig_acquire_pointer(Type* vptr) {
+    if (vptr) {
+      swig_owner[vptr] = new GCItem_T<Type>(vptr);
     }
-
-    int NegativeThrows(int in) {
-        if (in < 0) {
-            // use exception.i when throwing std_exception
-            throw std::range_error("NegativeThrows threw exception");
-        }
-        return in;
-    }
-
-    int NeverThrows(int in) {
-        return in;
-    }
+  }
+private:
+  typedef std::map<void *, GCItem_var> swig_ownership_map;
+  swig_ownership_map swig_owner;
 };
 
+template <typename Type>
+static void swig_acquire_pointer(Swig_memory** pmem, Type* ptr) {
+  if (!pmem) {
+    *pmem = new Swig_memory;
+  }
+  (*pmem)->swig_acquire_pointer(ptr);
+}
+
+SwigDirector_IndexStatus::SwigDirector_IndexStatus(int swig_p)
+    : indri::api::IndexStatus(),
+      go_val(swig_p), swig_mem(0)
+{ }
+
+extern "C" void Swiggo_DeleteDirector_IndexStatus_indri_go_add17ee78870902e(intgo);
+SwigDirector_IndexStatus::~SwigDirector_IndexStatus()
+{
+  Swiggo_DeleteDirector_IndexStatus_indri_go_add17ee78870902e(go_val);
+  delete swig_mem;
+}
+
+extern "C" void Swig_DirectorIndexStatus_callback_status_indri_go_add17ee78870902e(int, intgo code, _gostring_ documentPath, _gostring_ error, intgo documentsIndexed, intgo documentsSeen);
+void SwigDirector_IndexStatus::status(int code, std::string const &documentPath, std::string const &error, int documentsIndexed, int documentsSeen) {
+  intgo swig_code;
+  _gostring_ swig_documentPath;
+  _gostring_ swig_error;
+  intgo swig_documentsIndexed;
+  intgo swig_documentsSeen;
+  
+  swig_code = (int)code; 
+  swig_documentPath = Swig_AllocateString((&documentPath)->data(), (&documentPath)->length()); 
+  swig_error = Swig_AllocateString((&error)->data(), (&error)->length()); 
+  swig_documentsIndexed = (int)documentsIndexed; 
+  swig_documentsSeen = (int)documentsSeen; 
+  Swig_DirectorIndexStatus_callback_status_indri_go_add17ee78870902e(go_val, swig_code, swig_documentPath, swig_error, swig_documentsIndexed, swig_documentsSeen);
+}
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-void _wrap_Swig_free_indri_go_8e24520e0b567faa(void *_swig_go_0) {
+void _wrap_Swig_free_indri_go_add17ee78870902e(void *_swig_go_0) {
   void *arg1 = (void *) 0 ;
   
   arg1 = *(void **)&_swig_go_0; 
@@ -439,7 +1680,7 @@ void _wrap_Swig_free_indri_go_8e24520e0b567faa(void *_swig_go_0) {
 }
 
 
-void *_wrap_Swig_malloc_indri_go_8e24520e0b567faa(intgo _swig_go_0) {
+void *_wrap_Swig_malloc_indri_go_add17ee78870902e(intgo _swig_go_0) {
   int arg1 ;
   void *result = 0 ;
   void *_swig_go_result;
@@ -452,7 +1693,158 @@ void *_wrap_Swig_malloc_indri_go_8e24520e0b567faa(intgo _swig_go_0) {
 }
 
 
-std::vector< int > *_wrap_new_IntVector__SWIG_0_indri_go_8e24520e0b567faa() {
+_gostring_ _wrap_indriVersion_get_indri_go_add17ee78870902e() {
+  std::string *result = 0 ;
+  _gostring_ _swig_go_result;
+  
+  
+  result = (std::string *) &indriVersion;
+  _swig_go_result = Swig_AllocateString((*result).data(), (*result).length()); 
+  return _swig_go_result;
+}
+
+
+bool _wrap_buildindex_recoverRepository_indri_go_add17ee78870902e(_gostring_ _swig_go_0) {
+  std::string *arg1 = 0 ;
+  bool result;
+  bool _swig_go_result;
+  
+  
+  std::string arg1_str(_swig_go_0.p, _swig_go_0.n);
+  arg1 = &arg1_str;
+  
+  
+  {
+    try {
+      result = (bool)_recoverRepository((std::string const &)*arg1);
+    } catch( lemur::api::Exception& e ) {
+      SWIG_exception( SWIG_RuntimeError, e.what().c_str() );
+    }
+  }
+  _swig_go_result = result; 
+  return _swig_go_result;
+}
+
+
+void _wrap_buildindex_start_time_indri_go_add17ee78870902e() {
+  buildindex_start_time();
+  
+}
+
+
+void _wrap_buildindex_print_event_indri_go_add17ee78870902e(_gostring_ _swig_go_0) {
+  std::string arg1 ;
+  
+  (&arg1)->assign(_swig_go_0.p, _swig_go_0.n); 
+  
+  buildindex_print_event(arg1);
+  
+}
+
+
+void _wrap_buildindex_print_status__SWIG_0_indri_go_add17ee78870902e(_gostring_ _swig_go_0, intgo _swig_go_1) {
+  char *arg1 = (char *) 0 ;
+  int arg2 ;
+  
+  
+  arg1 = (char *)malloc(_swig_go_0.n + 1);
+  memcpy(arg1, _swig_go_0.p, _swig_go_0.n);
+  arg1[_swig_go_0.n] = '\0';
+  
+  arg2 = (int)_swig_go_1; 
+  
+  buildindex_print_status((char const *)arg1,arg2);
+  
+  free(arg1); 
+}
+
+
+void _wrap_buildindex_print_status__SWIG_1_indri_go_add17ee78870902e(_gostring_ _swig_go_0, intgo _swig_go_1, _gostring_ _swig_go_2, long long _swig_go_3) {
+  char *arg1 = (char *) 0 ;
+  int arg2 ;
+  char *arg3 = (char *) 0 ;
+  INT64 arg4 ;
+  
+  
+  arg1 = (char *)malloc(_swig_go_0.n + 1);
+  memcpy(arg1, _swig_go_0.p, _swig_go_0.n);
+  arg1[_swig_go_0.n] = '\0';
+  
+  arg2 = (int)_swig_go_1; 
+  
+  arg3 = (char *)malloc(_swig_go_2.n + 1);
+  memcpy(arg3, _swig_go_2.p, _swig_go_2.n);
+  arg3[_swig_go_2.n] = '\0';
+  
+  arg4 = (INT64)_swig_go_3; 
+  
+  buildindex_print_status((char const *)arg1,arg2,(char const *)arg3,arg4);
+  
+  free(arg1); 
+  free(arg3); 
+}
+
+
+void _wrap_buildindex_flush_status_indri_go_add17ee78870902e() {
+  buildindex_flush_status();
+  
+}
+
+
+bool _wrap_buildindex_augmentSpec_indri_go_add17ee78870902e(indri::parse::FileClassEnvironmentFactory::Specification *_swig_go_0, std::vector< std::string > *_swig_go_1, std::vector< std::string > *_swig_go_2, std::vector< std::string > *_swig_go_3, std::vector< std::string > *_swig_go_4) {
+  indri::parse::FileClassEnvironmentFactory::Specification *arg1 = (indri::parse::FileClassEnvironmentFactory::Specification *) 0 ;
+  std::vector< std::string > *arg2 = 0 ;
+  std::vector< std::string > *arg3 = 0 ;
+  std::vector< std::string > *arg4 = 0 ;
+  std::vector< std::string > *arg5 = 0 ;
+  bool result;
+  bool _swig_go_result;
+  
+  arg1 = *(indri::parse::FileClassEnvironmentFactory::Specification **)&_swig_go_0; 
+  arg2 = *(std::vector< std::string > **)&_swig_go_1; 
+  arg3 = *(std::vector< std::string > **)&_swig_go_2; 
+  arg4 = *(std::vector< std::string > **)&_swig_go_3; 
+  arg5 = *(std::vector< std::string > **)&_swig_go_4; 
+  
+  {
+    try {
+      result = (bool)augmentSpec(arg1,*arg2,*arg3,*arg4,*arg5);
+    } catch( lemur::api::Exception& e ) {
+      SWIG_exception( SWIG_RuntimeError, e.what().c_str() );
+    }
+  }
+  _swig_go_result = result; 
+  return _swig_go_result;
+}
+
+
+void _wrap_buildindex_mymain_indri_go_add17ee78870902e(intgo _swig_go_0, _gostring_ _swig_go_1, _gostring_ _swig_go_2, _gostring_ _swig_go_3, _gostring_ _swig_go_4, _gostring_ _swig_go_5) {
+  int arg1 ;
+  std::string arg2 ;
+  std::string arg3 ;
+  std::string arg4 ;
+  std::string arg5 ;
+  std::string arg6 ;
+  
+  arg1 = (int)_swig_go_0; 
+  (&arg2)->assign(_swig_go_1.p, _swig_go_1.n); 
+  (&arg3)->assign(_swig_go_2.p, _swig_go_2.n); 
+  (&arg4)->assign(_swig_go_3.p, _swig_go_3.n); 
+  (&arg5)->assign(_swig_go_4.p, _swig_go_4.n); 
+  (&arg6)->assign(_swig_go_5.p, _swig_go_5.n); 
+  
+  {
+    try {
+      buildindex_mymain(arg1,arg2,arg3,arg4,arg5,arg6);
+    } catch( lemur::api::Exception& e ) {
+      SWIG_exception( SWIG_RuntimeError, e.what().c_str() );
+    }
+  }
+  
+}
+
+
+std::vector< int > *_wrap_new_IntVector__SWIG_0_indri_go_add17ee78870902e() {
   std::vector< int > *result = 0 ;
   std::vector< int > *_swig_go_result;
   
@@ -463,7 +1855,7 @@ std::vector< int > *_wrap_new_IntVector__SWIG_0_indri_go_8e24520e0b567faa() {
 }
 
 
-std::vector< int > *_wrap_new_IntVector__SWIG_1_indri_go_8e24520e0b567faa(long long _swig_go_0) {
+std::vector< int > *_wrap_new_IntVector__SWIG_1_indri_go_add17ee78870902e(long long _swig_go_0) {
   std::vector< int >::size_type arg1 ;
   std::vector< int > *result = 0 ;
   std::vector< int > *_swig_go_result;
@@ -476,7 +1868,7 @@ std::vector< int > *_wrap_new_IntVector__SWIG_1_indri_go_8e24520e0b567faa(long l
 }
 
 
-long long _wrap_IntVector_size_indri_go_8e24520e0b567faa(std::vector< int > *_swig_go_0) {
+long long _wrap_IntVector_size_indri_go_add17ee78870902e(std::vector< int > *_swig_go_0) {
   std::vector< int > *arg1 = (std::vector< int > *) 0 ;
   std::vector< int >::size_type result;
   long long _swig_go_result;
@@ -489,7 +1881,7 @@ long long _wrap_IntVector_size_indri_go_8e24520e0b567faa(std::vector< int > *_sw
 }
 
 
-long long _wrap_IntVector_capacity_indri_go_8e24520e0b567faa(std::vector< int > *_swig_go_0) {
+long long _wrap_IntVector_capacity_indri_go_add17ee78870902e(std::vector< int > *_swig_go_0) {
   std::vector< int > *arg1 = (std::vector< int > *) 0 ;
   std::vector< int >::size_type result;
   long long _swig_go_result;
@@ -502,7 +1894,7 @@ long long _wrap_IntVector_capacity_indri_go_8e24520e0b567faa(std::vector< int > 
 }
 
 
-void _wrap_IntVector_reserve_indri_go_8e24520e0b567faa(std::vector< int > *_swig_go_0, long long _swig_go_1) {
+void _wrap_IntVector_reserve_indri_go_add17ee78870902e(std::vector< int > *_swig_go_0, long long _swig_go_1) {
   std::vector< int > *arg1 = (std::vector< int > *) 0 ;
   std::vector< int >::size_type arg2 ;
   
@@ -514,7 +1906,7 @@ void _wrap_IntVector_reserve_indri_go_8e24520e0b567faa(std::vector< int > *_swig
 }
 
 
-bool _wrap_IntVector_isEmpty_indri_go_8e24520e0b567faa(std::vector< int > *_swig_go_0) {
+bool _wrap_IntVector_isEmpty_indri_go_add17ee78870902e(std::vector< int > *_swig_go_0) {
   std::vector< int > *arg1 = (std::vector< int > *) 0 ;
   bool result;
   bool _swig_go_result;
@@ -527,7 +1919,7 @@ bool _wrap_IntVector_isEmpty_indri_go_8e24520e0b567faa(std::vector< int > *_swig
 }
 
 
-void _wrap_IntVector_clear_indri_go_8e24520e0b567faa(std::vector< int > *_swig_go_0) {
+void _wrap_IntVector_clear_indri_go_add17ee78870902e(std::vector< int > *_swig_go_0) {
   std::vector< int > *arg1 = (std::vector< int > *) 0 ;
   
   arg1 = *(std::vector< int > **)&_swig_go_0; 
@@ -537,7 +1929,7 @@ void _wrap_IntVector_clear_indri_go_8e24520e0b567faa(std::vector< int > *_swig_g
 }
 
 
-void _wrap_IntVector_add_indri_go_8e24520e0b567faa(std::vector< int > *_swig_go_0, intgo _swig_go_1) {
+void _wrap_IntVector_add_indri_go_add17ee78870902e(std::vector< int > *_swig_go_0, intgo _swig_go_1) {
   std::vector< int > *arg1 = (std::vector< int > *) 0 ;
   std::vector< int >::value_type *arg2 = 0 ;
   
@@ -549,7 +1941,7 @@ void _wrap_IntVector_add_indri_go_8e24520e0b567faa(std::vector< int > *_swig_go_
 }
 
 
-intgo _wrap_IntVector_get_indri_go_8e24520e0b567faa(std::vector< int > *_swig_go_0, intgo _swig_go_1) {
+intgo _wrap_IntVector_get_indri_go_add17ee78870902e(std::vector< int > *_swig_go_0, intgo _swig_go_1) {
   std::vector< int > *arg1 = (std::vector< int > *) 0 ;
   int arg2 ;
   std::vector< int >::value_type *result = 0 ;
@@ -572,7 +1964,7 @@ intgo _wrap_IntVector_get_indri_go_8e24520e0b567faa(std::vector< int > *_swig_go
 }
 
 
-void _wrap_IntVector_set_indri_go_8e24520e0b567faa(std::vector< int > *_swig_go_0, intgo _swig_go_1, intgo _swig_go_2) {
+void _wrap_IntVector_set_indri_go_add17ee78870902e(std::vector< int > *_swig_go_0, intgo _swig_go_1, intgo _swig_go_2) {
   std::vector< int > *arg1 = (std::vector< int > *) 0 ;
   int arg2 ;
   std::vector< int >::value_type *arg3 = 0 ;
@@ -594,23 +1986,17 @@ void _wrap_IntVector_set_indri_go_8e24520e0b567faa(std::vector< int > *_swig_go_
 }
 
 
-void _wrap_delete_IntVector_indri_go_8e24520e0b567faa(std::vector< int > *_swig_go_0) {
+void _wrap_delete_IntVector_indri_go_add17ee78870902e(std::vector< int > *_swig_go_0) {
   std::vector< int > *arg1 = (std::vector< int > *) 0 ;
   
   arg1 = *(std::vector< int > **)&_swig_go_0; 
   
-  {
-    try {
-      delete arg1;;
-    } catch (std::exception &e) {
-      _swig_gopanic(e.what());
-    }
-  }
+  delete arg1;
   
 }
 
 
-std::vector< std::string > *_wrap_new_StringVector__SWIG_0_indri_go_8e24520e0b567faa() {
+std::vector< std::string > *_wrap_new_StringVector__SWIG_0_indri_go_add17ee78870902e() {
   std::vector< std::string > *result = 0 ;
   std::vector< std::string > *_swig_go_result;
   
@@ -621,7 +2007,7 @@ std::vector< std::string > *_wrap_new_StringVector__SWIG_0_indri_go_8e24520e0b56
 }
 
 
-std::vector< std::string > *_wrap_new_StringVector__SWIG_1_indri_go_8e24520e0b567faa(long long _swig_go_0) {
+std::vector< std::string > *_wrap_new_StringVector__SWIG_1_indri_go_add17ee78870902e(long long _swig_go_0) {
   std::vector< std::string >::size_type arg1 ;
   std::vector< std::string > *result = 0 ;
   std::vector< std::string > *_swig_go_result;
@@ -634,7 +2020,7 @@ std::vector< std::string > *_wrap_new_StringVector__SWIG_1_indri_go_8e24520e0b56
 }
 
 
-long long _wrap_StringVector_size_indri_go_8e24520e0b567faa(std::vector< std::string > *_swig_go_0) {
+long long _wrap_StringVector_size_indri_go_add17ee78870902e(std::vector< std::string > *_swig_go_0) {
   std::vector< std::string > *arg1 = (std::vector< std::string > *) 0 ;
   std::vector< std::string >::size_type result;
   long long _swig_go_result;
@@ -647,7 +2033,7 @@ long long _wrap_StringVector_size_indri_go_8e24520e0b567faa(std::vector< std::st
 }
 
 
-long long _wrap_StringVector_capacity_indri_go_8e24520e0b567faa(std::vector< std::string > *_swig_go_0) {
+long long _wrap_StringVector_capacity_indri_go_add17ee78870902e(std::vector< std::string > *_swig_go_0) {
   std::vector< std::string > *arg1 = (std::vector< std::string > *) 0 ;
   std::vector< std::string >::size_type result;
   long long _swig_go_result;
@@ -660,7 +2046,7 @@ long long _wrap_StringVector_capacity_indri_go_8e24520e0b567faa(std::vector< std
 }
 
 
-void _wrap_StringVector_reserve_indri_go_8e24520e0b567faa(std::vector< std::string > *_swig_go_0, long long _swig_go_1) {
+void _wrap_StringVector_reserve_indri_go_add17ee78870902e(std::vector< std::string > *_swig_go_0, long long _swig_go_1) {
   std::vector< std::string > *arg1 = (std::vector< std::string > *) 0 ;
   std::vector< std::string >::size_type arg2 ;
   
@@ -672,7 +2058,7 @@ void _wrap_StringVector_reserve_indri_go_8e24520e0b567faa(std::vector< std::stri
 }
 
 
-bool _wrap_StringVector_isEmpty_indri_go_8e24520e0b567faa(std::vector< std::string > *_swig_go_0) {
+bool _wrap_StringVector_isEmpty_indri_go_add17ee78870902e(std::vector< std::string > *_swig_go_0) {
   std::vector< std::string > *arg1 = (std::vector< std::string > *) 0 ;
   bool result;
   bool _swig_go_result;
@@ -685,7 +2071,7 @@ bool _wrap_StringVector_isEmpty_indri_go_8e24520e0b567faa(std::vector< std::stri
 }
 
 
-void _wrap_StringVector_clear_indri_go_8e24520e0b567faa(std::vector< std::string > *_swig_go_0) {
+void _wrap_StringVector_clear_indri_go_add17ee78870902e(std::vector< std::string > *_swig_go_0) {
   std::vector< std::string > *arg1 = (std::vector< std::string > *) 0 ;
   
   arg1 = *(std::vector< std::string > **)&_swig_go_0; 
@@ -695,7 +2081,7 @@ void _wrap_StringVector_clear_indri_go_8e24520e0b567faa(std::vector< std::string
 }
 
 
-void _wrap_StringVector_add_indri_go_8e24520e0b567faa(std::vector< std::string > *_swig_go_0, _gostring_ _swig_go_1) {
+void _wrap_StringVector_add_indri_go_add17ee78870902e(std::vector< std::string > *_swig_go_0, _gostring_ _swig_go_1) {
   std::vector< std::string > *arg1 = (std::vector< std::string > *) 0 ;
   std::vector< std::string >::value_type *arg2 = 0 ;
   
@@ -710,7 +2096,7 @@ void _wrap_StringVector_add_indri_go_8e24520e0b567faa(std::vector< std::string >
 }
 
 
-_gostring_ _wrap_StringVector_get_indri_go_8e24520e0b567faa(std::vector< std::string > *_swig_go_0, intgo _swig_go_1) {
+_gostring_ _wrap_StringVector_get_indri_go_add17ee78870902e(std::vector< std::string > *_swig_go_0, intgo _swig_go_1) {
   std::vector< std::string > *arg1 = (std::vector< std::string > *) 0 ;
   int arg2 ;
   std::vector< std::string >::value_type *result = 0 ;
@@ -733,7 +2119,7 @@ _gostring_ _wrap_StringVector_get_indri_go_8e24520e0b567faa(std::vector< std::st
 }
 
 
-void _wrap_StringVector_set_indri_go_8e24520e0b567faa(std::vector< std::string > *_swig_go_0, intgo _swig_go_1, _gostring_ _swig_go_2) {
+void _wrap_StringVector_set_indri_go_add17ee78870902e(std::vector< std::string > *_swig_go_0, intgo _swig_go_1, _gostring_ _swig_go_2) {
   std::vector< std::string > *arg1 = (std::vector< std::string > *) 0 ;
   int arg2 ;
   std::vector< std::string >::value_type *arg3 = 0 ;
@@ -758,23 +2144,369 @@ void _wrap_StringVector_set_indri_go_8e24520e0b567faa(std::vector< std::string >
 }
 
 
-void _wrap_delete_StringVector_indri_go_8e24520e0b567faa(std::vector< std::string > *_swig_go_0) {
+void _wrap_delete_StringVector_indri_go_add17ee78870902e(std::vector< std::string > *_swig_go_0) {
   std::vector< std::string > *arg1 = (std::vector< std::string > *) 0 ;
   
   arg1 = *(std::vector< std::string > **)&_swig_go_0; 
   
-  {
-    try {
-      delete arg1;;
-    } catch (std::exception &e) {
-      _swig_gopanic(e.what());
-    }
-  }
+  delete arg1;
   
 }
 
 
-indri::api::Parameters *_wrap_new_Parameters_indri_go_8e24520e0b567faa() {
+void _wrap_Wrapped_deleteFileClassSpec_indri_go_add17ee78870902e(indri::parse::FileClassEnvironmentFactory::Specification *_swig_go_0) {
+  indri::parse::FileClassEnvironmentFactory::Specification *arg1 = (indri::parse::FileClassEnvironmentFactory::Specification *) 0 ;
+  
+  arg1 = *(indri::parse::FileClassEnvironmentFactory::Specification **)&_swig_go_0; 
+  
+  deleteFileClassSpec(arg1);
+  
+}
+
+
+void _wrap_Specification_name_set_indri_go_add17ee78870902e(indri::parse::Specification *_swig_go_0, _gostring_ _swig_go_1) {
+  indri::parse::Specification *arg1 = (indri::parse::Specification *) 0 ;
+  std::string *arg2 = 0 ;
+  
+  arg1 = *(indri::parse::Specification **)&_swig_go_0; 
+  
+  std::string arg2_str(_swig_go_1.p, _swig_go_1.n);
+  arg2 = &arg2_str;
+  
+  
+  if (arg1) (arg1)->name = *arg2;
+  
+}
+
+
+_gostring_ _wrap_Specification_name_get_indri_go_add17ee78870902e(indri::parse::Specification *_swig_go_0) {
+  indri::parse::Specification *arg1 = (indri::parse::Specification *) 0 ;
+  std::string *result = 0 ;
+  _gostring_ _swig_go_result;
+  
+  arg1 = *(indri::parse::Specification **)&_swig_go_0; 
+  
+  result = (std::string *) & ((arg1)->name);
+  _swig_go_result = Swig_AllocateString((*result).data(), (*result).length()); 
+  return _swig_go_result;
+}
+
+
+void _wrap_Specification_parser_set_indri_go_add17ee78870902e(indri::parse::Specification *_swig_go_0, _gostring_ _swig_go_1) {
+  indri::parse::Specification *arg1 = (indri::parse::Specification *) 0 ;
+  std::string *arg2 = 0 ;
+  
+  arg1 = *(indri::parse::Specification **)&_swig_go_0; 
+  
+  std::string arg2_str(_swig_go_1.p, _swig_go_1.n);
+  arg2 = &arg2_str;
+  
+  
+  if (arg1) (arg1)->parser = *arg2;
+  
+}
+
+
+_gostring_ _wrap_Specification_parser_get_indri_go_add17ee78870902e(indri::parse::Specification *_swig_go_0) {
+  indri::parse::Specification *arg1 = (indri::parse::Specification *) 0 ;
+  std::string *result = 0 ;
+  _gostring_ _swig_go_result;
+  
+  arg1 = *(indri::parse::Specification **)&_swig_go_0; 
+  
+  result = (std::string *) & ((arg1)->parser);
+  _swig_go_result = Swig_AllocateString((*result).data(), (*result).length()); 
+  return _swig_go_result;
+}
+
+
+void _wrap_Specification_tokenizer_set_indri_go_add17ee78870902e(indri::parse::Specification *_swig_go_0, _gostring_ _swig_go_1) {
+  indri::parse::Specification *arg1 = (indri::parse::Specification *) 0 ;
+  std::string *arg2 = 0 ;
+  
+  arg1 = *(indri::parse::Specification **)&_swig_go_0; 
+  
+  std::string arg2_str(_swig_go_1.p, _swig_go_1.n);
+  arg2 = &arg2_str;
+  
+  
+  if (arg1) (arg1)->tokenizer = *arg2;
+  
+}
+
+
+_gostring_ _wrap_Specification_tokenizer_get_indri_go_add17ee78870902e(indri::parse::Specification *_swig_go_0) {
+  indri::parse::Specification *arg1 = (indri::parse::Specification *) 0 ;
+  std::string *result = 0 ;
+  _gostring_ _swig_go_result;
+  
+  arg1 = *(indri::parse::Specification **)&_swig_go_0; 
+  
+  result = (std::string *) & ((arg1)->tokenizer);
+  _swig_go_result = Swig_AllocateString((*result).data(), (*result).length()); 
+  return _swig_go_result;
+}
+
+
+void _wrap_Specification_iterator_set_indri_go_add17ee78870902e(indri::parse::Specification *_swig_go_0, _gostring_ _swig_go_1) {
+  indri::parse::Specification *arg1 = (indri::parse::Specification *) 0 ;
+  std::string *arg2 = 0 ;
+  
+  arg1 = *(indri::parse::Specification **)&_swig_go_0; 
+  
+  std::string arg2_str(_swig_go_1.p, _swig_go_1.n);
+  arg2 = &arg2_str;
+  
+  
+  if (arg1) (arg1)->iterator = *arg2;
+  
+}
+
+
+_gostring_ _wrap_Specification_iterator_get_indri_go_add17ee78870902e(indri::parse::Specification *_swig_go_0) {
+  indri::parse::Specification *arg1 = (indri::parse::Specification *) 0 ;
+  std::string *result = 0 ;
+  _gostring_ _swig_go_result;
+  
+  arg1 = *(indri::parse::Specification **)&_swig_go_0; 
+  
+  result = (std::string *) & ((arg1)->iterator);
+  _swig_go_result = Swig_AllocateString((*result).data(), (*result).length()); 
+  return _swig_go_result;
+}
+
+
+void _wrap_Specification_startDocTag_set_indri_go_add17ee78870902e(indri::parse::Specification *_swig_go_0, _gostring_ _swig_go_1) {
+  indri::parse::Specification *arg1 = (indri::parse::Specification *) 0 ;
+  std::string *arg2 = 0 ;
+  
+  arg1 = *(indri::parse::Specification **)&_swig_go_0; 
+  
+  std::string arg2_str(_swig_go_1.p, _swig_go_1.n);
+  arg2 = &arg2_str;
+  
+  
+  if (arg1) (arg1)->startDocTag = *arg2;
+  
+}
+
+
+_gostring_ _wrap_Specification_startDocTag_get_indri_go_add17ee78870902e(indri::parse::Specification *_swig_go_0) {
+  indri::parse::Specification *arg1 = (indri::parse::Specification *) 0 ;
+  std::string *result = 0 ;
+  _gostring_ _swig_go_result;
+  
+  arg1 = *(indri::parse::Specification **)&_swig_go_0; 
+  
+  result = (std::string *) & ((arg1)->startDocTag);
+  _swig_go_result = Swig_AllocateString((*result).data(), (*result).length()); 
+  return _swig_go_result;
+}
+
+
+void _wrap_Specification_endDocTag_set_indri_go_add17ee78870902e(indri::parse::Specification *_swig_go_0, _gostring_ _swig_go_1) {
+  indri::parse::Specification *arg1 = (indri::parse::Specification *) 0 ;
+  std::string *arg2 = 0 ;
+  
+  arg1 = *(indri::parse::Specification **)&_swig_go_0; 
+  
+  std::string arg2_str(_swig_go_1.p, _swig_go_1.n);
+  arg2 = &arg2_str;
+  
+  
+  if (arg1) (arg1)->endDocTag = *arg2;
+  
+}
+
+
+_gostring_ _wrap_Specification_endDocTag_get_indri_go_add17ee78870902e(indri::parse::Specification *_swig_go_0) {
+  indri::parse::Specification *arg1 = (indri::parse::Specification *) 0 ;
+  std::string *result = 0 ;
+  _gostring_ _swig_go_result;
+  
+  arg1 = *(indri::parse::Specification **)&_swig_go_0; 
+  
+  result = (std::string *) & ((arg1)->endDocTag);
+  _swig_go_result = Swig_AllocateString((*result).data(), (*result).length()); 
+  return _swig_go_result;
+}
+
+
+void _wrap_Specification_endMetadataTag_set_indri_go_add17ee78870902e(indri::parse::Specification *_swig_go_0, _gostring_ _swig_go_1) {
+  indri::parse::Specification *arg1 = (indri::parse::Specification *) 0 ;
+  std::string *arg2 = 0 ;
+  
+  arg1 = *(indri::parse::Specification **)&_swig_go_0; 
+  
+  std::string arg2_str(_swig_go_1.p, _swig_go_1.n);
+  arg2 = &arg2_str;
+  
+  
+  if (arg1) (arg1)->endMetadataTag = *arg2;
+  
+}
+
+
+_gostring_ _wrap_Specification_endMetadataTag_get_indri_go_add17ee78870902e(indri::parse::Specification *_swig_go_0) {
+  indri::parse::Specification *arg1 = (indri::parse::Specification *) 0 ;
+  std::string *result = 0 ;
+  _gostring_ _swig_go_result;
+  
+  arg1 = *(indri::parse::Specification **)&_swig_go_0; 
+  
+  result = (std::string *) & ((arg1)->endMetadataTag);
+  _swig_go_result = Swig_AllocateString((*result).data(), (*result).length()); 
+  return _swig_go_result;
+}
+
+
+void _wrap_Specification_include_set_indri_go_add17ee78870902e(indri::parse::Specification *_swig_go_0, std::vector< std::string > *_swig_go_1) {
+  indri::parse::Specification *arg1 = (indri::parse::Specification *) 0 ;
+  std::vector< std::string > *arg2 = (std::vector< std::string > *) 0 ;
+  
+  arg1 = *(indri::parse::Specification **)&_swig_go_0; 
+  arg2 = *(std::vector< std::string > **)&_swig_go_1; 
+  
+  if (arg1) (arg1)->include = *arg2;
+  
+}
+
+
+std::vector< std::string > *_wrap_Specification_include_get_indri_go_add17ee78870902e(indri::parse::Specification *_swig_go_0) {
+  indri::parse::Specification *arg1 = (indri::parse::Specification *) 0 ;
+  std::vector< std::string > *result = 0 ;
+  std::vector< std::string > *_swig_go_result;
+  
+  arg1 = *(indri::parse::Specification **)&_swig_go_0; 
+  
+  result = (std::vector< std::string > *)& ((arg1)->include);
+  *(std::vector< std::string > **)&_swig_go_result = (std::vector< std::string > *)result; 
+  return _swig_go_result;
+}
+
+
+void _wrap_Specification_exclude_set_indri_go_add17ee78870902e(indri::parse::Specification *_swig_go_0, std::vector< std::string > *_swig_go_1) {
+  indri::parse::Specification *arg1 = (indri::parse::Specification *) 0 ;
+  std::vector< std::string > *arg2 = (std::vector< std::string > *) 0 ;
+  
+  arg1 = *(indri::parse::Specification **)&_swig_go_0; 
+  arg2 = *(std::vector< std::string > **)&_swig_go_1; 
+  
+  if (arg1) (arg1)->exclude = *arg2;
+  
+}
+
+
+std::vector< std::string > *_wrap_Specification_exclude_get_indri_go_add17ee78870902e(indri::parse::Specification *_swig_go_0) {
+  indri::parse::Specification *arg1 = (indri::parse::Specification *) 0 ;
+  std::vector< std::string > *result = 0 ;
+  std::vector< std::string > *_swig_go_result;
+  
+  arg1 = *(indri::parse::Specification **)&_swig_go_0; 
+  
+  result = (std::vector< std::string > *)& ((arg1)->exclude);
+  *(std::vector< std::string > **)&_swig_go_result = (std::vector< std::string > *)result; 
+  return _swig_go_result;
+}
+
+
+void _wrap_Specification_index_set_indri_go_add17ee78870902e(indri::parse::Specification *_swig_go_0, std::vector< std::string > *_swig_go_1) {
+  indri::parse::Specification *arg1 = (indri::parse::Specification *) 0 ;
+  std::vector< std::string > *arg2 = (std::vector< std::string > *) 0 ;
+  
+  arg1 = *(indri::parse::Specification **)&_swig_go_0; 
+  arg2 = *(std::vector< std::string > **)&_swig_go_1; 
+  
+  if (arg1) (arg1)->index = *arg2;
+  
+}
+
+
+std::vector< std::string > *_wrap_Specification_index_get_indri_go_add17ee78870902e(indri::parse::Specification *_swig_go_0) {
+  indri::parse::Specification *arg1 = (indri::parse::Specification *) 0 ;
+  std::vector< std::string > *result = 0 ;
+  std::vector< std::string > *_swig_go_result;
+  
+  arg1 = *(indri::parse::Specification **)&_swig_go_0; 
+  
+  result = (std::vector< std::string > *)& ((arg1)->index);
+  *(std::vector< std::string > **)&_swig_go_result = (std::vector< std::string > *)result; 
+  return _swig_go_result;
+}
+
+
+void _wrap_Specification_metadata_set_indri_go_add17ee78870902e(indri::parse::Specification *_swig_go_0, std::vector< std::string > *_swig_go_1) {
+  indri::parse::Specification *arg1 = (indri::parse::Specification *) 0 ;
+  std::vector< std::string > *arg2 = (std::vector< std::string > *) 0 ;
+  
+  arg1 = *(indri::parse::Specification **)&_swig_go_0; 
+  arg2 = *(std::vector< std::string > **)&_swig_go_1; 
+  
+  if (arg1) (arg1)->metadata = *arg2;
+  
+}
+
+
+std::vector< std::string > *_wrap_Specification_metadata_get_indri_go_add17ee78870902e(indri::parse::Specification *_swig_go_0) {
+  indri::parse::Specification *arg1 = (indri::parse::Specification *) 0 ;
+  std::vector< std::string > *result = 0 ;
+  std::vector< std::string > *_swig_go_result;
+  
+  arg1 = *(indri::parse::Specification **)&_swig_go_0; 
+  
+  result = (std::vector< std::string > *)& ((arg1)->metadata);
+  *(std::vector< std::string > **)&_swig_go_result = (std::vector< std::string > *)result; 
+  return _swig_go_result;
+}
+
+
+void _wrap_Specification_conflations_set_indri_go_add17ee78870902e(indri::parse::Specification *_swig_go_0, std::map< indri::parse::ConflationPattern *,std::string > *_swig_go_1) {
+  indri::parse::Specification *arg1 = (indri::parse::Specification *) 0 ;
+  std::map< indri::parse::ConflationPattern *,std::string > *arg2 = (std::map< indri::parse::ConflationPattern *,std::string > *) 0 ;
+  
+  arg1 = *(indri::parse::Specification **)&_swig_go_0; 
+  arg2 = *(std::map< indri::parse::ConflationPattern *,std::string > **)&_swig_go_1; 
+  
+  if (arg1) (arg1)->conflations = *arg2;
+  
+}
+
+
+std::map< indri::parse::ConflationPattern *,std::string > *_wrap_Specification_conflations_get_indri_go_add17ee78870902e(indri::parse::Specification *_swig_go_0) {
+  indri::parse::Specification *arg1 = (indri::parse::Specification *) 0 ;
+  std::map< indri::parse::ConflationPattern *,std::string > *result = 0 ;
+  std::map< indri::parse::ConflationPattern *,std::string > *_swig_go_result;
+  
+  arg1 = *(indri::parse::Specification **)&_swig_go_0; 
+  
+  result = (std::map< indri::parse::ConflationPattern *,std::string > *)& ((arg1)->conflations);
+  *(std::map< indri::parse::ConflationPattern *,std::string > **)&_swig_go_result = (std::map< indri::parse::ConflationPattern *,std::string > *)result; 
+  return _swig_go_result;
+}
+
+
+indri::parse::Specification *_wrap_new_Specification_indri_go_add17ee78870902e() {
+  indri::parse::Specification *result = 0 ;
+  indri::parse::Specification *_swig_go_result;
+  
+  
+  result = (indri::parse::Specification *)new indri::parse::Specification();
+  *(indri::parse::Specification **)&_swig_go_result = (indri::parse::Specification *)result; 
+  return _swig_go_result;
+}
+
+
+void _wrap_delete_Specification_indri_go_add17ee78870902e(indri::parse::Specification *_swig_go_0) {
+  indri::parse::Specification *arg1 = (indri::parse::Specification *) 0 ;
+  
+  arg1 = *(indri::parse::Specification **)&_swig_go_0; 
+  
+  delete arg1;
+  
+}
+
+
+indri::api::Parameters *_wrap_new_Wrapped_Parameters_indri_go_add17ee78870902e() {
   indri::api::Parameters *result = 0 ;
   indri::api::Parameters *_swig_go_result;
   
@@ -785,7 +2517,7 @@ indri::api::Parameters *_wrap_new_Parameters_indri_go_8e24520e0b567faa() {
 }
 
 
-void _wrap_delete_Parameters_indri_go_8e24520e0b567faa(indri::api::Parameters *_swig_go_0) {
+void _wrap_delete_Wrapped_Parameters_indri_go_add17ee78870902e(indri::api::Parameters *_swig_go_0) {
   indri::api::Parameters *arg1 = (indri::api::Parameters *) 0 ;
   
   arg1 = *(indri::api::Parameters **)&_swig_go_0; 
@@ -795,7 +2527,7 @@ void _wrap_delete_Parameters_indri_go_8e24520e0b567faa(indri::api::Parameters *_
 }
 
 
-void _wrap_Parameters_set_indri_go_8e24520e0b567faa(indri::api::Parameters *_swig_go_0, _gostring_ _swig_go_1) {
+void _wrap_Wrapped_Parameters_set_indri_go_add17ee78870902e(indri::api::Parameters *_swig_go_0, _gostring_ _swig_go_1) {
   indri::api::Parameters *arg1 = (indri::api::Parameters *) 0 ;
   std::string *arg2 = 0 ;
   
@@ -810,7 +2542,7 @@ void _wrap_Parameters_set_indri_go_8e24520e0b567faa(indri::api::Parameters *_swi
 }
 
 
-bool _wrap_Parameters_get_bool_indri_go_8e24520e0b567faa(indri::api::Parameters *_swig_go_0, _gostring_ _swig_go_1, bool _swig_go_2) {
+bool _wrap_Wrapped_Parameters_get_bool_indri_go_add17ee78870902e(indri::api::Parameters *_swig_go_0, _gostring_ _swig_go_1, bool _swig_go_2) {
   indri::api::Parameters *arg1 = (indri::api::Parameters *) 0 ;
   std::string *arg2 = 0 ;
   bool arg3 ;
@@ -830,7 +2562,7 @@ bool _wrap_Parameters_get_bool_indri_go_8e24520e0b567faa(indri::api::Parameters 
 }
 
 
-intgo _wrap_Parameters_get_int_indri_go_8e24520e0b567faa(indri::api::Parameters *_swig_go_0, _gostring_ _swig_go_1, intgo _swig_go_2) {
+intgo _wrap_Wrapped_Parameters_get_int_indri_go_add17ee78870902e(indri::api::Parameters *_swig_go_0, _gostring_ _swig_go_1, intgo _swig_go_2) {
   indri::api::Parameters *arg1 = (indri::api::Parameters *) 0 ;
   std::string *arg2 = 0 ;
   int arg3 ;
@@ -850,7 +2582,7 @@ intgo _wrap_Parameters_get_int_indri_go_8e24520e0b567faa(indri::api::Parameters 
 }
 
 
-double _wrap_Parameters_get_double_indri_go_8e24520e0b567faa(indri::api::Parameters *_swig_go_0, _gostring_ _swig_go_1, double _swig_go_2) {
+double _wrap_Wrapped_Parameters_get_double_indri_go_add17ee78870902e(indri::api::Parameters *_swig_go_0, _gostring_ _swig_go_1, double _swig_go_2) {
   indri::api::Parameters *arg1 = (indri::api::Parameters *) 0 ;
   std::string *arg2 = 0 ;
   double arg3 ;
@@ -870,7 +2602,7 @@ double _wrap_Parameters_get_double_indri_go_8e24520e0b567faa(indri::api::Paramet
 }
 
 
-long long _wrap_Parameters_get_INT64_indri_go_8e24520e0b567faa(indri::api::Parameters *_swig_go_0, _gostring_ _swig_go_1, long long _swig_go_2) {
+long long _wrap_Wrapped_Parameters_get_INT64_indri_go_add17ee78870902e(indri::api::Parameters *_swig_go_0, _gostring_ _swig_go_1, long long _swig_go_2) {
   indri::api::Parameters *arg1 = (indri::api::Parameters *) 0 ;
   std::string *arg2 = 0 ;
   INT64 arg3 ;
@@ -890,7 +2622,7 @@ long long _wrap_Parameters_get_INT64_indri_go_8e24520e0b567faa(indri::api::Param
 }
 
 
-_gostring_ _wrap_Parameters_get_string_indri_go_8e24520e0b567faa(indri::api::Parameters *_swig_go_0, _gostring_ _swig_go_1, _gostring_ _swig_go_2) {
+_gostring_ _wrap_Wrapped_Parameters_get_string_indri_go_add17ee78870902e(indri::api::Parameters *_swig_go_0, _gostring_ _swig_go_1, _gostring_ _swig_go_2) {
   indri::api::Parameters *arg1 = (indri::api::Parameters *) 0 ;
   std::string *arg2 = 0 ;
   std::string *arg3 = 0 ;
@@ -913,7 +2645,7 @@ _gostring_ _wrap_Parameters_get_string_indri_go_8e24520e0b567faa(indri::api::Par
 }
 
 
-void _wrap_Parameters_remove_indri_go_8e24520e0b567faa(indri::api::Parameters *_swig_go_0, _gostring_ _swig_go_1) {
+void _wrap_Wrapped_Parameters_remove_indri_go_add17ee78870902e(indri::api::Parameters *_swig_go_0, _gostring_ _swig_go_1) {
   indri::api::Parameters *arg1 = (indri::api::Parameters *) 0 ;
   std::string *arg2 = 0 ;
   
@@ -928,7 +2660,7 @@ void _wrap_Parameters_remove_indri_go_8e24520e0b567faa(indri::api::Parameters *_
 }
 
 
-void _wrap_Parameters_set_bool_indri_go_8e24520e0b567faa(indri::api::Parameters *_swig_go_0, _gostring_ _swig_go_1, bool _swig_go_2) {
+void _wrap_Wrapped_Parameters_set_bool_indri_go_add17ee78870902e(indri::api::Parameters *_swig_go_0, _gostring_ _swig_go_1, bool _swig_go_2) {
   indri::api::Parameters *arg1 = (indri::api::Parameters *) 0 ;
   std::string *arg2 = 0 ;
   bool arg3 ;
@@ -945,7 +2677,7 @@ void _wrap_Parameters_set_bool_indri_go_8e24520e0b567faa(indri::api::Parameters 
 }
 
 
-void _wrap_Parameters_set_string_indri_go_8e24520e0b567faa(indri::api::Parameters *_swig_go_0, _gostring_ _swig_go_1, _gostring_ _swig_go_2) {
+void _wrap_Wrapped_Parameters_set_string_indri_go_add17ee78870902e(indri::api::Parameters *_swig_go_0, _gostring_ _swig_go_1, _gostring_ _swig_go_2) {
   indri::api::Parameters *arg1 = (indri::api::Parameters *) 0 ;
   std::string *arg2 = 0 ;
   std::string *arg3 = 0 ;
@@ -965,7 +2697,7 @@ void _wrap_Parameters_set_string_indri_go_8e24520e0b567faa(indri::api::Parameter
 }
 
 
-void _wrap_Parameters_set_int_indri_go_8e24520e0b567faa(indri::api::Parameters *_swig_go_0, _gostring_ _swig_go_1, intgo _swig_go_2) {
+void _wrap_Wrapped_Parameters_set_int_indri_go_add17ee78870902e(indri::api::Parameters *_swig_go_0, _gostring_ _swig_go_1, intgo _swig_go_2) {
   indri::api::Parameters *arg1 = (indri::api::Parameters *) 0 ;
   std::string *arg2 = 0 ;
   int arg3 ;
@@ -982,7 +2714,7 @@ void _wrap_Parameters_set_int_indri_go_8e24520e0b567faa(indri::api::Parameters *
 }
 
 
-void _wrap_Parameters_set_UINT64_indri_go_8e24520e0b567faa(indri::api::Parameters *_swig_go_0, _gostring_ _swig_go_1, long long _swig_go_2) {
+void _wrap_Wrapped_Parameters_set_UINT64_indri_go_add17ee78870902e(indri::api::Parameters *_swig_go_0, _gostring_ _swig_go_1, long long _swig_go_2) {
   indri::api::Parameters *arg1 = (indri::api::Parameters *) 0 ;
   std::string *arg2 = 0 ;
   UINT64 arg3 ;
@@ -999,7 +2731,7 @@ void _wrap_Parameters_set_UINT64_indri_go_8e24520e0b567faa(indri::api::Parameter
 }
 
 
-void _wrap_Parameters_set_double_indri_go_8e24520e0b567faa(indri::api::Parameters *_swig_go_0, _gostring_ _swig_go_1, double _swig_go_2) {
+void _wrap_Wrapped_Parameters_set_double_indri_go_add17ee78870902e(indri::api::Parameters *_swig_go_0, _gostring_ _swig_go_1, double _swig_go_2) {
   indri::api::Parameters *arg1 = (indri::api::Parameters *) 0 ;
   std::string *arg2 = 0 ;
   double arg3 ;
@@ -1016,7 +2748,7 @@ void _wrap_Parameters_set_double_indri_go_8e24520e0b567faa(indri::api::Parameter
 }
 
 
-void _wrap_Parameters_clear_indri_go_8e24520e0b567faa(indri::api::Parameters *_swig_go_0) {
+void _wrap_Wrapped_Parameters_clear_indri_go_add17ee78870902e(indri::api::Parameters *_swig_go_0) {
   indri::api::Parameters *arg1 = (indri::api::Parameters *) 0 ;
   
   arg1 = *(indri::api::Parameters **)&_swig_go_0; 
@@ -1026,7 +2758,7 @@ void _wrap_Parameters_clear_indri_go_8e24520e0b567faa(indri::api::Parameters *_s
 }
 
 
-long long _wrap_Parameters_size_indri_go_8e24520e0b567faa(indri::api::Parameters *_swig_go_0) {
+long long _wrap_Wrapped_Parameters_size_indri_go_add17ee78870902e(indri::api::Parameters *_swig_go_0) {
   indri::api::Parameters *arg1 = (indri::api::Parameters *) 0 ;
   size_t result;
   long long _swig_go_result;
@@ -1039,7 +2771,7 @@ long long _wrap_Parameters_size_indri_go_8e24520e0b567faa(indri::api::Parameters
 }
 
 
-bool _wrap_Parameters_exists_indri_go_8e24520e0b567faa(indri::api::Parameters *_swig_go_0, _gostring_ _swig_go_1) {
+bool _wrap_Wrapped_Parameters_exists_indri_go_add17ee78870902e(indri::api::Parameters *_swig_go_0, _gostring_ _swig_go_1) {
   indri::api::Parameters *arg1 = (indri::api::Parameters *) 0 ;
   std::string *arg2 = 0 ;
   bool result;
@@ -1057,7 +2789,7 @@ bool _wrap_Parameters_exists_indri_go_8e24520e0b567faa(indri::api::Parameters *_
 }
 
 
-void _wrap_Parameters_load_indri_go_8e24520e0b567faa(indri::api::Parameters *_swig_go_0, _gostring_ _swig_go_1) {
+void _wrap_Wrapped_Parameters_load_indri_go_add17ee78870902e(indri::api::Parameters *_swig_go_0, _gostring_ _swig_go_1) {
   indri::api::Parameters *arg1 = (indri::api::Parameters *) 0 ;
   std::string *arg2 = 0 ;
   
@@ -1067,12 +2799,18 @@ void _wrap_Parameters_load_indri_go_8e24520e0b567faa(indri::api::Parameters *_sw
   arg2 = &arg2_str;
   
   
-  (arg1)->load((std::string const &)*arg2);
+  {
+    try {
+      (arg1)->load((std::string const &)*arg2);
+    } catch( lemur::api::Exception& e ) {
+      SWIG_exception( SWIG_RuntimeError, e.what().c_str() );
+    }
+  }
   
 }
 
 
-void _wrap_TermExtent_begin_set_indri_go_8e24520e0b567faa(indri::parse::TermExtent *_swig_go_0, intgo _swig_go_1) {
+void _wrap_TermExtent_begin_set_indri_go_add17ee78870902e(indri::parse::TermExtent *_swig_go_0, intgo _swig_go_1) {
   indri::parse::TermExtent *arg1 = (indri::parse::TermExtent *) 0 ;
   int arg2 ;
   
@@ -1084,7 +2822,7 @@ void _wrap_TermExtent_begin_set_indri_go_8e24520e0b567faa(indri::parse::TermExte
 }
 
 
-intgo _wrap_TermExtent_begin_get_indri_go_8e24520e0b567faa(indri::parse::TermExtent *_swig_go_0) {
+intgo _wrap_TermExtent_begin_get_indri_go_add17ee78870902e(indri::parse::TermExtent *_swig_go_0) {
   indri::parse::TermExtent *arg1 = (indri::parse::TermExtent *) 0 ;
   int result;
   intgo _swig_go_result;
@@ -1097,7 +2835,7 @@ intgo _wrap_TermExtent_begin_get_indri_go_8e24520e0b567faa(indri::parse::TermExt
 }
 
 
-void _wrap_TermExtent_end_set_indri_go_8e24520e0b567faa(indri::parse::TermExtent *_swig_go_0, intgo _swig_go_1) {
+void _wrap_TermExtent_end_set_indri_go_add17ee78870902e(indri::parse::TermExtent *_swig_go_0, intgo _swig_go_1) {
   indri::parse::TermExtent *arg1 = (indri::parse::TermExtent *) 0 ;
   int arg2 ;
   
@@ -1109,7 +2847,7 @@ void _wrap_TermExtent_end_set_indri_go_8e24520e0b567faa(indri::parse::TermExtent
 }
 
 
-intgo _wrap_TermExtent_end_get_indri_go_8e24520e0b567faa(indri::parse::TermExtent *_swig_go_0) {
+intgo _wrap_TermExtent_end_get_indri_go_add17ee78870902e(indri::parse::TermExtent *_swig_go_0) {
   indri::parse::TermExtent *arg1 = (indri::parse::TermExtent *) 0 ;
   int result;
   intgo _swig_go_result;
@@ -1122,7 +2860,7 @@ intgo _wrap_TermExtent_end_get_indri_go_8e24520e0b567faa(indri::parse::TermExten
 }
 
 
-void _wrap_delete_TermExtent_indri_go_8e24520e0b567faa(indri::parse::TermExtent *_swig_go_0) {
+void _wrap_delete_TermExtent_indri_go_add17ee78870902e(indri::parse::TermExtent *_swig_go_0) {
   indri::parse::TermExtent *arg1 = (indri::parse::TermExtent *) 0 ;
   
   arg1 = *(indri::parse::TermExtent **)&_swig_go_0; 
@@ -1132,24 +2870,18 @@ void _wrap_delete_TermExtent_indri_go_8e24520e0b567faa(indri::parse::TermExtent 
 }
 
 
-indri::parse::TermExtent *_wrap_new_TermExtent_indri_go_8e24520e0b567faa() {
+indri::parse::TermExtent *_wrap_new_TermExtent_indri_go_add17ee78870902e() {
   indri::parse::TermExtent *result = 0 ;
   indri::parse::TermExtent *_swig_go_result;
   
   
-  {
-    try {
-      result = (indri::parse::TermExtent *)new indri::parse::TermExtent();;
-    } catch (std::exception &e) {
-      _swig_gopanic(e.what());
-    }
-  }
+  result = (indri::parse::TermExtent *)new indri::parse::TermExtent();
   *(indri::parse::TermExtent **)&_swig_go_result = (indri::parse::TermExtent *)result; 
   return _swig_go_result;
 }
 
 
-void _wrap_delete_ScoredExtentResult_indri_go_8e24520e0b567faa(indri::api::ScoredExtentResult *_swig_go_0) {
+void _wrap_delete_ScoredExtentResult_indri_go_add17ee78870902e(indri::api::ScoredExtentResult *_swig_go_0) {
   indri::api::ScoredExtentResult *arg1 = (indri::api::ScoredExtentResult *) 0 ;
   
   arg1 = *(indri::api::ScoredExtentResult **)&_swig_go_0; 
@@ -1159,24 +2891,18 @@ void _wrap_delete_ScoredExtentResult_indri_go_8e24520e0b567faa(indri::api::Score
 }
 
 
-indri::api::ScoredExtentResult *_wrap_new_ScoredExtentResult_indri_go_8e24520e0b567faa() {
+indri::api::ScoredExtentResult *_wrap_new_ScoredExtentResult_indri_go_add17ee78870902e() {
   indri::api::ScoredExtentResult *result = 0 ;
   indri::api::ScoredExtentResult *_swig_go_result;
   
   
-  {
-    try {
-      result = (indri::api::ScoredExtentResult *)new indri::api::ScoredExtentResult();;
-    } catch (std::exception &e) {
-      _swig_gopanic(e.what());
-    }
-  }
+  result = (indri::api::ScoredExtentResult *)new indri::api::ScoredExtentResult();
   *(indri::api::ScoredExtentResult **)&_swig_go_result = (indri::api::ScoredExtentResult *)result; 
   return _swig_go_result;
 }
 
 
-void _wrap_delete_ParsedDocument_indri_go_8e24520e0b567faa(indri::api::ParsedDocument *_swig_go_0) {
+void _wrap_delete_ParsedDocument_indri_go_add17ee78870902e(indri::api::ParsedDocument *_swig_go_0) {
   indri::api::ParsedDocument *arg1 = (indri::api::ParsedDocument *) 0 ;
   
   arg1 = *(indri::api::ParsedDocument **)&_swig_go_0; 
@@ -1186,7 +2912,7 @@ void _wrap_delete_ParsedDocument_indri_go_8e24520e0b567faa(indri::api::ParsedDoc
 }
 
 
-_gostring_ _wrap_ParsedDocument_getContent_indri_go_8e24520e0b567faa(indri::api::ParsedDocument *_swig_go_0) {
+_gostring_ _wrap_ParsedDocument_getContent_indri_go_add17ee78870902e(indri::api::ParsedDocument *_swig_go_0) {
   indri::api::ParsedDocument *arg1 = (indri::api::ParsedDocument *) 0 ;
   std::string result;
   _gostring_ _swig_go_result;
@@ -1199,24 +2925,18 @@ _gostring_ _wrap_ParsedDocument_getContent_indri_go_8e24520e0b567faa(indri::api:
 }
 
 
-indri::api::ParsedDocument *_wrap_new_ParsedDocument_indri_go_8e24520e0b567faa() {
+indri::api::ParsedDocument *_wrap_new_ParsedDocument_indri_go_add17ee78870902e() {
   indri::api::ParsedDocument *result = 0 ;
   indri::api::ParsedDocument *_swig_go_result;
   
   
-  {
-    try {
-      result = (indri::api::ParsedDocument *)new indri::api::ParsedDocument();;
-    } catch (std::exception &e) {
-      _swig_gopanic(e.what());
-    }
-  }
+  result = (indri::api::ParsedDocument *)new indri::api::ParsedDocument();
   *(indri::api::ParsedDocument **)&_swig_go_result = (indri::api::ParsedDocument *)result; 
   return _swig_go_result;
 }
 
 
-void _wrap_QueryAnnotationNode_name_set_indri_go_8e24520e0b567faa(indri::api::QueryAnnotationNode *_swig_go_0, _gostring_ _swig_go_1) {
+void _wrap_QueryAnnotationNode_name_set_indri_go_add17ee78870902e(indri::api::QueryAnnotationNode *_swig_go_0, _gostring_ _swig_go_1) {
   indri::api::QueryAnnotationNode *arg1 = (indri::api::QueryAnnotationNode *) 0 ;
   std::string *arg2 = 0 ;
   
@@ -1231,7 +2951,7 @@ void _wrap_QueryAnnotationNode_name_set_indri_go_8e24520e0b567faa(indri::api::Qu
 }
 
 
-_gostring_ _wrap_QueryAnnotationNode_name_get_indri_go_8e24520e0b567faa(indri::api::QueryAnnotationNode *_swig_go_0) {
+_gostring_ _wrap_QueryAnnotationNode_name_get_indri_go_add17ee78870902e(indri::api::QueryAnnotationNode *_swig_go_0) {
   indri::api::QueryAnnotationNode *arg1 = (indri::api::QueryAnnotationNode *) 0 ;
   std::string *result = 0 ;
   _gostring_ _swig_go_result;
@@ -1244,7 +2964,7 @@ _gostring_ _wrap_QueryAnnotationNode_name_get_indri_go_8e24520e0b567faa(indri::a
 }
 
 
-void _wrap_QueryAnnotationNode_Xtype_set_indri_go_8e24520e0b567faa(indri::api::QueryAnnotationNode *_swig_go_0, _gostring_ _swig_go_1) {
+void _wrap_QueryAnnotationNode_Xtype_set_indri_go_add17ee78870902e(indri::api::QueryAnnotationNode *_swig_go_0, _gostring_ _swig_go_1) {
   indri::api::QueryAnnotationNode *arg1 = (indri::api::QueryAnnotationNode *) 0 ;
   std::string *arg2 = 0 ;
   
@@ -1259,7 +2979,7 @@ void _wrap_QueryAnnotationNode_Xtype_set_indri_go_8e24520e0b567faa(indri::api::Q
 }
 
 
-_gostring_ _wrap_QueryAnnotationNode_Xtype_get_indri_go_8e24520e0b567faa(indri::api::QueryAnnotationNode *_swig_go_0) {
+_gostring_ _wrap_QueryAnnotationNode_Xtype_get_indri_go_add17ee78870902e(indri::api::QueryAnnotationNode *_swig_go_0) {
   indri::api::QueryAnnotationNode *arg1 = (indri::api::QueryAnnotationNode *) 0 ;
   std::string *result = 0 ;
   _gostring_ _swig_go_result;
@@ -1272,7 +2992,7 @@ _gostring_ _wrap_QueryAnnotationNode_Xtype_get_indri_go_8e24520e0b567faa(indri::
 }
 
 
-void _wrap_QueryAnnotationNode_queryText_set_indri_go_8e24520e0b567faa(indri::api::QueryAnnotationNode *_swig_go_0, _gostring_ _swig_go_1) {
+void _wrap_QueryAnnotationNode_queryText_set_indri_go_add17ee78870902e(indri::api::QueryAnnotationNode *_swig_go_0, _gostring_ _swig_go_1) {
   indri::api::QueryAnnotationNode *arg1 = (indri::api::QueryAnnotationNode *) 0 ;
   std::string *arg2 = 0 ;
   
@@ -1287,7 +3007,7 @@ void _wrap_QueryAnnotationNode_queryText_set_indri_go_8e24520e0b567faa(indri::ap
 }
 
 
-_gostring_ _wrap_QueryAnnotationNode_queryText_get_indri_go_8e24520e0b567faa(indri::api::QueryAnnotationNode *_swig_go_0) {
+_gostring_ _wrap_QueryAnnotationNode_queryText_get_indri_go_add17ee78870902e(indri::api::QueryAnnotationNode *_swig_go_0) {
   indri::api::QueryAnnotationNode *arg1 = (indri::api::QueryAnnotationNode *) 0 ;
   std::string *result = 0 ;
   _gostring_ _swig_go_result;
@@ -1300,7 +3020,7 @@ _gostring_ _wrap_QueryAnnotationNode_queryText_get_indri_go_8e24520e0b567faa(ind
 }
 
 
-void _wrap_QueryAnnotationNode_children_set_indri_go_8e24520e0b567faa(indri::api::QueryAnnotationNode *_swig_go_0, std::vector< indri::api::QueryAnnotationNode * > *_swig_go_1) {
+void _wrap_QueryAnnotationNode_children_set_indri_go_add17ee78870902e(indri::api::QueryAnnotationNode *_swig_go_0, std::vector< indri::api::QueryAnnotationNode * > *_swig_go_1) {
   indri::api::QueryAnnotationNode *arg1 = (indri::api::QueryAnnotationNode *) 0 ;
   std::vector< indri::api::QueryAnnotationNode * > *arg2 = (std::vector< indri::api::QueryAnnotationNode * > *) 0 ;
   
@@ -1312,7 +3032,7 @@ void _wrap_QueryAnnotationNode_children_set_indri_go_8e24520e0b567faa(indri::api
 }
 
 
-std::vector< indri::api::QueryAnnotationNode * > *_wrap_QueryAnnotationNode_children_get_indri_go_8e24520e0b567faa(indri::api::QueryAnnotationNode *_swig_go_0) {
+std::vector< indri::api::QueryAnnotationNode * > *_wrap_QueryAnnotationNode_children_get_indri_go_add17ee78870902e(indri::api::QueryAnnotationNode *_swig_go_0) {
   indri::api::QueryAnnotationNode *arg1 = (indri::api::QueryAnnotationNode *) 0 ;
   std::vector< indri::api::QueryAnnotationNode * > *result = 0 ;
   std::vector< indri::api::QueryAnnotationNode * > *_swig_go_result;
@@ -1325,40 +3045,28 @@ std::vector< indri::api::QueryAnnotationNode * > *_wrap_QueryAnnotationNode_chil
 }
 
 
-indri::api::QueryAnnotationNode *_wrap_new_QueryAnnotationNode_indri_go_8e24520e0b567faa() {
+indri::api::QueryAnnotationNode *_wrap_new_QueryAnnotationNode_indri_go_add17ee78870902e() {
   indri::api::QueryAnnotationNode *result = 0 ;
   indri::api::QueryAnnotationNode *_swig_go_result;
   
   
-  {
-    try {
-      result = (indri::api::QueryAnnotationNode *)new indri::api::QueryAnnotationNode();;
-    } catch (std::exception &e) {
-      _swig_gopanic(e.what());
-    }
-  }
+  result = (indri::api::QueryAnnotationNode *)new indri::api::QueryAnnotationNode();
   *(indri::api::QueryAnnotationNode **)&_swig_go_result = (indri::api::QueryAnnotationNode *)result; 
   return _swig_go_result;
 }
 
 
-void _wrap_delete_QueryAnnotationNode_indri_go_8e24520e0b567faa(indri::api::QueryAnnotationNode *_swig_go_0) {
+void _wrap_delete_QueryAnnotationNode_indri_go_add17ee78870902e(indri::api::QueryAnnotationNode *_swig_go_0) {
   indri::api::QueryAnnotationNode *arg1 = (indri::api::QueryAnnotationNode *) 0 ;
   
   arg1 = *(indri::api::QueryAnnotationNode **)&_swig_go_0; 
   
-  {
-    try {
-      delete arg1;;
-    } catch (std::exception &e) {
-      _swig_gopanic(e.what());
-    }
-  }
+  delete arg1;
   
 }
 
 
-indri::api::QueryAnnotationNode *_wrap_QueryAnnotation_getQueryTree_indri_go_8e24520e0b567faa(indri::api::QueryAnnotation *_swig_go_0) {
+indri::api::QueryAnnotationNode *_wrap_QueryAnnotation_getQueryTree_indri_go_add17ee78870902e(indri::api::QueryAnnotation *_swig_go_0) {
   indri::api::QueryAnnotation *arg1 = (indri::api::QueryAnnotation *) 0 ;
   indri::api::QueryAnnotationNode *result = 0 ;
   indri::api::QueryAnnotationNode *_swig_go_result;
@@ -1379,7 +3087,7 @@ indri::api::QueryAnnotationNode *_wrap_QueryAnnotation_getQueryTree_indri_go_8e2
 }
 
 
-std::map< std::string,std::vector< indri::api::ScoredExtentResult > > *_wrap_QueryAnnotation_getAnnotations_indri_go_8e24520e0b567faa(indri::api::QueryAnnotation *_swig_go_0) {
+std::map< std::string,std::vector< indri::api::ScoredExtentResult > > *_wrap_QueryAnnotation_getAnnotations_indri_go_add17ee78870902e(indri::api::QueryAnnotation *_swig_go_0) {
   indri::api::QueryAnnotation *arg1 = (indri::api::QueryAnnotation *) 0 ;
   std::map< std::string,std::vector< indri::api::ScoredExtentResult > > *result = 0 ;
   std::map< std::string,std::vector< indri::api::ScoredExtentResult > > *_swig_go_result;
@@ -1400,7 +3108,7 @@ std::map< std::string,std::vector< indri::api::ScoredExtentResult > > *_wrap_Que
 }
 
 
-std::vector< indri::api::ScoredExtentResult > *_wrap_QueryAnnotation_getResults_indri_go_8e24520e0b567faa(indri::api::QueryAnnotation *_swig_go_0) {
+std::vector< indri::api::ScoredExtentResult > *_wrap_QueryAnnotation_getResults_indri_go_add17ee78870902e(indri::api::QueryAnnotation *_swig_go_0) {
   indri::api::QueryAnnotation *arg1 = (indri::api::QueryAnnotation *) 0 ;
   std::vector< indri::api::ScoredExtentResult > *result = 0 ;
   std::vector< indri::api::ScoredExtentResult > *_swig_go_result;
@@ -1421,40 +3129,28 @@ std::vector< indri::api::ScoredExtentResult > *_wrap_QueryAnnotation_getResults_
 }
 
 
-indri::api::QueryAnnotation *_wrap_new_QueryAnnotation_indri_go_8e24520e0b567faa() {
+indri::api::QueryAnnotation *_wrap_new_QueryAnnotation_indri_go_add17ee78870902e() {
   indri::api::QueryAnnotation *result = 0 ;
   indri::api::QueryAnnotation *_swig_go_result;
   
   
-  {
-    try {
-      result = (indri::api::QueryAnnotation *)new indri::api::QueryAnnotation();;
-    } catch (std::exception &e) {
-      _swig_gopanic(e.what());
-    }
-  }
+  result = (indri::api::QueryAnnotation *)new indri::api::QueryAnnotation();
   *(indri::api::QueryAnnotation **)&_swig_go_result = (indri::api::QueryAnnotation *)result; 
   return _swig_go_result;
 }
 
 
-void _wrap_delete_QueryAnnotation_indri_go_8e24520e0b567faa(indri::api::QueryAnnotation *_swig_go_0) {
+void _wrap_delete_QueryAnnotation_indri_go_add17ee78870902e(indri::api::QueryAnnotation *_swig_go_0) {
   indri::api::QueryAnnotation *arg1 = (indri::api::QueryAnnotation *) 0 ;
   
   arg1 = *(indri::api::QueryAnnotation **)&_swig_go_0; 
   
-  {
-    try {
-      delete arg1;;
-    } catch (std::exception &e) {
-      _swig_gopanic(e.what());
-    }
-  }
+  delete arg1;
   
 }
 
 
-indri::api::QueryEnvironment *_wrap_new_QueryEnvironment_indri_go_8e24520e0b567faa() {
+indri::api::QueryEnvironment *_wrap_new_QueryEnvironment_indri_go_add17ee78870902e() {
   indri::api::QueryEnvironment *result = 0 ;
   indri::api::QueryEnvironment *_swig_go_result;
   
@@ -1465,7 +3161,7 @@ indri::api::QueryEnvironment *_wrap_new_QueryEnvironment_indri_go_8e24520e0b567f
 }
 
 
-void _wrap_QueryEnvironment_addServer_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
+void _wrap_QueryEnvironment_addServer_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   
@@ -1494,7 +3190,7 @@ void _wrap_QueryEnvironment_addServer_indri_go_8e24520e0b567faa(indri::api::Quer
 }
 
 
-void _wrap_QueryEnvironment_addIndex_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
+void _wrap_QueryEnvironment_addIndex_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   
@@ -1523,7 +3219,7 @@ void _wrap_QueryEnvironment_addIndex_indri_go_8e24520e0b567faa(indri::api::Query
 }
 
 
-void _wrap_QueryEnvironment_removeServer_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
+void _wrap_QueryEnvironment_removeServer_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   
@@ -1552,7 +3248,7 @@ void _wrap_QueryEnvironment_removeServer_indri_go_8e24520e0b567faa(indri::api::Q
 }
 
 
-void _wrap_QueryEnvironment_removeIndex_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
+void _wrap_QueryEnvironment_removeIndex_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   
@@ -1581,7 +3277,7 @@ void _wrap_QueryEnvironment_removeIndex_indri_go_8e24520e0b567faa(indri::api::Qu
 }
 
 
-void _wrap_QueryEnvironment_close_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0) {
+void _wrap_QueryEnvironment_close_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   
   arg1 = *(indri::api::QueryEnvironment **)&_swig_go_0; 
@@ -1605,7 +3301,7 @@ void _wrap_QueryEnvironment_close_indri_go_8e24520e0b567faa(indri::api::QueryEnv
 }
 
 
-void _wrap_QueryEnvironment_setMemory_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0, long long _swig_go_1) {
+void _wrap_QueryEnvironment_setMemory_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0, long long _swig_go_1) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   UINT64 arg2 ;
   
@@ -1631,7 +3327,7 @@ void _wrap_QueryEnvironment_setMemory_indri_go_8e24520e0b567faa(indri::api::Quer
 }
 
 
-void _wrap_QueryEnvironment_setScoringRules_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0, std::vector< std::string > *_swig_go_1) {
+void _wrap_QueryEnvironment_setScoringRules_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0, std::vector< std::string > *_swig_go_1) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   std::vector< std::string > *arg2 = 0 ;
   
@@ -1657,7 +3353,7 @@ void _wrap_QueryEnvironment_setScoringRules_indri_go_8e24520e0b567faa(indri::api
 }
 
 
-void _wrap_QueryEnvironment_setStopwords_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0, std::vector< std::string > *_swig_go_1) {
+void _wrap_QueryEnvironment_setStopwords_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0, std::vector< std::string > *_swig_go_1) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   std::vector< std::string > *arg2 = 0 ;
   
@@ -1683,7 +3379,7 @@ void _wrap_QueryEnvironment_setStopwords_indri_go_8e24520e0b567faa(indri::api::Q
 }
 
 
-std::vector< indri::api::ScoredExtentResult > *_wrap_QueryEnvironment_runQuery__SWIG_0_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1, intgo _swig_go_2) {
+std::vector< indri::api::ScoredExtentResult > *_wrap_QueryEnvironment_runQuery__SWIG_0_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1, intgo _swig_go_2) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   int arg3 ;
@@ -1717,7 +3413,7 @@ std::vector< indri::api::ScoredExtentResult > *_wrap_QueryEnvironment_runQuery__
 }
 
 
-std::vector< indri::api::ScoredExtentResult > *_wrap_QueryEnvironment_runQuery__SWIG_1_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1, std::vector< int > *_swig_go_2, intgo _swig_go_3) {
+std::vector< indri::api::ScoredExtentResult > *_wrap_QueryEnvironment_runQuery__SWIG_1_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1, std::vector< int > *_swig_go_2, intgo _swig_go_3) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   std::vector< int > *arg3 = 0 ;
@@ -1753,7 +3449,7 @@ std::vector< indri::api::ScoredExtentResult > *_wrap_QueryEnvironment_runQuery__
 }
 
 
-indri::api::QueryAnnotation *_wrap_QueryEnvironment_runAnnotatedQuery__SWIG_0_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1, intgo _swig_go_2) {
+indri::api::QueryAnnotation *_wrap_QueryEnvironment_runAnnotatedQuery__SWIG_0_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1, intgo _swig_go_2) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   int arg3 ;
@@ -1787,7 +3483,7 @@ indri::api::QueryAnnotation *_wrap_QueryEnvironment_runAnnotatedQuery__SWIG_0_in
 }
 
 
-indri::api::QueryAnnotation *_wrap_QueryEnvironment_runAnnotatedQuery__SWIG_1_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1, std::vector< int > *_swig_go_2, intgo _swig_go_3) {
+indri::api::QueryAnnotation *_wrap_QueryEnvironment_runAnnotatedQuery__SWIG_1_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1, std::vector< int > *_swig_go_2, intgo _swig_go_3) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   std::vector< int > *arg3 = 0 ;
@@ -1823,7 +3519,7 @@ indri::api::QueryAnnotation *_wrap_QueryEnvironment_runAnnotatedQuery__SWIG_1_in
 }
 
 
-std::vector< indri::api::ScoredExtentResult > *_wrap_QueryEnvironment_runQuerydocset_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1, std::vector< lemur::api::DOCID_T > *_swig_go_2, intgo _swig_go_3) {
+std::vector< indri::api::ScoredExtentResult > *_wrap_QueryEnvironment_runQuerydocset_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1, std::vector< lemur::api::DOCID_T > *_swig_go_2, intgo _swig_go_3) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   std::vector< lemur::api::DOCID_T > *arg3 = 0 ;
@@ -1851,7 +3547,7 @@ std::vector< indri::api::ScoredExtentResult > *_wrap_QueryEnvironment_runQuerydo
 }
 
 
-indri::api::QueryAnnotation *_wrap_QueryEnvironment_runAnnotatedQuerydocset_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1, std::vector< lemur::api::DOCID_T > *_swig_go_2, intgo _swig_go_3) {
+indri::api::QueryAnnotation *_wrap_QueryEnvironment_runAnnotatedQuerydocset_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1, std::vector< lemur::api::DOCID_T > *_swig_go_2, intgo _swig_go_3) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   std::vector< lemur::api::DOCID_T > *arg3 = 0 ;
@@ -1879,7 +3575,7 @@ indri::api::QueryAnnotation *_wrap_QueryEnvironment_runAnnotatedQuerydocset_indr
 }
 
 
-std::vector< indri::api::ParsedDocument * > *_wrap_QueryEnvironment_documents__SWIG_0_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0, std::vector< int > *_swig_go_1) {
+std::vector< indri::api::ParsedDocument * > *_wrap_QueryEnvironment_documents__SWIG_0_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0, std::vector< int > *_swig_go_1) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   std::vector< int > *arg2 = 0 ;
   SwigValueWrapper< std::vector< indri::api::ParsedDocument * > > result;
@@ -1908,7 +3604,7 @@ std::vector< indri::api::ParsedDocument * > *_wrap_QueryEnvironment_documents__S
 }
 
 
-std::vector< indri::api::ParsedDocument * > *_wrap_QueryEnvironment_documents__SWIG_1_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0, std::vector< indri::api::ScoredExtentResult > *_swig_go_1) {
+std::vector< indri::api::ParsedDocument * > *_wrap_QueryEnvironment_documents__SWIG_1_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0, std::vector< indri::api::ScoredExtentResult > *_swig_go_1) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   std::vector< indri::api::ScoredExtentResult > *arg2 = 0 ;
   SwigValueWrapper< std::vector< indri::api::ParsedDocument * > > result;
@@ -1937,7 +3633,7 @@ std::vector< indri::api::ParsedDocument * > *_wrap_QueryEnvironment_documents__S
 }
 
 
-std::vector< std::string > *_wrap_QueryEnvironment_documentMetadata__SWIG_0_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0, std::vector< int > *_swig_go_1, _gostring_ _swig_go_2) {
+std::vector< std::string > *_wrap_QueryEnvironment_documentMetadata__SWIG_0_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0, std::vector< int > *_swig_go_1, _gostring_ _swig_go_2) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   std::vector< int > *arg2 = 0 ;
   std::string *arg3 = 0 ;
@@ -1971,7 +3667,7 @@ std::vector< std::string > *_wrap_QueryEnvironment_documentMetadata__SWIG_0_indr
 }
 
 
-std::vector< std::string > *_wrap_QueryEnvironment_documentMetadata__SWIG_1_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0, std::vector< indri::api::ScoredExtentResult > *_swig_go_1, _gostring_ _swig_go_2) {
+std::vector< std::string > *_wrap_QueryEnvironment_documentMetadata__SWIG_1_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0, std::vector< indri::api::ScoredExtentResult > *_swig_go_1, _gostring_ _swig_go_2) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   std::vector< indri::api::ScoredExtentResult > *arg2 = 0 ;
   std::string *arg3 = 0 ;
@@ -2005,7 +3701,7 @@ std::vector< std::string > *_wrap_QueryEnvironment_documentMetadata__SWIG_1_indr
 }
 
 
-std::vector< int > *_wrap_QueryEnvironment_documentIDsFromMetadata_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1, std::vector< std::string > *_swig_go_2) {
+std::vector< int > *_wrap_QueryEnvironment_documentIDsFromMetadata_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1, std::vector< std::string > *_swig_go_2) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   std::vector< std::string > *arg3 = 0 ;
@@ -2039,7 +3735,7 @@ std::vector< int > *_wrap_QueryEnvironment_documentIDsFromMetadata_indri_go_8e24
 }
 
 
-std::vector< indri::api::ParsedDocument * > *_wrap_QueryEnvironment_documentsFromMetadata_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1, std::vector< std::string > *_swig_go_2) {
+std::vector< indri::api::ParsedDocument * > *_wrap_QueryEnvironment_documentsFromMetadata_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1, std::vector< std::string > *_swig_go_2) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   std::vector< std::string > *arg3 = 0 ;
@@ -2073,7 +3769,7 @@ std::vector< indri::api::ParsedDocument * > *_wrap_QueryEnvironment_documentsFro
 }
 
 
-long long _wrap_QueryEnvironment_termCount__SWIG_0_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0) {
+long long _wrap_QueryEnvironment_termCount__SWIG_0_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   INT64 result;
   long long _swig_go_result;
@@ -2100,7 +3796,7 @@ long long _wrap_QueryEnvironment_termCount__SWIG_0_indri_go_8e24520e0b567faa(ind
 }
 
 
-long long _wrap_QueryEnvironment_termCount__SWIG_1_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
+long long _wrap_QueryEnvironment_termCount__SWIG_1_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   INT64 result;
@@ -2132,7 +3828,7 @@ long long _wrap_QueryEnvironment_termCount__SWIG_1_indri_go_8e24520e0b567faa(ind
 }
 
 
-long long _wrap_QueryEnvironment_termFieldCount_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1, _gostring_ _swig_go_2) {
+long long _wrap_QueryEnvironment_termFieldCount_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1, _gostring_ _swig_go_2) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   std::string *arg3 = 0 ;
@@ -2169,7 +3865,7 @@ long long _wrap_QueryEnvironment_termFieldCount_indri_go_8e24520e0b567faa(indri:
 }
 
 
-std::vector< std::string > *_wrap_QueryEnvironment_fieldList_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0) {
+std::vector< std::string > *_wrap_QueryEnvironment_fieldList_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   std::vector< std::string > result;
   std::vector< std::string > *_swig_go_result;
@@ -2196,7 +3892,7 @@ std::vector< std::string > *_wrap_QueryEnvironment_fieldList_indri_go_8e24520e0b
 }
 
 
-long long _wrap_QueryEnvironment_documentCount__SWIG_0_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0) {
+long long _wrap_QueryEnvironment_documentCount__SWIG_0_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   INT64 result;
   long long _swig_go_result;
@@ -2223,7 +3919,7 @@ long long _wrap_QueryEnvironment_documentCount__SWIG_0_indri_go_8e24520e0b567faa
 }
 
 
-long long _wrap_QueryEnvironment_documentCount__SWIG_1_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
+long long _wrap_QueryEnvironment_documentCount__SWIG_1_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   INT64 result;
@@ -2255,7 +3951,7 @@ long long _wrap_QueryEnvironment_documentCount__SWIG_1_indri_go_8e24520e0b567faa
 }
 
 
-std::vector< indri::api::DocumentVector * > *_wrap_QueryEnvironment_documentVectors_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0, std::vector< int > *_swig_go_1) {
+std::vector< indri::api::DocumentVector * > *_wrap_QueryEnvironment_documentVectors_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0, std::vector< int > *_swig_go_1) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   std::vector< int > *arg2 = 0 ;
   SwigValueWrapper< std::vector< indri::api::DocumentVector * > > result;
@@ -2284,7 +3980,7 @@ std::vector< indri::api::DocumentVector * > *_wrap_QueryEnvironment_documentVect
 }
 
 
-double _wrap_QueryEnvironment_expressionCount__SWIG_0_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1, _gostring_ _swig_go_2) {
+double _wrap_QueryEnvironment_expressionCount__SWIG_0_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1, _gostring_ _swig_go_2) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   std::string *arg3 = 0 ;
@@ -2321,7 +4017,7 @@ double _wrap_QueryEnvironment_expressionCount__SWIG_0_indri_go_8e24520e0b567faa(
 }
 
 
-double _wrap_QueryEnvironment_expressionCount__SWIG_1_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
+double _wrap_QueryEnvironment_expressionCount__SWIG_1_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   double result;
@@ -2353,7 +4049,7 @@ double _wrap_QueryEnvironment_expressionCount__SWIG_1_indri_go_8e24520e0b567faa(
 }
 
 
-double _wrap_QueryEnvironment_documentExpressionCount__SWIG_0_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1, _gostring_ _swig_go_2) {
+double _wrap_QueryEnvironment_documentExpressionCount__SWIG_0_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1, _gostring_ _swig_go_2) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   std::string *arg3 = 0 ;
@@ -2390,7 +4086,7 @@ double _wrap_QueryEnvironment_documentExpressionCount__SWIG_0_indri_go_8e24520e0
 }
 
 
-double _wrap_QueryEnvironment_documentExpressionCount__SWIG_1_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
+double _wrap_QueryEnvironment_documentExpressionCount__SWIG_1_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   double result;
@@ -2422,7 +4118,7 @@ double _wrap_QueryEnvironment_documentExpressionCount__SWIG_1_indri_go_8e24520e0
 }
 
 
-std::vector< indri::api::ScoredExtentResult > *_wrap_QueryEnvironment_expressionList__SWIG_0_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1, _gostring_ _swig_go_2) {
+std::vector< indri::api::ScoredExtentResult > *_wrap_QueryEnvironment_expressionList__SWIG_0_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1, _gostring_ _swig_go_2) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   std::string *arg3 = 0 ;
@@ -2459,7 +4155,7 @@ std::vector< indri::api::ScoredExtentResult > *_wrap_QueryEnvironment_expression
 }
 
 
-std::vector< indri::api::ScoredExtentResult > *_wrap_QueryEnvironment_expressionList__SWIG_1_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
+std::vector< indri::api::ScoredExtentResult > *_wrap_QueryEnvironment_expressionList__SWIG_1_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   SwigValueWrapper< std::vector< indri::api::ScoredExtentResult > > result;
@@ -2491,7 +4187,7 @@ std::vector< indri::api::ScoredExtentResult > *_wrap_QueryEnvironment_expression
 }
 
 
-intgo _wrap_QueryEnvironment_documentLength_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0, intgo _swig_go_1) {
+intgo _wrap_QueryEnvironment_documentLength_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0, intgo _swig_go_1) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   int arg2 ;
   int result;
@@ -2520,7 +4216,7 @@ intgo _wrap_QueryEnvironment_documentLength_indri_go_8e24520e0b567faa(indri::api
 }
 
 
-void _wrap_QueryEnvironment_setFormulationParameters_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0, indri::api::Parameters *_swig_go_1) {
+void _wrap_QueryEnvironment_setFormulationParameters_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0, indri::api::Parameters *_swig_go_1) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   indri::api::Parameters *arg2 = 0 ;
   
@@ -2532,7 +4228,7 @@ void _wrap_QueryEnvironment_setFormulationParameters_indri_go_8e24520e0b567faa(i
 }
 
 
-_gostring_ _wrap_QueryEnvironment_reformulateQuery_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
+_gostring_ _wrap_QueryEnvironment_reformulateQuery_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   std::string result;
@@ -2550,7 +4246,7 @@ _gostring_ _wrap_QueryEnvironment_reformulateQuery_indri_go_8e24520e0b567faa(ind
 }
 
 
-_gostring_ _wrap_QueryEnvironment_stemTerm_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
+_gostring_ _wrap_QueryEnvironment_stemTerm_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   std::string result;
@@ -2568,7 +4264,7 @@ _gostring_ _wrap_QueryEnvironment_stemTerm_indri_go_8e24520e0b567faa(indri::api:
 }
 
 
-long long _wrap_QueryEnvironment_termCountUnique_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0) {
+long long _wrap_QueryEnvironment_termCountUnique_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   INT64 result;
   long long _swig_go_result;
@@ -2581,7 +4277,7 @@ long long _wrap_QueryEnvironment_termCountUnique_indri_go_8e24520e0b567faa(indri
 }
 
 
-long long _wrap_QueryEnvironment_stemCount_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
+long long _wrap_QueryEnvironment_stemCount_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   INT64 result;
@@ -2599,7 +4295,7 @@ long long _wrap_QueryEnvironment_stemCount_indri_go_8e24520e0b567faa(indri::api:
 }
 
 
-long long _wrap_QueryEnvironment_stemFieldCount_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1, _gostring_ _swig_go_2) {
+long long _wrap_QueryEnvironment_stemFieldCount_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1, _gostring_ _swig_go_2) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   std::string *arg3 = 0 ;
@@ -2622,7 +4318,7 @@ long long _wrap_QueryEnvironment_stemFieldCount_indri_go_8e24520e0b567faa(indri:
 }
 
 
-long long _wrap_QueryEnvironment_documentStemCount_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
+long long _wrap_QueryEnvironment_documentStemCount_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   INT64 result;
@@ -2640,7 +4336,7 @@ long long _wrap_QueryEnvironment_documentStemCount_indri_go_8e24520e0b567faa(ind
 }
 
 
-std::vector< indri::api::ParsedDocument * > *_wrap_QueryEnvironment_documentsdocids_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0, std::vector< lemur::api::DOCID_T > *_swig_go_1) {
+std::vector< indri::api::ParsedDocument * > *_wrap_QueryEnvironment_documentsdocids_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0, std::vector< lemur::api::DOCID_T > *_swig_go_1) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   std::vector< lemur::api::DOCID_T > *arg2 = 0 ;
   SwigValueWrapper< std::vector< indri::api::ParsedDocument * > > result;
@@ -2661,7 +4357,7 @@ std::vector< indri::api::ParsedDocument * > *_wrap_QueryEnvironment_documentsdoc
 }
 
 
-std::vector< std::string > *_wrap_QueryEnvironment_documentMetadatadocids_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0, std::vector< lemur::api::DOCID_T > *_swig_go_1, _gostring_ _swig_go_2) {
+std::vector< std::string > *_wrap_QueryEnvironment_documentMetadatadocids_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0, std::vector< lemur::api::DOCID_T > *_swig_go_1, _gostring_ _swig_go_2) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   std::vector< lemur::api::DOCID_T > *arg2 = 0 ;
   std::string *arg3 = 0 ;
@@ -2687,7 +4383,7 @@ std::vector< std::string > *_wrap_QueryEnvironment_documentMetadatadocids_indri_
 }
 
 
-long long _wrap_QueryEnvironment_onetermCount_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
+long long _wrap_QueryEnvironment_onetermCount_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   INT64 result;
@@ -2705,7 +4401,7 @@ long long _wrap_QueryEnvironment_onetermCount_indri_go_8e24520e0b567faa(indri::a
 }
 
 
-long long _wrap_QueryEnvironment_onedocumentCount_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
+long long _wrap_QueryEnvironment_onedocumentCount_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   INT64 result;
@@ -2723,23 +4419,17 @@ long long _wrap_QueryEnvironment_onedocumentCount_indri_go_8e24520e0b567faa(indr
 }
 
 
-void _wrap_delete_QueryEnvironment_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0) {
+void _wrap_delete_QueryEnvironment_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   
   arg1 = *(indri::api::QueryEnvironment **)&_swig_go_0; 
   
-  {
-    try {
-      delete arg1;;
-    } catch (std::exception &e) {
-      _swig_gopanic(e.what());
-    }
-  }
+  delete arg1;
   
 }
 
 
-void _wrap_delete_QueryExpander_indri_go_8e24520e0b567faa(indri::query::QueryExpander *_swig_go_0) {
+void _wrap_delete_QueryExpander_indri_go_add17ee78870902e(indri::query::QueryExpander *_swig_go_0) {
   indri::query::QueryExpander *arg1 = (indri::query::QueryExpander *) 0 ;
   
   arg1 = *(indri::query::QueryExpander **)&_swig_go_0; 
@@ -2749,7 +4439,7 @@ void _wrap_delete_QueryExpander_indri_go_8e24520e0b567faa(indri::query::QueryExp
 }
 
 
-std::vector< indri::api::ScoredExtentResult > *_wrap_QueryExpander_runExpandedQuery__SWIG_0_indri_go_8e24520e0b567faa(indri::query::QueryExpander *_swig_go_0, _gostring_ _swig_go_1, intgo _swig_go_2, bool _swig_go_3) {
+std::vector< indri::api::ScoredExtentResult > *_wrap_QueryExpander_runExpandedQuery__SWIG_0_indri_go_add17ee78870902e(indri::query::QueryExpander *_swig_go_0, _gostring_ _swig_go_1, intgo _swig_go_2, bool _swig_go_3) {
   indri::query::QueryExpander *arg1 = (indri::query::QueryExpander *) 0 ;
   std::string arg2 ;
   int arg3 ;
@@ -2768,7 +4458,7 @@ std::vector< indri::api::ScoredExtentResult > *_wrap_QueryExpander_runExpandedQu
 }
 
 
-std::vector< indri::api::ScoredExtentResult > *_wrap_QueryExpander_runExpandedQuery__SWIG_1_indri_go_8e24520e0b567faa(indri::query::QueryExpander *_swig_go_0, _gostring_ _swig_go_1, intgo _swig_go_2) {
+std::vector< indri::api::ScoredExtentResult > *_wrap_QueryExpander_runExpandedQuery__SWIG_1_indri_go_add17ee78870902e(indri::query::QueryExpander *_swig_go_0, _gostring_ _swig_go_1, intgo _swig_go_2) {
   indri::query::QueryExpander *arg1 = (indri::query::QueryExpander *) 0 ;
   std::string arg2 ;
   int arg3 ;
@@ -2785,7 +4475,7 @@ std::vector< indri::api::ScoredExtentResult > *_wrap_QueryExpander_runExpandedQu
 }
 
 
-_gostring_ _wrap_QueryExpander_expand_indri_go_8e24520e0b567faa(indri::query::QueryExpander *_swig_go_0, _gostring_ _swig_go_1, std::vector< indri::api::ScoredExtentResult > *_swig_go_2) {
+_gostring_ _wrap_QueryExpander_expand_indri_go_add17ee78870902e(indri::query::QueryExpander *_swig_go_0, _gostring_ _swig_go_1, std::vector< indri::api::ScoredExtentResult > *_swig_go_2) {
   indri::query::QueryExpander *arg1 = (indri::query::QueryExpander *) 0 ;
   std::string arg2 ;
   std::vector< indri::api::ScoredExtentResult > *arg3 = 0 ;
@@ -2802,7 +4492,7 @@ _gostring_ _wrap_QueryExpander_expand_indri_go_8e24520e0b567faa(indri::query::Qu
 }
 
 
-indri::query::RMExpander *_wrap_new_RMExpander_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0, indri::api::Parameters *_swig_go_1) {
+indri::query::RMExpander *_wrap_new_RMExpander_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0, indri::api::Parameters *_swig_go_1) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   indri::api::Parameters *arg2 = 0 ;
   indri::query::RMExpander *result = 0 ;
@@ -2817,7 +4507,7 @@ indri::query::RMExpander *_wrap_new_RMExpander_indri_go_8e24520e0b567faa(indri::
 }
 
 
-_gostring_ _wrap_RMExpander_expand_indri_go_8e24520e0b567faa(indri::query::RMExpander *_swig_go_0, _gostring_ _swig_go_1, std::vector< indri::api::ScoredExtentResult > *_swig_go_2) {
+_gostring_ _wrap_RMExpander_expand_indri_go_add17ee78870902e(indri::query::RMExpander *_swig_go_0, _gostring_ _swig_go_1, std::vector< indri::api::ScoredExtentResult > *_swig_go_2) {
   indri::query::RMExpander *arg1 = (indri::query::RMExpander *) 0 ;
   std::string arg2 ;
   std::vector< indri::api::ScoredExtentResult > *arg3 = 0 ;
@@ -2834,23 +4524,17 @@ _gostring_ _wrap_RMExpander_expand_indri_go_8e24520e0b567faa(indri::query::RMExp
 }
 
 
-void _wrap_delete_RMExpander_indri_go_8e24520e0b567faa(indri::query::RMExpander *_swig_go_0) {
+void _wrap_delete_RMExpander_indri_go_add17ee78870902e(indri::query::RMExpander *_swig_go_0) {
   indri::query::RMExpander *arg1 = (indri::query::RMExpander *) 0 ;
   
   arg1 = *(indri::query::RMExpander **)&_swig_go_0; 
   
-  {
-    try {
-      delete arg1;;
-    } catch (std::exception &e) {
-      _swig_gopanic(e.what());
-    }
-  }
+  delete arg1;
   
 }
 
 
-std::vector< indri::api::ScoredExtentResult > *_wrap_RMExpander_runExpandedQuery__SWIG_0_indri_go_8e24520e0b567faa(indri::query::RMExpander *_swig_go_0, _gostring_ _swig_go_1, intgo _swig_go_2, bool _swig_go_3) {
+std::vector< indri::api::ScoredExtentResult > *_wrap_RMExpander_runExpandedQuery__SWIG_0_indri_go_add17ee78870902e(indri::query::RMExpander *_swig_go_0, _gostring_ _swig_go_1, intgo _swig_go_2, bool _swig_go_3) {
   indri::query::RMExpander *arg1 = (indri::query::RMExpander *) 0 ;
   std::string arg2 ;
   int arg3 ;
@@ -2870,7 +4554,7 @@ std::vector< indri::api::ScoredExtentResult > *_wrap_RMExpander_runExpandedQuery
 }
 
 
-std::vector< indri::api::ScoredExtentResult > *_wrap_RMExpander_runExpandedQuery__SWIG_1_indri_go_8e24520e0b567faa(indri::query::RMExpander *_swig_go_0, _gostring_ _swig_go_1, intgo _swig_go_2) {
+std::vector< indri::api::ScoredExtentResult > *_wrap_RMExpander_runExpandedQuery__SWIG_1_indri_go_add17ee78870902e(indri::query::RMExpander *_swig_go_0, _gostring_ _swig_go_1, intgo _swig_go_2) {
   indri::query::RMExpander *arg1 = (indri::query::RMExpander *) 0 ;
   std::string arg2 ;
   int arg3 ;
@@ -2888,7 +4572,7 @@ std::vector< indri::api::ScoredExtentResult > *_wrap_RMExpander_runExpandedQuery
 }
 
 
-indri::query::PonteExpander *_wrap_new_PonteExpander_indri_go_8e24520e0b567faa(indri::api::QueryEnvironment *_swig_go_0, indri::api::Parameters *_swig_go_1) {
+indri::query::PonteExpander *_wrap_new_PonteExpander_indri_go_add17ee78870902e(indri::api::QueryEnvironment *_swig_go_0, indri::api::Parameters *_swig_go_1) {
   indri::api::QueryEnvironment *arg1 = (indri::api::QueryEnvironment *) 0 ;
   indri::api::Parameters *arg2 = 0 ;
   indri::query::PonteExpander *result = 0 ;
@@ -2903,7 +4587,7 @@ indri::query::PonteExpander *_wrap_new_PonteExpander_indri_go_8e24520e0b567faa(i
 }
 
 
-_gostring_ _wrap_PonteExpander_expand_indri_go_8e24520e0b567faa(indri::query::PonteExpander *_swig_go_0, _gostring_ _swig_go_1, std::vector< indri::api::ScoredExtentResult > *_swig_go_2) {
+_gostring_ _wrap_PonteExpander_expand_indri_go_add17ee78870902e(indri::query::PonteExpander *_swig_go_0, _gostring_ _swig_go_1, std::vector< indri::api::ScoredExtentResult > *_swig_go_2) {
   indri::query::PonteExpander *arg1 = (indri::query::PonteExpander *) 0 ;
   std::string arg2 ;
   std::vector< indri::api::ScoredExtentResult > *arg3 = 0 ;
@@ -2920,23 +4604,17 @@ _gostring_ _wrap_PonteExpander_expand_indri_go_8e24520e0b567faa(indri::query::Po
 }
 
 
-void _wrap_delete_PonteExpander_indri_go_8e24520e0b567faa(indri::query::PonteExpander *_swig_go_0) {
+void _wrap_delete_PonteExpander_indri_go_add17ee78870902e(indri::query::PonteExpander *_swig_go_0) {
   indri::query::PonteExpander *arg1 = (indri::query::PonteExpander *) 0 ;
   
   arg1 = *(indri::query::PonteExpander **)&_swig_go_0; 
   
-  {
-    try {
-      delete arg1;;
-    } catch (std::exception &e) {
-      _swig_gopanic(e.what());
-    }
-  }
+  delete arg1;
   
 }
 
 
-std::vector< indri::api::ScoredExtentResult > *_wrap_PonteExpander_runExpandedQuery__SWIG_0_indri_go_8e24520e0b567faa(indri::query::PonteExpander *_swig_go_0, _gostring_ _swig_go_1, intgo _swig_go_2, bool _swig_go_3) {
+std::vector< indri::api::ScoredExtentResult > *_wrap_PonteExpander_runExpandedQuery__SWIG_0_indri_go_add17ee78870902e(indri::query::PonteExpander *_swig_go_0, _gostring_ _swig_go_1, intgo _swig_go_2, bool _swig_go_3) {
   indri::query::PonteExpander *arg1 = (indri::query::PonteExpander *) 0 ;
   std::string arg2 ;
   int arg3 ;
@@ -2956,7 +4634,7 @@ std::vector< indri::api::ScoredExtentResult > *_wrap_PonteExpander_runExpandedQu
 }
 
 
-std::vector< indri::api::ScoredExtentResult > *_wrap_PonteExpander_runExpandedQuery__SWIG_1_indri_go_8e24520e0b567faa(indri::query::PonteExpander *_swig_go_0, _gostring_ _swig_go_1, intgo _swig_go_2) {
+std::vector< indri::api::ScoredExtentResult > *_wrap_PonteExpander_runExpandedQuery__SWIG_1_indri_go_add17ee78870902e(indri::query::PonteExpander *_swig_go_0, _gostring_ _swig_go_1, intgo _swig_go_2) {
   indri::query::PonteExpander *arg1 = (indri::query::PonteExpander *) 0 ;
   std::string arg2 ;
   int arg3 ;
@@ -2974,7 +4652,300 @@ std::vector< indri::api::ScoredExtentResult > *_wrap_PonteExpander_runExpandedQu
 }
 
 
-intgo _wrap_FileOpen_IndexStatus_indri_go_8e24520e0b567faa() {
+void _wrap_Wrapped_MetadataPair_key_set_indri_go_add17ee78870902e(indri::parse::MetadataPair *_swig_go_0, _gostring_ _swig_go_1) {
+  indri::parse::MetadataPair *arg1 = (indri::parse::MetadataPair *) 0 ;
+  char *arg2 = (char *) 0 ;
+  
+  arg1 = *(indri::parse::MetadataPair **)&_swig_go_0; 
+  
+  arg2 = (char *)malloc(_swig_go_1.n + 1);
+  memcpy(arg2, _swig_go_1.p, _swig_go_1.n);
+  arg2[_swig_go_1.n] = '\0';
+  
+  
+  {
+    if (arg2) {
+      arg1->key = (char const *) (new char[strlen((const char *)arg2)+1]);
+      strcpy((char *)arg1->key, (const char *)arg2);
+    } else {
+      arg1->key = 0;
+    }
+  }
+  
+  free(arg2); 
+}
+
+
+_gostring_ _wrap_Wrapped_MetadataPair_key_get_indri_go_add17ee78870902e(indri::parse::MetadataPair *_swig_go_0) {
+  indri::parse::MetadataPair *arg1 = (indri::parse::MetadataPair *) 0 ;
+  char *result = 0 ;
+  _gostring_ _swig_go_result;
+  
+  arg1 = *(indri::parse::MetadataPair **)&_swig_go_0; 
+  
+  result = (char *) ((arg1)->key);
+  _swig_go_result = Swig_AllocateString((char*)result, result ? strlen((char*)result) : 0); 
+  return _swig_go_result;
+}
+
+
+void _wrap_Wrapped_MetadataPair_value_set_indri_go_add17ee78870902e(indri::parse::MetadataPair *_swig_go_0, void *_swig_go_1) {
+  indri::parse::MetadataPair *arg1 = (indri::parse::MetadataPair *) 0 ;
+  void *arg2 = (void *) 0 ;
+  
+  arg1 = *(indri::parse::MetadataPair **)&_swig_go_0; 
+  arg2 = *(void **)&_swig_go_1; 
+  
+  if (arg1) (arg1)->value = (void const *)arg2;
+  
+}
+
+
+void *_wrap_Wrapped_MetadataPair_value_get_indri_go_add17ee78870902e(indri::parse::MetadataPair *_swig_go_0) {
+  indri::parse::MetadataPair *arg1 = (indri::parse::MetadataPair *) 0 ;
+  void *result = 0 ;
+  void *_swig_go_result;
+  
+  arg1 = *(indri::parse::MetadataPair **)&_swig_go_0; 
+  
+  result = (void *) ((arg1)->value);
+  *(void **)&_swig_go_result = (void *)result; 
+  return _swig_go_result;
+}
+
+
+void _wrap_Wrapped_MetadataPair_valueLength_set_indri_go_add17ee78870902e(indri::parse::MetadataPair *_swig_go_0, intgo _swig_go_1) {
+  indri::parse::MetadataPair *arg1 = (indri::parse::MetadataPair *) 0 ;
+  int arg2 ;
+  
+  arg1 = *(indri::parse::MetadataPair **)&_swig_go_0; 
+  arg2 = (int)_swig_go_1; 
+  
+  if (arg1) (arg1)->valueLength = arg2;
+  
+}
+
+
+intgo _wrap_Wrapped_MetadataPair_valueLength_get_indri_go_add17ee78870902e(indri::parse::MetadataPair *_swig_go_0) {
+  indri::parse::MetadataPair *arg1 = (indri::parse::MetadataPair *) 0 ;
+  int result;
+  intgo _swig_go_result;
+  
+  arg1 = *(indri::parse::MetadataPair **)&_swig_go_0; 
+  
+  result = (int) ((arg1)->valueLength);
+  _swig_go_result = result; 
+  return _swig_go_result;
+}
+
+
+void _wrap_Wrapped_MetadataPair_stripValue_indri_go_add17ee78870902e(indri::parse::MetadataPair *_swig_go_0) {
+  indri::parse::MetadataPair *arg1 = (indri::parse::MetadataPair *) 0 ;
+  
+  arg1 = *(indri::parse::MetadataPair **)&_swig_go_0; 
+  
+  (arg1)->stripValue();
+  
+}
+
+
+indri::parse::MetadataPair *_wrap_new_Wrapped_MetadataPair_indri_go_add17ee78870902e() {
+  indri::parse::MetadataPair *result = 0 ;
+  indri::parse::MetadataPair *_swig_go_result;
+  
+  
+  result = (indri::parse::MetadataPair *)new indri::parse::MetadataPair();
+  *(indri::parse::MetadataPair **)&_swig_go_result = (indri::parse::MetadataPair *)result; 
+  return _swig_go_result;
+}
+
+
+void _wrap_delete_Wrapped_MetadataPair_indri_go_add17ee78870902e(indri::parse::MetadataPair *_swig_go_0) {
+  indri::parse::MetadataPair *arg1 = (indri::parse::MetadataPair *) 0 ;
+  
+  arg1 = *(indri::parse::MetadataPair **)&_swig_go_0; 
+  
+  delete arg1;
+  
+}
+
+
+std::vector< indri::parse::MetadataPair > *_wrap_new_MetadataPairVector__SWIG_0_indri_go_add17ee78870902e() {
+  std::vector< indri::parse::MetadataPair > *result = 0 ;
+  std::vector< indri::parse::MetadataPair > *_swig_go_result;
+  
+  
+  result = (std::vector< indri::parse::MetadataPair > *)new std::vector< indri::parse::MetadataPair >();
+  *(std::vector< indri::parse::MetadataPair > **)&_swig_go_result = (std::vector< indri::parse::MetadataPair > *)result; 
+  return _swig_go_result;
+}
+
+
+std::vector< indri::parse::MetadataPair > *_wrap_new_MetadataPairVector__SWIG_1_indri_go_add17ee78870902e(long long _swig_go_0) {
+  std::vector< indri::parse::MetadataPair >::size_type arg1 ;
+  std::vector< indri::parse::MetadataPair > *result = 0 ;
+  std::vector< indri::parse::MetadataPair > *_swig_go_result;
+  
+  arg1 = (size_t)_swig_go_0; 
+  
+  result = (std::vector< indri::parse::MetadataPair > *)new std::vector< indri::parse::MetadataPair >(arg1);
+  *(std::vector< indri::parse::MetadataPair > **)&_swig_go_result = (std::vector< indri::parse::MetadataPair > *)result; 
+  return _swig_go_result;
+}
+
+
+long long _wrap_MetadataPairVector_size_indri_go_add17ee78870902e(std::vector< indri::parse::MetadataPair > *_swig_go_0) {
+  std::vector< indri::parse::MetadataPair > *arg1 = (std::vector< indri::parse::MetadataPair > *) 0 ;
+  std::vector< indri::parse::MetadataPair >::size_type result;
+  long long _swig_go_result;
+  
+  arg1 = *(std::vector< indri::parse::MetadataPair > **)&_swig_go_0; 
+  
+  result = ((std::vector< indri::parse::MetadataPair > const *)arg1)->size();
+  _swig_go_result = result; 
+  return _swig_go_result;
+}
+
+
+long long _wrap_MetadataPairVector_capacity_indri_go_add17ee78870902e(std::vector< indri::parse::MetadataPair > *_swig_go_0) {
+  std::vector< indri::parse::MetadataPair > *arg1 = (std::vector< indri::parse::MetadataPair > *) 0 ;
+  std::vector< indri::parse::MetadataPair >::size_type result;
+  long long _swig_go_result;
+  
+  arg1 = *(std::vector< indri::parse::MetadataPair > **)&_swig_go_0; 
+  
+  result = ((std::vector< indri::parse::MetadataPair > const *)arg1)->capacity();
+  _swig_go_result = result; 
+  return _swig_go_result;
+}
+
+
+void _wrap_MetadataPairVector_reserve_indri_go_add17ee78870902e(std::vector< indri::parse::MetadataPair > *_swig_go_0, long long _swig_go_1) {
+  std::vector< indri::parse::MetadataPair > *arg1 = (std::vector< indri::parse::MetadataPair > *) 0 ;
+  std::vector< indri::parse::MetadataPair >::size_type arg2 ;
+  
+  arg1 = *(std::vector< indri::parse::MetadataPair > **)&_swig_go_0; 
+  arg2 = (size_t)_swig_go_1; 
+  
+  (arg1)->reserve(arg2);
+  
+}
+
+
+bool _wrap_MetadataPairVector_isEmpty_indri_go_add17ee78870902e(std::vector< indri::parse::MetadataPair > *_swig_go_0) {
+  std::vector< indri::parse::MetadataPair > *arg1 = (std::vector< indri::parse::MetadataPair > *) 0 ;
+  bool result;
+  bool _swig_go_result;
+  
+  arg1 = *(std::vector< indri::parse::MetadataPair > **)&_swig_go_0; 
+  
+  result = (bool)((std::vector< indri::parse::MetadataPair > const *)arg1)->empty();
+  _swig_go_result = result; 
+  return _swig_go_result;
+}
+
+
+void _wrap_MetadataPairVector_clear_indri_go_add17ee78870902e(std::vector< indri::parse::MetadataPair > *_swig_go_0) {
+  std::vector< indri::parse::MetadataPair > *arg1 = (std::vector< indri::parse::MetadataPair > *) 0 ;
+  
+  arg1 = *(std::vector< indri::parse::MetadataPair > **)&_swig_go_0; 
+  
+  (arg1)->clear();
+  
+}
+
+
+void _wrap_MetadataPairVector_add_indri_go_add17ee78870902e(std::vector< indri::parse::MetadataPair > *_swig_go_0, indri::parse::MetadataPair *_swig_go_1) {
+  std::vector< indri::parse::MetadataPair > *arg1 = (std::vector< indri::parse::MetadataPair > *) 0 ;
+  std::vector< indri::parse::MetadataPair >::value_type *arg2 = 0 ;
+  
+  arg1 = *(std::vector< indri::parse::MetadataPair > **)&_swig_go_0; 
+  arg2 = *(std::vector< indri::parse::MetadataPair >::value_type **)&_swig_go_1; 
+  
+  (arg1)->push_back((std::vector< indri::parse::MetadataPair >::value_type const &)*arg2);
+  
+}
+
+
+indri::parse::MetadataPair *_wrap_MetadataPairVector_get_indri_go_add17ee78870902e(std::vector< indri::parse::MetadataPair > *_swig_go_0, intgo _swig_go_1) {
+  std::vector< indri::parse::MetadataPair > *arg1 = (std::vector< indri::parse::MetadataPair > *) 0 ;
+  int arg2 ;
+  std::vector< indri::parse::MetadataPair >::value_type result;
+  indri::parse::MetadataPair *_swig_go_result;
+  
+  arg1 = *(std::vector< indri::parse::MetadataPair > **)&_swig_go_0; 
+  arg2 = (int)_swig_go_1; 
+  
+  try {
+    result = std_vector_Sl_indri_parse_MetadataPair_Sg__get(arg1,arg2);
+  }
+  catch(std::out_of_range &_e) {
+    (void)_e;
+    _swig_gopanic("C++ std::out_of_range exception thrown");
+    
+  }
+  
+  *(std::vector< indri::parse::MetadataPair >::value_type **)&_swig_go_result = new std::vector< indri::parse::MetadataPair >::value_type(result); 
+  return _swig_go_result;
+}
+
+
+void _wrap_MetadataPairVector_set_indri_go_add17ee78870902e(std::vector< indri::parse::MetadataPair > *_swig_go_0, intgo _swig_go_1, indri::parse::MetadataPair *_swig_go_2) {
+  std::vector< indri::parse::MetadataPair > *arg1 = (std::vector< indri::parse::MetadataPair > *) 0 ;
+  int arg2 ;
+  std::vector< indri::parse::MetadataPair >::value_type *arg3 = 0 ;
+  
+  arg1 = *(std::vector< indri::parse::MetadataPair > **)&_swig_go_0; 
+  arg2 = (int)_swig_go_1; 
+  arg3 = *(std::vector< indri::parse::MetadataPair >::value_type **)&_swig_go_2; 
+  
+  try {
+    std_vector_Sl_indri_parse_MetadataPair_Sg__set(arg1,arg2,(indri::parse::MetadataPair const &)*arg3);
+  }
+  catch(std::out_of_range &_e) {
+    (void)_e;
+    _swig_gopanic("C++ std::out_of_range exception thrown");
+    
+  }
+  
+  
+}
+
+
+void _wrap_delete_MetadataPairVector_indri_go_add17ee78870902e(std::vector< indri::parse::MetadataPair > *_swig_go_0) {
+  std::vector< indri::parse::MetadataPair > *arg1 = (std::vector< indri::parse::MetadataPair > *) 0 ;
+  
+  arg1 = *(std::vector< indri::parse::MetadataPair > **)&_swig_go_0; 
+  
+  delete arg1;
+  
+}
+
+
+indri::api::IndexStatus *_wrap__swig_NewDirectorIndexStatusIndexStatus_indri_go_add17ee78870902e(intgo _swig_go_0) {
+  int arg1 ;
+  indri::api::IndexStatus *result = 0 ;
+  indri::api::IndexStatus *_swig_go_result;
+  
+  arg1 = (int)_swig_go_0; 
+  
+  result = new SwigDirector_IndexStatus(arg1);
+  *(indri::api::IndexStatus **)&_swig_go_result = (indri::api::IndexStatus *)result; 
+  return _swig_go_result;
+}
+
+
+void _wrap_DeleteDirectorIndexStatus_indri_go_add17ee78870902e(indri::api::IndexStatus *_swig_go_0) {
+  indri::api::IndexStatus *arg1 = (indri::api::IndexStatus *) 0 ;
+  
+  arg1 = *(indri::api::IndexStatus **)&_swig_go_0; 
+  
+  delete arg1;
+  
+}
+
+
+intgo _wrap_FileOpen_IndexStatus_indri_go_add17ee78870902e() {
   indri::api::IndexStatus::action_code result;
   intgo _swig_go_result;
   
@@ -2986,7 +4957,7 @@ intgo _wrap_FileOpen_IndexStatus_indri_go_8e24520e0b567faa() {
 }
 
 
-intgo _wrap_FileSkip_IndexStatus_indri_go_8e24520e0b567faa() {
+intgo _wrap_FileSkip_IndexStatus_indri_go_add17ee78870902e() {
   indri::api::IndexStatus::action_code result;
   intgo _swig_go_result;
   
@@ -2998,7 +4969,7 @@ intgo _wrap_FileSkip_IndexStatus_indri_go_8e24520e0b567faa() {
 }
 
 
-intgo _wrap_FileError_IndexStatus_indri_go_8e24520e0b567faa() {
+intgo _wrap_FileError_IndexStatus_indri_go_add17ee78870902e() {
   indri::api::IndexStatus::action_code result;
   intgo _swig_go_result;
   
@@ -3010,7 +4981,7 @@ intgo _wrap_FileError_IndexStatus_indri_go_8e24520e0b567faa() {
 }
 
 
-intgo _wrap_FileClose_IndexStatus_indri_go_8e24520e0b567faa() {
+intgo _wrap_FileClose_IndexStatus_indri_go_add17ee78870902e() {
   indri::api::IndexStatus::action_code result;
   intgo _swig_go_result;
   
@@ -3022,7 +4993,7 @@ intgo _wrap_FileClose_IndexStatus_indri_go_8e24520e0b567faa() {
 }
 
 
-intgo _wrap_DocumentCount_IndexStatus_indri_go_8e24520e0b567faa() {
+intgo _wrap_DocumentCount_IndexStatus_indri_go_add17ee78870902e() {
   indri::api::IndexStatus::action_code result;
   intgo _swig_go_result;
   
@@ -3034,7 +5005,7 @@ intgo _wrap_DocumentCount_IndexStatus_indri_go_8e24520e0b567faa() {
 }
 
 
-void _wrap_delete_IndexStatus_indri_go_8e24520e0b567faa(indri::api::IndexStatus *_swig_go_0) {
+void _wrap_delete_IndexStatus_indri_go_add17ee78870902e(indri::api::IndexStatus *_swig_go_0) {
   indri::api::IndexStatus *arg1 = (indri::api::IndexStatus *) 0 ;
   
   arg1 = *(indri::api::IndexStatus **)&_swig_go_0; 
@@ -3044,7 +5015,7 @@ void _wrap_delete_IndexStatus_indri_go_8e24520e0b567faa(indri::api::IndexStatus 
 }
 
 
-void _wrap_IndexStatus_status_indri_go_8e24520e0b567faa(indri::api::IndexStatus *_swig_go_0, intgo _swig_go_1, _gostring_ _swig_go_2, _gostring_ _swig_go_3, intgo _swig_go_4, intgo _swig_go_5) {
+void _wrap_IndexStatus_status_indri_go_add17ee78870902e(indri::api::IndexStatus *_swig_go_0, intgo _swig_go_1, _gostring_ _swig_go_2, _gostring_ _swig_go_3, intgo _swig_go_4, intgo _swig_go_5) {
   indri::api::IndexStatus *arg1 = (indri::api::IndexStatus *) 0 ;
   int arg2 ;
   std::string *arg3 = 0 ;
@@ -3070,7 +5041,7 @@ void _wrap_IndexStatus_status_indri_go_8e24520e0b567faa(indri::api::IndexStatus 
 }
 
 
-indri::api::IndexEnvironment *_wrap_new_IndexEnvironment_indri_go_8e24520e0b567faa() {
+indri::api::IndexEnvironment *_wrap_new_Wrapped_IndexEnvironment_indri_go_add17ee78870902e() {
   indri::api::IndexEnvironment *result = 0 ;
   indri::api::IndexEnvironment *_swig_go_result;
   
@@ -3081,7 +5052,7 @@ indri::api::IndexEnvironment *_wrap_new_IndexEnvironment_indri_go_8e24520e0b567f
 }
 
 
-void _wrap_delete_IndexEnvironment_indri_go_8e24520e0b567faa(indri::api::IndexEnvironment *_swig_go_0) {
+void _wrap_delete_Wrapped_IndexEnvironment_indri_go_add17ee78870902e(indri::api::IndexEnvironment *_swig_go_0) {
   indri::api::IndexEnvironment *arg1 = (indri::api::IndexEnvironment *) 0 ;
   
   arg1 = *(indri::api::IndexEnvironment **)&_swig_go_0; 
@@ -3091,7 +5062,7 @@ void _wrap_delete_IndexEnvironment_indri_go_8e24520e0b567faa(indri::api::IndexEn
 }
 
 
-void _wrap_IndexEnvironment_setDocumentRoot_indri_go_8e24520e0b567faa(indri::api::IndexEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
+void _wrap_Wrapped_IndexEnvironment_Wrapped_setDocumentRoot_indri_go_add17ee78870902e(indri::api::IndexEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
   indri::api::IndexEnvironment *arg1 = (indri::api::IndexEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   
@@ -3101,20 +5072,26 @@ void _wrap_IndexEnvironment_setDocumentRoot_indri_go_8e24520e0b567faa(indri::api
   arg2 = &arg2_str;
   
   
-  try {
-    (arg1)->setDocumentRoot((std::string const &)*arg2);
+  {
+    try {
+      try {
+        (arg1)->setDocumentRoot((std::string const &)*arg2);
+      }
+      catch(lemur::api::Exception &_e) {
+        (void)_e;
+        _swig_gopanic("C++ lemur::api::Exception exception thrown");
+        
+      }
+      
+    } catch( lemur::api::Exception& e ) {
+      SWIG_exception( SWIG_RuntimeError, e.what().c_str() );
+    }
   }
-  catch(lemur::api::Exception &_e) {
-    (void)_e;
-    _swig_gopanic("C++ lemur::api::Exception exception thrown");
-    
-  }
-  
   
 }
 
 
-void _wrap_IndexEnvironment_setAnchorTextPath_indri_go_8e24520e0b567faa(indri::api::IndexEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
+void _wrap_Wrapped_IndexEnvironment_Wrapped_setAnchorTextPath_indri_go_add17ee78870902e(indri::api::IndexEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
   indri::api::IndexEnvironment *arg1 = (indri::api::IndexEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   
@@ -3124,20 +5101,26 @@ void _wrap_IndexEnvironment_setAnchorTextPath_indri_go_8e24520e0b567faa(indri::a
   arg2 = &arg2_str;
   
   
-  try {
-    (arg1)->setAnchorTextPath((std::string const &)*arg2);
+  {
+    try {
+      try {
+        (arg1)->setAnchorTextPath((std::string const &)*arg2);
+      }
+      catch(lemur::api::Exception &_e) {
+        (void)_e;
+        _swig_gopanic("C++ lemur::api::Exception exception thrown");
+        
+      }
+      
+    } catch( lemur::api::Exception& e ) {
+      SWIG_exception( SWIG_RuntimeError, e.what().c_str() );
+    }
   }
-  catch(lemur::api::Exception &_e) {
-    (void)_e;
-    _swig_gopanic("C++ lemur::api::Exception exception thrown");
-    
-  }
-  
   
 }
 
 
-void _wrap_IndexEnvironment_setOffsetMetadataPath_indri_go_8e24520e0b567faa(indri::api::IndexEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
+void _wrap_Wrapped_IndexEnvironment_Wrapped_setOffsetMetadataPath_indri_go_add17ee78870902e(indri::api::IndexEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
   indri::api::IndexEnvironment *arg1 = (indri::api::IndexEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   
@@ -3147,20 +5130,26 @@ void _wrap_IndexEnvironment_setOffsetMetadataPath_indri_go_8e24520e0b567faa(indr
   arg2 = &arg2_str;
   
   
-  try {
-    (arg1)->setOffsetMetadataPath((std::string const &)*arg2);
+  {
+    try {
+      try {
+        (arg1)->setOffsetMetadataPath((std::string const &)*arg2);
+      }
+      catch(lemur::api::Exception &_e) {
+        (void)_e;
+        _swig_gopanic("C++ lemur::api::Exception exception thrown");
+        
+      }
+      
+    } catch( lemur::api::Exception& e ) {
+      SWIG_exception( SWIG_RuntimeError, e.what().c_str() );
+    }
   }
-  catch(lemur::api::Exception &_e) {
-    (void)_e;
-    _swig_gopanic("C++ lemur::api::Exception exception thrown");
-    
-  }
-  
   
 }
 
 
-void _wrap_IndexEnvironment_setOffsetAnnotationsPath_indri_go_8e24520e0b567faa(indri::api::IndexEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
+void _wrap_Wrapped_IndexEnvironment_Wrapped_setOffsetAnnotationsPath_indri_go_add17ee78870902e(indri::api::IndexEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
   indri::api::IndexEnvironment *arg1 = (indri::api::IndexEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   
@@ -3170,20 +5159,26 @@ void _wrap_IndexEnvironment_setOffsetAnnotationsPath_indri_go_8e24520e0b567faa(i
   arg2 = &arg2_str;
   
   
-  try {
-    (arg1)->setOffsetAnnotationsPath((std::string const &)*arg2);
+  {
+    try {
+      try {
+        (arg1)->setOffsetAnnotationsPath((std::string const &)*arg2);
+      }
+      catch(lemur::api::Exception &_e) {
+        (void)_e;
+        _swig_gopanic("C++ lemur::api::Exception exception thrown");
+        
+      }
+      
+    } catch( lemur::api::Exception& e ) {
+      SWIG_exception( SWIG_RuntimeError, e.what().c_str() );
+    }
   }
-  catch(lemur::api::Exception &_e) {
-    (void)_e;
-    _swig_gopanic("C++ lemur::api::Exception exception thrown");
-    
-  }
-  
   
 }
 
 
-void _wrap_IndexEnvironment_addFileClass__SWIG_0_indri_go_8e24520e0b567faa(indri::api::IndexEnvironment *_swig_go_0, _gostring_ _swig_go_1, _gostring_ _swig_go_2, _gostring_ _swig_go_3, _gostring_ _swig_go_4, _gostring_ _swig_go_5, _gostring_ _swig_go_6, _gostring_ _swig_go_7, std::vector< std::string > *_swig_go_8, std::vector< std::string > *_swig_go_9, std::vector< std::string > *_swig_go_10, std::vector< std::string > *_swig_go_11, std::map< indri::parse::ConflationPattern *,std::string > *_swig_go_12) {
+void _wrap_Wrapped_IndexEnvironment_Wrapped_addFileClass__SWIG_0_indri_go_add17ee78870902e(indri::api::IndexEnvironment *_swig_go_0, _gostring_ _swig_go_1, _gostring_ _swig_go_2, _gostring_ _swig_go_3, _gostring_ _swig_go_4, _gostring_ _swig_go_5, _gostring_ _swig_go_6, _gostring_ _swig_go_7, std::vector< std::string > *_swig_go_8, std::vector< std::string > *_swig_go_9, std::vector< std::string > *_swig_go_10, std::vector< std::string > *_swig_go_11, std::map< indri::parse::ConflationPattern *,std::string > *_swig_go_12) {
   indri::api::IndexEnvironment *arg1 = (indri::api::IndexEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   std::string *arg3 = 0 ;
@@ -3233,20 +5228,26 @@ void _wrap_IndexEnvironment_addFileClass__SWIG_0_indri_go_8e24520e0b567faa(indri
   arg12 = *(std::vector< std::string > **)&_swig_go_11; 
   arg13 = *(std::map< indri::parse::ConflationPattern *,std::string > **)&_swig_go_12; 
   
-  try {
-    (arg1)->addFileClass((std::string const &)*arg2,(std::string const &)*arg3,(std::string const &)*arg4,(std::string const &)*arg5,(std::string const &)*arg6,(std::string const &)*arg7,(std::string const &)*arg8,(std::vector< std::string > const &)*arg9,(std::vector< std::string > const &)*arg10,(std::vector< std::string > const &)*arg11,(std::vector< std::string > const &)*arg12,(std::map< indri::parse::ConflationPattern *,std::string > const &)*arg13);
+  {
+    try {
+      try {
+        (arg1)->addFileClass((std::string const &)*arg2,(std::string const &)*arg3,(std::string const &)*arg4,(std::string const &)*arg5,(std::string const &)*arg6,(std::string const &)*arg7,(std::string const &)*arg8,(std::vector< std::string > const &)*arg9,(std::vector< std::string > const &)*arg10,(std::vector< std::string > const &)*arg11,(std::vector< std::string > const &)*arg12,(std::map< indri::parse::ConflationPattern *,std::string > const &)*arg13);
+      }
+      catch(lemur::api::Exception &_e) {
+        (void)_e;
+        _swig_gopanic("C++ lemur::api::Exception exception thrown");
+        
+      }
+      
+    } catch( lemur::api::Exception& e ) {
+      SWIG_exception( SWIG_RuntimeError, e.what().c_str() );
+    }
   }
-  catch(lemur::api::Exception &_e) {
-    (void)_e;
-    _swig_gopanic("C++ lemur::api::Exception exception thrown");
-    
-  }
-  
   
 }
 
 
-indri::parse::FileClassEnvironmentFactory::Specification *_wrap_IndexEnvironment_getFileClassSpec_indri_go_8e24520e0b567faa(indri::api::IndexEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
+indri::parse::FileClassEnvironmentFactory::Specification *_wrap_Wrapped_IndexEnvironment_Wrapped_getFileClassSpec_indri_go_add17ee78870902e(indri::api::IndexEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
   indri::api::IndexEnvironment *arg1 = (indri::api::IndexEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   indri::parse::FileClassEnvironmentFactory::Specification *result = 0 ;
@@ -3258,81 +5259,105 @@ indri::parse::FileClassEnvironmentFactory::Specification *_wrap_IndexEnvironment
   arg2 = &arg2_str;
   
   
-  try {
-    result = (indri::parse::FileClassEnvironmentFactory::Specification *)(arg1)->getFileClassSpec((std::string const &)*arg2);
+  {
+    try {
+      try {
+        result = (indri::parse::FileClassEnvironmentFactory::Specification *)(arg1)->getFileClassSpec((std::string const &)*arg2);
+      }
+      catch(lemur::api::Exception &_e) {
+        (void)_e;
+        _swig_gopanic("C++ lemur::api::Exception exception thrown");
+        
+      }
+      
+    } catch( lemur::api::Exception& e ) {
+      SWIG_exception( SWIG_RuntimeError, e.what().c_str() );
+    }
   }
-  catch(lemur::api::Exception &_e) {
-    (void)_e;
-    _swig_gopanic("C++ lemur::api::Exception exception thrown");
-    
-  }
-  
   *(indri::parse::FileClassEnvironmentFactory::Specification **)&_swig_go_result = (indri::parse::FileClassEnvironmentFactory::Specification *)result; 
   return _swig_go_result;
 }
 
 
-void _wrap_IndexEnvironment_addFileClass__SWIG_1_indri_go_8e24520e0b567faa(indri::api::IndexEnvironment *_swig_go_0, indri::parse::FileClassEnvironmentFactory::Specification *_swig_go_1) {
+void _wrap_Wrapped_IndexEnvironment_Wrapped_addFileClass__SWIG_1_indri_go_add17ee78870902e(indri::api::IndexEnvironment *_swig_go_0, indri::parse::FileClassEnvironmentFactory::Specification *_swig_go_1) {
   indri::api::IndexEnvironment *arg1 = (indri::api::IndexEnvironment *) 0 ;
   indri::parse::FileClassEnvironmentFactory::Specification *arg2 = 0 ;
   
   arg1 = *(indri::api::IndexEnvironment **)&_swig_go_0; 
   arg2 = *(indri::parse::FileClassEnvironmentFactory::Specification **)&_swig_go_1; 
   
-  try {
-    (arg1)->addFileClass((indri::parse::FileClassEnvironmentFactory::Specification const &)*arg2);
+  {
+    try {
+      try {
+        (arg1)->addFileClass((indri::parse::FileClassEnvironmentFactory::Specification const &)*arg2);
+      }
+      catch(lemur::api::Exception &_e) {
+        (void)_e;
+        _swig_gopanic("C++ lemur::api::Exception exception thrown");
+        
+      }
+      
+    } catch( lemur::api::Exception& e ) {
+      SWIG_exception( SWIG_RuntimeError, e.what().c_str() );
+    }
   }
-  catch(lemur::api::Exception &_e) {
-    (void)_e;
-    _swig_gopanic("C++ lemur::api::Exception exception thrown");
-    
-  }
-  
   
 }
 
 
-void _wrap_IndexEnvironment_deleteDocument_indri_go_8e24520e0b567faa(indri::api::IndexEnvironment *_swig_go_0, intgo _swig_go_1) {
+void _wrap_Wrapped_IndexEnvironment_Wrapped_deleteDocument_indri_go_add17ee78870902e(indri::api::IndexEnvironment *_swig_go_0, intgo _swig_go_1) {
   indri::api::IndexEnvironment *arg1 = (indri::api::IndexEnvironment *) 0 ;
   int arg2 ;
   
   arg1 = *(indri::api::IndexEnvironment **)&_swig_go_0; 
   arg2 = (int)_swig_go_1; 
   
-  try {
-    (arg1)->deleteDocument(arg2);
+  {
+    try {
+      try {
+        (arg1)->deleteDocument(arg2);
+      }
+      catch(lemur::api::Exception &_e) {
+        (void)_e;
+        _swig_gopanic("C++ lemur::api::Exception exception thrown");
+        
+      }
+      
+    } catch( lemur::api::Exception& e ) {
+      SWIG_exception( SWIG_RuntimeError, e.what().c_str() );
+    }
   }
-  catch(lemur::api::Exception &_e) {
-    (void)_e;
-    _swig_gopanic("C++ lemur::api::Exception exception thrown");
-    
-  }
-  
   
 }
 
 
-void _wrap_IndexEnvironment_setIndexedFields_indri_go_8e24520e0b567faa(indri::api::IndexEnvironment *_swig_go_0, std::vector< std::string > *_swig_go_1) {
+void _wrap_Wrapped_IndexEnvironment_Wrapped_setIndexedFields_indri_go_add17ee78870902e(indri::api::IndexEnvironment *_swig_go_0, std::vector< std::string > *_swig_go_1) {
   indri::api::IndexEnvironment *arg1 = (indri::api::IndexEnvironment *) 0 ;
   std::vector< std::string > *arg2 = 0 ;
   
   arg1 = *(indri::api::IndexEnvironment **)&_swig_go_0; 
   arg2 = *(std::vector< std::string > **)&_swig_go_1; 
   
-  try {
-    (arg1)->setIndexedFields((std::vector< std::string > const &)*arg2);
+  {
+    try {
+      try {
+        (arg1)->setIndexedFields((std::vector< std::string > const &)*arg2);
+      }
+      catch(lemur::api::Exception &_e) {
+        (void)_e;
+        _swig_gopanic("C++ lemur::api::Exception exception thrown");
+        
+      }
+      
+    } catch( lemur::api::Exception& e ) {
+      SWIG_exception( SWIG_RuntimeError, e.what().c_str() );
+    }
   }
-  catch(lemur::api::Exception &_e) {
-    (void)_e;
-    _swig_gopanic("C++ lemur::api::Exception exception thrown");
-    
-  }
-  
   
 }
 
 
-void _wrap_IndexEnvironment_setNumericField__SWIG_0_indri_go_8e24520e0b567faa(indri::api::IndexEnvironment *_swig_go_0, _gostring_ _swig_go_1, bool _swig_go_2, _gostring_ _swig_go_3) {
+void _wrap_Wrapped_IndexEnvironment_Wrapped_setNumericField__SWIG_0_indri_go_add17ee78870902e(indri::api::IndexEnvironment *_swig_go_0, _gostring_ _swig_go_1, bool _swig_go_2, _gostring_ _swig_go_3) {
   indri::api::IndexEnvironment *arg1 = (indri::api::IndexEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   bool arg3 ;
@@ -3349,20 +5374,26 @@ void _wrap_IndexEnvironment_setNumericField__SWIG_0_indri_go_8e24520e0b567faa(in
   arg4 = &arg4_str;
   
   
-  try {
-    (arg1)->setNumericField((std::string const &)*arg2,arg3,(std::string const &)*arg4);
+  {
+    try {
+      try {
+        (arg1)->setNumericField((std::string const &)*arg2,arg3,(std::string const &)*arg4);
+      }
+      catch(lemur::api::Exception &_e) {
+        (void)_e;
+        _swig_gopanic("C++ lemur::api::Exception exception thrown");
+        
+      }
+      
+    } catch( lemur::api::Exception& e ) {
+      SWIG_exception( SWIG_RuntimeError, e.what().c_str() );
+    }
   }
-  catch(lemur::api::Exception &_e) {
-    (void)_e;
-    _swig_gopanic("C++ lemur::api::Exception exception thrown");
-    
-  }
-  
   
 }
 
 
-void _wrap_IndexEnvironment_setNumericField__SWIG_1_indri_go_8e24520e0b567faa(indri::api::IndexEnvironment *_swig_go_0, _gostring_ _swig_go_1, bool _swig_go_2) {
+void _wrap_Wrapped_IndexEnvironment_Wrapped_setNumericField__SWIG_1_indri_go_add17ee78870902e(indri::api::IndexEnvironment *_swig_go_0, _gostring_ _swig_go_1, bool _swig_go_2) {
   indri::api::IndexEnvironment *arg1 = (indri::api::IndexEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   bool arg3 ;
@@ -3374,20 +5405,26 @@ void _wrap_IndexEnvironment_setNumericField__SWIG_1_indri_go_8e24520e0b567faa(in
   
   arg3 = (bool)_swig_go_2; 
   
-  try {
-    (arg1)->setNumericField((std::string const &)*arg2,arg3);
+  {
+    try {
+      try {
+        (arg1)->setNumericField((std::string const &)*arg2,arg3);
+      }
+      catch(lemur::api::Exception &_e) {
+        (void)_e;
+        _swig_gopanic("C++ lemur::api::Exception exception thrown");
+        
+      }
+      
+    } catch( lemur::api::Exception& e ) {
+      SWIG_exception( SWIG_RuntimeError, e.what().c_str() );
+    }
   }
-  catch(lemur::api::Exception &_e) {
-    (void)_e;
-    _swig_gopanic("C++ lemur::api::Exception exception thrown");
-    
-  }
-  
   
 }
 
 
-void _wrap_IndexEnvironment_setOrdinalField_indri_go_8e24520e0b567faa(indri::api::IndexEnvironment *_swig_go_0, _gostring_ _swig_go_1, bool _swig_go_2) {
+void _wrap_Wrapped_IndexEnvironment_Wrapped_setOrdinalField_indri_go_add17ee78870902e(indri::api::IndexEnvironment *_swig_go_0, _gostring_ _swig_go_1, bool _swig_go_2) {
   indri::api::IndexEnvironment *arg1 = (indri::api::IndexEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   bool arg3 ;
@@ -3399,20 +5436,26 @@ void _wrap_IndexEnvironment_setOrdinalField_indri_go_8e24520e0b567faa(indri::api
   
   arg3 = (bool)_swig_go_2; 
   
-  try {
-    (arg1)->setOrdinalField((std::string const &)*arg2,arg3);
+  {
+    try {
+      try {
+        (arg1)->setOrdinalField((std::string const &)*arg2,arg3);
+      }
+      catch(lemur::api::Exception &_e) {
+        (void)_e;
+        _swig_gopanic("C++ lemur::api::Exception exception thrown");
+        
+      }
+      
+    } catch( lemur::api::Exception& e ) {
+      SWIG_exception( SWIG_RuntimeError, e.what().c_str() );
+    }
   }
-  catch(lemur::api::Exception &_e) {
-    (void)_e;
-    _swig_gopanic("C++ lemur::api::Exception exception thrown");
-    
-  }
-  
   
 }
 
 
-void _wrap_IndexEnvironment_setParentalField_indri_go_8e24520e0b567faa(indri::api::IndexEnvironment *_swig_go_0, _gostring_ _swig_go_1, bool _swig_go_2) {
+void _wrap_Wrapped_IndexEnvironment_Wrapped_setParentalField_indri_go_add17ee78870902e(indri::api::IndexEnvironment *_swig_go_0, _gostring_ _swig_go_1, bool _swig_go_2) {
   indri::api::IndexEnvironment *arg1 = (indri::api::IndexEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   bool arg3 ;
@@ -3424,20 +5467,26 @@ void _wrap_IndexEnvironment_setParentalField_indri_go_8e24520e0b567faa(indri::ap
   
   arg3 = (bool)_swig_go_2; 
   
-  try {
-    (arg1)->setParentalField((std::string const &)*arg2,arg3);
+  {
+    try {
+      try {
+        (arg1)->setParentalField((std::string const &)*arg2,arg3);
+      }
+      catch(lemur::api::Exception &_e) {
+        (void)_e;
+        _swig_gopanic("C++ lemur::api::Exception exception thrown");
+        
+      }
+      
+    } catch( lemur::api::Exception& e ) {
+      SWIG_exception( SWIG_RuntimeError, e.what().c_str() );
+    }
   }
-  catch(lemur::api::Exception &_e) {
-    (void)_e;
-    _swig_gopanic("C++ lemur::api::Exception exception thrown");
-    
-  }
-  
   
 }
 
 
-void _wrap_IndexEnvironment_setMetadataIndexedFields_indri_go_8e24520e0b567faa(indri::api::IndexEnvironment *_swig_go_0, std::vector< std::string > *_swig_go_1, std::vector< std::string > *_swig_go_2) {
+void _wrap_Wrapped_IndexEnvironment_Wrapped_setMetadataIndexedFields_indri_go_add17ee78870902e(indri::api::IndexEnvironment *_swig_go_0, std::vector< std::string > *_swig_go_1, std::vector< std::string > *_swig_go_2) {
   indri::api::IndexEnvironment *arg1 = (indri::api::IndexEnvironment *) 0 ;
   std::vector< std::string > *arg2 = 0 ;
   std::vector< std::string > *arg3 = 0 ;
@@ -3446,40 +5495,52 @@ void _wrap_IndexEnvironment_setMetadataIndexedFields_indri_go_8e24520e0b567faa(i
   arg2 = *(std::vector< std::string > **)&_swig_go_1; 
   arg3 = *(std::vector< std::string > **)&_swig_go_2; 
   
-  try {
-    (arg1)->setMetadataIndexedFields((std::vector< std::string > const &)*arg2,(std::vector< std::string > const &)*arg3);
+  {
+    try {
+      try {
+        (arg1)->setMetadataIndexedFields((std::vector< std::string > const &)*arg2,(std::vector< std::string > const &)*arg3);
+      }
+      catch(lemur::api::Exception &_e) {
+        (void)_e;
+        _swig_gopanic("C++ lemur::api::Exception exception thrown");
+        
+      }
+      
+    } catch( lemur::api::Exception& e ) {
+      SWIG_exception( SWIG_RuntimeError, e.what().c_str() );
+    }
   }
-  catch(lemur::api::Exception &_e) {
-    (void)_e;
-    _swig_gopanic("C++ lemur::api::Exception exception thrown");
-    
-  }
-  
   
 }
 
 
-void _wrap_IndexEnvironment_setStopwords_indri_go_8e24520e0b567faa(indri::api::IndexEnvironment *_swig_go_0, std::vector< std::string > *_swig_go_1) {
+void _wrap_Wrapped_IndexEnvironment_Wrapped_setStopwords_indri_go_add17ee78870902e(indri::api::IndexEnvironment *_swig_go_0, std::vector< std::string > *_swig_go_1) {
   indri::api::IndexEnvironment *arg1 = (indri::api::IndexEnvironment *) 0 ;
   std::vector< std::string > *arg2 = 0 ;
   
   arg1 = *(indri::api::IndexEnvironment **)&_swig_go_0; 
   arg2 = *(std::vector< std::string > **)&_swig_go_1; 
   
-  try {
-    (arg1)->setStopwords((std::vector< std::string > const &)*arg2);
+  {
+    try {
+      try {
+        (arg1)->setStopwords((std::vector< std::string > const &)*arg2);
+      }
+      catch(lemur::api::Exception &_e) {
+        (void)_e;
+        _swig_gopanic("C++ lemur::api::Exception exception thrown");
+        
+      }
+      
+    } catch( lemur::api::Exception& e ) {
+      SWIG_exception( SWIG_RuntimeError, e.what().c_str() );
+    }
   }
-  catch(lemur::api::Exception &_e) {
-    (void)_e;
-    _swig_gopanic("C++ lemur::api::Exception exception thrown");
-    
-  }
-  
   
 }
 
 
-void _wrap_IndexEnvironment_setStemmer_indri_go_8e24520e0b567faa(indri::api::IndexEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
+void _wrap_Wrapped_IndexEnvironment_Wrapped_setStemmer_indri_go_add17ee78870902e(indri::api::IndexEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
   indri::api::IndexEnvironment *arg1 = (indri::api::IndexEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   
@@ -3489,80 +5550,104 @@ void _wrap_IndexEnvironment_setStemmer_indri_go_8e24520e0b567faa(indri::api::Ind
   arg2 = &arg2_str;
   
   
-  try {
-    (arg1)->setStemmer((std::string const &)*arg2);
+  {
+    try {
+      try {
+        (arg1)->setStemmer((std::string const &)*arg2);
+      }
+      catch(lemur::api::Exception &_e) {
+        (void)_e;
+        _swig_gopanic("C++ lemur::api::Exception exception thrown");
+        
+      }
+      
+    } catch( lemur::api::Exception& e ) {
+      SWIG_exception( SWIG_RuntimeError, e.what().c_str() );
+    }
   }
-  catch(lemur::api::Exception &_e) {
-    (void)_e;
-    _swig_gopanic("C++ lemur::api::Exception exception thrown");
-    
-  }
-  
   
 }
 
 
-void _wrap_IndexEnvironment_setMemory_indri_go_8e24520e0b567faa(indri::api::IndexEnvironment *_swig_go_0, long long _swig_go_1) {
+void _wrap_Wrapped_IndexEnvironment_Wrapped_setMemory_indri_go_add17ee78870902e(indri::api::IndexEnvironment *_swig_go_0, long long _swig_go_1) {
   indri::api::IndexEnvironment *arg1 = (indri::api::IndexEnvironment *) 0 ;
   UINT64 arg2 ;
   
   arg1 = *(indri::api::IndexEnvironment **)&_swig_go_0; 
   arg2 = (UINT64)_swig_go_1; 
   
-  try {
-    (arg1)->setMemory(arg2);
+  {
+    try {
+      try {
+        (arg1)->setMemory(arg2);
+      }
+      catch(lemur::api::Exception &_e) {
+        (void)_e;
+        _swig_gopanic("C++ lemur::api::Exception exception thrown");
+        
+      }
+      
+    } catch( lemur::api::Exception& e ) {
+      SWIG_exception( SWIG_RuntimeError, e.what().c_str() );
+    }
   }
-  catch(lemur::api::Exception &_e) {
-    (void)_e;
-    _swig_gopanic("C++ lemur::api::Exception exception thrown");
-    
-  }
-  
   
 }
 
 
-void _wrap_IndexEnvironment_setNormalization_indri_go_8e24520e0b567faa(indri::api::IndexEnvironment *_swig_go_0, bool _swig_go_1) {
+void _wrap_Wrapped_IndexEnvironment_Wrapped_setNormalization_indri_go_add17ee78870902e(indri::api::IndexEnvironment *_swig_go_0, bool _swig_go_1) {
   indri::api::IndexEnvironment *arg1 = (indri::api::IndexEnvironment *) 0 ;
   bool arg2 ;
   
   arg1 = *(indri::api::IndexEnvironment **)&_swig_go_0; 
   arg2 = (bool)_swig_go_1; 
   
-  try {
-    (arg1)->setNormalization(arg2);
+  {
+    try {
+      try {
+        (arg1)->setNormalization(arg2);
+      }
+      catch(lemur::api::Exception &_e) {
+        (void)_e;
+        _swig_gopanic("C++ lemur::api::Exception exception thrown");
+        
+      }
+      
+    } catch( lemur::api::Exception& e ) {
+      SWIG_exception( SWIG_RuntimeError, e.what().c_str() );
+    }
   }
-  catch(lemur::api::Exception &_e) {
-    (void)_e;
-    _swig_gopanic("C++ lemur::api::Exception exception thrown");
-    
-  }
-  
   
 }
 
 
-void _wrap_IndexEnvironment_setStoreDocs_indri_go_8e24520e0b567faa(indri::api::IndexEnvironment *_swig_go_0, bool _swig_go_1) {
+void _wrap_Wrapped_IndexEnvironment_Wrapped_setStoreDocs_indri_go_add17ee78870902e(indri::api::IndexEnvironment *_swig_go_0, bool _swig_go_1) {
   indri::api::IndexEnvironment *arg1 = (indri::api::IndexEnvironment *) 0 ;
   bool arg2 ;
   
   arg1 = *(indri::api::IndexEnvironment **)&_swig_go_0; 
   arg2 = (bool)_swig_go_1; 
   
-  try {
-    (arg1)->setStoreDocs(arg2);
+  {
+    try {
+      try {
+        (arg1)->setStoreDocs(arg2);
+      }
+      catch(lemur::api::Exception &_e) {
+        (void)_e;
+        _swig_gopanic("C++ lemur::api::Exception exception thrown");
+        
+      }
+      
+    } catch( lemur::api::Exception& e ) {
+      SWIG_exception( SWIG_RuntimeError, e.what().c_str() );
+    }
   }
-  catch(lemur::api::Exception &_e) {
-    (void)_e;
-    _swig_gopanic("C++ lemur::api::Exception exception thrown");
-    
-  }
-  
   
 }
 
 
-void _wrap_IndexEnvironment_create__SWIG_0_indri_go_8e24520e0b567faa(indri::api::IndexEnvironment *_swig_go_0, _gostring_ _swig_go_1, indri::api::IndexStatus *_swig_go_2) {
+void _wrap_Wrapped_IndexEnvironment_Wrapped_create__SWIG_0_indri_go_add17ee78870902e(indri::api::IndexEnvironment *_swig_go_0, _gostring_ _swig_go_1, indri::api::IndexStatus *_swig_go_2) {
   indri::api::IndexEnvironment *arg1 = (indri::api::IndexEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   indri::api::IndexStatus *arg3 = (indri::api::IndexStatus *) 0 ;
@@ -3574,20 +5659,26 @@ void _wrap_IndexEnvironment_create__SWIG_0_indri_go_8e24520e0b567faa(indri::api:
   
   arg3 = *(indri::api::IndexStatus **)&_swig_go_2; 
   
-  try {
-    (arg1)->create((std::string const &)*arg2,arg3);
+  {
+    try {
+      try {
+        (arg1)->create((std::string const &)*arg2,arg3);
+      }
+      catch(lemur::api::Exception &_e) {
+        (void)_e;
+        _swig_gopanic("C++ lemur::api::Exception exception thrown");
+        
+      }
+      
+    } catch( lemur::api::Exception& e ) {
+      SWIG_exception( SWIG_RuntimeError, e.what().c_str() );
+    }
   }
-  catch(lemur::api::Exception &_e) {
-    (void)_e;
-    _swig_gopanic("C++ lemur::api::Exception exception thrown");
-    
-  }
-  
   
 }
 
 
-void _wrap_IndexEnvironment_create__SWIG_1_indri_go_8e24520e0b567faa(indri::api::IndexEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
+void _wrap_Wrapped_IndexEnvironment_Wrapped_create__SWIG_1_indri_go_add17ee78870902e(indri::api::IndexEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
   indri::api::IndexEnvironment *arg1 = (indri::api::IndexEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   
@@ -3597,20 +5688,26 @@ void _wrap_IndexEnvironment_create__SWIG_1_indri_go_8e24520e0b567faa(indri::api:
   arg2 = &arg2_str;
   
   
-  try {
-    (arg1)->create((std::string const &)*arg2);
+  {
+    try {
+      try {
+        (arg1)->create((std::string const &)*arg2);
+      }
+      catch(lemur::api::Exception &_e) {
+        (void)_e;
+        _swig_gopanic("C++ lemur::api::Exception exception thrown");
+        
+      }
+      
+    } catch( lemur::api::Exception& e ) {
+      SWIG_exception( SWIG_RuntimeError, e.what().c_str() );
+    }
   }
-  catch(lemur::api::Exception &_e) {
-    (void)_e;
-    _swig_gopanic("C++ lemur::api::Exception exception thrown");
-    
-  }
-  
   
 }
 
 
-void _wrap_IndexEnvironment_open__SWIG_0_indri_go_8e24520e0b567faa(indri::api::IndexEnvironment *_swig_go_0, _gostring_ _swig_go_1, indri::api::IndexStatus *_swig_go_2) {
+void _wrap_Wrapped_IndexEnvironment_Wrapped_open__SWIG_0_indri_go_add17ee78870902e(indri::api::IndexEnvironment *_swig_go_0, _gostring_ _swig_go_1, indri::api::IndexStatus *_swig_go_2) {
   indri::api::IndexEnvironment *arg1 = (indri::api::IndexEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   indri::api::IndexStatus *arg3 = (indri::api::IndexStatus *) 0 ;
@@ -3622,20 +5719,26 @@ void _wrap_IndexEnvironment_open__SWIG_0_indri_go_8e24520e0b567faa(indri::api::I
   
   arg3 = *(indri::api::IndexStatus **)&_swig_go_2; 
   
-  try {
-    (arg1)->open((std::string const &)*arg2,arg3);
+  {
+    try {
+      try {
+        (arg1)->open((std::string const &)*arg2,arg3);
+      }
+      catch(lemur::api::Exception &_e) {
+        (void)_e;
+        _swig_gopanic("C++ lemur::api::Exception exception thrown");
+        
+      }
+      
+    } catch( lemur::api::Exception& e ) {
+      SWIG_exception( SWIG_RuntimeError, e.what().c_str() );
+    }
   }
-  catch(lemur::api::Exception &_e) {
-    (void)_e;
-    _swig_gopanic("C++ lemur::api::Exception exception thrown");
-    
-  }
-  
   
 }
 
 
-void _wrap_IndexEnvironment_open__SWIG_1_indri_go_8e24520e0b567faa(indri::api::IndexEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
+void _wrap_Wrapped_IndexEnvironment_Wrapped_open__SWIG_1_indri_go_add17ee78870902e(indri::api::IndexEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
   indri::api::IndexEnvironment *arg1 = (indri::api::IndexEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   
@@ -3645,38 +5748,50 @@ void _wrap_IndexEnvironment_open__SWIG_1_indri_go_8e24520e0b567faa(indri::api::I
   arg2 = &arg2_str;
   
   
-  try {
-    (arg1)->open((std::string const &)*arg2);
+  {
+    try {
+      try {
+        (arg1)->open((std::string const &)*arg2);
+      }
+      catch(lemur::api::Exception &_e) {
+        (void)_e;
+        _swig_gopanic("C++ lemur::api::Exception exception thrown");
+        
+      }
+      
+    } catch( lemur::api::Exception& e ) {
+      SWIG_exception( SWIG_RuntimeError, e.what().c_str() );
+    }
   }
-  catch(lemur::api::Exception &_e) {
-    (void)_e;
-    _swig_gopanic("C++ lemur::api::Exception exception thrown");
-    
-  }
-  
   
 }
 
 
-void _wrap_IndexEnvironment_close_indri_go_8e24520e0b567faa(indri::api::IndexEnvironment *_swig_go_0) {
+void _wrap_Wrapped_IndexEnvironment_Wrapped_close_indri_go_add17ee78870902e(indri::api::IndexEnvironment *_swig_go_0) {
   indri::api::IndexEnvironment *arg1 = (indri::api::IndexEnvironment *) 0 ;
   
   arg1 = *(indri::api::IndexEnvironment **)&_swig_go_0; 
   
-  try {
-    (arg1)->close();
+  {
+    try {
+      try {
+        (arg1)->close();
+      }
+      catch(lemur::api::Exception &_e) {
+        (void)_e;
+        _swig_gopanic("C++ lemur::api::Exception exception thrown");
+        
+      }
+      
+    } catch( lemur::api::Exception& e ) {
+      SWIG_exception( SWIG_RuntimeError, e.what().c_str() );
+    }
   }
-  catch(lemur::api::Exception &_e) {
-    (void)_e;
-    _swig_gopanic("C++ lemur::api::Exception exception thrown");
-    
-  }
-  
   
 }
 
 
-void _wrap_IndexEnvironment_addFile__SWIG_0_indri_go_8e24520e0b567faa(indri::api::IndexEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
+void _wrap_Wrapped_IndexEnvironment_Wrapped_addFile__SWIG_0_indri_go_add17ee78870902e(indri::api::IndexEnvironment *_swig_go_0, _gostring_ _swig_go_1) {
   indri::api::IndexEnvironment *arg1 = (indri::api::IndexEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   
@@ -3686,20 +5801,26 @@ void _wrap_IndexEnvironment_addFile__SWIG_0_indri_go_8e24520e0b567faa(indri::api
   arg2 = &arg2_str;
   
   
-  try {
-    (arg1)->addFile((std::string const &)*arg2);
+  {
+    try {
+      try {
+        (arg1)->addFile((std::string const &)*arg2);
+      }
+      catch(lemur::api::Exception &_e) {
+        (void)_e;
+        _swig_gopanic("C++ lemur::api::Exception exception thrown");
+        
+      }
+      
+    } catch( lemur::api::Exception& e ) {
+      SWIG_exception( SWIG_RuntimeError, e.what().c_str() );
+    }
   }
-  catch(lemur::api::Exception &_e) {
-    (void)_e;
-    _swig_gopanic("C++ lemur::api::Exception exception thrown");
-    
-  }
-  
   
 }
 
 
-void _wrap_IndexEnvironment_addFile__SWIG_1_indri_go_8e24520e0b567faa(indri::api::IndexEnvironment *_swig_go_0, _gostring_ _swig_go_1, _gostring_ _swig_go_2) {
+void _wrap_Wrapped_IndexEnvironment_Wrapped_addFile__SWIG_1_indri_go_add17ee78870902e(indri::api::IndexEnvironment *_swig_go_0, _gostring_ _swig_go_1, _gostring_ _swig_go_2) {
   indri::api::IndexEnvironment *arg1 = (indri::api::IndexEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   std::string *arg3 = 0 ;
@@ -3714,20 +5835,26 @@ void _wrap_IndexEnvironment_addFile__SWIG_1_indri_go_8e24520e0b567faa(indri::api
   arg3 = &arg3_str;
   
   
-  try {
-    (arg1)->addFile((std::string const &)*arg2,(std::string const &)*arg3);
+  {
+    try {
+      try {
+        (arg1)->addFile((std::string const &)*arg2,(std::string const &)*arg3);
+      }
+      catch(lemur::api::Exception &_e) {
+        (void)_e;
+        _swig_gopanic("C++ lemur::api::Exception exception thrown");
+        
+      }
+      
+    } catch( lemur::api::Exception& e ) {
+      SWIG_exception( SWIG_RuntimeError, e.what().c_str() );
+    }
   }
-  catch(lemur::api::Exception &_e) {
-    (void)_e;
-    _swig_gopanic("C++ lemur::api::Exception exception thrown");
-    
-  }
-  
   
 }
 
 
-intgo _wrap_IndexEnvironment_addString_indri_go_8e24520e0b567faa(indri::api::IndexEnvironment *_swig_go_0, _gostring_ _swig_go_1, _gostring_ _swig_go_2, std::vector< indri::parse::MetadataPair > *_swig_go_3) {
+intgo _wrap_Wrapped_IndexEnvironment_Wrapped_addString_indri_go_add17ee78870902e(indri::api::IndexEnvironment *_swig_go_0, _gostring_ _swig_go_1, _gostring_ _swig_go_2, std::vector< indri::parse::MetadataPair > *_swig_go_3) {
   indri::api::IndexEnvironment *arg1 = (indri::api::IndexEnvironment *) 0 ;
   std::string *arg2 = 0 ;
   std::string *arg3 = 0 ;
@@ -3746,21 +5873,27 @@ intgo _wrap_IndexEnvironment_addString_indri_go_8e24520e0b567faa(indri::api::Ind
   
   arg4 = *(std::vector< indri::parse::MetadataPair > **)&_swig_go_3; 
   
-  try {
-    result = (int)(arg1)->addString((std::string const &)*arg2,(std::string const &)*arg3,(std::vector< indri::parse::MetadataPair > const &)*arg4);
+  {
+    try {
+      try {
+        result = (int)(arg1)->addString((std::string const &)*arg2,(std::string const &)*arg3,(std::vector< indri::parse::MetadataPair > const &)*arg4);
+      }
+      catch(lemur::api::Exception &_e) {
+        (void)_e;
+        _swig_gopanic("C++ lemur::api::Exception exception thrown");
+        
+      }
+      
+    } catch( lemur::api::Exception& e ) {
+      SWIG_exception( SWIG_RuntimeError, e.what().c_str() );
+    }
   }
-  catch(lemur::api::Exception &_e) {
-    (void)_e;
-    _swig_gopanic("C++ lemur::api::Exception exception thrown");
-    
-  }
-  
   _swig_go_result = result; 
   return _swig_go_result;
 }
 
 
-intgo _wrap_IndexEnvironment_addParsedDocument_indri_go_8e24520e0b567faa(indri::api::IndexEnvironment *_swig_go_0, indri::api::ParsedDocument *_swig_go_1) {
+intgo _wrap_Wrapped_IndexEnvironment_Wrapped_addParsedDocument_indri_go_add17ee78870902e(indri::api::IndexEnvironment *_swig_go_0, indri::api::ParsedDocument *_swig_go_1) {
   indri::api::IndexEnvironment *arg1 = (indri::api::IndexEnvironment *) 0 ;
   indri::api::ParsedDocument *arg2 = (indri::api::ParsedDocument *) 0 ;
   int result;
@@ -3769,227 +5902,46 @@ intgo _wrap_IndexEnvironment_addParsedDocument_indri_go_8e24520e0b567faa(indri::
   arg1 = *(indri::api::IndexEnvironment **)&_swig_go_0; 
   arg2 = *(indri::api::ParsedDocument **)&_swig_go_1; 
   
-  try {
-    result = (int)(arg1)->addParsedDocument(arg2);
-  }
-  catch(lemur::api::Exception &_e) {
-    (void)_e;
-    _swig_gopanic("C++ lemur::api::Exception exception thrown");
-    
-  }
-  
-  _swig_go_result = result; 
-  return _swig_go_result;
-}
-
-
-intgo _wrap_IndexEnvironment_documentsIndexed_indri_go_8e24520e0b567faa(indri::api::IndexEnvironment *_swig_go_0) {
-  indri::api::IndexEnvironment *arg1 = (indri::api::IndexEnvironment *) 0 ;
-  int result;
-  intgo _swig_go_result;
-  
-  arg1 = *(indri::api::IndexEnvironment **)&_swig_go_0; 
-  
-  try {
-    result = (int)(arg1)->documentsIndexed();
-  }
-  catch(lemur::api::Exception &_e) {
-    (void)_e;
-    _swig_gopanic("C++ lemur::api::Exception exception thrown");
-    
-  }
-  
-  _swig_go_result = result; 
-  return _swig_go_result;
-}
-
-
-intgo _wrap_IndexEnvironment_documentsSeen_indri_go_8e24520e0b567faa(indri::api::IndexEnvironment *_swig_go_0) {
-  indri::api::IndexEnvironment *arg1 = (indri::api::IndexEnvironment *) 0 ;
-  int result;
-  intgo _swig_go_result;
-  
-  arg1 = *(indri::api::IndexEnvironment **)&_swig_go_0; 
-  
-  try {
-    result = (int)(arg1)->documentsSeen();
-  }
-  catch(lemur::api::Exception &_e) {
-    (void)_e;
-    _swig_gopanic("C++ lemur::api::Exception exception thrown");
-    
-  }
-  
-  _swig_go_result = result; 
-  return _swig_go_result;
-}
-
-
-_gostring_ _wrap_StaticMethodPanic_indri_go_8e24520e0b567faa() {
-  char *result = 0 ;
-  _gostring_ _swig_go_result;
-  
-  
-  result = (char *)StaticMethodPanic();
-  _swig_go_result = Swig_AllocateString((char*)result, result ? strlen((char*)result) : 0); 
-  return _swig_go_result;
-}
-
-
-_gostring_ _wrap_Tester_GetName_indri_go_8e24520e0b567faa(indri::api::Tester *_swig_go_0) {
-  indri::api::Tester *arg1 = (indri::api::Tester *) 0 ;
-  std::string result;
-  _gostring_ _swig_go_result;
-  
-  arg1 = *(indri::api::Tester **)&_swig_go_0; 
-  
-  result = (arg1)->GetName();
-  _swig_go_result = Swig_AllocateString((&result)->data(), (&result)->length()); 
-  return _swig_go_result;
-}
-
-
-_gostring_ _wrap_Tester_GetType_indri_go_8e24520e0b567faa(indri::api::Tester *_swig_go_0) {
-  indri::api::Tester *arg1 = (indri::api::Tester *) 0 ;
-  std::string result;
-  _gostring_ _swig_go_result;
-  
-  arg1 = *(indri::api::Tester **)&_swig_go_0; 
-  
-  result = (arg1)->GetType();
-  _swig_go_result = Swig_AllocateString((&result)->data(), (&result)->length()); 
-  return _swig_go_result;
-}
-
-
-void _wrap_Tester_SetName_indri_go_8e24520e0b567faa(indri::api::Tester *_swig_go_0, _gostring_ _swig_go_1) {
-  indri::api::Tester *arg1 = (indri::api::Tester *) 0 ;
-  std::string arg2 ;
-  
-  arg1 = *(indri::api::Tester **)&_swig_go_0; 
-  (&arg2)->assign(_swig_go_1.p, _swig_go_1.n); 
-  
-  (arg1)->SetName(arg2);
-  
-}
-
-
-void _wrap_Tester_SetType_indri_go_8e24520e0b567faa(indri::api::Tester *_swig_go_0, _gostring_ _swig_go_1) {
-  indri::api::Tester *arg1 = (indri::api::Tester *) 0 ;
-  std::string arg2 ;
-  
-  arg1 = *(indri::api::Tester **)&_swig_go_0; 
-  (&arg2)->assign(_swig_go_1.p, _swig_go_1.n); 
-  
-  (arg1)->SetType(arg2);
-  
-}
-
-
-_gostring_ _wrap_Tester_InjectFault_indri_go_8e24520e0b567faa(indri::api::Tester *_swig_go_0) {
-  indri::api::Tester *arg1 = (indri::api::Tester *) 0 ;
-  std::string result;
-  _gostring_ _swig_go_result;
-  
-  arg1 = *(indri::api::Tester **)&_swig_go_0; 
-  
   {
     try {
-      result = (arg1)->InjectFault();
+      try {
+        result = (int)(arg1)->addParsedDocument(arg2);
+      }
+      catch(lemur::api::Exception &_e) {
+        (void)_e;
+        _swig_gopanic("C++ lemur::api::Exception exception thrown");
+        
+      }
+      
     } catch( lemur::api::Exception& e ) {
       SWIG_exception( SWIG_RuntimeError, e.what().c_str() );
     }
   }
-  _swig_go_result = Swig_AllocateString((&result)->data(), (&result)->length()); 
-  return _swig_go_result;
-}
-
-
-indri::api::Tester *_wrap_new_Tester_indri_go_8e24520e0b567faa() {
-  indri::api::Tester *result = 0 ;
-  indri::api::Tester *_swig_go_result;
-  
-  
-  {
-    try {
-      result = (indri::api::Tester *)new indri::api::Tester();;
-    } catch (std::exception &e) {
-      _swig_gopanic(e.what());
-    }
-  }
-  *(indri::api::Tester **)&_swig_go_result = (indri::api::Tester *)result; 
-  return _swig_go_result;
-}
-
-
-void _wrap_delete_Tester_indri_go_8e24520e0b567faa(indri::api::Tester *_swig_go_0) {
-  indri::api::Tester *arg1 = (indri::api::Tester *) 0 ;
-  
-  arg1 = *(indri::api::Tester **)&_swig_go_0; 
-  
-  {
-    try {
-      delete arg1;;
-    } catch (std::exception &e) {
-      _swig_gopanic(e.what());
-    }
-  }
-  
-}
-
-
-DemoLib *_wrap_new_Wrapped_DemoLib_indri_go_8e24520e0b567faa() {
-  DemoLib *result = 0 ;
-  DemoLib *_swig_go_result;
-  
-  
-  {
-    try {
-      result = (DemoLib *)new DemoLib();;
-    } catch (std::exception &e) {
-      _swig_gopanic(e.what());
-    }
-  }
-  *(DemoLib **)&_swig_go_result = (DemoLib *)result; 
-  return _swig_go_result;
-}
-
-
-double _wrap_Wrapped_DemoLib_Wrapped_DivideBy_indri_go_8e24520e0b567faa(DemoLib *_swig_go_0, intgo _swig_go_1) {
-  DemoLib *arg1 = (DemoLib *) 0 ;
-  int arg2 ;
-  double result;
-  double _swig_go_result;
-  
-  arg1 = *(DemoLib **)&_swig_go_0; 
-  arg2 = (int)_swig_go_1; 
-  
-  {
-    try {
-      result = (double)(arg1)->DivideBy(arg2);;
-    } catch (std::exception &e) {
-      _swig_gopanic(e.what());
-    }
-  }
   _swig_go_result = result; 
   return _swig_go_result;
 }
 
 
-intgo _wrap_Wrapped_DemoLib_Wrapped_NegativeThrows_indri_go_8e24520e0b567faa(DemoLib *_swig_go_0, intgo _swig_go_1) {
-  DemoLib *arg1 = (DemoLib *) 0 ;
-  int arg2 ;
+intgo _wrap_Wrapped_IndexEnvironment_Wrapped_documentsIndexed_indri_go_add17ee78870902e(indri::api::IndexEnvironment *_swig_go_0) {
+  indri::api::IndexEnvironment *arg1 = (indri::api::IndexEnvironment *) 0 ;
   int result;
   intgo _swig_go_result;
   
-  arg1 = *(DemoLib **)&_swig_go_0; 
-  arg2 = (int)_swig_go_1; 
+  arg1 = *(indri::api::IndexEnvironment **)&_swig_go_0; 
   
   {
     try {
-      result = (int)(arg1)->NegativeThrows(arg2);;
-    } catch (std::exception &e) {
-      _swig_gopanic(e.what());
+      try {
+        result = (int)(arg1)->documentsIndexed();
+      }
+      catch(lemur::api::Exception &_e) {
+        (void)_e;
+        _swig_gopanic("C++ lemur::api::Exception exception thrown");
+        
+      }
+      
+    } catch( lemur::api::Exception& e ) {
+      SWIG_exception( SWIG_RuntimeError, e.what().c_str() );
     }
   }
   _swig_go_result = result; 
@@ -3997,40 +5949,30 @@ intgo _wrap_Wrapped_DemoLib_Wrapped_NegativeThrows_indri_go_8e24520e0b567faa(Dem
 }
 
 
-intgo _wrap_Wrapped_DemoLib_NeverThrows_indri_go_8e24520e0b567faa(DemoLib *_swig_go_0, intgo _swig_go_1) {
-  DemoLib *arg1 = (DemoLib *) 0 ;
-  int arg2 ;
+intgo _wrap_Wrapped_IndexEnvironment_Wrapped_documentsSeen_indri_go_add17ee78870902e(indri::api::IndexEnvironment *_swig_go_0) {
+  indri::api::IndexEnvironment *arg1 = (indri::api::IndexEnvironment *) 0 ;
   int result;
   intgo _swig_go_result;
   
-  arg1 = *(DemoLib **)&_swig_go_0; 
-  arg2 = (int)_swig_go_1; 
+  arg1 = *(indri::api::IndexEnvironment **)&_swig_go_0; 
   
   {
     try {
-      result = (int)(arg1)->NeverThrows(arg2);;
-    } catch (std::exception &e) {
-      _swig_gopanic(e.what());
+      try {
+        result = (int)(arg1)->documentsSeen();
+      }
+      catch(lemur::api::Exception &_e) {
+        (void)_e;
+        _swig_gopanic("C++ lemur::api::Exception exception thrown");
+        
+      }
+      
+    } catch( lemur::api::Exception& e ) {
+      SWIG_exception( SWIG_RuntimeError, e.what().c_str() );
     }
   }
   _swig_go_result = result; 
   return _swig_go_result;
-}
-
-
-void _wrap_delete_Wrapped_DemoLib_indri_go_8e24520e0b567faa(DemoLib *_swig_go_0) {
-  DemoLib *arg1 = (DemoLib *) 0 ;
-  
-  arg1 = *(DemoLib **)&_swig_go_0; 
-  
-  {
-    try {
-      delete arg1;;
-    } catch (std::exception &e) {
-      _swig_gopanic(e.what());
-    }
-  }
-  
 }
 
 
